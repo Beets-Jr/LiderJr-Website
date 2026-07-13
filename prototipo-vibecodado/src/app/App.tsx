@@ -5,6 +5,7 @@ import {
   ArrowRight,
   ChevronLeft,
   ChevronRight,
+  ChevronDown,
   CheckCircle2,
   Users,
   TrendingUp,
@@ -21,15 +22,19 @@ import {
   Clock,
   Tag,
   Box,
+  Download,
 } from "lucide-react";
 
 type Page =
   | "home"
   | "quem-somos"
   | "servicos"
+  | "mapeamento-processos"
   | "cases"
+  | "case-metalurgica"
   | "materiais"
   | "blog"
+  | "post-lean-manufacturing"
   | "contato";
 
 const HEADING = "'League Spartan', sans-serif";
@@ -46,85 +51,73 @@ const NAV_LINKS: { label: string; page: Page }[] = [
   { label: "Fale Conosco", page: "contato" },
 ];
 
-const SERVICES = [
+const SERVICES: {
+  icon: typeof TrendingUp;
+  title: string;
+  desc: string;
+  tags: string[];
+  page: Page;
+}[] = [
   {
     icon: TrendingUp,
     title: "Mapeamento de Processos",
     desc: "Identificamos gargalos e ineficiências na sua operação, propondo melhorias sustentadas em metodologias como BPMN e fluxogramas.",
     tags: ["Lean", "BPMN", "VSM"],
+    page: "mapeamento-processos",
   },
   {
     icon: Award,
     title: "Gestão da Qualidade",
     desc: "Implementamos ferramentas de controle de qualidade como PDCA, 5S e FMEA para elevar o padrão dos seus processos e produtos.",
     tags: ["PDCA", "5S", "FMEA"],
+    page: "servicos",
   },
   {
     icon: Users,
     title: "Pesquisa de Mercado",
     desc: "Realizamos pesquisas quantitativas e qualitativas para embasar decisões estratégicas com dados reais do seu segmento.",
     tags: ["Dados", "Análise", "Estratégia"],
+    page: "servicos",
   },
   {
     icon: BookOpen,
     title: "Planejamento Estratégico",
     desc: "Desenvolvemos planos de negócios e diagnósticos organizacionais com foco em crescimento sustentável e competitividade.",
     tags: ["OKR", "BSC", "Swot"],
+    page: "servicos",
   },
   {
     icon: CheckCircle2,
     title: "Custos e Precificação",
     desc: "Analisamos sua estrutura de custos e desenvolvemos estratégias de precificação alinhadas ao mercado e à margem desejada.",
     tags: ["Custos", "Precificação", "Margem"],
+    page: "servicos",
   },
   {
     icon: Star,
     title: "Consultoria em Estoque",
     desc: "Otimizamos a gestão de estoques com modelos de lote econômico, curva ABC e sistemas de reabastecimento inteligente.",
     tags: ["ABC", "EOQ", "Kanban"],
+    page: "servicos",
   },
 ];
 
-const TEAM = [
-  {
-    name: "Ana Beatriz Costa",
-    role: "Presidente",
-    img: "photo-1573496359142-b8d87734a5a2",
-  },
-  {
-    name: "Lucas Mendonça",
-    role: "Diretor de Projetos",
-    img: "photo-1519085360753-af0119f7cbe7",
-  },
-  {
-    name: "Fernanda Lima",
-    role: "Diretora de Marketing",
-    img: "photo-1580489944761-15a19d654956",
-  },
-  {
-    name: "Rafael Sousa",
-    role: "Diretor Financeiro",
-    img: "photo-1507003211169-0a1dd7228f2d",
-  },
-  {
-    name: "Juliana Moraes",
-    role: "Gerente de Qualidade",
-    img: "photo-1438761681033-6461ffad8d80",
-  },
-  {
-    name: "Pedro Alves",
-    role: "Gerente de RH",
-    img: "photo-1472099645785-5658abf4ff4e",
-  },
-];
-
-const CASES = [
+const CASES: {
+  result: string;
+  metric: string;
+  company: string;
+  desc: string;
+  tags: string[];
+  category: string;
+  page?: Page;
+}[] = [
   {
     result: "+28%",
     metric: "Produtividade",
     company: "Empresa do setor alimentício",
     desc: "Reestruturamos os processos produtivos reduzindo desperdícios e aumentando a eficiência operacional.",
     tags: ["Lean", "Processos"],
+    category: "Processos",
   },
   {
     result: "-35%",
@@ -132,6 +125,8 @@ const CASES = [
     company: "Indústria metalúrgica",
     desc: "Mapeamento e padronização dos processos resultando em entregas mais rápidas e organizadas.",
     tags: ["Mapeamento", "Qualidade"],
+    category: "Qualidade",
+    page: "case-metalurgica",
   },
   {
     result: "+18%",
@@ -139,10 +134,43 @@ const CASES = [
     company: "Comércio varejista",
     desc: "Diagnóstico estratégico e implantação de melhorias que impulsionaram os resultados da empresa.",
     tags: ["Estratégia", "Gestão"],
+    category: "Estratégia",
+  },
+  {
+    result: "-22%",
+    metric: "Perdas na colheita",
+    company: "Cooperativa agrícola",
+    desc: "Implantamos controles de processo e logística interna que reduziram perdas e melhoraram o aproveitamento da produção.",
+    tags: ["Agronegócio", "Lean"],
+    category: "Agronegócio",
+  },
+  {
+    result: "+31%",
+    metric: "Satisfação dos pacientes",
+    company: "Rede de clínicas",
+    desc: "Redesenhamos o fluxo de atendimento e implantamos indicadores de qualidade para elevar a experiência do paciente.",
+    tags: ["Qualidade", "Serviços"],
+    category: "Serviços",
+  },
+  {
+    result: "-40%",
+    metric: "Tempo de entrega",
+    company: "Distribuidora logística",
+    desc: "Otimizamos rotas e a gestão de estoque, reduzindo prazos de entrega e custos operacionais.",
+    tags: ["Logística", "Processos"],
+    category: "Logística",
   },
 ];
 
-const BLOG_POSTS = [
+const BLOG_POSTS: {
+  title: string;
+  excerpt: string;
+  date: string;
+  category: string;
+  readTime: string;
+  img: string;
+  page?: Page;
+}[] = [
   {
     title:
       "Como o Lean Manufacturing pode transformar sua pequena empresa",
@@ -152,6 +180,7 @@ const BLOG_POSTS = [
     category: "Processos",
     readTime: "6 min",
     img: "photo-1581091226825-a6a2a5aee158",
+    page: "post-lean-manufacturing",
   },
   {
     title: "5 indicadores de desempenho essenciais para PMEs",
@@ -202,6 +231,51 @@ const BLOG_POSTS = [
   },
 ];
 
+const MATERIALS = [
+  {
+    title: "Guia completo de Lean Manufacturing para PMEs",
+    excerpt:
+      "Um passo a passo prático para reduzir desperdícios e aumentar a eficiência da sua operação com os princípios do Lean.",
+    type: "E-book",
+    category: "Processos",
+  },
+  {
+    title: "Planilha de controle de estoque com Curva ABC",
+    excerpt:
+      "Modelo pronto para classificar seus itens por importância e definir pontos de reposição inteligentes.",
+    type: "Planilha",
+    category: "Logística",
+  },
+  {
+    title: "Checklist de implementação do 5S",
+    excerpt:
+      "Roteiro simples para organizar o ambiente de trabalho e sustentar a metodologia 5S no dia a dia.",
+    type: "Guia",
+    category: "Qualidade",
+  },
+  {
+    title: "Modelo de plano de negócios",
+    excerpt:
+      "Template editável para estruturar objetivos, análise de mercado, operações e projeções financeiras.",
+    type: "Template",
+    category: "Estratégia",
+  },
+  {
+    title: "Indicadores de desempenho essenciais para PMEs",
+    excerpt:
+      "Webinar gravado sobre os KPIs que toda pequena e média empresa deveria acompanhar de perto.",
+    type: "Webinar",
+    category: "Gestão",
+  },
+  {
+    title: "Guia de precificação e formação de custos",
+    excerpt:
+      "Conceitos e uma calculadora simples para precificar produtos e serviços com margem saudável.",
+    type: "E-book",
+    category: "Financeiro",
+  },
+];
+
 const STATS = [
   { value: "+100", label: "Projetos entregues" },
   { value: "17", label: "Anos de atuação" },
@@ -209,23 +283,11 @@ const STATS = [
   { value: "+50", label: "Clientes atendidos" },
 ];
 
-const VALUES = [
-  {
-    title: "Inovação",
-    desc: "Buscamos soluções criativas e atualizadas para cada desafio empresarial.",
-  },
-  {
-    title: "Comprometimento",
-    desc: "Entregamos o que prometemos, dentro do prazo e com excelência.",
-  },
-  {
-    title: "Ética",
-    desc: "Transparência e integridade norteiam todas as nossas relações.",
-  },
-  {
-    title: "Aprendizado",
-    desc: "Somos uma empresa que cresce junto com nossos membros e clientes.",
-  },
+const AFFILIATIONS = [
+  { name: "Universidade (UFSCar)" },
+  { name: "Núcleo Campinas" },
+  { name: "FEJESP" },
+  { name: "Brasil Júnior" },
 ];
 
 const CLIENTS_ROW_1 = [
@@ -505,8 +567,11 @@ function Navbar({
   setPage: (p: Page) => void;
 }) {
   const [open, setOpen] = useState(false);
+  const [servicosMobileOpen, setServicosMobileOpen] = useState(false);
 
   const mainLinks = NAV_LINKS.filter((l) => l.page !== "contato");
+  const isServicosActive =
+    page === "servicos" || page === "mapeamento-processos";
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-primary/95 backdrop-blur-sm border-b border-white/10">
@@ -531,24 +596,59 @@ function Navbar({
 
         {/* Nav desktop */}
         <div className="hidden md:flex items-center gap-1">
-          {NAV_LINKS.map((l) => (
-            <button
-              key={l.page}
-              onClick={() => setPage(l.page)}
-              className={
-                l.page === "contato"
-                  ? "ml-4 px-5 py-2 bg-accent text-white text-sm font-semibold rounded hover:bg-[#f26821] transition-colors"
-                  : `px-4 py-2 rounded text-sm font-medium transition-all duration-200 ${
-                      page === l.page
-                        ? "text-accent bg-white/10"
-                        : "text-white/70 hover:text-white hover:bg-white/5"
-                    }`
-              }
-              style={{ fontFamily: BODY }}
-            >
-              {l.label}
-            </button>
-          ))}
+          {NAV_LINKS.map((l) =>
+            l.page === "servicos" ? (
+              <div key={l.page} className="relative group">
+                <button
+                  onClick={() => setPage("servicos")}
+                  className={`flex items-center gap-1 px-4 py-2 rounded text-sm font-medium transition-all duration-200 ${
+                    isServicosActive
+                      ? "text-accent bg-white/10"
+                      : "text-white/70 hover:text-white hover:bg-white/5"
+                  }`}
+                  style={{ fontFamily: BODY }}
+                >
+                  {l.label}
+                  <ChevronDown
+                    size={14}
+                    className="transition-transform duration-200 group-hover:rotate-180"
+                  />
+                </button>
+                <div className="absolute left-0 top-full pt-2 opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200">
+                  <div className="bg-primary border border-white/10 rounded-lg shadow-xl py-2 w-72">
+                    {SERVICES.map((s) => (
+                      <button
+                        key={s.title}
+                        onClick={() => setPage(s.page)}
+                        className="w-full flex items-center gap-3 px-4 py-2.5 text-left text-sm text-white/70 hover:text-white hover:bg-white/5 transition-colors"
+                        style={{ fontFamily: BODY }}
+                      >
+                        <s.icon size={16} className="text-accent shrink-0" />
+                        {s.title}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <button
+                key={l.page}
+                onClick={() => setPage(l.page)}
+                className={
+                  l.page === "contato"
+                    ? "ml-4 px-5 py-2 bg-accent text-white text-sm font-semibold rounded hover:bg-[#f26821] transition-colors"
+                    : `px-4 py-2 rounded text-sm font-medium transition-all duration-200 ${
+                        page === l.page
+                          ? "text-accent bg-white/10"
+                          : "text-white/70 hover:text-white hover:bg-white/5"
+                      }`
+                }
+                style={{ fontFamily: BODY }}
+              >
+                {l.label}
+              </button>
+            ),
+          )}
         </div>
 
         {/* Fale Conosco + hambúrguer no mobile */}
@@ -577,21 +677,74 @@ function Navbar({
       {/* Menu mobile (sem Fale Conosco) */}
       {open && (
         <div className="md:hidden bg-primary border-t border-white/10 px-6 py-4 flex flex-col gap-2">
-          {mainLinks.map((l) => (
-            <button
-              key={l.page}
-              onClick={() => {
-                setPage(l.page);
-                setOpen(false);
-              }}
-              className={`text-left px-3 py-2 rounded text-sm font-medium transition-colors ${
-                page === l.page ? "text-accent bg-white/10" : "text-white/70"
-              }`}
-              style={{ fontFamily: BODY }}
-            >
-              {l.label}
-            </button>
-          ))}
+          {mainLinks.map((l) =>
+            l.page === "servicos" ? (
+              <div key={l.page}>
+                <div className="flex items-center gap-1">
+                  <button
+                    onClick={() => {
+                      setPage(l.page);
+                      setOpen(false);
+                    }}
+                    className={`flex-1 text-left px-3 py-2 rounded text-sm font-medium transition-colors ${
+                      isServicosActive ? "text-accent bg-white/10" : "text-white/70"
+                    }`}
+                    style={{ fontFamily: BODY }}
+                  >
+                    {l.label}
+                  </button>
+                  <button
+                    onClick={() => setServicosMobileOpen((v) => !v)}
+                    aria-label={
+                      servicosMobileOpen
+                        ? "Recolher serviços"
+                        : "Expandir serviços"
+                    }
+                    aria-expanded={servicosMobileOpen}
+                    className="p-2 text-white/70"
+                  >
+                    <ChevronDown
+                      size={16}
+                      className={`transition-transform duration-200 ${
+                        servicosMobileOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+                </div>
+                {servicosMobileOpen && (
+                  <div className="pl-4 mt-1 flex flex-col gap-1">
+                    {SERVICES.map((s) => (
+                      <button
+                        key={s.title}
+                        onClick={() => {
+                          setPage(s.page);
+                          setOpen(false);
+                        }}
+                        className="text-left px-3 py-2 rounded text-xs text-white/60 hover:text-white"
+                        style={{ fontFamily: BODY }}
+                      >
+                        {s.title}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <button
+                key={l.page}
+                onClick={() => {
+                  setPage(l.page);
+                  setOpen(false);
+                }}
+                className={`text-left px-3 py-2 rounded text-sm font-medium transition-colors ${
+                  page === l.page ? "text-accent bg-white/10" : "text-white/70"
+                }`}
+                style={{ fontFamily: BODY }}
+              >
+                {l.label}
+              </button>
+            ),
+          )}
         </div>
       )}
     </nav>
@@ -1631,12 +1784,13 @@ function QuemSomosPage() {
       {/* Hero */}
       <section className="bg-primary py-28 relative overflow-hidden">
         <div
-          className="absolute inset-0 opacity-10"
+          className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage:
-              "radial-gradient(circle at 30% 70%, #ff751f, transparent 60%)",
+              "url(https://placehold.co/1600x600/1a1a1a/666666?text=Placeholder)",
           }}
         />
+        <div className="absolute inset-0 bg-primary/80" />
         <div className="relative max-w-7xl mx-auto px-6 text-center">
           <p
             className="text-accent text-xs font-semibold uppercase tracking-widest mb-4"
@@ -1661,10 +1815,10 @@ function QuemSomosPage() {
         </div>
       </section>
 
-      {/* Mission / Vision / Values */}
+      {/* História */}
       <section className="bg-background py-24">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
               <p
                 className="text-accent text-xs font-semibold uppercase tracking-widest mb-3"
@@ -1705,8 +1859,28 @@ function QuemSomosPage() {
               style={{ height: 380 }}
             />
           </div>
+        </div>
+      </section>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
+      {/* Cultura */}
+      <section className="bg-muted py-24">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-14">
+            <p
+              className="text-accent text-xs font-semibold uppercase tracking-widest mb-3"
+              style={{ fontFamily: BODY }}
+            >
+              Cultura
+            </p>
+            <h2
+              className="text-4xl font-bold text-foreground"
+              style={{ fontFamily: HEADING }}
+            >
+              O que nos guia
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               {
                 label: "Missão",
@@ -1744,93 +1918,46 @@ function QuemSomosPage() {
               </div>
             ))}
           </div>
-
-          {/* Values */}
-          <div className="mb-20">
-            <p
-              className="text-accent text-xs font-semibold uppercase tracking-widest mb-3 text-center"
-              style={{ fontFamily: BODY }}
-            >
-              Cultura
-            </p>
-            <h2
-              className="text-4xl font-bold text-foreground text-center mb-12"
-              style={{ fontFamily: HEADING }}
-            >
-              O que nos guia
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {VALUES.map((v, i) => (
-                <div
-                  key={i}
-                  className="group text-center p-6 rounded-xl border border-border hover:border-accent/40 hover:bg-card transition-all duration-300"
-                >
-                  <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-accent transition-colors">
-                    <span
-                      className="text-accent group-hover:text-white text-lg font-bold"
-                      style={{ fontFamily: HEADING }}
-                    >
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                  </div>
-                  <h3
-                    className="font-bold text-foreground mb-2"
-                    style={{ fontFamily: HEADING }}
-                  >
-                    {v.title}
-                  </h3>
-                  <p
-                    className="text-sm text-muted-foreground leading-relaxed"
-                    style={{ fontFamily: BODY }}
-                  >
-                    {v.desc}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
       </section>
 
-      {/* Team */}
-      <section className="bg-primary py-24">
+      {/* Filiações */}
+      <section className="bg-background py-24">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-14">
             <p
               className="text-accent text-xs font-semibold uppercase tracking-widest mb-3"
               style={{ fontFamily: BODY }}
             >
-              Pessoas
+              Parcerias
             </p>
             <h2
-              className="text-4xl font-bold text-white"
+              className="text-4xl font-bold text-foreground"
               style={{ fontFamily: HEADING }}
             >
-              Conheça nossa equipe
+              Filiações
             </h2>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            {TEAM.map((member, i) => (
-              <div key={i} className="group text-center">
-                <div className="mb-3 rounded-xl overflow-hidden bg-white/10 aspect-square">
-                  <img
-                    src={`https://images.unsplash.com/${member.img}?w=300&h=300&fit=crop&auto=format&face`}
-                    alt={member.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+            {AFFILIATIONS.map((a, i) => (
+              <div
+                key={i}
+                className="bg-card border border-border rounded-xl p-8 text-center"
+              >
+                <div className="w-full h-20 rounded-lg bg-muted flex items-center justify-center mb-4">
+                  <span
+                    className="text-xs text-muted-foreground uppercase tracking-widest"
+                    style={{ fontFamily: BODY }}
+                  >
+                    Logo
+                  </span>
                 </div>
-                <p
-                  className="font-semibold text-white text-sm"
-                  style={{ fontFamily: BODY }}
+                <h3
+                  className="font-bold text-foreground"
+                  style={{ fontFamily: HEADING }}
                 >
-                  {member.name}
-                </p>
-                <p
-                  className="text-xs text-accent mt-0.5"
-                  style={{ fontFamily: BODY }}
-                >
-                  {member.role}
-                </p>
+                  {a.name}
+                </h3>
               </div>
             ))}
           </div>
@@ -1848,12 +1975,13 @@ function ServicosPage() {
       {/* Hero */}
       <section className="bg-primary py-28 relative overflow-hidden">
         <div
-          className="absolute inset-0 opacity-10"
+          className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage:
-              "radial-gradient(circle at 80% 30%, #ff751f, transparent 55%)",
+              "url(https://placehold.co/1600x600/1a1a1a/666666?text=Placeholder)",
           }}
         />
+        <div className="absolute inset-0 bg-primary/80" />
         <div className="relative max-w-7xl mx-auto px-6 text-center">
           <p
             className="text-accent text-xs font-semibold uppercase tracking-widest mb-4"
@@ -2004,85 +2132,298 @@ function ServicosPage() {
         </div>
       </section>
 
-      {/* Contact form */}
-      <section className="bg-background pb-24">
-        <div className="max-w-3xl mx-auto px-6">
-          <div className="bg-card border border-border rounded-2xl p-10">
-            <div className="text-center mb-10">
-              <p
-                className="text-accent text-xs font-semibold uppercase tracking-widest mb-3"
-                style={{ fontFamily: BODY }}
-              >
-                Orçamento
-              </p>
-              <h2
-                className="text-3xl font-bold text-foreground"
-                style={{ fontFamily: HEADING }}
-              >
-                Solicite uma proposta gratuita
-              </h2>
-            </div>
-            <form
-              className="grid grid-cols-1 sm:grid-cols-2 gap-5"
-              onSubmit={(e) => e.preventDefault()}
+    </div>
+  );
+}
+
+function MapeamentoProcessosPage({
+  setPage,
+}: {
+  setPage: (p: Page) => void;
+}) {
+  const service = SERVICES[0];
+
+  return (
+    <div className="pt-16">
+      {/* Hero */}
+      <section className="bg-primary py-28 relative overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage:
+              "url(https://placehold.co/1600x600/1a1a1a/666666?text=Placeholder)",
+          }}
+        />
+        <div className="absolute inset-0 bg-primary/80" />
+        <div className="relative max-w-7xl mx-auto px-6 text-center">
+          <p
+            className="text-accent text-xs font-semibold uppercase tracking-widest mb-4"
+            style={{ fontFamily: BODY }}
+          >
+            Serviço
+          </p>
+          <h1
+            className="text-5xl lg:text-6xl font-bold text-white mb-6"
+            style={{ fontFamily: HEADING }}
+          >
+            Mapeamento de Processos
+          </h1>
+          <p
+            className="text-white/60 text-lg max-w-2xl mx-auto"
+            style={{ fontFamily: BODY }}
+          >
+            {service.desc}
+          </p>
+        </div>
+      </section>
+
+      {/* Sobre */}
+      <section className="bg-background py-24">
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div>
+            <p
+              className="text-accent text-xs font-semibold uppercase tracking-widest mb-3"
+              style={{ fontFamily: BODY }}
             >
-              {[
-                {
-                  label: "Nome completo",
-                  placeholder: "João da Silva",
-                },
-                {
-                  label: "Email",
-                  placeholder: "joao@empresa.com.br",
-                },
-                {
-                  label: "Empresa",
-                  placeholder: "Empresa Ltda.",
-                },
-                {
-                  label: "Telefone",
-                  placeholder: "(11) 99999-9999",
-                },
-              ].map(({ label, placeholder }, i) => (
-                <div key={i}>
-                  <label
-                    className="block text-sm font-semibold text-foreground mb-1.5"
+              Como funciona
+            </p>
+            <h2
+              className="text-4xl font-bold text-foreground mb-6"
+              style={{ fontFamily: HEADING }}
+            >
+              Enxergue sua operação com clareza
+            </h2>
+            <p
+              className="text-muted-foreground leading-relaxed mb-4"
+              style={{ fontFamily: BODY }}
+            >
+              Levantamos, documentamos e analisamos os processos da sua
+              empresa para identificar gargalos, retrabalho e pontos de
+              melhoria — antes de propor qualquer mudança.
+            </p>
+            <p
+              className="text-muted-foreground leading-relaxed"
+              style={{ fontFamily: BODY }}
+            >
+              Usamos metodologias consolidadas como BPMN, fluxogramas e
+              Value Stream Mapping (VSM) para transformar processos
+              informais em fluxos claros e mensuráveis.
+            </p>
+            <div className="flex flex-wrap gap-2 mt-6">
+              {service.tags.map((t) => (
+                <span
+                  key={t}
+                  className="text-xs px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground font-medium"
+                  style={{ fontFamily: BODY }}
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
+          <img
+            src="https://placehold.co/700x500/1a1a1a/666666?text=Placeholder"
+            alt="Mapeamento de processos"
+            className="w-full rounded-2xl object-cover"
+            style={{ height: 380 }}
+          />
+        </div>
+      </section>
+
+      {/* Etapas */}
+      <section className="bg-muted py-24">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-14">
+            <p
+              className="text-accent text-xs font-semibold uppercase tracking-widest mb-3"
+              style={{ fontFamily: BODY }}
+            >
+              Metodologia
+            </p>
+            <h2
+              className="text-4xl font-bold text-foreground"
+              style={{ fontFamily: HEADING }}
+            >
+              Etapas do mapeamento
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                step: "01",
+                title: "Levantamento",
+                desc: "Entrevistas e observação in loco para entender o processo como ele realmente acontece.",
+              },
+              {
+                step: "02",
+                title: "Modelagem",
+                desc: "Construção do fluxo atual (AS IS) em notação BPMN, deixando visível cada etapa e responsável.",
+              },
+              {
+                step: "03",
+                title: "Diagnóstico",
+                desc: "Identificação de gargalos, desperdícios e retrabalho ao longo do fluxo mapeado.",
+              },
+              {
+                step: "04",
+                title: "Redesenho",
+                desc: "Proposta do processo futuro (TO BE), com melhorias validadas junto à equipe.",
+              },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="bg-card border border-border rounded-xl p-6"
+              >
+                <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center mb-4">
+                  <span
+                    className="text-white text-xs font-bold"
                     style={{ fontFamily: BODY }}
                   >
-                    {label}
-                  </label>
-                  <input
-                    type="text"
-                    placeholder={placeholder}
-                    className="w-full px-4 py-3 rounded-lg border border-border bg-input-background text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:border-accent transition-colors"
-                    style={{ fontFamily: BODY }}
+                    {item.step}
+                  </span>
+                </div>
+                <h3
+                  className="font-bold text-foreground mb-2"
+                  style={{ fontFamily: HEADING }}
+                >
+                  {item.title}
+                </h3>
+                <p
+                  className="text-sm text-muted-foreground leading-relaxed"
+                  style={{ fontFamily: BODY }}
+                >
+                  {item.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Depoimento */}
+      <section className="bg-background py-24">
+        <div className="max-w-3xl mx-auto px-6 text-center">
+          <div className="flex justify-center gap-1 mb-6">
+            {[...Array(5)].map((_, i) => (
+              <Star
+                key={i}
+                size={18}
+                className="text-accent fill-accent"
+              />
+            ))}
+          </div>
+          <p
+            className="text-foreground text-2xl lg:text-3xl leading-relaxed mb-8"
+            style={{ fontFamily: SERIF }}
+          >
+            "O mapeamento mostrou gargalos que a gente nem enxergava mais
+            de tão acostumados com a rotina. Em poucas semanas reduzimos
+            o tempo de produção reorganizando o fluxo de ponta a ponta."
+          </p>
+          <div className="flex items-center justify-center gap-3">
+            <div className="w-11 h-11 rounded-full bg-accent/10 flex items-center justify-center shrink-0">
+              <span
+                className="text-accent font-bold text-sm"
+                style={{ fontFamily: HEADING }}
+              >
+                RM
+              </span>
+            </div>
+            <div className="text-left">
+              <p
+                className="font-semibold text-foreground text-sm"
+                style={{ fontFamily: BODY }}
+              >
+                Roberto Martins
+              </p>
+              <p
+                className="text-muted-foreground text-xs"
+                style={{ fontFamily: BODY }}
+              >
+                Gerente de Produção, Indústria Metalúrgica
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="bg-primary py-24 relative overflow-hidden">
+        <div
+          className="absolute inset-0 opacity-10"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 50% 50%, #ff751f, transparent 60%)",
+          }}
+        />
+        <div className="relative max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div>
+            <p
+              className="text-accent text-xs font-semibold uppercase tracking-widest mb-4"
+              style={{ fontFamily: BODY }}
+            >
+              Vamos conversar
+            </p>
+            <h2
+              className="text-3xl lg:text-4xl font-bold text-white leading-tight mb-6"
+              style={{ fontFamily: HEADING }}
+            >
+              Quer mapear os processos da sua empresa?
+            </h2>
+            <p
+              className="text-white/70 text-lg leading-8 mb-10"
+              style={{ fontFamily: BODY }}
+            >
+              Fale com a nossa equipe e entenda como podemos ajudar a
+              identificar oportunidades de melhoria no seu negócio, com
+              um diagnóstico inicial sem custo.
+            </p>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+              <button
+                onClick={() => setPage("contato")}
+                className="w-full sm:w-auto px-8 py-4 bg-accent text-white font-semibold rounded-xl hover:bg-[#f26821] transition-colors"
+                style={{ fontFamily: BODY }}
+              >
+                Fale Conosco
+              </button>
+              <button
+                onClick={() => setPage("servicos")}
+                className="w-full sm:w-auto px-8 py-4 border border-white/20 text-white rounded-xl hover:bg-white/10 transition-colors"
+                style={{ fontFamily: BODY }}
+              >
+                Ver outros serviços
+              </button>
+            </div>
+          </div>
+
+          <div className="bg-white/5 border border-white/10 rounded-2xl p-8">
+            <p
+              className="text-white font-semibold mb-6"
+              style={{ fontFamily: HEADING }}
+            >
+              O que você recebe
+            </p>
+            <div className="flex flex-col gap-4">
+              {[
+                "Diagnóstico inicial sem custo",
+                "Mapeamento do fluxo atual (AS IS) em BPMN",
+                "Relatório com gargalos e oportunidades de melhoria",
+                "Proposta de processo futuro (TO BE)",
+              ].map((item, i) => (
+                <div key={i} className="flex items-start gap-3">
+                  <CheckCircle2
+                    size={18}
+                    className="text-accent shrink-0 mt-0.5"
                   />
+                  <span
+                    className="text-white/80 text-sm"
+                    style={{ fontFamily: BODY }}
+                  >
+                    {item}
+                  </span>
                 </div>
               ))}
-              <div className="sm:col-span-2">
-                <label
-                  className="block text-sm font-semibold text-foreground mb-1.5"
-                  style={{ fontFamily: BODY }}
-                >
-                  Como podemos ajudar?
-                </label>
-                <textarea
-                  rows={4}
-                  placeholder="Descreva brevemente o desafio ou projeto que você tem em mente..."
-                  className="w-full px-4 py-3 rounded-lg border border-border bg-input-background text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:border-accent transition-colors resize-none"
-                  style={{ fontFamily: BODY }}
-                />
-              </div>
-              <div className="sm:col-span-2">
-                <button
-                  type="submit"
-                  className="w-full py-4 bg-accent text-white font-bold rounded-lg hover:bg-[#f26821] transition-colors"
-                  style={{ fontFamily: BODY }}
-                >
-                  Enviar solicitação
-                </button>
-              </div>
-            </form>
+            </div>
           </div>
         </div>
       </section>
@@ -2090,18 +2431,35 @@ function ServicosPage() {
   );
 }
 
-function CasesPage() {
+function CasesPage({ setPage }: { setPage: (p: Page) => void }) {
+  const [activeCategory, setActiveCategory] = useState("Todos");
+  const categories = [
+    "Todos",
+    "Processos",
+    "Qualidade",
+    "Estratégia",
+    "Agronegócio",
+    "Serviços",
+    "Logística",
+  ];
+
+  const filtered =
+    activeCategory === "Todos"
+      ? CASES
+      : CASES.filter((c) => c.category === activeCategory);
+
   return (
     <div className="pt-16">
       {/* Hero */}
       <section className="bg-primary py-28 relative overflow-hidden">
         <div
-          className="absolute inset-0 opacity-10"
+          className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage:
-              "radial-gradient(circle at 70% 30%, #ff751f, transparent 55%)",
+              "url(https://placehold.co/1600x600/1a1a1a/666666?text=Placeholder)",
           }}
         />
+        <div className="absolute inset-0 bg-primary/80" />
 
         <div className="relative max-w-7xl mx-auto px-6 text-center">
           <p
@@ -2129,22 +2487,451 @@ function CasesPage() {
           </p>
         </div>
       </section>
+
+      {/* Filter */}
+      <section className="bg-background py-8 border-b border-border sticky top-16 z-40">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-hide">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`shrink-0 px-4 py-1.5 rounded-full text-sm font-semibold transition-all ${
+                  activeCategory === cat
+                    ? "bg-accent text-white"
+                    : "bg-secondary text-secondary-foreground hover:bg-accent/10"
+                }`}
+                style={{ fontFamily: BODY }}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Cases */}
+      <section className="bg-background py-16">
+        <div className="max-w-7xl mx-auto px-6">
+          {/* Featured */}
+          {activeCategory === "Todos" && (
+            <div className="mb-12 group cursor-pointer">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 bg-card border border-border rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300">
+                <div
+                  className="overflow-hidden bg-muted"
+                  style={{ minHeight: 280 }}
+                >
+                  <img
+                    src={`https://placehold.co/800x500/1a1a1a/666666?text=${encodeURIComponent(CASES[0].company)}`}
+                    alt={CASES[0].company}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    style={{ minHeight: 280 }}
+                  />
+                </div>
+                <div className="p-10 flex flex-col justify-center">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span
+                      className="text-xs px-2.5 py-1 rounded-full bg-accent/10 text-accent font-semibold"
+                      style={{ fontFamily: BODY }}
+                    >
+                      {CASES[0].category}
+                    </span>
+                    <span
+                      className="font-bold text-accent text-2xl"
+                      style={{ fontFamily: HEADING }}
+                    >
+                      {CASES[0].result}
+                    </span>
+                    <span
+                      className="text-xs text-muted-foreground"
+                      style={{ fontFamily: BODY }}
+                    >
+                      {CASES[0].metric}
+                    </span>
+                  </div>
+                  <h2
+                    className="text-2xl font-bold text-foreground mb-3 group-hover:text-accent transition-colors"
+                    style={{ fontFamily: HEADING }}
+                  >
+                    {CASES[0].company}
+                  </h2>
+                  <p
+                    className="text-sm text-muted-foreground leading-relaxed mb-6"
+                    style={{ fontFamily: BODY }}
+                  >
+                    {CASES[0].desc}
+                  </p>
+                  <div className="flex items-center gap-2 text-accent text-sm font-semibold">
+                    Ver case completo <ArrowRight size={14} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {(activeCategory === "Todos"
+              ? filtered.slice(1)
+              : filtered
+            ).map((c, i) => (
+              <article
+                key={i}
+                onClick={() => c.page && setPage(c.page)}
+                className={`group bg-card border border-border rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 ${
+                  c.page ? "cursor-pointer" : "cursor-default"
+                }`}
+              >
+                <div
+                  className="overflow-hidden bg-muted"
+                  style={{ height: 200 }}
+                >
+                  <img
+                    src={`https://placehold.co/500x300/1a1a1a/666666?text=${encodeURIComponent(c.company)}`}
+                    alt={c.company}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div className="p-6">
+                  <div className="flex items-center gap-3 mb-3">
+                    <span
+                      className="text-xs px-2.5 py-1 rounded-full bg-accent/10 text-accent font-semibold"
+                      style={{ fontFamily: BODY }}
+                    >
+                      <Tag size={10} className="inline mr-1" />
+                      {c.category}
+                    </span>
+                    <span
+                      className="font-bold text-accent"
+                      style={{ fontFamily: HEADING }}
+                    >
+                      {c.result}
+                    </span>
+                  </div>
+                  <h3
+                    className="font-bold text-foreground text-base leading-snug mb-2 group-hover:text-accent transition-colors"
+                    style={{ fontFamily: HEADING }}
+                  >
+                    {c.company}
+                  </h3>
+                  <p
+                    className="text-xs text-muted-foreground leading-relaxed mb-4"
+                    style={{ fontFamily: BODY }}
+                  >
+                    {c.desc}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {c.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-xs px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground font-medium"
+                        style={{ fontFamily: BODY }}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          {filtered.length === 0 && (
+            <div className="text-center py-20">
+              <p
+                className="text-muted-foreground"
+                style={{ fontFamily: BODY }}
+              >
+                Nenhum case encontrado nesta categoria.
+              </p>
+            </div>
+          )}
+        </div>
+      </section>
     </div>
   );
 }
 
-function MateriaisPage() {
+function CaseMetalurgicaPage({
+  setPage,
+}: {
+  setPage: (p: Page) => void;
+}) {
+  const caseData = CASES[1];
+
   return (
     <div className="pt-16">
       {/* Hero */}
       <section className="bg-primary py-28 relative overflow-hidden">
         <div
-          className="absolute inset-0 opacity-10"
+          className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage:
-              "radial-gradient(circle at 50% 80%, #ff751f, transparent 55%)",
+              "url(https://placehold.co/1600x600/1a1a1a/666666?text=Placeholder)",
           }}
         />
+        <div className="absolute inset-0 bg-primary/80" />
+        <div className="relative max-w-7xl mx-auto px-6 text-center">
+          <p
+            className="text-accent text-xs font-semibold uppercase tracking-widest mb-4"
+            style={{ fontFamily: BODY }}
+          >
+            Case • {caseData.category}
+          </p>
+          <h1
+            className="text-5xl lg:text-6xl font-bold text-white mb-6"
+            style={{ fontFamily: HEADING }}
+          >
+            {caseData.company}
+          </h1>
+          <p
+            className="text-white/60 text-lg max-w-2xl mx-auto"
+            style={{ fontFamily: BODY }}
+          >
+            {caseData.desc}
+          </p>
+        </div>
+      </section>
+
+      {/* Desafio / Solução / Resultado */}
+      <section className="bg-background py-24">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                icon: TrendingUp,
+                label: "O desafio",
+                text: "A empresa enfrentava atrasos recorrentes na produção, com etapas informais e sem padronização entre os turnos.",
+              },
+              {
+                icon: CheckCircle2,
+                label: "A solução",
+                text: "Mapeamos o fluxo produtivo em BPMN, identificamos os principais gargalos e propusemos um processo padronizado ponta a ponta.",
+              },
+              {
+                icon: Award,
+                label: "O resultado",
+                text: "Com o novo fluxo implementado, a empresa reduziu significativamente o tempo de produção e passou a entregar com mais previsibilidade.",
+              },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="bg-card border border-border rounded-xl p-8"
+              >
+                <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mb-6">
+                  <item.icon size={22} className="text-accent" />
+                </div>
+                <h3
+                  className="font-bold text-foreground text-lg mb-3"
+                  style={{ fontFamily: HEADING }}
+                >
+                  {item.label}
+                </h3>
+                <p
+                  className="text-sm text-muted-foreground leading-relaxed"
+                  style={{ fontFamily: BODY }}
+                >
+                  {item.text}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Resultados em números */}
+      <section className="bg-muted py-24">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-14">
+            <p
+              className="text-accent text-xs font-semibold uppercase tracking-widest mb-3"
+              style={{ fontFamily: BODY }}
+            >
+              Impacto do projeto
+            </p>
+            <h2
+              className="text-4xl font-bold text-foreground"
+              style={{ fontFamily: HEADING }}
+            >
+              Resultados em números
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            {[
+              { value: caseData.result, label: caseData.metric },
+              { value: "+20%", label: "Entregas no prazo" },
+              { value: "18 semanas", label: "Duração do projeto" },
+            ].map((stat, i) => (
+              <div
+                key={i}
+                className="bg-card border border-border rounded-xl p-8 text-center"
+              >
+                <p
+                  className="text-4xl font-bold text-accent mb-2"
+                  style={{ fontFamily: HEADING }}
+                >
+                  {stat.value}
+                </p>
+                <p
+                  className="text-sm text-muted-foreground"
+                  style={{ fontFamily: BODY }}
+                >
+                  {stat.label}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Depoimento */}
+      <section className="bg-background py-24">
+        <div className="max-w-3xl mx-auto px-6 text-center">
+          <div className="flex justify-center gap-1 mb-6">
+            {[...Array(5)].map((_, i) => (
+              <Star key={i} size={18} className="text-accent fill-accent" />
+            ))}
+          </div>
+          <p
+            className="text-foreground text-2xl lg:text-3xl leading-relaxed mb-8"
+            style={{ fontFamily: SERIF }}
+          >
+            "O mapeamento mostrou gargalos que a gente nem enxergava mais
+            de tão acostumados com a rotina. Em poucas semanas reduzimos
+            o tempo de produção reorganizando o fluxo de ponta a ponta."
+          </p>
+          <div className="flex items-center justify-center gap-3">
+            <div className="w-11 h-11 rounded-full bg-accent/10 flex items-center justify-center shrink-0">
+              <span
+                className="text-accent font-bold text-sm"
+                style={{ fontFamily: HEADING }}
+              >
+                RM
+              </span>
+            </div>
+            <div className="text-left">
+              <p
+                className="font-semibold text-foreground text-sm"
+                style={{ fontFamily: BODY }}
+              >
+                Roberto Martins
+              </p>
+              <p
+                className="text-muted-foreground text-xs"
+                style={{ fontFamily: BODY }}
+              >
+                Gerente de Produção, {caseData.company}
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Serviço relacionado */}
+      <section className="bg-muted py-24">
+        <div className="max-w-3xl mx-auto px-6">
+          <div className="bg-card border border-border rounded-2xl p-8 flex flex-col sm:flex-row items-start sm:items-center gap-6">
+            <div className="w-14 h-14 rounded-lg bg-accent/10 flex items-center justify-center shrink-0">
+              <TrendingUp size={26} className="text-accent" />
+            </div>
+            <div className="flex-1">
+              <p
+                className="text-accent text-xs font-semibold uppercase tracking-widest mb-2"
+                style={{ fontFamily: BODY }}
+              >
+                Serviço relacionado
+              </p>
+              <h3
+                className="font-bold text-foreground text-lg mb-1"
+                style={{ fontFamily: HEADING }}
+              >
+                Mapeamento de Processos
+              </h3>
+              <p
+                className="text-sm text-muted-foreground"
+                style={{ fontFamily: BODY }}
+              >
+                A metodologia usada neste case também está disponível como
+                serviço para a sua empresa.
+              </p>
+            </div>
+            <button
+              onClick={() => setPage("mapeamento-processos")}
+              className="shrink-0 flex items-center gap-2 px-5 py-3 bg-accent text-white text-sm font-semibold rounded-lg hover:bg-[#f26821] transition-colors"
+              style={{ fontFamily: BODY }}
+            >
+              Conhecer serviço <ArrowRight size={14} />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="bg-primary py-20">
+        <div className="max-w-xl mx-auto px-6 text-center">
+          <h2
+            className="text-3xl font-bold text-white mb-3"
+            style={{ fontFamily: HEADING }}
+          >
+            Quer um resultado parecido?
+          </h2>
+          <p
+            className="text-white/60 text-sm mb-8"
+            style={{ fontFamily: BODY }}
+          >
+            Fale com a nossa equipe e entenda como podemos ajudar a sua
+            empresa a alcançar melhores resultados.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <button
+              onClick={() => setPage("contato")}
+              className="px-6 py-3 bg-accent text-white font-semibold rounded-lg hover:bg-[#f26821] transition-colors text-sm"
+              style={{ fontFamily: BODY }}
+            >
+              Fale Conosco
+            </button>
+            <button
+              onClick={() => setPage("cases")}
+              className="px-6 py-3 border border-white/20 text-white rounded-lg hover:bg-white/10 transition-colors text-sm"
+              style={{ fontFamily: BODY }}
+            >
+              Ver outros cases
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function MateriaisPage() {
+  const [activeCategory, setActiveCategory] = useState("Todos");
+  const categories = [
+    "Todos",
+    "Processos",
+    "Logística",
+    "Qualidade",
+    "Estratégia",
+    "Gestão",
+    "Financeiro",
+  ];
+
+  const filtered =
+    activeCategory === "Todos"
+      ? MATERIALS
+      : MATERIALS.filter((m) => m.category === activeCategory);
+
+  return (
+    <div className="pt-16">
+      {/* Hero */}
+      <section className="bg-primary py-28 relative overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage:
+              "url(https://placehold.co/1600x600/1a1a1a/666666?text=Placeholder)",
+          }}
+        />
+        <div className="absolute inset-0 bg-primary/80" />
 
         <div className="relative max-w-7xl mx-auto px-6 text-center">
           <p
@@ -2171,11 +2958,154 @@ function MateriaisPage() {
           </p>
         </div>
       </section>
+
+      {/* Filter */}
+      <section className="bg-background py-8 border-b border-border sticky top-16 z-40">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-hide">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`shrink-0 px-4 py-1.5 rounded-full text-sm font-semibold transition-all ${
+                  activeCategory === cat
+                    ? "bg-accent text-white"
+                    : "bg-secondary text-secondary-foreground hover:bg-accent/10"
+                }`}
+                style={{ fontFamily: BODY }}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Materials */}
+      <section className="bg-background py-16">
+        <div className="max-w-7xl mx-auto px-6">
+          {/* Featured */}
+          {activeCategory === "Todos" && (
+            <div className="mb-12 group cursor-pointer">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 bg-card border border-border rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300">
+                <div
+                  className="overflow-hidden bg-muted"
+                  style={{ minHeight: 280 }}
+                >
+                  <img
+                    src={`https://placehold.co/800x500/1a1a1a/666666?text=${encodeURIComponent(MATERIALS[0].type)}`}
+                    alt={MATERIALS[0].title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    style={{ minHeight: 280 }}
+                  />
+                </div>
+                <div className="p-10 flex flex-col justify-center">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span
+                      className="text-xs px-2.5 py-1 rounded-full bg-accent/10 text-accent font-semibold"
+                      style={{ fontFamily: BODY }}
+                    >
+                      {MATERIALS[0].category}
+                    </span>
+                    <span
+                      className="text-xs text-muted-foreground flex items-center gap-1"
+                      style={{ fontFamily: BODY }}
+                    >
+                      <BookOpen size={11} /> {MATERIALS[0].type}
+                    </span>
+                  </div>
+                  <h2
+                    className="text-2xl font-bold text-foreground mb-3 group-hover:text-accent transition-colors"
+                    style={{ fontFamily: HEADING }}
+                  >
+                    {MATERIALS[0].title}
+                  </h2>
+                  <p
+                    className="text-sm text-muted-foreground leading-relaxed mb-6"
+                    style={{ fontFamily: BODY }}
+                  >
+                    {MATERIALS[0].excerpt}
+                  </p>
+                  <div className="flex items-center gap-1.5 text-accent text-sm font-semibold">
+                    Baixar material <Download size={14} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {(activeCategory === "Todos"
+              ? filtered.slice(1)
+              : filtered
+            ).map((m, i) => (
+              <article
+                key={i}
+                className="group bg-card border border-border rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer"
+              >
+                <div
+                  className="overflow-hidden bg-muted"
+                  style={{ height: 200 }}
+                >
+                  <img
+                    src={`https://placehold.co/500x300/1a1a1a/666666?text=${encodeURIComponent(m.type)}`}
+                    alt={m.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div className="p-6">
+                  <div className="flex items-center gap-3 mb-3">
+                    <span
+                      className="text-xs px-2.5 py-1 rounded-full bg-accent/10 text-accent font-semibold"
+                      style={{ fontFamily: BODY }}
+                    >
+                      <Tag size={10} className="inline mr-1" />
+                      {m.category}
+                    </span>
+                    <span
+                      className="text-xs text-muted-foreground flex items-center gap-1"
+                      style={{ fontFamily: BODY }}
+                    >
+                      <BookOpen size={11} /> {m.type}
+                    </span>
+                  </div>
+                  <h3
+                    className="font-bold text-foreground text-base leading-snug mb-2 group-hover:text-accent transition-colors"
+                    style={{ fontFamily: HEADING }}
+                  >
+                    {m.title}
+                  </h3>
+                  <p
+                    className="text-xs text-muted-foreground leading-relaxed mb-4"
+                    style={{ fontFamily: BODY }}
+                  >
+                    {m.excerpt}
+                  </p>
+                  <div className="flex items-center gap-1.5 text-accent text-xs font-semibold">
+                    Baixar material <Download size={12} />
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          {filtered.length === 0 && (
+            <div className="text-center py-20">
+              <p
+                className="text-muted-foreground"
+                style={{ fontFamily: BODY }}
+              >
+                Nenhum material encontrado nesta categoria.
+              </p>
+            </div>
+          )}
+        </div>
+      </section>
     </div>
   );
 }
 
-function BlogPage() {
+function BlogPage({ setPage }: { setPage: (p: Page) => void }) {
   const [activeCategory, setActiveCategory] = useState("Todos");
   const categories = [
     "Todos",
@@ -2197,12 +3127,13 @@ function BlogPage() {
       {/* Hero */}
       <section className="bg-primary py-28 relative overflow-hidden">
         <div
-          className="absolute inset-0 opacity-10"
+          className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage:
-              "radial-gradient(circle at 50% 80%, #ff751f, transparent 55%)",
+              "url(https://placehold.co/1600x600/1a1a1a/666666?text=Placeholder)",
           }}
         />
+        <div className="absolute inset-0 bg-primary/80" />
         <div className="relative max-w-7xl mx-auto px-6 text-center">
           <p
             className="text-accent text-xs font-semibold uppercase tracking-widest mb-4"
@@ -2254,7 +3185,12 @@ function BlogPage() {
         <div className="max-w-7xl mx-auto px-6">
           {/* Featured */}
           {activeCategory === "Todos" && (
-            <div className="mb-12 group cursor-pointer">
+            <div
+              onClick={() => BLOG_POSTS[0].page && setPage(BLOG_POSTS[0].page)}
+              className={`mb-12 group ${
+                BLOG_POSTS[0].page ? "cursor-pointer" : "cursor-default"
+              }`}
+            >
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 bg-card border border-border rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300">
                 <div
                   className="overflow-hidden bg-muted"
@@ -2321,7 +3257,10 @@ function BlogPage() {
             ).map((post, i) => (
               <article
                 key={i}
-                className="group bg-card border border-border rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer"
+                onClick={() => post.page && setPage(post.page)}
+                className={`group bg-card border border-border rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 ${
+                  post.page ? "cursor-pointer" : "cursor-default"
+                }`}
               >
                 <div
                   className="overflow-hidden bg-muted"
@@ -2426,18 +3365,286 @@ function BlogPage() {
   );
 }
 
+function PostLeanManufacturingPage({
+  setPage,
+}: {
+  setPage: (p: Page) => void;
+}) {
+  const post = BLOG_POSTS[0];
+
+  return (
+    <div className="pt-16">
+      {/* Header */}
+      <section className="bg-primary py-24 relative overflow-hidden">
+        <div
+          className="absolute inset-0 opacity-10"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 50% 30%, #ff751f, transparent 60%)",
+          }}
+        />
+        <div className="relative max-w-3xl mx-auto px-6">
+          <button
+            onClick={() => setPage("blog")}
+            className="flex items-center gap-1.5 text-white/60 hover:text-white text-sm mb-8 transition-colors"
+            style={{ fontFamily: BODY }}
+          >
+            <ChevronLeft size={16} /> Voltar para o Blog
+          </button>
+          <div className="flex items-center gap-3 mb-5">
+            <span
+              className="text-xs px-2.5 py-1 rounded-full bg-accent/10 text-accent font-semibold"
+              style={{ fontFamily: BODY }}
+            >
+              {post.category}
+            </span>
+            <span
+              className="text-xs text-white/50 flex items-center gap-1"
+              style={{ fontFamily: BODY }}
+            >
+              <Clock size={11} /> {post.readTime}
+            </span>
+            <span
+              className="text-xs text-white/50"
+              style={{ fontFamily: BODY }}
+            >
+              {post.date}
+            </span>
+          </div>
+          <h1
+            className="text-3xl lg:text-5xl font-bold text-white leading-tight"
+            style={{ fontFamily: HEADING }}
+          >
+            {post.title}
+          </h1>
+        </div>
+      </section>
+
+      {/* Imagem de capa */}
+      <div
+        className="max-w-5xl mx-auto px-6 -mt-10 relative"
+        style={{ marginBottom: -1 }}
+      >
+        <img
+          src={`https://images.unsplash.com/${post.img}?w=1200&h=600&fit=crop&auto=format`}
+          alt={post.title}
+          className="w-full rounded-2xl object-cover shadow-xl"
+          style={{ height: 380 }}
+        />
+      </div>
+
+      {/* Artigo */}
+      <section className="bg-background pt-16 pb-24">
+        <div className="max-w-3xl mx-auto px-6">
+          <p
+            className="text-lg text-muted-foreground leading-relaxed mb-8"
+            style={{ fontFamily: BODY }}
+          >
+            {post.excerpt}
+          </p>
+
+          <h2
+            className="text-2xl font-bold text-foreground mb-4"
+            style={{ fontFamily: HEADING }}
+          >
+            O que é Lean Manufacturing
+          </h2>
+          <p
+            className="text-muted-foreground leading-relaxed mb-6"
+            style={{ fontFamily: BODY }}
+          >
+            Lean Manufacturing é uma filosofia de gestão originada no
+            Sistema Toyota de Produção, focada em entregar mais valor ao
+            cliente com menos desperdício. Na prática, isso significa
+            olhar para cada etapa do processo produtivo e perguntar: essa
+            atividade agrega valor real para quem compra o produto ou
+            serviço?
+          </p>
+          <p
+            className="text-muted-foreground leading-relaxed mb-10"
+            style={{ fontFamily: BODY }}
+          >
+            Para pequenas empresas, o Lean costuma parecer distante da
+            realidade — algo feito apenas por grandes indústrias. Na
+            prática, os princípios são simples e podem ser aplicados com
+            baixo investimento, desde que haja disciplina para observar o
+            processo com atenção.
+          </p>
+
+          <div className="border-l-4 border-accent pl-6 mb-10">
+            <p
+              className="text-xl text-foreground leading-relaxed"
+              style={{ fontFamily: SERIF }}
+            >
+              "Desperdício não é só material jogado fora — é também
+              tempo de espera, retrabalho e etapas que ninguém sabe
+              explicar por que existem."
+            </p>
+          </div>
+
+          <h2
+            className="text-2xl font-bold text-foreground mb-4"
+            style={{ fontFamily: HEADING }}
+          >
+            Os 5 princípios do Lean
+          </h2>
+          <div className="flex flex-col gap-4 mb-10">
+            {[
+              {
+                title: "Valor",
+                desc: "Definir o que realmente importa para o cliente final.",
+              },
+              {
+                title: "Fluxo de valor",
+                desc: "Mapear todas as etapas do processo e identificar o que não agrega valor.",
+              },
+              {
+                title: "Fluxo contínuo",
+                desc: "Eliminar interrupções e esperas entre uma etapa e outra.",
+              },
+              {
+                title: "Produção puxada",
+                desc: "Produzir de acordo com a demanda real, não com previsões otimistas.",
+              },
+              {
+                title: "Melhoria contínua",
+                desc: "Revisar processos periodicamente em busca de pequenos ganhos constantes.",
+              },
+            ].map((item, i) => (
+              <div key={i} className="flex items-start gap-4">
+                <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center shrink-0">
+                  <span
+                    className="text-accent text-xs font-bold"
+                    style={{ fontFamily: HEADING }}
+                  >
+                    {i + 1}
+                  </span>
+                </div>
+                <div>
+                  <p
+                    className="font-semibold text-foreground mb-0.5"
+                    style={{ fontFamily: HEADING }}
+                  >
+                    {item.title}
+                  </p>
+                  <p
+                    className="text-sm text-muted-foreground leading-relaxed"
+                    style={{ fontFamily: BODY }}
+                  >
+                    {item.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <h2
+            className="text-2xl font-bold text-foreground mb-4"
+            style={{ fontFamily: HEADING }}
+          >
+            Como começar na sua empresa
+          </h2>
+          <p
+            className="text-muted-foreground leading-relaxed mb-10"
+            style={{ fontFamily: BODY }}
+          >
+            O primeiro passo não é comprar ferramentas ou treinamentos
+            caros — é observar. Escolha um processo, acompanhe-o do
+            início ao fim e anote onde o trabalho para, onde há retrabalho
+            e onde a informação se perde. Esses pontos costumam ser os
+            gargalos mais fáceis de atacar primeiro.
+          </p>
+
+          <div className="flex flex-wrap gap-2 mb-10">
+            {["Lean", "Processos", "PMEs"].map((tag) => (
+              <span
+                key={tag}
+                className="text-xs px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground font-medium"
+                style={{ fontFamily: BODY }}
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-3 pt-8 border-t border-border">
+            <div className="w-11 h-11 rounded-full bg-accent/10 flex items-center justify-center shrink-0">
+              <span
+                className="text-accent font-bold text-sm"
+                style={{ fontFamily: HEADING }}
+              >
+                LJ
+              </span>
+            </div>
+            <div>
+              <p
+                className="font-semibold text-foreground text-sm"
+                style={{ fontFamily: BODY }}
+              >
+                Equipe Líder Jr.
+              </p>
+              <p
+                className="text-muted-foreground text-xs"
+                style={{ fontFamily: BODY }}
+              >
+                Consultoria em Engenharia de Produção
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="bg-primary py-20">
+        <div className="max-w-xl mx-auto px-6 text-center">
+          <h2
+            className="text-3xl font-bold text-white mb-3"
+            style={{ fontFamily: HEADING }}
+          >
+            Quer aplicar o Lean na sua empresa?
+          </h2>
+          <p
+            className="text-white/60 text-sm mb-8"
+            style={{ fontFamily: BODY }}
+          >
+            Nossa equipe pode ajudar a mapear seus processos e encontrar
+            oportunidades reais de melhoria.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <button
+              onClick={() => setPage("contato")}
+              className="px-6 py-3 bg-accent text-white font-semibold rounded-lg hover:bg-[#f26821] transition-colors text-sm"
+              style={{ fontFamily: BODY }}
+            >
+              Fale Conosco
+            </button>
+            <button
+              onClick={() => setPage("blog")}
+              className="px-6 py-3 border border-white/20 text-white rounded-lg hover:bg-white/10 transition-colors text-sm"
+              style={{ fontFamily: BODY }}
+            >
+              Ver outros artigos
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
 function ContatoPage() {
   return (
     <div className="pt-16">
       {/* Hero */}
       <section className="bg-primary py-28 relative overflow-hidden">
         <div
-          className="absolute inset-0 opacity-10"
+          className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage:
-              "radial-gradient(circle at 75% 30%, #ff751f, transparent 55%)",
+              "url(https://placehold.co/1600x600/1a1a1a/666666?text=Placeholder)",
           }}
         />
+        <div className="absolute inset-0 bg-primary/80" />
 
         <div className="relative max-w-7xl mx-auto px-6 text-center">
           <p
@@ -2627,9 +3834,18 @@ export default function App() {
         {page === "home" && <HomePage setPage={navigate} />}
         {page === "quem-somos" && <QuemSomosPage />}
         {page === "servicos" && <ServicosPage />}
-        {page === "cases" && <CasesPage />}
+        {page === "mapeamento-processos" && (
+          <MapeamentoProcessosPage setPage={navigate} />
+        )}
+        {page === "cases" && <CasesPage setPage={navigate} />}
+        {page === "case-metalurgica" && (
+          <CaseMetalurgicaPage setPage={navigate} />
+        )}
         {page === "materiais" && <MateriaisPage />}
-        {page === "blog" && <BlogPage />}
+        {page === "blog" && <BlogPage setPage={navigate} />}
+        {page === "post-lean-manufacturing" && (
+          <PostLeanManufacturingPage setPage={navigate} />
+        )}
         {page === "contato" && <ContatoPage />}
       </main>
 
