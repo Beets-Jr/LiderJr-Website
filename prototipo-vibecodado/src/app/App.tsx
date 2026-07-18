@@ -2430,7 +2430,6 @@ function MapeamentoProcessosPage({
     </div>
   );
 }
-
 function CasesPage({ setPage }: { setPage: (p: Page) => void }) {
   const [activeCategory, setActiveCategory] = useState("Todos");
   const categories = [
@@ -2452,43 +2451,40 @@ function CasesPage({ setPage }: { setPage: (p: Page) => void }) {
     <div className="pt-16">
       {/* Hero */}
       <section className="bg-primary py-28 relative overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
+        <div 
+          className="absolute inset-0 opacity-10"
           style={{
-            backgroundImage:
-              "url(https://placehold.co/1600x600/1a1a1a/666666?text=Placeholder)",
+            backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.2) 1px, transparent 1px)`,
+            backgroundSize: '40px 40px'
           }}
         />
-        <div className="absolute inset-0 bg-primary/80" />
+        <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/80 to-transparent" />
 
         <div className="relative max-w-7xl mx-auto px-6 text-center">
           <p
             className="text-accent text-xs font-semibold uppercase tracking-widest mb-4"
             style={{ fontFamily: BODY }}
           >
-            Resultados
+            Resultados Comprovados
           </p>
 
           <h1
             className="text-5xl lg:text-6xl font-bold text-white mb-6"
             style={{ fontFamily: HEADING }}
           >
-            Cases
+            Nossos Cases
           </h1>
 
           <p
             className="text-white/60 text-lg max-w-2xl mx-auto"
             style={{ fontFamily: BODY }}
           >
-            Conheça alguns dos projetos desenvolvidos pela Lider
-            Jr. e descubra como ajudamos empresas a alcançarem
-            melhores resultados por meio da Engenharia de
-            Produção.
+            Conheça os projetos desenvolvidos pela Líder Jr. e o impacto real que a Engenharia de Produção gerou na produtividade e no faturamento dos nossos clientes.
           </p>
         </div>
       </section>
 
-      {/* Filter */}
+      {/* Filter Sticky (Botões padronizados com o Blog) */}
       <section className="bg-background py-8 border-b border-border sticky top-16 z-40">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-hide">
@@ -2510,138 +2506,98 @@ function CasesPage({ setPage }: { setPage: (p: Page) => void }) {
         </div>
       </section>
 
-      {/* Cases */}
-      <section className="bg-background py-16">
-        <div className="max-w-7xl mx-auto px-6">
-          {/* Featured */}
-          {activeCategory === "Todos" && (
-            <div className="mb-12 group cursor-pointer">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 bg-card border border-border rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300">
-                <div
-                  className="overflow-hidden bg-muted"
-                  style={{ minHeight: 280 }}
+      {/* Lista de Cases - Card Inteiro Interativo */}
+      <section className="bg-background py-24">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col gap-24">
+          {filtered.map((c, i) => (
+            <article
+              key={i}
+              onClick={() => c.page && setPage(c.page)}
+              className={`group flex flex-col lg:flex-row gap-12 lg:gap-20 items-center transition-all duration-300 ${
+                i % 2 !== 0 ? "lg:flex-row-reverse" : ""
+              } ${c.page ? "cursor-pointer" : "cursor-default"}`}
+            >
+              {/* Lado da Imagem */}
+              <div className="w-full lg:w-1/2">
+                <div 
+                  className="relative aspect-[4/3] rounded-3xl overflow-hidden bg-card border border-border shadow-sm group-hover:shadow-2xl group-hover:border-accent/30 transition-all duration-500"
                 >
                   <img
-                    src={`https://placehold.co/800x500/1a1a1a/666666?text=${encodeURIComponent(CASES[0].company)}`}
-                    alt={CASES[0].company}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    style={{ minHeight: 280 }}
+                    src={`https://placehold.co/800x600/1a1a1a/666666?text=${encodeURIComponent(c.company)}`}
+                    alt={c.company}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
-                </div>
-                <div className="p-10 flex flex-col justify-center">
-                  <div className="flex items-center gap-3 mb-4">
-                    <span
-                      className="text-xs px-2.5 py-1 rounded-full bg-accent/10 text-accent font-semibold"
-                      style={{ fontFamily: BODY }}
-                    >
-                      {CASES[0].category}
-                    </span>
-                    <span
-                      className="font-bold text-accent text-2xl"
-                      style={{ fontFamily: HEADING }}
-                    >
-                      {CASES[0].result}
-                    </span>
-                    <span
-                      className="text-xs text-muted-foreground"
-                      style={{ fontFamily: BODY }}
-                    >
-                      {CASES[0].metric}
-                    </span>
-                  </div>
-                  <h2
-                    className="text-2xl font-bold text-foreground mb-3 group-hover:text-accent transition-colors"
-                    style={{ fontFamily: HEADING }}
-                  >
-                    {CASES[0].company}
-                  </h2>
-                  <p
-                    className="text-sm text-muted-foreground leading-relaxed mb-6"
-                    style={{ fontFamily: BODY }}
-                  >
-                    {CASES[0].desc}
-                  </p>
-                  <div className="flex items-center gap-2 text-accent text-sm font-semibold">
-                    Ver case completo <ArrowRight size={14} />
+                  {/* Selo flutuante */}
+                  <div className="absolute bottom-6 left-6 bg-primary/90 backdrop-blur-sm border border-white/10 text-white px-6 py-4 rounded-2xl shadow-xl">
+                    <p className="text-accent font-bold text-3xl" style={{ fontFamily: HEADING }}>{c.result}</p>
+                    <p className="text-xs uppercase tracking-wider text-white/70" style={{ fontFamily: BODY }}>{c.metric}</p>
                   </div>
                 </div>
               </div>
-            </div>
-          )}
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {(activeCategory === "Todos"
-              ? filtered.slice(1)
-              : filtered
-            ).map((c, i) => (
-              <article
-                key={i}
-                onClick={() => c.page && setPage(c.page)}
-                className={`group bg-card border border-border rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 ${
-                  c.page ? "cursor-pointer" : "cursor-default"
-                }`}
-              >
-                <div
-                  className="overflow-hidden bg-muted"
-                  style={{ height: 200 }}
-                >
-                  <img
-                    src={`https://placehold.co/500x300/1a1a1a/666666?text=${encodeURIComponent(c.company)}`}
-                    alt={c.company}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-                <div className="p-6">
-                  <div className="flex items-center gap-3 mb-3">
-                    <span
-                      className="text-xs px-2.5 py-1 rounded-full bg-accent/10 text-accent font-semibold"
-                      style={{ fontFamily: BODY }}
-                    >
-                      <Tag size={10} className="inline mr-1" />
-                      {c.category}
-                    </span>
-                    <span
-                      className="font-bold text-accent"
-                      style={{ fontFamily: HEADING }}
-                    >
-                      {c.result}
-                    </span>
-                  </div>
-                  <h3
-                    className="font-bold text-foreground text-base leading-snug mb-2 group-hover:text-accent transition-colors"
-                    style={{ fontFamily: HEADING }}
-                  >
-                    {c.company}
-                  </h3>
-                  <p
-                    className="text-xs text-muted-foreground leading-relaxed mb-4"
+              {/* Lado do Conteúdo */}
+              <div className="w-full lg:w-1/2 flex flex-col justify-center">
+                <div className="flex items-center gap-3 mb-6">
+                  <span
+                    className="text-xs px-3 py-1.5 rounded-md bg-accent/10 text-accent font-bold uppercase tracking-wider"
                     style={{ fontFamily: BODY }}
                   >
-                    {c.desc}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {c.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-xs px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground font-medium"
-                        style={{ fontFamily: BODY }}
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+                    {c.category}
+                  </span>
                 </div>
-              </article>
-            ))}
-          </div>
+
+                <h2
+                  className="text-3xl lg:text-4xl font-bold text-foreground mb-4 leading-tight group-hover:text-accent transition-colors duration-300"
+                  style={{ fontFamily: HEADING }}
+                >
+                  {c.company}
+                </h2>
+                
+                <p
+                  className="text-lg text-muted-foreground leading-relaxed mb-8"
+                  style={{ fontFamily: BODY }}
+                >
+                  {c.desc}
+                </p>
+
+                <div className="flex flex-wrap gap-2 mb-10">
+                  {c.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="text-xs px-3 py-1.5 rounded-full border border-border bg-muted text-muted-foreground font-medium"
+                      style={{ fontFamily: BODY }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                {/* CTA Visual (acionado pelo hover do Article) */}
+                <div
+                  className={`w-fit flex items-center gap-3 font-bold transition-all duration-300 ${
+                    c.page
+                      ? "text-accent group-hover:text-[#f26821]"
+                      : "text-muted-foreground opacity-50"
+                  }`}
+                  style={{ fontFamily: BODY }}
+                >
+                  <span className="border-b-2 border-transparent group-hover:border-current pb-0.5 transition-colors duration-300">
+                    {c.page ? "Ver resultados completos" : "Case em breve"}
+                  </span>
+                  {c.page && (
+                    <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent group-hover:text-white transition-colors duration-300">
+                      <ArrowRight size={16} />
+                    </div>
+                  )}
+                </div>
+              </div>
+            </article>
+          ))}
 
           {filtered.length === 0 && (
-            <div className="text-center py-20">
-              <p
-                className="text-muted-foreground"
-                style={{ fontFamily: BODY }}
-              >
-                Nenhum case encontrado nesta categoria.
+            <div className="text-center py-20 bg-card border border-border rounded-2xl">
+              <p className="text-muted-foreground text-lg" style={{ fontFamily: BODY }}>
+                Nenhum projeto encontrado nesta categoria no momento.
               </p>
             </div>
           )}
@@ -2920,46 +2876,68 @@ function MateriaisPage() {
       ? MATERIALS
       : MATERIALS.filter((m) => m.category === activeCategory);
 
+  // Mapeamento de ícones por formato
+  const getTypeIcon = (type: string) => {
+    switch (type) {
+      case "E-book": return BookOpen;
+      case "Planilha": return TrendingUp;
+      case "Guia": return CheckCircle2;
+      case "Template": return Box;
+      case "Webinar": return Users;
+      default: return BookOpen;
+    }
+  };
+
+  // Cores dinâmicas para a "capa" do material
+  const getTypeStyle = (type: string) => {
+    switch (type) {
+      case "E-book": return "bg-[#ff751f]/10 text-[#ff751f] border-[#ff751f]/20"; // Laranja Lider
+      case "Planilha": return "bg-emerald-500/10 text-emerald-600 border-emerald-500/20";
+      case "Guia": return "bg-blue-500/10 text-blue-600 border-blue-500/20";
+      case "Template": return "bg-purple-500/10 text-purple-600 border-purple-500/20";
+      case "Webinar": return "bg-rose-500/10 text-rose-600 border-rose-500/20";
+      default: return "bg-accent/10 text-accent border-accent/20";
+    }
+  };
+
   return (
     <div className="pt-16">
       {/* Hero */}
       <section className="bg-primary py-28 relative overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
+        <div 
+          className="absolute inset-0 opacity-20"
           style={{
-            backgroundImage:
-              "url(https://placehold.co/1600x600/1a1a1a/666666?text=Placeholder)",
+            backgroundImage: `radial-gradient(rgba(255, 255, 255, 0.3) 2px, transparent 2px)`,
+            backgroundSize: '30px 30px'
           }}
         />
-        <div className="absolute inset-0 bg-primary/80" />
+        <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/80 to-transparent" />
 
         <div className="relative max-w-7xl mx-auto px-6 text-center">
           <p
             className="text-accent text-xs font-semibold uppercase tracking-widest mb-4"
             style={{ fontFamily: BODY }}
           >
-            Conteúdo
+            Biblioteca Gratuita
           </p>
 
           <h1
             className="text-5xl lg:text-6xl font-bold text-white mb-6"
             style={{ fontFamily: HEADING }}
           >
-            Materiais
+            Diretório de Materiais
           </h1>
 
           <p
             className="text-white/60 text-lg max-w-2xl mx-auto"
             style={{ fontFamily: BODY }}
           >
-            Acesse e-books, guias, planilhas e outros materiais
-            desenvolvidos para compartilhar conhecimento e
-            apoiar o crescimento de empresas e empreendedores.
+            Acesse e-books, guias, planilhas e templates práticos. Ferramentas reais estruturadas para impulsionar a gestão do seu negócio.
           </p>
         </div>
       </section>
 
-      {/* Filter */}
+      {/* Filter Sticky */}
       <section className="bg-background py-8 border-b border-border sticky top-16 z-40">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-hide">
@@ -2981,121 +2959,75 @@ function MateriaisPage() {
         </div>
       </section>
 
-      {/* Materials */}
-      <section className="bg-background py-16">
+      {/* Grid de Materiais - Estilo Produto */}
+      <section className="bg-background py-16 pb-32">
         <div className="max-w-7xl mx-auto px-6">
-          {/* Featured */}
-          {activeCategory === "Todos" && (
-            <div className="mb-12 group cursor-pointer">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 bg-card border border-border rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300">
-                <div
-                  className="overflow-hidden bg-muted"
-                  style={{ minHeight: 280 }}
-                >
-                  <img
-                    src={`https://placehold.co/800x500/1a1a1a/666666?text=${encodeURIComponent(MATERIALS[0].type)}`}
-                    alt={MATERIALS[0].title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    style={{ minHeight: 280 }}
-                  />
-                </div>
-                <div className="p-10 flex flex-col justify-center">
-                  <div className="flex items-center gap-3 mb-4">
-                    <span
-                      className="text-xs px-2.5 py-1 rounded-full bg-accent/10 text-accent font-semibold"
-                      style={{ fontFamily: BODY }}
-                    >
-                      {MATERIALS[0].category}
-                    </span>
-                    <span
-                      className="text-xs text-muted-foreground flex items-center gap-1"
-                      style={{ fontFamily: BODY }}
-                    >
-                      <BookOpen size={11} /> {MATERIALS[0].type}
-                    </span>
-                  </div>
-                  <h2
-                    className="text-2xl font-bold text-foreground mb-3 group-hover:text-accent transition-colors"
-                    style={{ fontFamily: HEADING }}
-                  >
-                    {MATERIALS[0].title}
-                  </h2>
-                  <p
-                    className="text-sm text-muted-foreground leading-relaxed mb-6"
-                    style={{ fontFamily: BODY }}
-                  >
-                    {MATERIALS[0].excerpt}
-                  </p>
-                  <div className="flex items-center gap-1.5 text-accent text-sm font-semibold">
-                    Baixar material <Download size={14} />
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filtered.map((m, i) => {
+              const Icon = getTypeIcon(m.type);
+              const styleClass = getTypeStyle(m.type);
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {(activeCategory === "Todos"
-              ? filtered.slice(1)
-              : filtered
-            ).map((m, i) => (
-              <article
-                key={i}
-                className="group bg-card border border-border rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer"
-              >
-                <div
-                  className="overflow-hidden bg-muted"
-                  style={{ height: 200 }}
+              return (
+                <article 
+                  key={i} 
+                  className="group flex flex-col bg-card border border-border rounded-2xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
                 >
-                  <img
-                    src={`https://placehold.co/500x300/1a1a1a/666666?text=${encodeURIComponent(m.type)}`}
-                    alt={m.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-                <div className="p-6">
-                  <div className="flex items-center gap-3 mb-3">
-                    <span
-                      className="text-xs px-2.5 py-1 rounded-full bg-accent/10 text-accent font-semibold"
-                      style={{ fontFamily: BODY }}
-                    >
-                      <Tag size={10} className="inline mr-1" />
-                      {m.category}
-                    </span>
-                    <span
-                      className="text-xs text-muted-foreground flex items-center gap-1"
-                      style={{ fontFamily: BODY }}
-                    >
-                      <BookOpen size={11} /> {m.type}
+                  {/* Capa do Material */}
+                  <div className={`h-48 w-full flex flex-col items-center justify-center border-b ${styleClass}`}>
+                    <div className="w-16 h-16 bg-background rounded-2xl shadow-sm flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-500">
+                      <Icon size={32} />
+                    </div>
+                    <span className="font-bold tracking-widest uppercase text-xs opacity-80" style={{ fontFamily: BODY }}>
+                      {m.type}
                     </span>
                   </div>
-                  <h3
-                    className="font-bold text-foreground text-base leading-snug mb-2 group-hover:text-accent transition-colors"
-                    style={{ fontFamily: HEADING }}
-                  >
-                    {m.title}
-                  </h3>
-                  <p
-                    className="text-xs text-muted-foreground leading-relaxed mb-4"
-                    style={{ fontFamily: BODY }}
-                  >
-                    {m.excerpt}
-                  </p>
-                  <div className="flex items-center gap-1.5 text-accent text-xs font-semibold">
-                    Baixar material <Download size={12} />
+
+                  {/* Conteúdo */}
+                  <div className="p-6 flex flex-col flex-1">
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="text-xs px-2.5 py-1 rounded-full border border-border bg-muted text-muted-foreground font-medium" style={{ fontFamily: BODY }}>
+                        {m.category}
+                      </span>
+                    </div>
+
+                    <h3 
+                      className="font-bold text-foreground text-xl leading-snug mb-3 group-hover:text-accent transition-colors" 
+                      style={{ fontFamily: HEADING }}
+                    >
+                      {m.title}
+                    </h3>
+                    
+                    <p 
+                      className="text-sm text-muted-foreground line-clamp-3 mb-6 flex-1" 
+                      style={{ fontFamily: BODY }}
+                    >
+                      {m.excerpt}
+                    </p>
+
+                    {/* Botão fixo no rodapé com hover isolado */}
+                    <button 
+                      className="w-full flex items-center justify-center gap-2 text-sm font-bold bg-secondary text-foreground group-hover:bg-accent group-hover:text-white hover:!bg-[#f26821] hover:scale-[1.02] active:scale-95 py-3.5 rounded-xl transition-all duration-200" 
+                      style={{ fontFamily: BODY }}
+                    >
+                      <Download size={16} />
+                      Baixar Material
+                    </button>
                   </div>
-                </div>
-              </article>
-            ))}
+                </article>
+              )
+            })}
           </div>
 
+          {/* Empty State */}
           {filtered.length === 0 && (
-            <div className="text-center py-20">
-              <p
-                className="text-muted-foreground"
-                style={{ fontFamily: BODY }}
-              >
-                Nenhum material encontrado nesta categoria.
+            <div className="text-center py-24 bg-card border border-border rounded-2xl">
+              <div className="w-16 h-16 mx-auto bg-muted rounded-2xl flex items-center justify-center mb-4">
+                <Box size={24} className="text-muted-foreground" />
+              </div>
+              <h3 className="text-xl font-bold text-foreground mb-2" style={{ fontFamily: HEADING }}>Nenhum material encontrado</h3>
+              <p className="text-muted-foreground text-sm" style={{ fontFamily: BODY }}>
+                Ainda não liberamos recursos para esta categoria. Fique de olho!
               </p>
             </div>
           )}
@@ -3181,9 +3113,9 @@ function BlogPage({ setPage }: { setPage: (p: Page) => void }) {
       </section>
 
       {/* Posts */}
-      <section className="bg-background py-16">
+      <section className="bg-background py-16 pb-32">
         <div className="max-w-7xl mx-auto px-6">
-          {/* Featured */}
+          {/* Featured Post */}
           {activeCategory === "Todos" && (
             <div
               onClick={() => BLOG_POSTS[0].page && setPage(BLOG_POSTS[0].page)}
@@ -3194,55 +3126,57 @@ function BlogPage({ setPage }: { setPage: (p: Page) => void }) {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 bg-card border border-border rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300">
                 <div
                   className="overflow-hidden bg-muted"
-                  style={{ minHeight: 280 }}
+                  style={{ minHeight: 320 }}
                 >
                   <img
                     src={`https://images.unsplash.com/${BLOG_POSTS[0].img}?w=800&h=500&fit=crop&auto=format`}
                     alt={BLOG_POSTS[0].title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    style={{ minHeight: 280 }}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    style={{ minHeight: 320 }}
                   />
                 </div>
                 <div className="p-10 flex flex-col justify-center">
-                  <div className="flex items-center gap-3 mb-4">
+                  <div className="flex items-center gap-3 mb-5">
                     <span
-                      className="text-xs px-2.5 py-1 rounded-full bg-accent/10 text-accent font-semibold"
+                      className="text-xs px-3 py-1.5 rounded-full bg-accent/10 text-accent font-bold uppercase tracking-wider"
                       style={{ fontFamily: BODY }}
                     >
                       {BLOG_POSTS[0].category}
                     </span>
                     <span
-                      className="text-xs text-muted-foreground flex items-center gap-1"
+                      className="text-sm font-medium text-muted-foreground flex items-center gap-1.5"
                       style={{ fontFamily: BODY }}
                     >
-                      <Clock size={11} />{" "}
+                      <Clock size={14} />{" "}
                       {BLOG_POSTS[0].readTime}
                     </span>
                   </div>
+                  {/* Título do destaque aumentado de 2xl para 3xl/4xl */}
                   <h2
-                    className="text-2xl font-bold text-foreground mb-3 group-hover:text-accent transition-colors"
+                    className="text-3xl lg:text-4xl font-bold text-foreground mb-4 group-hover:text-accent transition-colors leading-tight"
                     style={{ fontFamily: HEADING }}
                   >
                     {BLOG_POSTS[0].title}
                   </h2>
+                  {/* Legenda do destaque aumentada de sm para base/lg */}
                   <p
-                    className="text-sm text-muted-foreground leading-relaxed mb-6"
+                    className="text-base lg:text-lg text-muted-foreground leading-relaxed mb-8"
                     style={{ fontFamily: BODY }}
                   >
                     {BLOG_POSTS[0].excerpt}
                   </p>
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between mt-auto">
                     <span
-                      className="text-xs text-muted-foreground"
+                      className="text-sm font-medium text-muted-foreground"
                       style={{ fontFamily: BODY }}
                     >
                       {BLOG_POSTS[0].date}
                     </span>
                     <div
-                      className="flex items-center gap-1.5 text-accent text-sm font-semibold"
+                      className="flex items-center gap-1.5 text-accent text-sm font-bold"
                       style={{ fontFamily: BODY }}
                     >
-                      Ler artigo <ExternalLink size={14} />
+                      Ler artigo <ExternalLink size={16} />
                     </div>
                   </div>
                 </div>
@@ -3250,7 +3184,8 @@ function BlogPage({ setPage }: { setPage: (p: Page) => void }) {
             </div>
           )}
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Grid de Posts Normais */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {(activeCategory === "Todos"
               ? filtered.slice(1)
               : filtered
@@ -3258,13 +3193,13 @@ function BlogPage({ setPage }: { setPage: (p: Page) => void }) {
               <article
                 key={i}
                 onClick={() => post.page && setPage(post.page)}
-                className={`group bg-card border border-border rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 ${
+                className={`group flex flex-col bg-card border border-border rounded-2xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 ${
                   post.page ? "cursor-pointer" : "cursor-default"
                 }`}
               >
                 <div
-                  className="overflow-hidden bg-muted"
-                  style={{ height: 200 }}
+                  className="overflow-hidden bg-muted shrink-0"
+                  style={{ height: 220 }}
                 >
                   <img
                     src={`https://images.unsplash.com/${post.img}?w=500&h=300&fit=crop&auto=format`}
@@ -3272,52 +3207,57 @@ function BlogPage({ setPage }: { setPage: (p: Page) => void }) {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
-                <div className="p-6">
-                  <div className="flex items-center gap-3 mb-3">
+                <div className="p-6 flex flex-col flex-1">
+                  <div className="flex items-center gap-3 mb-4">
                     <span
-                      className="text-xs px-2.5 py-1 rounded-full bg-accent/10 text-accent font-semibold"
+                      className="text-[10px] px-2.5 py-1 rounded-full bg-accent/10 text-accent font-bold uppercase tracking-wider"
                       style={{ fontFamily: BODY }}
                     >
                       <Tag size={10} className="inline mr-1" />
                       {post.category}
                     </span>
                     <span
-                      className="text-xs text-muted-foreground flex items-center gap-1"
+                      className="text-xs font-medium text-muted-foreground flex items-center gap-1"
                       style={{ fontFamily: BODY }}
                     >
-                      <Clock size={11} /> {post.readTime}
+                      <Clock size={12} /> {post.readTime}
                     </span>
                   </div>
+                  {/* Título dos posts na grid aumentados de text-base para text-xl */}
                   <h3
-                    className="font-bold text-foreground text-base leading-snug mb-2 group-hover:text-accent transition-colors"
+                    className="font-bold text-foreground text-xl leading-snug mb-3 group-hover:text-accent transition-colors"
                     style={{ fontFamily: HEADING }}
                   >
                     {post.title}
                   </h3>
+                  {/* Legenda dos posts aumentados de text-xs para text-sm */}
                   <p
-                    className="text-xs text-muted-foreground leading-relaxed mb-4"
+                    className="text-sm text-muted-foreground leading-relaxed mb-6 flex-1"
                     style={{ fontFamily: BODY }}
                   >
                     {post.excerpt}
                   </p>
-                  <p
-                    className="text-xs text-muted-foreground"
-                    style={{ fontFamily: BODY }}
-                  >
-                    {post.date}
-                  </p>
+                  {/* Data aumentada e presa ao rodapé do card */}
+                  <div className="mt-auto pt-4 border-t border-border/50">
+                    <p
+                      className="text-sm font-medium text-muted-foreground"
+                      style={{ fontFamily: BODY }}
+                    >
+                      {post.date}
+                    </p>
+                  </div>
                 </div>
               </article>
             ))}
           </div>
 
           {filtered.length === 0 && (
-            <div className="text-center py-20">
+            <div className="text-center py-20 bg-card border border-border rounded-2xl">
               <p
-                className="text-muted-foreground"
+                className="text-muted-foreground text-lg"
                 style={{ fontFamily: BODY }}
               >
-                Nenhum artigo encontrado nesta categoria.
+                Nenhum artigo encontrado nesta categoria no momento.
               </p>
             </div>
           )}
