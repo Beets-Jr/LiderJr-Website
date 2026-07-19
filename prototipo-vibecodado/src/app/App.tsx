@@ -567,62 +567,79 @@ function Navbar({
 }) {
   const [open, setOpen] = useState(false);
   const [servicosMobileOpen, setServicosMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  const mainLinks = NAV_LINKS.filter((l) => l.page !== "contato");
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const mainLinks = NAV_LINKS.filter((l) => l.page !== "contato" && l.page !== "home");
   const isServicosActive =
     page === "servicos" || page === "mapeamento-processos";
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-primary/95 backdrop-blur-sm border-b border-white/10">
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-black/98 shadow-2xl shadow-black/50 backdrop-blur-md"
+          : "bg-black backdrop-blur-sm"
+      } border-b border-white/5`}
+    >
+      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center">
+        {/* Logo à esquerda */}
         <button
           onClick={() => {
             setPage("home");
             setOpen(false);
           }}
-          className="flex items-center gap-2 group"
+          className="flex items-center gap-3 group flex-shrink-0"
         >
-          <div className="w-8 h-8 bg-accent rounded flex items-center justify-center">
-            <Box size={18} className="text-white" strokeWidth={1.8} />
+          <div className="w-9 h-9 bg-accent rounded-lg flex items-center justify-center group-hover:bg-[#f26821] transition-colors">
+            <Box size={20} className="text-white" strokeWidth={1.8} />
           </div>
-          <span
-            className="text-white font-bold text-lg"
-            style={{ fontFamily: HEADING }}
-          >
-            <span className="text-accent">Líder Jr.</span>
-          </span>
+          <div className="flex items-center gap-2">
+            <div className="w-px h-5 bg-accent/60" />
+            <span
+              className="text-accent font-bold text-xl tracking-tight"
+              style={{ fontFamily: HEADING }}
+            >
+              Líder Jr.
+            </span>
+          </div>
         </button>
 
-        {/* Nav desktop */}
-        <div className="hidden md:flex items-center gap-1">
-          {NAV_LINKS.map((l) =>
+        {/* Nav desktop - CENTRALIZADO */}
+        <div className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
+          {mainLinks.map((l) =>
             l.page === "servicos" ? (
               <div key={l.page} className="relative group">
                 <button
                   onClick={() => setPage("servicos")}
-                  className={`flex items-center gap-1 px-4 py-2 rounded text-sm font-medium transition-all duration-200 ${
+                  className={`flex items-center gap-1 px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
                     isServicosActive
-                      ? "text-accent bg-white/10"
-                      : "text-white/70 hover:text-white hover:bg-white/5"
+                      ? "text-white bg-white/10"
+                      : "text-white/60 hover:text-white hover:bg-white/5"
                   }`}
                   style={{ fontFamily: BODY }}
                 >
                   {l.label}
                   <ChevronDown
                     size={14}
-                    className="transition-transform duration-200 group-hover:rotate-180"
+                    className="transition-transform duration-200 group-hover:rotate-180 text-white/50"
                   />
                 </button>
-                <div className="absolute left-0 top-full pt-2 opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200">
-                  <div className="bg-primary border border-white/10 rounded-lg shadow-xl py-2 w-72">
+                <div className="absolute left-0 top-full pt-2 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200">
+                  <div className="bg-[#111] border border-accent/20 rounded-xl shadow-2xl py-2 w-72">
                     {SERVICES.map((s) => (
                       <button
                         key={s.title}
                         onClick={() => setPage(s.page)}
-                        className="w-full flex items-center gap-3 px-4 py-2.5 text-left text-sm text-white/70 hover:text-white hover:bg-white/5 transition-colors"
+                        className="w-full flex items-center gap-3 px-4 py-2.5 text-left text-sm text-white/60 hover:text-white hover:bg-white/5 transition-colors"
                         style={{ fontFamily: BODY }}
                       >
-                        <s.icon size={16} className="text-accent shrink-0" />
+                        <s.icon size={15} className="text-accent shrink-0" />
                         {s.title}
                       </button>
                     ))}
@@ -633,15 +650,11 @@ function Navbar({
               <button
                 key={l.page}
                 onClick={() => setPage(l.page)}
-                className={
-                  l.page === "contato"
-                    ? "ml-4 px-5 py-2 bg-accent text-white text-sm font-semibold rounded hover:bg-[#f26821] transition-colors"
-                    : `px-4 py-2 rounded text-sm font-medium transition-all duration-200 ${
-                        page === l.page
-                          ? "text-accent bg-white/10"
-                          : "text-white/70 hover:text-white hover:bg-white/5"
-                      }`
-                }
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
+                  page === l.page
+                    ? "text-white bg-white/10"
+                    : "text-white/60 hover:text-white hover:bg-white/5"
+                }`}
                 style={{ fontFamily: BODY }}
               >
                 {l.label}
@@ -650,20 +663,31 @@ function Navbar({
           )}
         </div>
 
-        {/* Fale Conosco + hambúrguer no mobile */}
-        <div className="flex md:hidden items-center gap-3">
+        {/* Botão laranja à direita + hambúrguer mobile */}
+        <div className="ml-auto flex items-center gap-3">
           <button
             onClick={() => {
               setPage("contato");
               setOpen(false);
             }}
-            className="px-4 py-2 bg-accent text-white text-sm font-semibold rounded hover:bg-[#f26821] transition-colors"
+            className="hidden md:flex items-center gap-2 px-5 py-2.5 bg-accent text-white text-sm font-semibold rounded-lg hover:bg-[#f26821] transition-all duration-200 hover:shadow-lg hover:shadow-accent/25"
             style={{ fontFamily: BODY }}
           >
-            Fale Conosco
+            Solicitar Diagnóstico
+          </button>
+          {/* Mobile: botão laranja menor + hambúrguer */}
+          <button
+            onClick={() => {
+              setPage("contato");
+              setOpen(false);
+            }}
+            className="flex md:hidden px-3 py-1.5 bg-accent text-white text-xs font-semibold rounded-lg hover:bg-[#f26821] transition-colors"
+            style={{ fontFamily: BODY }}
+          >
+            Contato
           </button>
           <button
-            className="text-white p-1"
+            className="flex md:hidden text-white p-1"
             onClick={() => setOpen(!open)}
             aria-label={open ? "Fechar menu" : "Abrir menu"}
             aria-expanded={open}
@@ -673,9 +697,18 @@ function Navbar({
         </div>
       </div>
 
-      {/* Menu mobile (sem Fale Conosco) */}
+      {/* Menu mobile */}
       {open && (
-        <div className="md:hidden bg-primary border-t border-white/10 px-6 py-4 flex flex-col gap-2">
+        <div className="md:hidden bg-black border-t border-white/5 px-6 py-4 flex flex-col gap-1">
+          <button
+            onClick={() => { setPage("home"); setOpen(false); }}
+            className={`text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+              page === "home" ? "text-white bg-white/10" : "text-white/60 hover:text-white hover:bg-white/5"
+            }`}
+            style={{ fontFamily: BODY }}
+          >
+            Início
+          </button>
           {mainLinks.map((l) =>
             l.page === "servicos" ? (
               <div key={l.page}>
@@ -685,8 +718,8 @@ function Navbar({
                       setPage(l.page);
                       setOpen(false);
                     }}
-                    className={`flex-1 text-left px-3 py-2 rounded text-sm font-medium transition-colors ${
-                      isServicosActive ? "text-accent bg-white/10" : "text-white/70"
+                    className={`flex-1 text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                      isServicosActive ? "text-white bg-white/10" : "text-white/60 hover:text-white"
                     }`}
                     style={{ fontFamily: BODY }}
                   >
@@ -694,13 +727,9 @@ function Navbar({
                   </button>
                   <button
                     onClick={() => setServicosMobileOpen((v) => !v)}
-                    aria-label={
-                      servicosMobileOpen
-                        ? "Recolher serviços"
-                        : "Expandir serviços"
-                    }
+                    aria-label={servicosMobileOpen ? "Recolher serviços" : "Expandir serviços"}
                     aria-expanded={servicosMobileOpen}
-                    className="p-2 text-white/70"
+                    className="p-2 text-white/50 hover:text-white"
                   >
                     <ChevronDown
                       size={16}
@@ -719,7 +748,7 @@ function Navbar({
                           setPage(s.page);
                           setOpen(false);
                         }}
-                        className="text-left px-3 py-2 rounded text-xs text-white/60 hover:text-white"
+                        className="text-left px-3 py-2 rounded-lg text-xs text-white/50 hover:text-white hover:bg-white/5"
                         style={{ fontFamily: BODY }}
                       >
                         {s.title}
@@ -735,8 +764,8 @@ function Navbar({
                   setPage(l.page);
                   setOpen(false);
                 }}
-                className={`text-left px-3 py-2 rounded text-sm font-medium transition-colors ${
-                  page === l.page ? "text-accent bg-white/10" : "text-white/70"
+                className={`text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                  page === l.page ? "text-white bg-white/10" : "text-white/60 hover:text-white hover:bg-white/5"
                 }`}
                 style={{ fontFamily: BODY }}
               >
@@ -928,137 +957,188 @@ function CTASectionRapida({ setPage }: { setPage: (p: Page) => void }) {
 
 function Footer({ setPage }: { setPage: (p: Page) => void }) {
   return (
-    <footer className="bg-primary text-white">
-      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
-        {/* Logo */}
-        <div className="lg:col-span-2">
-          <p
-            className="font-bold text-4xl mb-5 leading-none"
-            style={{ fontFamily: HEADING }}
-          >
-            <span className="text-accent">Líder Jr.</span>
-          </p>
-          <div className="w-20 h-20 bg-accent rounded-xl flex items-center justify-center">
-            <Box
-              size={44}
-              className="text-white"
-              strokeWidth={1.4}
-            />
-          </div>
-        </div>
+    <footer id="site-footer" className="bg-[#161616] text-white">
+      {/* Corpo principal do footer */}
+      <div className="max-w-7xl mx-auto px-6 pt-16 pb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
 
-        {/* Navegação */}
-        <div>
-          <p
-            className="text-xs font-semibold uppercase tracking-widest text-accent mb-4"
-            style={{ fontFamily: BODY }}
-          >
-            Navegação
-          </p>
-          <div className="flex flex-col gap-2">
-            {NAV_LINKS.map((l) => (
-              <button
-                key={l.page}
-                onClick={() => setPage(l.page)}
-                className="text-left text-sm text-white/60 hover:text-white transition-colors"
-                style={{ fontFamily: BODY }}
-              >
-                {l.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Serviços */}
-        <div>
-          <p
-            className="text-xs font-semibold uppercase tracking-widest text-accent mb-4"
-            style={{ fontFamily: BODY }}
-          >
-            Serviços
-          </p>
-
-          <div className="flex flex-col gap-2">
-            {[
-              "Lorem Ipsum",
-              "Dolor Sit",
-              "Amet Consectetur",
-              "Adipiscing Elit",
-              "Ver todos",
-            ].map((item) => (
-              <button
-                key={item}
-                className="text-left text-sm text-white/60 hover:text-white transition-colors"
-                style={{ fontFamily: BODY }}
-              >
-                {item}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Contato + redes sociais */}
-        <div>
-          <p
-            className="text-xs font-semibold uppercase tracking-widest text-accent mb-4"
-            style={{ fontFamily: BODY }}
-          >
-            Contato
-          </p>
-          <div className="flex flex-col gap-3 mb-6">
-            {[
-              { icon: Phone, text: "(15) 99827‑7936" },
-              { icon: Mail, text: "contato@liderjr.com" },
-            ].map(({ icon: Icon, text }, i) => (
-              <div
-                key={i}
-                className="flex items-start gap-2 text-sm text-white/60"
-              >
-                <Icon
-                  size={14}
-                  className="mt-0.5 shrink-0 text-accent"
-                />
-                <span style={{ fontFamily: BODY }}>{text}</span>
+          {/* Coluna 1: Logo + texto + redes sociais */}
+          <div className="lg:col-span-1">
+            <button
+              onClick={() => setPage("home")}
+              className="flex items-center gap-3 mb-4 group"
+            >
+              <div className="w-9 h-9 bg-accent rounded-lg flex items-center justify-center group-hover:bg-[#f26821] transition-colors">
+                <Box size={20} className="text-white" strokeWidth={1.8} />
               </div>
-            ))}
-          </div>
-          <div className="flex gap-3">
-            {([Linkedin, Instagram, Facebook] as const).map(
-              (Icon, i) => (
+              <div className="flex items-center gap-2">
+                <div className="w-px h-5 bg-accent/60" />
+                <span className="text-accent font-bold text-xl tracking-tight" style={{ fontFamily: HEADING }}>
+                  Líder Jr.
+                </span>
+              </div>
+            </button>
+            <p className="text-sm text-white/50 leading-relaxed mb-6 max-w-xs" style={{ fontFamily: BODY }}>
+              Consultoria empresarial júnior da UFSCar, conectando conhecimento acadêmico às necessidades reais do seu negócio.
+            </p>
+            <div className="flex gap-3">
+              {([
+                { Icon: Instagram, href: "https://instagram.com/liderjr", label: "Instagram" },
+                { Icon: Linkedin, href: "https://linkedin.com/company/liderjr", label: "LinkedIn" },
+                { Icon: Facebook, href: "#", label: "Facebook" },
+              ]).map(({ Icon, href, label }) => (
                 <a
-                  key={i}
-                  href="#"
-                  className="w-9 h-9 rounded bg-white/10 hover:bg-accent flex items-center justify-center transition-colors"
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="w-9 h-9 rounded-lg bg-white/8 border border-white/10 hover:bg-accent hover:border-accent flex items-center justify-center transition-all duration-200"
                 >
-                  <Icon size={16} />
+                  <Icon size={15} className="text-white/70" />
                 </a>
-              ),
-            )}
+              ))}
+            </div>
+          </div>
+
+          {/* Coluna 2: Navegação */}
+          <div>
+            <p
+              className="text-xs font-bold uppercase tracking-widest text-accent mb-5"
+              style={{ fontFamily: HEADING }}
+            >
+              Navegação
+            </p>
+            <div className="flex flex-col gap-2.5">
+              {([
+                { label: "Início", page: "home" },
+                { label: "Quem Somos", page: "quem-somos" },
+                { label: "Serviços", page: "servicos" },
+                { label: "Cases", page: "cases" },
+                { label: "Blog", page: "blog" },
+              ] as { label: string; page: Page }[]).map((l) => (
+                <button
+                  key={l.page}
+                  onClick={() => setPage(l.page)}
+                  className="text-left text-sm text-white/55 hover:text-white transition-colors hover:translate-x-0.5 duration-200"
+                  style={{ fontFamily: BODY }}
+                >
+                  {l.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Coluna 3: Serviços */}
+          <div>
+            <p
+              className="text-xs font-bold uppercase tracking-widest text-accent mb-5"
+              style={{ fontFamily: HEADING }}
+            >
+              Serviços
+            </p>
+            <div className="flex flex-col gap-2.5">
+              {SERVICES.map((s) => (
+                <button
+                  key={s.title}
+                  onClick={() => setPage(s.page)}
+                  className="text-left text-sm text-white/55 hover:text-white transition-colors duration-200"
+                  style={{ fontFamily: BODY }}
+                >
+                  {s.title}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Coluna 4: Contato */}
+          <div>
+            <p
+              className="text-xs font-bold uppercase tracking-widest text-accent mb-5"
+              style={{ fontFamily: HEADING }}
+            >
+              Contato
+            </p>
+            <div className="flex flex-col gap-3 mb-6">
+              <a
+                href="mailto:contato@liderjr.com"
+                className="flex items-center gap-3 text-sm text-white/55 hover:text-white transition-colors group"
+                style={{ fontFamily: BODY }}
+              >
+                <div className="w-7 h-7 rounded-md bg-accent/15 flex items-center justify-center group-hover:bg-accent/30 transition-colors">
+                  <Mail size={13} className="text-accent" />
+                </div>
+                CONTATO@LIDERJR.COM
+              </a>
+              <a
+                href="tel:+5515998277936"
+                className="flex items-center gap-3 text-sm text-white/55 hover:text-white transition-colors group"
+                style={{ fontFamily: BODY }}
+              >
+                <div className="w-7 h-7 rounded-md bg-accent/15 flex items-center justify-center group-hover:bg-accent/30 transition-colors">
+                  <Phone size={13} className="text-accent" />
+                </div>
+                (15) 99827-7936
+              </a>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="border-t border-white/10 max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-2">
-        <p
-          className="text-xs text-white/40"
-          style={{ fontFamily: BODY }}
-        >
-          © 2026 Líder Jr. Todos os direitos reservados.
-        </p>
-        <p
-          className="text-xs text-white/40"
-          style={{ fontFamily: BODY }}
-        >
-          Empresa Júnior certificada pela Brasil Júnior
-        </p>
+      {/* Barra inferior */}
+      <div className="border-t border-white/8">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-xs text-white/30" style={{ fontFamily: BODY }}>
+            © 2026 Líder Jr. Todos os direitos reservados.
+          </p>
+          <div className="flex items-center gap-6">
+            <button className="text-xs text-white/30 hover:text-white/60 transition-colors" style={{ fontFamily: BODY }}>
+              Política de Privacidade
+            </button>
+            <button className="text-xs text-white/30 hover:text-white/60 transition-colors" style={{ fontFamily: BODY }}>
+              Termos de Uso
+            </button>
+          </div>
+        </div>
       </div>
     </footer>
   );
 }
 
 function WhatsAppButton() {
-  const phone = "5515998277936"; // código do país + DDD + número, sem espaços/símbolos
+  const phone = "5515998277936";
   const message = "Olá! Gostaria de saber mais sobre a consultoria da Líder Jr.";
+  const [bottom, setBottom] = useState(24);
+
+  useEffect(() => {
+    const footer = document.getElementById("site-footer");
+    if (!footer) return;
+
+    const updateBottom = () => {
+      const footerRect = footer.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      const BUTTON_SIZE = 56; // w-14 = 56px
+      const GAP = 16; // espaço acima do footer
+
+      if (footerRect.top < windowHeight) {
+        // Footer está visível: empurrar botão para cima
+        const overlap = windowHeight - footerRect.top;
+        setBottom(overlap + GAP);
+      } else {
+        setBottom(24);
+      }
+      void BUTTON_SIZE;
+    };
+
+    window.addEventListener("scroll", updateBottom, { passive: true });
+    window.addEventListener("resize", updateBottom, { passive: true });
+    updateBottom();
+
+    return () => {
+      window.removeEventListener("scroll", updateBottom);
+      window.removeEventListener("resize", updateBottom);
+    };
+  }, []);
 
   return (
     <a
@@ -1066,7 +1146,8 @@ function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Fale conosco pelo WhatsApp"
-      className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-[#25D366] hover:bg-[#20BD5A] rounded-full shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-300 hover:scale-110"
+      style={{ bottom: `${bottom}px` }}
+      className="fixed right-6 z-50 w-14 h-14 bg-[#25D366] hover:bg-[#20BD5A] rounded-full shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-300 hover:scale-110"
     >
       <svg
         width="28"
@@ -1966,101 +2047,300 @@ function QuemSomosPage() {
   );
 }
 
-function ServicosPage() {
-  const [selected, setSelected] = useState<number | null>(null);
+// Imagens para os cards de serviços
+const SERVICE_IMAGES: string[] = [
+  "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=700&h=500&fit=crop&auto=format",
+  "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=700&h=500&fit=crop&auto=format",
+  "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=700&h=500&fit=crop&auto=format",
+  "https://images.unsplash.com/photo-1552664730-d307ca884978?w=700&h=500&fit=crop&auto=format",
+  "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=700&h=500&fit=crop&auto=format",
+  "https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=700&h=500&fit=crop&auto=format",
+];
 
+// Chamadas de impacto para cada serviço
+const SERVICE_CALLOUTS: string[] = [
+  "Transforme eficiência em vantagem competitiva!",
+  "Eleve o padrão e reduza falhas no seu processo!",
+  "Decida com dados, não com suposições!",
+  "Construa um negócio preparado para crescer!",
+  "Maximize sua margem com precificação inteligente!",
+  "Elimine rupturas e excesso de estoque!",
+];
+
+function ServicosPage({ setPage }: { setPage: (p: Page) => void }) {
   return (
     <div className="pt-16">
-      {/* Hero */}
-      <section className="bg-primary py-28 relative overflow-hidden">
+      {/* Hero limpo - sem formulário */}
+      <section className="bg-black py-32 relative overflow-hidden">
+        {/* Background com gradiente laranja sutil */}
         <div
-          className="absolute inset-0 bg-cover bg-center"
+          className="absolute inset-0"
           style={{
             backgroundImage:
-              "url(https://placehold.co/1600x600/1a1a1a/666666?text=Placeholder)",
+              "radial-gradient(ellipse at 30% 60%, rgba(242,104,33,0.18) 0%, transparent 55%), radial-gradient(ellipse at 80% 20%, rgba(242,104,33,0.1) 0%, transparent 45%)",
           }}
         />
-        <div className="absolute inset-0 bg-primary/80" />
-        <div className="relative max-w-7xl mx-auto px-6 text-center">
-          <p
-            className="text-accent text-xs font-semibold uppercase tracking-widest mb-4"
-            style={{ fontFamily: BODY }}
-          >
-            O que oferecemos
-          </p>
-          <h1
-            className="text-5xl lg:text-6xl font-bold text-white mb-6"
-            style={{ fontFamily: HEADING }}
-          >
-            Nossos Serviços
-          </h1>
-          <p
-            className="text-white/60 text-lg max-w-2xl mx-auto"
-            style={{ fontFamily: BODY }}
-          >
-            Soluções completas em Engenharia de Produção para
-            empresas que querem crescer com inteligência e
-            eficiência.
-          </p>
+        {/* Imagem de fundo semitransparente */}
+        <div
+          className="absolute right-0 top-0 w-1/2 h-full opacity-20"
+          style={{
+            backgroundImage:
+              "url(https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=900&h=700&fit=crop&auto=format)",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            maskImage: "linear-gradient(to left, rgba(0,0,0,0.8), transparent)",
+            WebkitMaskImage: "linear-gradient(to left, rgba(0,0,0,0.8), transparent)",
+          }}
+        />
+
+        <div className="relative max-w-7xl mx-auto px-6">
+          <div className="max-w-2xl">
+            <p
+              className="text-accent text-xs font-bold uppercase tracking-[0.2em] mb-5"
+              style={{ fontFamily: BODY }}
+            >
+              O que oferecemos
+            </p>
+            <h1
+              className="text-5xl lg:text-7xl font-bold text-white leading-[1.05] mb-6"
+              style={{ fontFamily: HEADING }}
+            >
+              Nossas{" "}
+              <span className="text-accent">Soluções</span>
+            </h1>
+            <p
+              className="text-white/55 text-lg leading-relaxed mb-10 max-w-xl"
+              style={{ fontFamily: BODY }}
+            >
+              Soluções completas em Engenharia de Produção para
+              empresas que querem crescer com inteligência e
+              eficiência.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <button
+                onClick={() => setPage("contato")}
+                className="group flex items-center gap-2 px-8 py-4 bg-accent text-white font-semibold rounded-lg hover:bg-[#f26821] transition-all duration-200 hover:shadow-lg hover:shadow-accent/30"
+                style={{ fontFamily: BODY }}
+              >
+                Solicitar Diagnóstico
+                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+              </button>
+              <button
+                onClick={() => {
+                  const el = document.getElementById("servicos-lista");
+                  if (el) el.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="px-8 py-4 border border-white/20 text-white font-semibold rounded-lg hover:bg-white/8 hover:border-white/40 transition-all duration-200"
+                style={{ fontFamily: BODY }}
+              >
+                Ver nossos serviços
+              </button>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Services grid */}
-      <section className="bg-background py-24">
+      {/* Título da seção de serviços */}
+      <section id="servicos-lista" className="bg-black pt-20 pb-4">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <p
+            className="text-accent text-xs font-bold uppercase tracking-[0.2em] mb-4"
+            style={{ fontFamily: BODY }}
+          >
+            Conheça nossos serviços
+          </p>
+          <h2
+            className="text-4xl lg:text-5xl font-bold text-white mb-4"
+            style={{ fontFamily: HEADING }}
+          >
+            Soluções que trazemos para o seu negócio
+          </h2>
+        </div>
+      </section>
+
+      {/* Cards de serviços - estilo referência com corte diagonal */}
+      <section className="bg-black py-12 pb-24">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {SERVICES.map((s, i) => (
               <div
                 key={i}
-                className={`group bg-card border rounded-xl p-8 cursor-pointer transition-all duration-300 ${
-                  selected === i
-                    ? "border-accent shadow-lg shadow-accent/10"
-                    : "border-border hover:border-accent/40 hover:shadow-md"
-                }`}
-                onClick={() =>
-                  setSelected(selected === i ? null : i)
-                }
+                className="group relative flex flex-col cursor-pointer transition-all duration-300 hover:-translate-y-1"
+                style={{
+                  background: "#0A0A0A",
+                  border: "2px solid #FF6A00",
+                  borderRadius: 16,
+                  overflow: "hidden",
+                  minHeight: 530,
+                  boxShadow: "0 0 0 0 rgba(255,106,0,0)",
+                }}
+                onMouseEnter={e => (e.currentTarget.style.boxShadow = "0 8px 40px rgba(255,106,0,0.20)")}
+                onMouseLeave={e => (e.currentTarget.style.boxShadow = "0 0 0 0 rgba(255,106,0,0)")}
+                onClick={() => setPage(s.page)}
               >
+                {/* Imagem com corte diagonal (direita superior -> esquerda inferior) */}
                 <div
-                  className={`w-12 h-12 rounded-lg flex items-center justify-center mb-6 transition-colors ${selected === i ? "bg-accent" : "bg-accent/10 group-hover:bg-accent"}`}
+                  className="relative flex-shrink-0"
+                  style={{
+                    height: 260,
+                    overflow: "hidden",
+                    clipPath: "polygon(0 0, 100% 0, 100% 40%, 0 85%)",
+                  }}
                 >
-                  <s.icon
-                    size={22}
-                    className={`transition-colors ${selected === i ? "text-white" : "text-accent group-hover:text-white"}`}
+                  {/* Imagem de fundo */}
+                  <img
+                    src={SERVICE_IMAGES[i]}
+                    alt={s.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    style={{ display: "block" }}
+                  />
+                  {/* Overlay escuro sobre toda a imagem para contraste */}
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      background: "linear-gradient(135deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.6) 100%)",
+                    }}
                   />
                 </div>
-                <h3
-                  className="font-bold text-foreground text-lg mb-3"
-                  style={{ fontFamily: HEADING }}
-                >
-                  {s.title}
-                </h3>
-                <p
-                  className="text-sm text-muted-foreground leading-relaxed mb-5"
-                  style={{ fontFamily: BODY }}
-                >
-                  {s.desc}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {s.tags.map((t) => (
-                    <span
-                      key={t}
-                      className="text-xs px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground font-medium"
-                      style={{ fontFamily: BODY }}
+
+                {/* Conteúdo do card - puxado para cima para aproveitar o espaço do corte */}
+                <div className="flex flex-col flex-1 px-6 pb-6 -mt-20 relative z-10">
+                  {/* Título grande em laranja - principal elemento de destaque, alinhado à direita e com largura máxima para não sobrepor a parte mais baixa da imagem à esquerda */}
+                  <h3
+                    className="text-2xl font-extrabold leading-tight mb-6 text-right ml-auto"
+                    style={{
+                      fontFamily: HEADING,
+                      color: "#FF6A00",
+                      letterSpacing: "-0.01em",
+                      textShadow: "0px 4px 12px rgba(0,0,0,0.8)",
+                      maxWidth: "80%",
+                    }}
+                  >
+                    {s.title.toUpperCase()}
+                  </h3>
+
+                  {/* Chamada de impacto - laranja semibold */}
+                  <p
+                    className="text-sm font-bold mb-4"
+                    style={{
+                      fontFamily: BODY,
+                      color: "#FF6A00",
+                    }}
+                  >
+                    {SERVICE_CALLOUTS[i]}
+                  </p>
+
+                  {/* Descrição em branco/cinza claro */}
+                  <p
+                    className="text-sm leading-relaxed flex-1 mb-8"
+                    style={{
+                      fontFamily: BODY,
+                      color: "#E0E0E0",
+                      lineHeight: 1.75,
+                    }}
+                  >
+                    {s.desc}
+                  </p>
+
+                  {/* Botão no canto inferior direito */}
+                  <div className="flex justify-end mt-auto">
+                    <button
+                      onClick={e => { e.stopPropagation(); setPage(s.page); }}
+                      className="flex items-center gap-2 text-white text-sm font-semibold transition-all duration-200 hover:brightness-110 active:scale-95"
+                      style={{
+                        background: "#FF6A00",
+                        borderRadius: 8,
+                        padding: "10px 18px",
+                        fontFamily: BODY,
+                      }}
                     >
-                      {t}
-                    </span>
-                  ))}
+                      Conhecer a solução
+                      <ArrowRight size={14} />
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
+        </div>
+      </section>
 
-          {/* Process */}
-          <div className="bg-primary rounded-2xl p-12">
+      {/* CTA após os serviços */}
+      <section className="relative py-28 overflow-hidden" style={{ background: "#0a0a0a" }}>
+        {/* Fundo com glow laranja central */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage:
+              "radial-gradient(ellipse at 50% 100%, rgba(242,104,33,0.22) 0%, transparent 60%)",
+          }}
+        />
+        {/* Linha decorativa laranja */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-px bg-accent/40" />
+
+        <div className="relative max-w-4xl mx-auto px-6 text-center">
+          <p
+            className="text-accent text-xs font-bold uppercase tracking-[0.2em] mb-5"
+            style={{ fontFamily: BODY }}
+          >
+            Pronto para transformar seu negócio?
+          </p>
+          <h2
+            className="text-4xl lg:text-5xl font-bold text-white leading-tight mb-6"
+            style={{ fontFamily: HEADING }}
+          >
+            Solicite um diagnóstico{" "}
+            <span className="text-accent">gratuito</span>
+          </h2>
+          <p
+            className="text-white/55 text-lg max-w-2xl mx-auto leading-relaxed mb-12"
+            style={{ fontFamily: BODY }}
+          >
+            Nossa equipe analisa os desafios do seu negócio e propõe
+            uma solução personalizada — sem custo no diagnóstico inicial.
+          </p>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+            <button
+              onClick={() => setPage("contato")}
+              className="group flex items-center gap-2 px-10 py-4 bg-accent text-white font-bold text-lg rounded-xl hover:bg-[#f26821] transition-all duration-200 hover:shadow-2xl hover:shadow-accent/30 hover:-translate-y-0.5"
+              style={{ fontFamily: BODY }}
+            >
+              Solicitar Diagnóstico
+              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+            </button>
+            <button
+              onClick={() => setPage("cases")}
+              className="px-10 py-4 border border-white/20 text-white font-semibold text-lg rounded-xl hover:bg-white/6 hover:border-white/40 transition-all duration-200"
+              style={{ fontFamily: BODY }}
+            >
+              Ver nossos cases
+            </button>
+          </div>
+
+          {/* Garantias */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-8">
+            {[
+              "Diagnóstico inicial gratuito",
+              "Retorno em até 24 horas",
+              "Projetos supervisionados por professores",
+            ].map((item, i) => (
+              <div key={i} className="flex items-center gap-2 text-white/50 text-sm" style={{ fontFamily: BODY }}>
+                <CheckCircle2 size={15} className="text-accent" />
+                {item}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Nosso Processo */}
+      <section className="bg-black py-24">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="bg-[#111] border border-white/8 rounded-2xl p-12">
             <div className="text-center mb-12">
               <p
-                className="text-accent text-xs font-semibold uppercase tracking-widest mb-3"
+                className="text-accent text-xs font-bold uppercase tracking-[0.2em] mb-3"
                 style={{ fontFamily: BODY }}
               >
                 Como trabalhamos
@@ -2097,7 +2377,7 @@ function ServicosPage() {
               ].map((item, i) => (
                 <div key={i} className="relative">
                   <div
-                    className="text-6xl font-bold text-white/5 absolute -top-2 -left-2"
+                    className="text-6xl font-bold text-white/4 absolute -top-2 -left-2 select-none"
                     style={{ fontFamily: HEADING }}
                   >
                     {item.step}
@@ -2118,7 +2398,7 @@ function ServicosPage() {
                       {item.title}
                     </h3>
                     <p
-                      className="text-sm text-white/60 leading-relaxed"
+                      className="text-sm text-white/55 leading-relaxed"
                       style={{ fontFamily: BODY }}
                     >
                       {item.desc}
@@ -2130,7 +2410,6 @@ function ServicosPage() {
           </div>
         </div>
       </section>
-
     </div>
   );
 }
@@ -3811,7 +4090,7 @@ export default function App() {
       <main>
         {page === "home" && <HomePage setPage={navigate} />}
         {page === "quem-somos" && <QuemSomosPage />}
-        {page === "servicos" && <ServicosPage />}
+        {page === "servicos" && <ServicosPage setPage={navigate} />}
         {page === "mapeamento-processos" && (
           <MapeamentoProcessosPage setPage={navigate} />
         )}
