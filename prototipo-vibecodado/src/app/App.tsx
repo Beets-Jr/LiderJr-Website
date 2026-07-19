@@ -11,7 +11,6 @@ import {
   TrendingUp,
   Award,
   BookOpen,
-  MapPin,
   Phone,
   Mail,
   Linkedin,
@@ -3730,27 +3729,6 @@ function ContatoPage() {
                     style={{ fontFamily: BODY }}
                   >
                     contato@liderjr.com
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex gap-4">
-                <MapPin
-                  className="text-accent shrink-0"
-                  size={22}
-                />
-                <div>
-                  <p
-                    className="font-semibold"
-                    style={{ fontFamily: BODY }}
-                  >
-                    Endereço
-                  </p>
-                  <p
-                    className="text-muted-foreground"
-                    style={{ fontFamily: BODY }}
-                  >
-                    Universidade • Cidade • Estado
                   </p>
                 </div>
               </div>
