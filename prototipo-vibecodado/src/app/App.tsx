@@ -53,6 +53,7 @@ const NAV_LINKS: { label: string; page: Page }[] = [
 const SERVICES: {
   icon: typeof TrendingUp;
   title: string;
+  tagline: string;
   desc: string;
   tags: string[];
   page: Page;
@@ -60,6 +61,7 @@ const SERVICES: {
   {
     icon: TrendingUp,
     title: "Mapeamento de Processos",
+    tagline: "Transforme eficiência em vantagem competitiva!",
     desc: "Identificamos gargalos e ineficiências na sua operação, propondo melhorias sustentadas em metodologias como BPMN e fluxogramas.",
     tags: ["Lean", "BPMN", "VSM"],
     page: "mapeamento-processos",
@@ -67,6 +69,7 @@ const SERVICES: {
   {
     icon: Award,
     title: "Gestão da Qualidade",
+    tagline: "Eleve o padrão e conquiste a confiança do mercado!",
     desc: "Implementamos ferramentas de controle de qualidade como PDCA, 5S e FMEA para elevar o padrão dos seus processos e produtos.",
     tags: ["PDCA", "5S", "FMEA"],
     page: "servicos",
@@ -74,6 +77,7 @@ const SERVICES: {
   {
     icon: Users,
     title: "Pesquisa de Mercado",
+    tagline: "Decisões certeiras com dados reais do seu setor!",
     desc: "Realizamos pesquisas quantitativas e qualitativas para embasar decisões estratégicas com dados reais do seu segmento.",
     tags: ["Dados", "Análise", "Estratégia"],
     page: "servicos",
@@ -81,6 +85,7 @@ const SERVICES: {
   {
     icon: BookOpen,
     title: "Planejamento Estratégico",
+    tagline: "Trace o caminho para um crescimento sólido!",
     desc: "Desenvolvemos planos de negócios e diagnósticos organizacionais com foco em crescimento sustentável e competitividade.",
     tags: ["OKR", "BSC", "Swot"],
     page: "servicos",
@@ -88,6 +93,7 @@ const SERVICES: {
   {
     icon: CheckCircle2,
     title: "Custos e Precificação",
+    tagline: "Precifique com inteligência e proteja sua margem!",
     desc: "Analisamos sua estrutura de custos e desenvolvemos estratégias de precificação alinhadas ao mercado e à margem desejada.",
     tags: ["Custos", "Precificação", "Margem"],
     page: "servicos",
@@ -95,6 +101,7 @@ const SERVICES: {
   {
     icon: Star,
     title: "Consultoria em Estoque",
+    tagline: "Estoque enxuto, operação mais ágil!",
     desc: "Otimizamos a gestão de estoques com modelos de lote econômico, curva ABC e sistemas de reabastecimento inteligente.",
     tags: ["ABC", "EOQ", "Kanban"],
     page: "servicos",
@@ -228,6 +235,16 @@ const BLOG_POSTS: {
     readTime: "6 min",
     img: "photo-1460925895917-afdab827c52f",
   },
+];
+
+// Teste visual: imagens já usadas no blog, uma por serviço
+const SERVICE_IMAGES = [
+  BLOG_POSTS[0].img,
+  BLOG_POSTS[4].img,
+  BLOG_POSTS[5].img,
+  BLOG_POSTS[3].img,
+  BLOG_POSTS[1].img,
+  BLOG_POSTS[2].img,
 ];
 
 const MATERIALS = [
@@ -1786,7 +1803,7 @@ function QuemSomosPage() {
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage:
-              "url(https://placehold.co/1600x600/1a1a1a/666666?text=Placeholder)",
+              "url(https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1600&h=600&fit=crop&auto=format)",
           }}
         />
         <div className="absolute inset-0 bg-primary/80" />
@@ -1966,9 +1983,7 @@ function QuemSomosPage() {
   );
 }
 
-function ServicosPage() {
-  const [selected, setSelected] = useState<number | null>(null);
-
+function ServicosPage({ setPage }: { setPage: (p: Page) => void }) {
   return (
     <div className="pt-16">
       {/* Hero */}
@@ -1977,7 +1992,7 @@ function ServicosPage() {
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage:
-              "url(https://placehold.co/1600x600/1a1a1a/666666?text=Placeholder)",
+              "url(https://images.unsplash.com/photo-1552664730-d307ca884978?w=1600&h=600&fit=crop&auto=format)",
           }}
         />
         <div className="absolute inset-0 bg-primary/80" />
@@ -2012,45 +2027,79 @@ function ServicosPage() {
             {SERVICES.map((s, i) => (
               <div
                 key={i}
-                className={`group bg-card border rounded-xl p-8 cursor-pointer transition-all duration-300 ${
-                  selected === i
-                    ? "border-accent shadow-lg shadow-accent/10"
-                    : "border-border hover:border-accent/40 hover:shadow-md"
-                }`}
-                onClick={() =>
-                  setSelected(selected === i ? null : i)
-                }
+                className="group relative flex flex-col bg-card border border-border rounded-2xl overflow-hidden shadow-sm cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-accent/30"
+                style={{ minHeight: 530 }}
+                onClick={() => setPage(s.page)}
               >
+                {/* Imagem com corte diagonal */}
                 <div
-                  className={`w-12 h-12 rounded-lg flex items-center justify-center mb-6 transition-colors ${selected === i ? "bg-accent" : "bg-accent/10 group-hover:bg-accent"}`}
+                  className="relative flex-shrink-0 overflow-hidden"
+                  style={{
+                    height: 260,
+                    clipPath: "polygon(0 0, 100% 0, 100% 40%, 0 85%)",
+                  }}
                 >
-                  <s.icon
-                    size={22}
-                    className={`transition-colors ${selected === i ? "text-white" : "text-accent group-hover:text-white"}`}
+                  <img
+                    src={`https://images.unsplash.com/${SERVICE_IMAGES[i]}?w=600&h=400&fit=crop&auto=format`}
+                    alt={s.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
+                  <div className="absolute inset-0 bg-primary/40" />
                 </div>
-                <h3
-                  className="font-bold text-foreground text-lg mb-3"
-                  style={{ fontFamily: HEADING }}
-                >
-                  {s.title}
-                </h3>
-                <p
-                  className="text-sm text-muted-foreground leading-relaxed mb-5"
-                  style={{ fontFamily: BODY }}
-                >
-                  {s.desc}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {s.tags.map((t) => (
-                    <span
-                      key={t}
-                      className="text-xs px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground font-medium"
+
+                {/* Conteúdo do card - puxado para cima para aproveitar o espaço do corte */}
+                <div className="flex flex-col flex-1 px-6 pb-6 -mt-20 relative z-10">
+                  <h3
+                    className="text-2xl font-extrabold leading-tight mb-3 text-right ml-auto text-accent"
+                    style={{
+                      fontFamily: HEADING,
+                      maxWidth: "80%",
+                    }}
+                  >
+                    {s.title === "Gestão da Qualidade" ? (
+                      <>
+                        GESTÃO DA
+                        <br />
+                        QUALIDADE
+                      </>
+                    ) : s.title === "Pesquisa de Mercado" ? (
+                      <>
+                        PESQUISA DE
+                        <br />
+                        MERCADO
+                      </>
+                    ) : (
+                      s.title.toUpperCase()
+                    )}
+                  </h3>
+
+                  <p
+                    className="text-sm font-bold text-accent mb-4"
+                    style={{ fontFamily: BODY }}
+                  >
+                    {s.tagline}
+                  </p>
+
+                  <p
+                    className="text-sm text-foreground leading-relaxed flex-1 mb-8"
+                    style={{ fontFamily: BODY, lineHeight: 1.75 }}
+                  >
+                    {s.desc}
+                  </p>
+
+                  <div className="flex justify-end mt-auto">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setPage(s.page);
+                      }}
+                      className="flex items-center gap-2 bg-accent hover:bg-primary text-white text-sm font-semibold rounded-lg px-5 py-2.5 transition-all duration-200 hover:brightness-110 active:scale-95"
                       style={{ fontFamily: BODY }}
                     >
-                      {t}
-                    </span>
-                  ))}
+                      Conhecer a solução
+                      <ArrowRight size={14} />
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}
@@ -2150,7 +2199,7 @@ function MapeamentoProcessosPage({
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage:
-              "url(https://placehold.co/1600x600/1a1a1a/666666?text=Placeholder)",
+              "url(https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1600&h=600&fit=crop&auto=format)",
           }}
         />
         <div className="absolute inset-0 bg-primary/80" />
@@ -2450,11 +2499,11 @@ function CasesPage({ setPage }: { setPage: (p: Page) => void }) {
     <div className="pt-16">
       {/* Hero */}
       <section className="bg-primary py-28 relative overflow-hidden">
-        <div 
-          className="absolute inset-0 opacity-10"
+        <div
+          className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.2) 1px, transparent 1px)`,
-            backgroundSize: '40px 40px'
+            backgroundImage:
+              "url(https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&h=600&fit=crop&auto=format)",
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/80 to-transparent" />
@@ -2621,7 +2670,7 @@ function CaseMetalurgicaPage({
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage:
-              "url(https://placehold.co/1600x600/1a1a1a/666666?text=Placeholder)",
+              "url(https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1600&h=600&fit=crop&auto=format)",
           }}
         />
         <div className="absolute inset-0 bg-primary/80" />
@@ -2903,11 +2952,11 @@ function MateriaisPage() {
     <div className="pt-16">
       {/* Hero */}
       <section className="bg-primary py-28 relative overflow-hidden">
-        <div 
-          className="absolute inset-0 opacity-20"
+        <div
+          className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: `radial-gradient(rgba(255, 255, 255, 0.3) 2px, transparent 2px)`,
-            backgroundSize: '30px 30px'
+            backgroundImage:
+              "url(https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1600&h=600&fit=crop&auto=format)",
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/80 to-transparent" />
@@ -3061,7 +3110,7 @@ function BlogPage({ setPage }: { setPage: (p: Page) => void }) {
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage:
-              "url(https://placehold.co/1600x600/1a1a1a/666666?text=Placeholder)",
+              "url(https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600&h=600&fit=crop&auto=format)",
           }}
         />
         <div className="absolute inset-0 bg-primary/80" />
@@ -3580,7 +3629,7 @@ function ContatoPage() {
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage:
-              "url(https://placehold.co/1600x600/1a1a1a/666666?text=Placeholder)",
+              "url(https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1600&h=600&fit=crop&auto=format)",
           }}
         />
         <div className="absolute inset-0 bg-primary/80" />
@@ -3751,7 +3800,7 @@ export default function App() {
       <main>
         {page === "home" && <HomePage setPage={navigate} />}
         {page === "quem-somos" && <QuemSomosPage />}
-        {page === "servicos" && <ServicosPage />}
+        {page === "servicos" && <ServicosPage setPage={setPage} />}
         {page === "mapeamento-processos" && (
           <MapeamentoProcessosPage setPage={navigate} />
         )}
