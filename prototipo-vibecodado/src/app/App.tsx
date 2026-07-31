@@ -22,6 +22,9 @@ import {
   Tag,
   Box,
   Download,
+  Target,
+  Quote,
+  Calendar,
 } from "lucide-react";
 
 type Page =
@@ -166,6 +169,16 @@ const CASES: {
     tags: ["Logística", "Processos"],
     category: "Logística",
   },
+];
+
+// Imagens já existentes no sistema, uma por case
+const CASE_IMAGES = [
+  "photo-1581091226825-a6a2a5aee158",
+  "photo-1454165804606-c3d57bc86b40",
+  "photo-1552664730-d307ca884978",
+  "photo-1551288049-bebda4e38f71",
+  "photo-1556761175-5973dc0f32e7",
+  "photo-1566576912321-d58ddd7a6088",
 ];
 
 const BLOG_POSTS: {
@@ -2571,7 +2584,7 @@ function CasesPage({ setPage }: { setPage: (p: Page) => void }) {
                   className="relative aspect-[4/3] rounded-3xl overflow-hidden bg-card border border-border shadow-sm group-hover:shadow-2xl group-hover:border-accent/30 transition-all duration-500"
                 >
                   <img
-                    src={`https://placehold.co/800x600/1a1a1a/666666?text=${encodeURIComponent(c.company)}`}
+                    src={`https://images.unsplash.com/${CASE_IMAGES[CASES.indexOf(c)]}?w=800&h=600&fit=crop&auto=format`}
                     alt={c.company}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
@@ -2696,210 +2709,239 @@ function CaseMetalurgicaPage({
         </div>
       </section>
 
-      {/* Desafio / Solução / Resultado */}
-      <section className="bg-background py-24">
+      {/* Voltar aos Cases */}
+      <section className="bg-background pt-10">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              {
-                icon: TrendingUp,
-                label: "O desafio",
-                text: "A empresa enfrentava atrasos recorrentes na produção, com etapas informais e sem padronização entre os turnos.",
-              },
-              {
-                icon: CheckCircle2,
-                label: "A solução",
-                text: "Mapeamos o fluxo produtivo em BPMN, identificamos os principais gargalos e propusemos um processo padronizado ponta a ponta.",
-              },
-              {
-                icon: Award,
-                label: "O resultado",
-                text: "Com o novo fluxo implementado, a empresa reduziu significativamente o tempo de produção e passou a entregar com mais previsibilidade.",
-              },
-            ].map((item, i) => (
-              <div
-                key={i}
-                className="bg-card border border-border rounded-xl p-8"
-              >
-                <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mb-6">
-                  <item.icon size={22} className="text-accent" />
-                </div>
-                <h3
-                  className="font-bold text-foreground text-lg mb-3"
-                  style={{ fontFamily: HEADING }}
-                >
-                  {item.label}
-                </h3>
-                <p
-                  className="text-sm text-muted-foreground leading-relaxed"
-                  style={{ fontFamily: BODY }}
-                >
-                  {item.text}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Resultados em números */}
-      <section className="bg-muted py-24">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-14">
-            <p
-              className="text-accent text-xs font-semibold uppercase tracking-widest mb-3"
-              style={{ fontFamily: BODY }}
-            >
-              Impacto do projeto
-            </p>
-            <h2
-              className="text-4xl font-bold text-foreground"
-              style={{ fontFamily: HEADING }}
-            >
-              Resultados em números
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {[
-              { value: caseData.result, label: caseData.metric },
-              { value: "+20%", label: "Entregas no prazo" },
-              { value: "18 semanas", label: "Duração do projeto" },
-            ].map((stat, i) => (
-              <div
-                key={i}
-                className="bg-card border border-border rounded-xl p-8 text-center"
-              >
-                <p
-                  className="text-4xl font-bold text-accent mb-2"
-                  style={{ fontFamily: HEADING }}
-                >
-                  {stat.value}
-                </p>
-                <p
-                  className="text-sm text-muted-foreground"
-                  style={{ fontFamily: BODY }}
-                >
-                  {stat.label}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Depoimento */}
-      <section className="bg-background py-24">
-        <div className="max-w-3xl mx-auto px-6 text-center">
-          <div className="flex justify-center gap-1 mb-6">
-            {[...Array(5)].map((_, i) => (
-              <Star key={i} size={18} className="text-accent fill-accent" />
-            ))}
-          </div>
-          <p
-            className="text-foreground text-2xl lg:text-3xl leading-relaxed mb-8"
-            style={{ fontFamily: SERIF }}
+          <button
+            onClick={() => setPage("cases")}
+            className="inline-flex items-center gap-1.5 text-foreground hover:text-accent text-sm font-semibold transition-colors"
+            style={{ fontFamily: BODY }}
           >
-            "O mapeamento mostrou gargalos que a gente nem enxergava mais
-            de tão acostumados com a rotina. Em poucas semanas reduzimos
-            o tempo de produção reorganizando o fluxo de ponta a ponta."
-          </p>
-          <div className="flex items-center justify-center gap-3">
-            <div className="w-11 h-11 rounded-full bg-accent/10 flex items-center justify-center shrink-0">
-              <span
-                className="text-accent font-bold text-sm"
-                style={{ fontFamily: HEADING }}
-              >
-                RM
-              </span>
-            </div>
-            <div className="text-left">
-              <p
-                className="font-semibold text-foreground text-sm"
-                style={{ fontFamily: BODY }}
-              >
-                Roberto Martins
-              </p>
-              <p
-                className="text-muted-foreground text-xs"
-                style={{ fontFamily: BODY }}
-              >
-                Gerente de Produção, {caseData.company}
-              </p>
-            </div>
-          </div>
+            <ChevronLeft size={16} />
+            Voltar aos Cases
+          </button>
         </div>
       </section>
 
-      {/* Serviço relacionado */}
-      <section className="bg-muted py-24">
-        <div className="max-w-3xl mx-auto px-6">
-          <div className="bg-card border border-border rounded-2xl p-8 flex flex-col sm:flex-row items-start sm:items-center gap-6">
-            <div className="w-14 h-14 rounded-lg bg-accent/10 flex items-center justify-center shrink-0">
-              <TrendingUp size={26} className="text-accent" />
-            </div>
-            <div className="flex-1">
-              <p
-                className="text-accent text-xs font-semibold uppercase tracking-widest mb-2"
-                style={{ fontFamily: BODY }}
-              >
-                Serviço relacionado
-              </p>
-              <h3
-                className="font-bold text-foreground text-lg mb-1"
+      {/* Desafio / Solução / Resultados */}
+      <section className="bg-background py-16">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+            <div className="lg:col-span-2">
+              <h2
+                className="font-bold text-foreground text-2xl mb-4"
                 style={{ fontFamily: HEADING }}
               >
-                Mapeamento de Processos
-              </h3>
+                O Desafio
+              </h2>
               <p
-                className="text-sm text-muted-foreground"
+                className="text-foreground/80 leading-relaxed mb-12"
                 style={{ fontFamily: BODY }}
               >
-                A metodologia usada neste case também está disponível como
-                serviço para a sua empresa.
+                A {caseData.company.toLowerCase()} enfrentava atrasos
+                recorrentes na produção, com etapas informais e sem
+                padronização entre os turnos. Sem um fluxo claro,
+                informações se perdiam nas trocas de turno, o retrabalho
+                era frequente e não havia visibilidade real sobre onde os
+                gargalos aconteciam — o que dificultava qualquer tentativa
+                de melhoria consistente.
+              </p>
+
+              <h2
+                className="font-bold text-foreground text-2xl mb-4"
+                style={{ fontFamily: HEADING }}
+              >
+                A Solução
+              </h2>
+              <p
+                className="text-foreground/80 leading-relaxed mb-12"
+                style={{ fontFamily: BODY }}
+              >
+                A equipe da Líder Jr. mapeou o fluxo produtivo do início ao
+                fim utilizando a notação BPMN, entrevistando operadores e
+                supervisores de cada turno para entender a rotina real de
+                produção. Com o mapeamento em mãos, identificamos os
+                principais gargalos e pontos de retrabalho, e propusemos
+                um processo padronizado, documentado e validado com os
+                times operacionais antes da implementação.
+              </p>
+
+              <h2
+                className="font-bold text-foreground text-2xl mb-4"
+                style={{ fontFamily: HEADING }}
+              >
+                Os Resultados
+              </h2>
+              <p
+                className="text-foreground/80 leading-relaxed"
+                style={{ fontFamily: BODY }}
+              >
+                Com o novo fluxo implementado, a empresa reduziu
+                significativamente o tempo de produção e passou a
+                entregar com mais previsibilidade. A padronização entre
+                turnos eliminou boa parte do retrabalho e trouxe
+                visibilidade real sobre o processo, servindo de base
+                para futuras melhorias contínuas.
               </p>
             </div>
-            <button
-              onClick={() => setPage("mapeamento-processos")}
-              className="shrink-0 flex items-center gap-2 px-5 py-3 bg-accent text-white text-sm font-semibold rounded-lg hover:bg-[#f26821] transition-colors"
-              style={{ fontFamily: BODY }}
-            >
-              Conhecer serviço <ArrowRight size={14} />
-            </button>
+
+            {/* Relato do Cliente */}
+            <div className="lg:col-span-1">
+              <div className="relative bg-secondary/40 border border-border rounded-2xl p-6 shadow-sm overflow-hidden">
+                <Quote
+                  size={80}
+                  className="absolute -right-4 -top-4 text-accent/5 pointer-events-none transform rotate-12"
+                />
+                <p
+                  className="text-sm italic text-foreground leading-relaxed relative z-10 mb-6"
+                  style={{ fontFamily: BODY }}
+                >
+                  "A consultoria da Líder Júnior superou todas as nossas
+                  expectativas. Conseguimos destravar gargalos históricos
+                  em menos de 3 meses de projeto."
+                </p>
+                <div className="flex items-center gap-3">
+                  <div className="h-9 w-9 rounded-full bg-accent text-white flex items-center justify-center font-bold text-xs">
+                    DM
+                  </div>
+                  <div>
+                    <p
+                      className="text-xs font-bold text-foreground"
+                      style={{ fontFamily: BODY }}
+                    >
+                      Diretor de Operações
+                    </p>
+                    <p
+                      className="text-[10px] text-muted-foreground"
+                      style={{ fontFamily: BODY }}
+                    >
+                      Grande Indústria Metalúrgica
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Impacto do Projeto */}
+              <div className="mt-12 text-center">
+                <span
+                  className="text-accent text-xs font-bold tracking-widest uppercase block mb-2"
+                  style={{ fontFamily: BODY }}
+                >
+                  Impacto do Projeto
+                </span>
+                <h2
+                  className="text-3xl font-bold text-foreground mb-8"
+                  style={{ fontFamily: HEADING }}
+                >
+                  Resultados em números
+                </h2>
+
+                <div className="grid grid-cols-1 gap-4">
+                  <div className="p-6 bg-card border border-border rounded-xl flex flex-col items-center justify-center shadow-sm">
+                    <div className="p-2 bg-accent/10 rounded-lg text-accent mb-2">
+                      <Target size={18} />
+                    </div>
+                    <p
+                      className="text-3xl font-bold text-accent"
+                      style={{ fontFamily: HEADING }}
+                    >
+                      R$ 150k
+                    </p>
+                    <p
+                      className="text-xs text-muted-foreground font-semibold mt-1"
+                      style={{ fontFamily: BODY }}
+                    >
+                      Economia Anual
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="bg-primary py-20">
-        <div className="max-w-xl mx-auto px-6 text-center">
-          <h2
-            className="text-3xl font-bold text-white mb-3"
+      <section className="bg-background py-4">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="bg-primary rounded-2xl p-10 sm:p-16 text-center">
+            <h2
+              className="text-4xl font-bold text-white mb-3"
+              style={{ fontFamily: HEADING }}
+            >
+              Quer um resultado parecido?
+            </h2>
+            <p
+              className="text-white/60 text-base mb-8 max-w-xl mx-auto"
+              style={{ fontFamily: BODY }}
+            >
+              Fale com a nossa equipe e entenda como podemos ajudar a sua
+              empresa a alcançar melhores resultados.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <button
+                onClick={() => setPage("contato")}
+                className="px-6 py-3 bg-accent text-white font-semibold rounded-lg hover:bg-[#f26821] transition-colors text-sm"
+                style={{ fontFamily: BODY }}
+              >
+                Fale Conosco
+              </button>
+              <button
+                onClick={() => setPage("mapeamento-processos")}
+                className="flex items-center gap-2 px-6 py-3 border border-white/20 text-white font-semibold rounded-lg hover:bg-white/10 transition-colors text-sm"
+                style={{ fontFamily: BODY }}
+              >
+                Conhecer o serviço <ArrowRight size={14} />
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Outros cases clicáveis */}
+      <section className="bg-background py-24">
+        <div className="max-w-7xl mx-auto px-6">
+          <h3
+            className="text-lg font-bold text-foreground mb-6"
             style={{ fontFamily: HEADING }}
           >
-            Quer um resultado parecido?
-          </h2>
-          <p
-            className="text-white/60 text-sm mb-8"
-            style={{ fontFamily: BODY }}
-          >
-            Fale com a nossa equipe e entenda como podemos ajudar a sua
-            empresa a alcançar melhores resultados.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button
-              onClick={() => setPage("contato")}
-              className="px-6 py-3 bg-accent text-white font-semibold rounded-lg hover:bg-[#f26821] transition-colors text-sm"
-              style={{ fontFamily: BODY }}
-            >
-              Fale Conosco
-            </button>
-            <button
-              onClick={() => setPage("cases")}
-              className="px-6 py-3 border border-white/20 text-white rounded-lg hover:bg-white/10 transition-colors text-sm"
-              style={{ fontFamily: BODY }}
-            >
-              Ver outros cases
-            </button>
+            Conheça outros resultados de sucesso
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {CASES.filter((c) => c.company !== caseData.company)
+              .slice(0, 3)
+              .map((item, index) => (
+                <div
+                  key={index}
+                  onClick={() => setPage(item.page ?? "cases")}
+                  className="group p-5 rounded-xl border border-border bg-card hover:border-accent hover:shadow-md transition-all duration-200 cursor-pointer"
+                >
+                  <span
+                    className="text-[10px] font-bold text-accent uppercase bg-accent/10 px-2 py-0.5 rounded-full"
+                    style={{ fontFamily: BODY }}
+                  >
+                    {item.category}
+                  </span>
+                  <h4
+                    className="font-bold text-foreground group-hover:text-accent transition-colors text-sm mt-3 mb-1"
+                    style={{ fontFamily: HEADING }}
+                  >
+                    {item.company}
+                  </h4>
+                  <p
+                    className="text-xs text-muted-foreground line-clamp-2"
+                    style={{ fontFamily: BODY }}
+                  >
+                    {item.desc}
+                  </p>
+                  <span
+                    className="inline-block text-[11px] font-semibold text-accent mt-3 opacity-0 group-hover:opacity-100 transition-all transform translate-x-[-4px] group-hover:translate-x-0"
+                    style={{ fontFamily: BODY }}
+                  >
+                    Ver case →
+                  </span>
+                </div>
+              ))}
           </div>
         </div>
       </section>
@@ -3311,44 +3353,6 @@ function BlogPage({ setPage }: { setPage: (p: Page) => void }) {
           )}
         </div>
       </section>
-
-      {/* Newsletter */}
-      <section className="bg-primary py-20">
-        <div className="max-w-xl mx-auto px-6 text-center">
-          <h2
-            className="text-3xl font-bold text-white mb-3"
-            style={{ fontFamily: HEADING }}
-          >
-            Fique por dentro
-          </h2>
-          <p
-            className="text-white/60 text-sm mb-8"
-            style={{ fontFamily: BODY }}
-          >
-            Assine nossa newsletter e receba conteúdos
-            exclusivos sobre Engenharia de Produção e gestão
-            empresarial.
-          </p>
-          <form
-            className="flex gap-3"
-            onSubmit={(e) => e.preventDefault()}
-          >
-            <input
-              type="email"
-              placeholder="seu@email.com.br"
-              className="flex-1 px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder:text-white/40 text-sm focus:outline-none focus:border-accent transition-colors"
-              style={{ fontFamily: BODY }}
-            />
-            <button
-              type="submit"
-              className="px-6 py-3 bg-accent text-white font-semibold rounded-lg hover:bg-[#f26821] transition-colors shrink-0 text-sm"
-              style={{ fontFamily: BODY }}
-            >
-              Assinar
-            </button>
-          </form>
-        </div>
-      </section>
     </div>
   );
 }
@@ -3362,70 +3366,76 @@ function PostLeanManufacturingPage({
 
   return (
     <div className="pt-16">
-      {/* Header */}
-      <section className="bg-primary py-24 relative overflow-hidden">
+      {/* Hero */}
+      <section className="bg-primary py-28 relative overflow-hidden">
         <div
-          className="absolute inset-0 opacity-10"
+          className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage:
-              "radial-gradient(circle at 50% 30%, #ff751f, transparent 60%)",
+            backgroundImage: `url(https://images.unsplash.com/${post.img}?w=1600&h=600&fit=crop&auto=format)`,
           }}
         />
-        <div className="relative max-w-3xl mx-auto px-6">
-          <button
-            onClick={() => setPage("blog")}
-            className="flex items-center gap-1.5 text-white/60 hover:text-white text-sm mb-8 transition-colors"
+        <div className="absolute inset-0 bg-primary/80" />
+        <div className="relative max-w-7xl mx-auto px-6 text-center">
+          <p
+            className="text-accent text-xs font-semibold uppercase tracking-widest mb-4"
             style={{ fontFamily: BODY }}
           >
-            <ChevronLeft size={16} /> Voltar para o Blog
-          </button>
-          <div className="flex items-center gap-3 mb-5">
-            <span
-              className="text-xs px-2.5 py-1 rounded-full bg-accent/10 text-accent font-semibold"
-              style={{ fontFamily: BODY }}
-            >
-              {post.category}
-            </span>
-            <span
-              className="text-xs text-white/50 flex items-center gap-1"
-              style={{ fontFamily: BODY }}
-            >
-              <Clock size={11} /> {post.readTime}
-            </span>
-            <span
-              className="text-xs text-white/50"
-              style={{ fontFamily: BODY }}
-            >
-              {post.date}
-            </span>
-          </div>
+            Artigo • {post.category}
+          </p>
           <h1
-            className="text-3xl lg:text-5xl font-bold text-white leading-tight"
+            className="text-5xl lg:text-6xl font-bold text-white mb-6"
             style={{ fontFamily: HEADING }}
           >
             {post.title}
           </h1>
+
+          <div className="flex items-center justify-center gap-3">
+            <div className="h-8 w-8 rounded-full bg-accent flex items-center justify-center font-bold text-white text-xs shrink-0">
+              LJ
+            </div>
+            <p
+              className="text-sm text-white"
+              style={{ fontFamily: BODY }}
+            >
+              Por Consultor Líder Júnior
+            </p>
+            <span className="text-white/40">•</span>
+            <span
+              className="flex items-center gap-1.5 text-sm text-white/70"
+              style={{ fontFamily: BODY }}
+            >
+              <Calendar size={14} /> 17 Jul, 2026
+            </span>
+            <span className="text-white/40">•</span>
+            <span
+              className="flex items-center gap-1.5 text-sm text-white/70"
+              style={{ fontFamily: BODY }}
+            >
+              <Clock size={14} /> 5 min de leitura
+            </span>
+          </div>
         </div>
       </section>
 
-      {/* Imagem de capa */}
-      <div
-        className="max-w-5xl mx-auto px-6 -mt-10 relative"
-        style={{ marginBottom: -1 }}
-      >
-        <img
-          src={`https://images.unsplash.com/${post.img}?w=1200&h=600&fit=crop&auto=format`}
-          alt={post.title}
-          className="w-full rounded-2xl object-cover shadow-xl"
-          style={{ height: 380 }}
-        />
-      </div>
+      {/* Voltar para o Blog */}
+      <section className="bg-background pt-10">
+        <div className="max-w-7xl mx-auto px-6">
+          <button
+            onClick={() => setPage("blog")}
+            className="inline-flex items-center gap-1.5 text-foreground hover:text-accent text-sm font-semibold transition-colors"
+            style={{ fontFamily: BODY }}
+          >
+            <ChevronLeft size={16} />
+            Voltar para o Blog
+          </button>
+        </div>
+      </section>
 
       {/* Artigo */}
       <section className="bg-background pt-16 pb-24">
-        <div className="max-w-3xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-6">
           <p
-            className="text-lg text-muted-foreground leading-relaxed mb-8"
+            className="text-lg text-foreground leading-relaxed mb-8"
             style={{ fontFamily: BODY }}
           >
             {post.excerpt}
@@ -3438,7 +3448,7 @@ function PostLeanManufacturingPage({
             O que é Lean Manufacturing
           </h2>
           <p
-            className="text-muted-foreground leading-relaxed mb-6"
+            className="text-foreground leading-relaxed mb-6"
             style={{ fontFamily: BODY }}
           >
             Lean Manufacturing é uma filosofia de gestão originada no
@@ -3449,7 +3459,7 @@ function PostLeanManufacturingPage({
             serviço?
           </p>
           <p
-            className="text-muted-foreground leading-relaxed mb-10"
+            className="text-foreground leading-relaxed mb-10"
             style={{ fontFamily: BODY }}
           >
             Para pequenas empresas, o Lean costuma parecer distante da
@@ -3516,7 +3526,7 @@ function PostLeanManufacturingPage({
                     {item.title}
                   </p>
                   <p
-                    className="text-sm text-muted-foreground leading-relaxed"
+                    className="text-sm text-foreground leading-relaxed"
                     style={{ fontFamily: BODY }}
                   >
                     {item.desc}
@@ -3533,7 +3543,7 @@ function PostLeanManufacturingPage({
             Como começar na sua empresa
           </h2>
           <p
-            className="text-muted-foreground leading-relaxed mb-10"
+            className="text-foreground leading-relaxed mb-10"
             style={{ fontFamily: BODY }}
           >
             O primeiro passo não é comprar ferramentas ou treinamentos
@@ -3543,76 +3553,90 @@ function PostLeanManufacturingPage({
             gargalos mais fáceis de atacar primeiro.
           </p>
 
-          <div className="flex flex-wrap gap-2 mb-10">
-            {["Lean", "Processos", "PMEs"].map((tag) => (
-              <span
-                key={tag}
-                className="text-xs px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground font-medium"
-                style={{ fontFamily: BODY }}
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
+        </div>
+      </section>
 
-          <div className="flex items-center gap-3 pt-8 border-t border-border">
-            <div className="w-11 h-11 rounded-full bg-accent/10 flex items-center justify-center shrink-0">
-              <span
-                className="text-accent font-bold text-sm"
-                style={{ fontFamily: HEADING }}
-              >
-                LJ
-              </span>
-            </div>
-            <div>
-              <p
-                className="font-semibold text-foreground text-sm"
+      {/* CTA */}
+      <section className="bg-background py-4">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="bg-primary rounded-2xl p-10 sm:p-16 text-center">
+            <h2
+              className="text-4xl font-bold text-white mb-3"
+              style={{ fontFamily: HEADING }}
+            >
+              Quer aplicar o Lean na sua empresa?
+            </h2>
+            <p
+              className="text-white/60 text-base mb-8 max-w-xl mx-auto"
+              style={{ fontFamily: BODY }}
+            >
+              Nossa equipe pode ajudar a mapear seus processos e encontrar
+              oportunidades reais de melhoria.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <button
+                onClick={() => setPage("contato")}
+                className="px-6 py-3 bg-accent text-white font-semibold rounded-lg hover:bg-[#f26821] transition-colors text-sm"
                 style={{ fontFamily: BODY }}
               >
-                Equipe Líder Jr.
-              </p>
-              <p
-                className="text-muted-foreground text-xs"
+                Fale Conosco
+              </button>
+              <button
+                onClick={() => setPage("blog")}
+                className="flex items-center gap-2 px-6 py-3 border border-white/20 text-white font-semibold rounded-lg hover:bg-white/10 transition-colors text-sm"
                 style={{ fontFamily: BODY }}
               >
-                Consultoria em Engenharia de Produção
-              </p>
+                Ver outros artigos <ArrowRight size={14} />
+              </button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="bg-primary py-20">
-        <div className="max-w-xl mx-auto px-6 text-center">
-          <h2
-            className="text-3xl font-bold text-white mb-3"
+      {/* Outros artigos */}
+      <section className="bg-background py-24">
+        <div className="max-w-7xl mx-auto px-6">
+          <h3
+            className="text-lg font-bold text-foreground mb-6"
             style={{ fontFamily: HEADING }}
           >
-            Quer aplicar o Lean na sua empresa?
-          </h2>
-          <p
-            className="text-white/60 text-sm mb-8"
-            style={{ fontFamily: BODY }}
-          >
-            Nossa equipe pode ajudar a mapear seus processos e encontrar
-            oportunidades reais de melhoria.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button
-              onClick={() => setPage("contato")}
-              className="px-6 py-3 bg-accent text-white font-semibold rounded-lg hover:bg-[#f26821] transition-colors text-sm"
-              style={{ fontFamily: BODY }}
-            >
-              Fale Conosco
-            </button>
-            <button
-              onClick={() => setPage("blog")}
-              className="px-6 py-3 border border-white/20 text-white rounded-lg hover:bg-white/10 transition-colors text-sm"
-              style={{ fontFamily: BODY }}
-            >
-              Ver outros artigos
-            </button>
+            Conheça outros artigos do blog
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {BLOG_POSTS.filter((p) => p.title !== post.title)
+              .slice(0, 3)
+              .map((item, index) => (
+                <div
+                  key={index}
+                  onClick={() => setPage(item.page ?? "blog")}
+                  className="group p-5 rounded-xl border border-border bg-card hover:border-accent hover:shadow-md transition-all duration-200 cursor-pointer"
+                >
+                  <span
+                    className="text-[10px] font-bold text-accent uppercase bg-accent/10 px-2 py-0.5 rounded-full"
+                    style={{ fontFamily: BODY }}
+                  >
+                    {item.category}
+                  </span>
+                  <h4
+                    className="font-bold text-foreground group-hover:text-accent transition-colors text-sm mt-3 mb-1"
+                    style={{ fontFamily: HEADING }}
+                  >
+                    {item.title}
+                  </h4>
+                  <p
+                    className="text-xs text-muted-foreground line-clamp-2"
+                    style={{ fontFamily: BODY }}
+                  >
+                    {item.excerpt}
+                  </p>
+                  <span
+                    className="inline-block text-[11px] font-semibold text-accent mt-3 opacity-0 group-hover:opacity-100 transition-all transform translate-x-[-4px] group-hover:translate-x-0"
+                    style={{ fontFamily: BODY }}
+                  >
+                    Ler artigo →
+                  </span>
+                </div>
+              ))}
           </div>
         </div>
       </section>
