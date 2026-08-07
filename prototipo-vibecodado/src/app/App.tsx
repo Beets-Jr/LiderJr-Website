@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ArrowLeft, Calendar, BarChart3, Target, Quote } from "lucide-react";
+import { ArrowLeft, Calendar, BarChart3, Target, Quote, Sparkles, Eye} from "lucide-react";
 import {
   Menu,
   X,
@@ -1760,182 +1760,226 @@ function HomePage({ setPage }: { setPage: (p: Page) => void }) {
 }
 
 function QuemSomosPage() {
+  const valores = [
+    {
+      titulo: "Inovação",
+      desc: "Buscamos constantemente novas abordagens e metodologias para resolver desafios complexos de engenharia com criatividade.",
+      icon: <Sparkles className="w-6 h-6 text-accent" />,
+    },
+    {
+      titulo: "Comprometimento",
+      desc: "Tratamos cada projeto com total dedicação e responsabilidade, garantindo entregas que superam as expectativas dos clientes.",
+      icon: <Target className="w-6 h-6 text-accent" />,
+    },
+    {
+      titulo: "Ética",
+      desc: "Atuamos com transparência, integridade e respeito em todas as nossas relações com membros, parceiros e clientes.",
+      icon: <Award className="w-6 h-6 text-accent" />,
+    },
+    {
+      titulo: "Aprendizado Contínuo",
+      desc: "Fomentamos a evolução diária através do conhecimento, prática constante e desenvolvimento de novas competências.",
+      icon: <Users className="w-6 h-6 text-accent" />,
+    },
+  ];
+
+  // Filiações atualizadas idênticas à imagem enviada
+  const filiacoes = [
+    { nome: "Universidade (UFSCar)" },
+    { nome: "Núcleo Campinas" },
+    { nome: "FEJESP" },
+    { nome: "Brasil Júnior" },
+  ];
+
   return (
-    <div className="pt-16">
-      {/* Hero */}
-      <section className="bg-primary py-28 relative overflow-hidden">
+    <div className="pt-16 min-h-screen bg-background">
+      {/* HERO DA PÁGINA */}
+      <section className="bg-primary py-24 relative overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage:
-              "url(https://placehold.co/1600x600/1a1a1a/666666?text=Placeholder)",
+              "url(https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1600&auto=format&fit=crop&q=80)",
           }}
         />
-        <div className="absolute inset-0 bg-primary/80" />
-        <div className="relative max-w-7xl mx-auto px-6 text-center">
-          <p
-            className="text-accent text-xs font-semibold uppercase tracking-widest mb-4"
+        <div className="absolute inset-0 bg-primary/85" />
+        <div className="relative max-w-4xl mx-auto px-6 text-center">
+          <span 
+            className="text-accent text-xs font-bold uppercase tracking-widest bg-accent/10 px-3 py-1 rounded-full inline-block mb-4"
             style={{ fontFamily: BODY }}
           >
-            Nossa empresa
-          </p>
-          <h1
-            className="text-5xl lg:text-6xl font-bold text-white mb-6"
+            Sobre Nós
+          </span>
+          <h1 
+            className="text-4xl lg:text-5xl font-bold text-white leading-tight mb-4"
             style={{ fontFamily: HEADING }}
           >
             Quem Somos
           </h1>
-          <p
-            className="text-white/60 text-lg max-w-2xl mx-auto"
+          <p 
+            className="text-white/80 text-base lg:text-lg max-w-2xl mx-auto leading-relaxed"
             style={{ fontFamily: BODY }}
           >
-            Somos a Líder Jr., empresa júnior do curso de Engenharia de
-            Produção, formada por estudantes apaixonados por soluções que fazem
-            diferença.
+           Somos a Líder Jr., empresa júnior do curso de Engenharia de Produção, formada por estudantes apaixonados por soluções que fazem diferença.
           </p>
         </div>
       </section>
 
-      {/* História */}
-      <section className="bg-background py-24">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+  {/* SEÇÃO: NOSSA HISTÓRIA */}
+      <section className="bg-black text-white py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-l from-accent/20 via-accent/5 to-transparent pointer-events-none" />
+      
+        <div className="absolute -top-24 -right-24 w-80 h-80 bg-accent/15 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="relative max-w-6xl mx-auto px-6 z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <p
-                className="text-accent text-xs font-semibold uppercase tracking-widest mb-3"
+              <span 
+                className="text-accent text-xs font-bold uppercase tracking-widest bg-accent/10 px-3 py-1 rounded-full inline-block mb-3"
                 style={{ fontFamily: BODY }}
               >
-                Nossa história
-              </p>
-              <h2
-                className="text-4xl font-bold text-foreground mb-6"
+                Trajetória & Legado
+              </span>
+              <h2 
+                className="text-3xl lg:text-4xl font-bold mb-6 text-white" 
                 style={{ fontFamily: HEADING }}
               >
-                Nascemos para conectar academia e mercado
+                Nossa História
               </h2>
-              <p
-                className="text-muted-foreground leading-relaxed mb-4"
-                style={{ fontFamily: BODY }}
-              >
-                Fundada por um grupo de alunos motivados do curso de Engenharia
-                de Produção, a Líder Jr. surgiu como resposta a uma necessidade
-                clara: pequenas e médias empresas precisavam de consultoria de
-                qualidade a preços acessíveis.
-              </p>
-              <p
-                className="text-muted-foreground leading-relaxed"
-                style={{ fontFamily: BODY }}
-              >
-                Ao longo dos anos, crescemos, obtivemos certificação pela Brasil
-                Júnior e construímos um portfólio diversificado de projetos em
-                setores como indústria, varejo, serviços e agronegócio.
-              </p>
+              <div className="space-y-4 text-white/70 text-base leading-relaxed" style={{ fontFamily: BODY }}>
+                <p>
+                  Fundada com o propósito de aproximar a vivência prática do mercado à formação acadêmica, a Líder Júnior nasceu do inconformismo de estudantes de Engenharia de Produção focados em gerar impacto real.
+                </p>
+                <p>
+                  Ao longo dos anos, consolidamos nossa atuação no ecossistema regional, entregando projetos de alta qualidade técnica em consultoria empresarial, otimização de processos e gestão estratégica para empresas de diversos portes.
+                </p>
+              </div>
             </div>
-            <img
-              src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=700&h=500&fit=crop&auto=format"
-              alt="Equipe Líder Jr. trabalhando em projeto"
-              className="w-full rounded-2xl object-cover"
-              style={{ height: 380 }}
-            />
+
+            <div className="relative">
+              <div className="absolute -inset-2 bg-gradient-to-r from-accent/20 to-transparent rounded-2xl blur-lg opacity-30 pointer-events-none" />
+              <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl h-[360px]">
+                <img 
+                  src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&auto=format&fit=crop&q=80" 
+                  alt="Equipe da Líder Júnior reunida em projeto" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Cultura */}
-      <section className="bg-muted py-24">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-14">
-            <p
-              className="text-accent text-xs font-semibold uppercase tracking-widest mb-3"
-              style={{ fontFamily: BODY }}
-            >
-              Cultura
+      {/* SEÇÃO: MISSÃO, VISÃO E VALORES */}
+      <section className="py-20 max-w-6xl mx-auto px-6">
+        <div className="text-center mb-16">
+          <span 
+            className="text-accent text-xs font-bold uppercase tracking-widest bg-accent/10 px-3 py-1 rounded-full inline-block mb-3"
+            style={{ fontFamily: BODY }}
+          >
+            Cultura
+          </span>
+          <h2 
+            className="text-3xl lg:text-4xl font-bold text-foreground"
+            style={{ fontFamily: HEADING }}
+          >
+            O que nos move diariamente
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+          <div className="bg-card border border-border p-8 rounded-2xl relative overflow-hidden shadow-sm group hover:border-accent transition-colors">
+            <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
+              <Target className="w-6 h-6 text-accent" />
+            </div>
+            <h3 className="text-2xl font-bold text-foreground mb-3" style={{ fontFamily: HEADING }}>
+              Missão
+            </h3>
+            <p className="text-muted-foreground text-sm leading-relaxed" style={{ fontFamily: BODY }}>
+              Oferecer soluções inovadoras em Engenharia de Produção, desenvolvendo competências nos nossos membros e gerando valor real para clientes.
             </p>
-            <h2
-              className="text-4xl font-bold text-foreground"
-              style={{ fontFamily: HEADING }}
-            >
-              O que nos guia
-            </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              {
-                label: "Missão",
-                text: "Oferecer soluções inovadoras em Engenharia de Produção, desenvolvendo competências nos nossos membros e gerando valor real para clientes.",
-                icon: "🎯",
-              },
-              {
-                label: "Visão",
-                text: "Ser referência nacional em consultoria júnior, reconhecida pela excelência técnica, impacto nos negócios e formação de líderes.",
-                icon: "🔭",
-              },
-              {
-                label: "Valores",
-                text: "Inovação, comprometimento, ética e aprendizado contínuo são os pilares que guiam cada projeto e cada decisão da Líder Jr.",
-                icon: "⚡",
-              },
-            ].map((item, i) => (
-              <div
-                key={i}
-                className="bg-card border border-border rounded-xl p-8"
+          <div className="bg-card border border-border p-8 rounded-2xl relative overflow-hidden shadow-sm group hover:border-accent transition-colors">
+            <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
+              <Eye className="w-6 h-6 text-accent" />
+            </div>
+            <h3 className="text-2xl font-bold text-foreground mb-3" style={{ fontFamily: HEADING }}>
+              Visão
+            </h3>
+            <p className="text-muted-foreground text-sm leading-relaxed" style={{ fontFamily: BODY }}>
+              Ser referência nacional em consultoria júnior, reconhecida pela excelência técnica, impacto nos negócios e formação de líderes.
+            </p>
+          </div>
+        </div>
+
+        <div>
+          <h4 className="text-xl font-bold text-foreground mb-8 text-center" style={{ fontFamily: HEADING }}>
+            NOSSOS VALORES
+          </h4>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {valores.map((val, idx) => (
+              <div 
+                key={idx} 
+                className="p-6 bg-card border border-border rounded-2xl flex flex-col justify-between shadow-sm hover:border-accent hover:shadow-md transition-all duration-300"
               >
-                <div className="text-3xl mb-4">{item.icon}</div>
-                <h3
-                  className="font-bold text-foreground text-lg mb-3"
-                  style={{ fontFamily: HEADING }}
-                >
-                  {item.label}
-                </h3>
-                <p
-                  className="text-sm text-muted-foreground leading-relaxed"
-                  style={{ fontFamily: BODY }}
-                >
-                  {item.text}
-                </p>
+                <div>
+                  <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-5">
+                    {val.icon}
+                  </div>
+                  <h5 className="font-bold text-foreground text-lg mb-2" style={{ fontFamily: HEADING }}>
+                    {val.titulo}
+                  </h5>
+                  <p className="text-xs text-muted-foreground leading-relaxed" style={{ fontFamily: BODY }}>
+                    {val.desc}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Filiações */}
-      <section className="bg-background py-24">
-        <div className="max-w-7xl mx-auto px-6">
+{/* SEÇÃO FILIAÇÕES */}
+      <section className="py-24 bg-secondary/40 w-full relative overflow-hidden">
+
+        <div className="absolute -top-24 -left-24 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="max-w-6xl mx-auto px-6 relative z-10">
           <div className="text-center mb-14">
-            <p
-              className="text-accent text-xs font-semibold uppercase tracking-widest mb-3"
+            <span 
+              className="text-accent text-xs font-bold uppercase tracking-widest bg-accent/10 px-3.5 py-1.5 rounded-full inline-block mb-3 border-accent/20"
               style={{ fontFamily: BODY }}
             >
               Parcerias
-            </p>
-            <h2
-              className="text-4xl font-bold text-foreground"
+            </span>
+            <h2 
+              className="text-3xl lg:text-4xl font-bold text-foreground"
               style={{ fontFamily: HEADING }}
             >
-              Filiações
+              Nossas Filiações
             </h2>
+            <p className="text-muted-foreground text-sm max-w-xl mx-auto mt-2" style={{ fontFamily: BODY }}>
+              Conexões que garantem nossa governança e impacto.
+            </p>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-            {AFFILIATIONS.map((a, i) => (
-              <div
-                key={i}
-                className="bg-card border border-border rounded-xl p-8 text-center"
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {filiacoes.map((item, idx) => (
+              <div 
+                key={idx} 
+                className="group relative bg-card border border-border/80 rounded-2xl p-6 text-center flex flex-col items-center justify-between shadow-sm hover:shadow-xl hover:border-accent/50 hover:-translate-y-1 transition-all duration-300"
               >
-                <div className="w-full h-20 rounded-lg bg-muted flex items-center justify-center mb-4">
-                  <span
-                    className="text-xs text-muted-foreground uppercase tracking-widest"
-                    style={{ fontFamily: BODY }}
-                  >
-                    Logo
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-0 group-hover:w-1/2 h-1 bg-accent rounded-b-full transition-all duration-300" />
+
+                <div className="w-full h-28 bg-background/80 rounded-xl flex items-center justify-center mb-4 border border-border/60 group-hover:bg-accent/5 group-hover:border-accent/30 transition-colors">
+                  <span className="text-xs font-bold text-muted-foreground/50 group-hover:text-accent uppercase tracking-widest transition-colors" style={{ fontFamily: BODY }}>
+                    LOGO
                   </span>
                 </div>
-                <h3
-                  className="font-bold text-foreground"
-                  style={{ fontFamily: HEADING }}
-                >
-                  {a.name}
+
+                <h3 className="text-base font-bold text-foreground group-hover:text-accent transition-colors mb-1" style={{ fontFamily: HEADING }}>
+                  {item.nome}
                 </h3>
               </div>
             ))}
