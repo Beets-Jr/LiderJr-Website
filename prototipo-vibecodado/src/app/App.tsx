@@ -12,7 +12,6 @@ import {
   TrendingUp,
   Award,
   BookOpen,
-  MapPin,
   Phone,
   Mail,
   Linkedin,
@@ -24,6 +23,9 @@ import {
   Tag,
   Box,
   Download,
+  Target,
+  Quote,
+  Calendar,
 } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "./components/ui/avatar";
 import { Badge } from "./components/ui/badge";
@@ -58,6 +60,7 @@ const NAV_LINKS: { label: string; page: Page }[] = [
 const SERVICES: {
   icon: typeof TrendingUp;
   title: string;
+  tagline: string;
   desc: string;
   tags: string[];
   page: Page;
@@ -65,6 +68,7 @@ const SERVICES: {
   {
     icon: TrendingUp,
     title: "Mapeamento de Processos",
+    tagline: "Transforme eficiência em vantagem competitiva!",
     desc: "Identificamos gargalos e ineficiências na sua operação, propondo melhorias sustentadas em metodologias como BPMN e fluxogramas.",
     tags: ["Lean", "BPMN", "VSM"],
     page: "mapeamento-processos",
@@ -72,6 +76,7 @@ const SERVICES: {
   {
     icon: Award,
     title: "Gestão da Qualidade",
+    tagline: "Eleve o padrão e conquiste a confiança do mercado!",
     desc: "Implementamos ferramentas de controle de qualidade como PDCA, 5S e FMEA para elevar o padrão dos seus processos e produtos.",
     tags: ["PDCA", "5S", "FMEA"],
     page: "servicos",
@@ -79,6 +84,7 @@ const SERVICES: {
   {
     icon: Users,
     title: "Pesquisa de Mercado",
+    tagline: "Decisões certeiras com dados reais do seu setor!",
     desc: "Realizamos pesquisas quantitativas e qualitativas para embasar decisões estratégicas com dados reais do seu segmento.",
     tags: ["Dados", "Análise", "Estratégia"],
     page: "servicos",
@@ -86,6 +92,7 @@ const SERVICES: {
   {
     icon: BookOpen,
     title: "Planejamento Estratégico",
+    tagline: "Trace o caminho para um crescimento sólido!",
     desc: "Desenvolvemos planos de negócios e diagnósticos organizacionais com foco em crescimento sustentável e competitividade.",
     tags: ["OKR", "BSC", "Swot"],
     page: "servicos",
@@ -93,6 +100,7 @@ const SERVICES: {
   {
     icon: CheckCircle2,
     title: "Custos e Precificação",
+    tagline: "Precifique com inteligência e proteja sua margem!",
     desc: "Analisamos sua estrutura de custos e desenvolvemos estratégias de precificação alinhadas ao mercado e à margem desejada.",
     tags: ["Custos", "Precificação", "Margem"],
     page: "servicos",
@@ -100,6 +108,7 @@ const SERVICES: {
   {
     icon: Star,
     title: "Consultoria em Estoque",
+    tagline: "Estoque enxuto, operação mais ágil!",
     desc: "Otimizamos a gestão de estoques com modelos de lote econômico, curva ABC e sistemas de reabastecimento inteligente.",
     tags: ["ABC", "EOQ", "Kanban"],
     page: "servicos",
@@ -166,6 +175,16 @@ const CASES: {
   },
 ];
 
+// Imagens já existentes no sistema, uma por case
+const CASE_IMAGES = [
+  "photo-1581091226825-a6a2a5aee158",
+  "photo-1454165804606-c3d57bc86b40",
+  "photo-1552664730-d307ca884978",
+  "photo-1551288049-bebda4e38f71",
+  "photo-1556761175-5973dc0f32e7",
+  "photo-1566576912321-d58ddd7a6088",
+];
+
 const BLOG_POSTS: {
   title: string;
   excerpt: string;
@@ -230,6 +249,16 @@ const BLOG_POSTS: {
     readTime: "6 min",
     img: "photo-1460925895917-afdab827c52f",
   },
+];
+
+// Teste visual: imagens já usadas no blog, uma por serviço
+const SERVICE_IMAGES = [
+  BLOG_POSTS[0].img,
+  BLOG_POSTS[4].img,
+  BLOG_POSTS[5].img,
+  BLOG_POSTS[3].img,
+  BLOG_POSTS[1].img,
+  BLOG_POSTS[2].img,
 ];
 
 const MATERIALS = [
@@ -1799,7 +1828,11 @@ function QuemSomosPage() {
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage:
+ Prototipo-Larissa
               "url(https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1600&auto=format&fit=crop&q=80)",
+
+              "url(https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1600&h=600&fit=crop&auto=format)",
+ main
           }}
         />
         <div className="absolute inset-0 bg-primary/85" />
@@ -1990,9 +2023,7 @@ function QuemSomosPage() {
   );
 }
 
-function ServicosPage() {
-  const [selected, setSelected] = useState<number | null>(null);
-
+function ServicosPage({ setPage }: { setPage: (p: Page) => void }) {
   return (
     <div className="pt-16">
       {/* Hero */}
@@ -2001,7 +2032,7 @@ function ServicosPage() {
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage:
-              "url(https://placehold.co/1600x600/1a1a1a/666666?text=Placeholder)",
+              "url(https://images.unsplash.com/photo-1552664730-d307ca884978?w=1600&h=600&fit=crop&auto=format)",
           }}
         />
         <div className="absolute inset-0 bg-primary/80" />
@@ -2035,43 +2066,88 @@ function ServicosPage() {
             {SERVICES.map((s, i) => (
               <div
                 key={i}
+Prototipo-Larissa
                 className={`group bg-card border rounded-xl p-8 cursor-pointer transition-all duration-300 ${
                   selected === i
                     ? "border-accent shadow-lg shadow-accent/10"
                     : "border-border hover:border-accent/40 hover:shadow-md"
                 }`}
                 onClick={() => setSelected(selected === i ? null : i)}
+
+                className="group relative flex flex-col bg-card border border-border rounded-2xl overflow-hidden shadow-sm cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-accent/30"
+                style={{ minHeight: 530 }}
+                onClick={() => setPage(s.page)}
+main
               >
+                {/* Imagem com corte diagonal */}
                 <div
-                  className={`w-12 h-12 rounded-lg flex items-center justify-center mb-6 transition-colors ${selected === i ? "bg-accent" : "bg-accent/10 group-hover:bg-accent"}`}
+                  className="relative flex-shrink-0 overflow-hidden"
+                  style={{
+                    height: 260,
+                    clipPath: "polygon(0 0, 100% 0, 100% 40%, 0 85%)",
+                  }}
                 >
-                  <s.icon
-                    size={22}
-                    className={`transition-colors ${selected === i ? "text-white" : "text-accent group-hover:text-white"}`}
+                  <img
+                    src={`https://images.unsplash.com/${SERVICE_IMAGES[i]}?w=600&h=400&fit=crop&auto=format`}
+                    alt={s.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
+                  <div className="absolute inset-0 bg-primary/40" />
                 </div>
-                <h3
-                  className="font-bold text-foreground text-lg mb-3"
-                  style={{ fontFamily: HEADING }}
-                >
-                  {s.title}
-                </h3>
-                <p
-                  className="text-sm text-muted-foreground leading-relaxed mb-5"
-                  style={{ fontFamily: BODY }}
-                >
-                  {s.desc}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {s.tags.map((t) => (
-                    <span
-                      key={t}
-                      className="text-xs px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground font-medium"
+
+                {/* Conteúdo do card - puxado para cima para aproveitar o espaço do corte */}
+                <div className="flex flex-col flex-1 px-6 pb-6 -mt-20 relative z-10">
+                  <h3
+                    className="text-2xl font-extrabold leading-tight mb-3 text-right ml-auto text-accent"
+                    style={{
+                      fontFamily: HEADING,
+                      maxWidth: "80%",
+                    }}
+                  >
+                    {s.title === "Gestão da Qualidade" ? (
+                      <>
+                        GESTÃO DA
+                        <br />
+                        QUALIDADE
+                      </>
+                    ) : s.title === "Pesquisa de Mercado" ? (
+                      <>
+                        PESQUISA DE
+                        <br />
+                        MERCADO
+                      </>
+                    ) : (
+                      s.title.toUpperCase()
+                    )}
+                  </h3>
+
+                  <p
+                    className="text-sm font-bold text-accent mb-4"
+                    style={{ fontFamily: BODY }}
+                  >
+                    {s.tagline}
+                  </p>
+
+                  <p
+                    className="text-sm text-foreground leading-relaxed flex-1 mb-8"
+                    style={{ fontFamily: BODY, lineHeight: 1.75 }}
+                  >
+                    {s.desc}
+                  </p>
+
+                  <div className="flex justify-end mt-auto">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setPage(s.page);
+                      }}
+                      className="flex items-center gap-2 bg-accent hover:bg-primary text-white text-sm font-semibold rounded-lg px-5 py-2.5 transition-all duration-200 hover:brightness-110 active:scale-95"
                       style={{ fontFamily: BODY }}
                     >
-                      {t}
-                    </span>
-                  ))}
+                      Conhecer a solução
+                      <ArrowRight size={14} />
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}
@@ -2166,7 +2242,7 @@ function MapeamentoProcessosPage({ setPage }: { setPage: (p: Page) => void }) {
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage:
-              "url(https://placehold.co/1600x600/1a1a1a/666666?text=Placeholder)",
+              "url(https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1600&h=600&fit=crop&auto=format)",
           }}
         />
         <div className="absolute inset-0 bg-primary/80" />
@@ -2441,7 +2517,6 @@ function MapeamentoProcessosPage({ setPage }: { setPage: (p: Page) => void }) {
     </div>
   );
 }
-
 function CasesPage({ setPage }: { setPage: (p: Page) => void }) {
   const [activeCategory, setActiveCategory] = useState("Todos");
   const categories = [
@@ -2467,38 +2542,42 @@ function CasesPage({ setPage }: { setPage: (p: Page) => void }) {
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage:
-              "url(https://placehold.co/1600x600/1a1a1a/666666?text=Placeholder)",
+              "url(https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&h=600&fit=crop&auto=format)",
           }}
         />
-        <div className="absolute inset-0 bg-primary/80" />
+        <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/80 to-transparent" />
 
         <div className="relative max-w-7xl mx-auto px-6 text-center">
           <p
             className="text-accent text-xs font-semibold uppercase tracking-widest mb-4"
             style={{ fontFamily: BODY }}
           >
-            Resultados
+            Resultados Comprovados
           </p>
 
           <h1
             className="text-5xl lg:text-6xl font-bold text-white mb-6"
             style={{ fontFamily: HEADING }}
           >
-            Cases
+            Nossos Cases
           </h1>
 
           <p
             className="text-white/60 text-lg max-w-2xl mx-auto"
             style={{ fontFamily: BODY }}
           >
+Prototipo-Larissa
             Conheça alguns dos projetos desenvolvidos pela Lider Jr. e descubra
             como ajudamos empresas a alcançarem melhores resultados por meio da
             Engenharia de Produção.
+
+            Conheça os projetos desenvolvidos pela Líder Jr. e o impacto real que a Engenharia de Produção gerou na produtividade e no faturamento dos nossos clientes.
+ main
           </p>
         </div>
       </section>
 
-      {/* Filter */}
+      {/* Filter Sticky (Botões padronizados com o Blog) */}
       <section className="bg-background py-8 border-b border-border sticky top-16 z-40">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-hide">
@@ -2520,65 +2599,47 @@ function CasesPage({ setPage }: { setPage: (p: Page) => void }) {
         </div>
       </section>
 
-      {/* Cases */}
-      <section className="bg-background py-16">
-        <div className="max-w-7xl mx-auto px-6">
-          {/* Featured */}
-          {activeCategory === "Todos" && (
-            <div className="mb-12 group cursor-pointer">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 bg-card border border-border rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300">
-                <div
-                  className="overflow-hidden bg-muted"
-                  style={{ minHeight: 280 }}
+      {/* Lista de Cases - Card Inteiro Interativo */}
+      <section className="bg-background py-24">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col gap-24">
+          {filtered.map((c, i) => (
+            <article
+              key={i}
+              onClick={() => c.page && setPage(c.page)}
+              className={`group flex flex-col lg:flex-row gap-12 lg:gap-20 items-center transition-all duration-300 ${
+                i % 2 !== 0 ? "lg:flex-row-reverse" : ""
+              } ${c.page ? "cursor-pointer" : "cursor-default"}`}
+            >
+              {/* Lado da Imagem */}
+              <div className="w-full lg:w-1/2">
+                <div 
+                  className="relative aspect-[4/3] rounded-3xl overflow-hidden bg-card border border-border shadow-sm group-hover:shadow-2xl group-hover:border-accent/30 transition-all duration-500"
                 >
                   <img
-                    src={`https://placehold.co/800x500/1a1a1a/666666?text=${encodeURIComponent(CASES[0].company)}`}
-                    alt={CASES[0].company}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    style={{ minHeight: 280 }}
+                    src={`https://images.unsplash.com/${CASE_IMAGES[CASES.indexOf(c)]}?w=800&h=600&fit=crop&auto=format`}
+                    alt={c.company}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
-                </div>
-                <div className="p-10 flex flex-col justify-center">
-                  <div className="flex items-center gap-3 mb-4">
-                    <span
-                      className="text-xs px-2.5 py-1 rounded-full bg-accent/10 text-accent font-semibold"
-                      style={{ fontFamily: BODY }}
-                    >
-                      {CASES[0].category}
-                    </span>
-                    <span
-                      className="font-bold text-accent text-2xl"
-                      style={{ fontFamily: HEADING }}
-                    >
-                      {CASES[0].result}
-                    </span>
-                    <span
-                      className="text-xs text-muted-foreground"
-                      style={{ fontFamily: BODY }}
-                    >
-                      {CASES[0].metric}
-                    </span>
-                  </div>
-                  <h2
-                    className="text-2xl font-bold text-foreground mb-3 group-hover:text-accent transition-colors"
-                    style={{ fontFamily: HEADING }}
-                  >
-                    {CASES[0].company}
-                  </h2>
-                  <p
-                    className="text-sm text-muted-foreground leading-relaxed mb-6"
-                    style={{ fontFamily: BODY }}
-                  >
-                    {CASES[0].desc}
-                  </p>
-                  <div className="flex items-center gap-2 text-accent text-sm font-semibold">
-                    Ver case completo <ArrowRight size={14} />
+                  {/* Selo flutuante */}
+                  <div className="absolute bottom-6 left-6 bg-primary/90 backdrop-blur-sm border border-white/10 text-white px-6 py-4 rounded-2xl shadow-xl">
+                    <p className="text-accent font-bold text-3xl" style={{ fontFamily: HEADING }}>{c.result}</p>
+                    <p className="text-xs uppercase tracking-wider text-white/70" style={{ fontFamily: BODY }}>{c.metric}</p>
                   </div>
                 </div>
               </div>
-            </div>
-          )}
 
+              {/* Lado do Conteúdo */}
+              <div className="w-full lg:w-1/2 flex flex-col justify-center">
+                <div className="flex items-center gap-3 mb-6">
+                  <span
+                    className="text-xs px-3 py-1.5 rounded-md bg-accent/10 text-accent font-bold uppercase tracking-wider"
+                    style={{ fontFamily: BODY }}
+                  >
+                    {c.category}
+                  </span>
+                </div>
+
+ Prototipo-Larissa
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {(activeCategory === "Todos" ? filtered.slice(1) : filtered).map(
               (c, i) => (
@@ -2648,6 +2709,60 @@ function CasesPage({ setPage }: { setPage: (p: Page) => void }) {
             <div className="text-center py-20">
               <p className="text-muted-foreground" style={{ fontFamily: BODY }}>
                 Nenhum case encontrado nesta categoria.
+
+                <h2
+                  className="text-3xl lg:text-4xl font-bold text-foreground mb-4 leading-tight group-hover:text-accent transition-colors duration-300"
+                  style={{ fontFamily: HEADING }}
+                >
+                  {c.company}
+                </h2>
+                
+                <p
+                  className="text-lg text-muted-foreground leading-relaxed mb-8"
+                  style={{ fontFamily: BODY }}
+                >
+                  {c.desc}
+                </p>
+
+                <div className="flex flex-wrap gap-2 mb-10">
+                  {c.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="text-xs px-3 py-1.5 rounded-full border border-border bg-muted text-muted-foreground font-medium"
+                      style={{ fontFamily: BODY }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                {/* CTA Visual (acionado pelo hover do Article) */}
+                <div
+                  className={`w-fit flex items-center gap-3 font-bold transition-all duration-300 ${
+                    c.page
+                      ? "text-accent group-hover:text-[#f26821]"
+                      : "text-muted-foreground opacity-50"
+                  }`}
+                  style={{ fontFamily: BODY }}
+                >
+                  <span className="border-b-2 border-transparent group-hover:border-current pb-0.5 transition-colors duration-300">
+                    {c.page ? "Ver resultados completos" : "Case em breve"}
+                  </span>
+                  {c.page && (
+                    <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent group-hover:text-white transition-colors duration-300">
+                      <ArrowRight size={16} />
+                    </div>
+                  )}
+                </div>
+              </div>
+            </article>
+          ))}
+
+          {filtered.length === 0 && (
+            <div className="text-center py-20 bg-card border border-border rounded-2xl">
+              <p className="text-muted-foreground text-lg" style={{ fontFamily: BODY }}>
+                Nenhum projeto encontrado nesta categoria no momento.
+main
               </p>
             </div>
           )}
@@ -2672,7 +2787,12 @@ function CaseMetalurgicaPage({ setPage }: { setPage: (p: Page) => void }) {
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
+ Prototipo-Larissa
             backgroundImage: "url(https://images.unsplash.com/photo-1537462715879-360eeb61a0bc?w=1600&auto=format&fit=crop&q=80)",
+
+            backgroundImage:
+              "url(https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1600&h=600&fit=crop&auto=format)",
+ main
           }}
         />
         <div className="absolute inset-0 bg-primary/85" />
@@ -2700,6 +2820,7 @@ function CaseMetalurgicaPage({ setPage }: { setPage: (p: Page) => void }) {
         </div>
       </section>
 
+ Prototipo-Larissa
         {/* MÉTRICAS CONSOLIDADAS: IMPACTO DO PROJETO */}
         <section className="max-w-5xl mx-auto px-6 mb-16 text-center">
           <span 
@@ -2732,10 +2853,160 @@ function CaseMetalurgicaPage({ setPage }: { setPage: (p: Page) => void }) {
               <div className="p-2 bg-accent/10 rounded-lg text-accent mb-2"><Target size={18} /></div>
               <p className="text-3xl font-bold text-accent" style={{ fontFamily: HEADING }}>R$ 150k</p>
               <p className="text-xs text-muted-foreground font-semibold mt-1" style={{ fontFamily: BODY }}>Economia Anual</p>
+
+      {/* Voltar aos Cases */}
+      <section className="bg-background pt-10">
+        <div className="max-w-7xl mx-auto px-6">
+          <button
+            onClick={() => setPage("cases")}
+            className="inline-flex items-center gap-1.5 text-foreground hover:text-accent text-sm font-semibold transition-colors"
+            style={{ fontFamily: BODY }}
+          >
+            <ChevronLeft size={16} />
+            Voltar aos Cases
+          </button>
+        </div>
+      </section>
+
+      {/* Desafio / Solução / Resultados */}
+      <section className="bg-background py-16">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+            <div className="lg:col-span-2">
+              <h2
+                className="font-bold text-foreground text-2xl mb-4"
+                style={{ fontFamily: HEADING }}
+              >
+                O Desafio
+              </h2>
+              <p
+                className="text-foreground/80 leading-relaxed mb-12"
+                style={{ fontFamily: BODY }}
+              >
+                A {caseData.company.toLowerCase()} enfrentava atrasos
+                recorrentes na produção, com etapas informais e sem
+                padronização entre os turnos. Sem um fluxo claro,
+                informações se perdiam nas trocas de turno, o retrabalho
+                era frequente e não havia visibilidade real sobre onde os
+                gargalos aconteciam — o que dificultava qualquer tentativa
+                de melhoria consistente.
+              </p>
+
+              <h2
+                className="font-bold text-foreground text-2xl mb-4"
+                style={{ fontFamily: HEADING }}
+              >
+                A Solução
+              </h2>
+              <p
+                className="text-foreground/80 leading-relaxed mb-12"
+                style={{ fontFamily: BODY }}
+              >
+                A equipe da Líder Jr. mapeou o fluxo produtivo do início ao
+                fim utilizando a notação BPMN, entrevistando operadores e
+                supervisores de cada turno para entender a rotina real de
+                produção. Com o mapeamento em mãos, identificamos os
+                principais gargalos e pontos de retrabalho, e propusemos
+                um processo padronizado, documentado e validado com os
+                times operacionais antes da implementação.
+              </p>
+
+              <h2
+                className="font-bold text-foreground text-2xl mb-4"
+                style={{ fontFamily: HEADING }}
+              >
+                Os Resultados
+              </h2>
+              <p
+                className="text-foreground/80 leading-relaxed"
+                style={{ fontFamily: BODY }}
+              >
+                Com o novo fluxo implementado, a empresa reduziu
+                significativamente o tempo de produção e passou a
+                entregar com mais previsibilidade. A padronização entre
+                turnos eliminou boa parte do retrabalho e trouxe
+                visibilidade real sobre o processo, servindo de base
+                para futuras melhorias contínuas.
+              </p>
+ main
+            </div>
+
+            {/* Relato do Cliente */}
+            <div className="lg:col-span-1">
+              <div className="relative bg-secondary/40 border border-border rounded-2xl p-6 shadow-sm overflow-hidden">
+                <Quote
+                  size={80}
+                  className="absolute -right-4 -top-4 text-accent/5 pointer-events-none transform rotate-12"
+                />
+                <p
+                  className="text-sm italic text-foreground leading-relaxed relative z-10 mb-6"
+                  style={{ fontFamily: BODY }}
+                >
+                  "A consultoria da Líder Júnior superou todas as nossas
+                  expectativas. Conseguimos destravar gargalos históricos
+                  em menos de 3 meses de projeto."
+                </p>
+                <div className="flex items-center gap-3">
+                  <div className="h-9 w-9 rounded-full bg-accent text-white flex items-center justify-center font-bold text-xs">
+                    DM
+                  </div>
+                  <div>
+                    <p
+                      className="text-xs font-bold text-foreground"
+                      style={{ fontFamily: BODY }}
+                    >
+                      Diretor de Operações
+                    </p>
+                    <p
+                      className="text-[10px] text-muted-foreground"
+                      style={{ fontFamily: BODY }}
+                    >
+                      Grande Indústria Metalúrgica
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Impacto do Projeto */}
+              <div className="mt-12 text-center">
+                <span
+                  className="text-accent text-xs font-bold tracking-widest uppercase block mb-2"
+                  style={{ fontFamily: BODY }}
+                >
+                  Impacto do Projeto
+                </span>
+                <h2
+                  className="text-3xl font-bold text-foreground mb-8"
+                  style={{ fontFamily: HEADING }}
+                >
+                  Resultados em números
+                </h2>
+
+                <div className="grid grid-cols-1 gap-4">
+                  <div className="p-6 bg-card border border-border rounded-xl flex flex-col items-center justify-center shadow-sm">
+                    <div className="p-2 bg-accent/10 rounded-lg text-accent mb-2">
+                      <Target size={18} />
+                    </div>
+                    <p
+                      className="text-3xl font-bold text-accent"
+                      style={{ fontFamily: HEADING }}
+                    >
+                      R$ 150k
+                    </p>
+                    <p
+                      className="text-xs text-muted-foreground font-semibold mt-1"
+                      style={{ fontFamily: BODY }}
+                    >
+                      Economia Anual
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
+ Prototipo-Larissa
         {/* Conteúdo Principal */}
         <div className="max-w-5xl mx-auto px-6 pb-16">
           <button 
@@ -2783,6 +3054,40 @@ function CaseMetalurgicaPage({ setPage }: { setPage: (p: Page) => void }) {
                   </div>
                 </div>
               </div>
+
+      {/* CTA */}
+      <section className="bg-background py-4">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="bg-primary rounded-2xl p-10 sm:p-16 text-center">
+            <h2
+              className="text-4xl font-bold text-white mb-3"
+              style={{ fontFamily: HEADING }}
+            >
+              Quer um resultado parecido?
+            </h2>
+            <p
+              className="text-white/60 text-base mb-8 max-w-xl mx-auto"
+              style={{ fontFamily: BODY }}
+            >
+              Fale com a nossa equipe e entenda como podemos ajudar a sua
+              empresa a alcançar melhores resultados.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <button
+                onClick={() => setPage("contato")}
+                className="px-6 py-3 bg-accent text-white font-semibold rounded-lg hover:bg-[#f26821] transition-colors text-sm"
+                style={{ fontFamily: BODY }}
+              >
+                Fale Conosco
+              </button>
+              <button
+                onClick={() => setPage("mapeamento-processos")}
+                className="flex items-center gap-2 px-6 py-3 border border-white/20 text-white font-semibold rounded-lg hover:bg-white/10 transition-colors text-sm"
+                style={{ fontFamily: BODY }}
+              >
+                Conhecer o serviço <ArrowRight size={14} />
+              </button>
+ main
             </div>
           </div>
 
@@ -2815,7 +3120,7 @@ function CaseMetalurgicaPage({ setPage }: { setPage: (p: Page) => void }) {
         </div>
       </div>
 
-      {/* SEÇÃO JUNTO AO RODAPÉ: ABA DE CONTATO (CTA) */}
+ Prototipo-Larissa
       <section className="bg-[#030303] text-white py-16 text-center w-full mt-auto">
         <div className="max-w-4xl mx-auto px-6">
           <h2 
@@ -2845,6 +3150,51 @@ function CaseMetalurgicaPage({ setPage }: { setPage: (p: Page) => void }) {
             >
               Ver outros cases
             </button>
+      {/* Outros cases clicáveis */}
+      <section className="bg-background py-24">
+        <div className="max-w-7xl mx-auto px-6">
+          <h3
+            className="text-lg font-bold text-foreground mb-6"
+            style={{ fontFamily: HEADING }}
+          >
+            Conheça outros resultados de sucesso
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {CASES.filter((c) => c.company !== caseData.company)
+              .slice(0, 3)
+              .map((item, index) => (
+                <div
+                  key={index}
+                  onClick={() => setPage(item.page ?? "cases")}
+                  className="group p-5 rounded-xl border border-border bg-card hover:border-accent hover:shadow-md transition-all duration-200 cursor-pointer"
+                >
+                  <span
+                    className="text-[10px] font-bold text-accent uppercase bg-accent/10 px-2 py-0.5 rounded-full"
+                    style={{ fontFamily: BODY }}
+                  >
+                    {item.category}
+                  </span>
+                  <h4
+                    className="font-bold text-foreground group-hover:text-accent transition-colors text-sm mt-3 mb-1"
+                    style={{ fontFamily: HEADING }}
+                  >
+                    {item.company}
+                  </h4>
+                  <p
+                    className="text-xs text-muted-foreground line-clamp-2"
+                    style={{ fontFamily: BODY }}
+                  >
+                    {item.desc}
+                  </p>
+                  <span
+                    className="inline-block text-[11px] font-semibold text-accent mt-3 opacity-0 group-hover:opacity-100 transition-all transform translate-x-[-4px] group-hover:translate-x-0"
+                    style={{ fontFamily: BODY }}
+                  >
+                    Ver case →
+                  </span>
+                </div>
+              ))}
+ main
           </div>
         </div>
       </section>
@@ -2869,6 +3219,30 @@ function MateriaisPage() {
       ? MATERIALS
       : MATERIALS.filter((m) => m.category === activeCategory);
 
+  // Mapeamento de ícones por formato
+  const getTypeIcon = (type: string) => {
+    switch (type) {
+      case "E-book": return BookOpen;
+      case "Planilha": return TrendingUp;
+      case "Guia": return CheckCircle2;
+      case "Template": return Box;
+      case "Webinar": return Users;
+      default: return BookOpen;
+    }
+  };
+
+  // Cores dinâmicas para a "capa" do material
+  const getTypeStyle = (type: string) => {
+    switch (type) {
+      case "E-book": return "bg-[#ff751f]/10 text-[#ff751f] border-[#ff751f]/20"; // Laranja Lider
+      case "Planilha": return "bg-emerald-500/10 text-emerald-600 border-emerald-500/20";
+      case "Guia": return "bg-blue-500/10 text-blue-600 border-blue-500/20";
+      case "Template": return "bg-purple-500/10 text-purple-600 border-purple-500/20";
+      case "Webinar": return "bg-rose-500/10 text-rose-600 border-rose-500/20";
+      default: return "bg-accent/10 text-accent border-accent/20";
+    }
+  };
+
   return (
     <div className="pt-16">
       {/* Hero */}
@@ -2877,38 +3251,42 @@ function MateriaisPage() {
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage:
-              "url(https://placehold.co/1600x600/1a1a1a/666666?text=Placeholder)",
+              "url(https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1600&h=600&fit=crop&auto=format)",
           }}
         />
-        <div className="absolute inset-0 bg-primary/80" />
+        <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/80 to-transparent" />
 
         <div className="relative max-w-7xl mx-auto px-6 text-center">
           <p
             className="text-accent text-xs font-semibold uppercase tracking-widest mb-4"
             style={{ fontFamily: BODY }}
           >
-            Conteúdo
+            Biblioteca Gratuita
           </p>
 
           <h1
             className="text-5xl lg:text-6xl font-bold text-white mb-6"
             style={{ fontFamily: HEADING }}
           >
-            Materiais
+            Diretório de Materiais
           </h1>
 
           <p
             className="text-white/60 text-lg max-w-2xl mx-auto"
             style={{ fontFamily: BODY }}
           >
+Prototipo-Larissa
             Acesse e-books, guias, planilhas e outros materiais desenvolvidos
             para compartilhar conhecimento e apoiar o crescimento de empresas e
             empreendedores.
+
+            Acesse e-books, guias, planilhas e templates práticos. Ferramentas reais estruturadas para impulsionar a gestão do seu negócio.
+main
           </p>
         </div>
       </section>
 
-      {/* Filter */}
+      {/* Filter Sticky */}
       <section className="bg-background py-8 border-b border-border sticky top-16 z-40">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-hide">
@@ -2930,59 +3308,31 @@ function MateriaisPage() {
         </div>
       </section>
 
-      {/* Materials */}
-      <section className="bg-background py-16">
+      {/* Grid de Materiais - Estilo Produto */}
+      <section className="bg-background py-16 pb-32">
         <div className="max-w-7xl mx-auto px-6">
-          {/* Featured */}
-          {activeCategory === "Todos" && (
-            <div className="mb-12 group cursor-pointer">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 bg-card border border-border rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300">
-                <div
-                  className="overflow-hidden bg-muted"
-                  style={{ minHeight: 280 }}
-                >
-                  <img
-                    src={`https://placehold.co/800x500/1a1a1a/666666?text=${encodeURIComponent(MATERIALS[0].type)}`}
-                    alt={MATERIALS[0].title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    style={{ minHeight: 280 }}
-                  />
-                </div>
-                <div className="p-10 flex flex-col justify-center">
-                  <div className="flex items-center gap-3 mb-4">
-                    <span
-                      className="text-xs px-2.5 py-1 rounded-full bg-accent/10 text-accent font-semibold"
-                      style={{ fontFamily: BODY }}
-                    >
-                      {MATERIALS[0].category}
-                    </span>
-                    <span
-                      className="text-xs text-muted-foreground flex items-center gap-1"
-                      style={{ fontFamily: BODY }}
-                    >
-                      <BookOpen size={11} /> {MATERIALS[0].type}
-                    </span>
-                  </div>
-                  <h2
-                    className="text-2xl font-bold text-foreground mb-3 group-hover:text-accent transition-colors"
-                    style={{ fontFamily: HEADING }}
-                  >
-                    {MATERIALS[0].title}
-                  </h2>
-                  <p
-                    className="text-sm text-muted-foreground leading-relaxed mb-6"
-                    style={{ fontFamily: BODY }}
-                  >
-                    {MATERIALS[0].excerpt}
-                  </p>
-                  <div className="flex items-center gap-1.5 text-accent text-sm font-semibold">
-                    Baixar material <Download size={14} />
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filtered.map((m, i) => {
+              const Icon = getTypeIcon(m.type);
+              const styleClass = getTypeStyle(m.type);
 
+              return (
+                <article 
+                  key={i} 
+                  className="group flex flex-col bg-card border border-border rounded-2xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                >
+                  {/* Capa do Material */}
+                  <div className={`h-48 w-full flex flex-col items-center justify-center border-b ${styleClass}`}>
+                    <div className="w-16 h-16 bg-background rounded-2xl shadow-sm flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-500">
+                      <Icon size={32} />
+                    </div>
+                    <span className="font-bold tracking-widest uppercase text-xs opacity-80" style={{ fontFamily: BODY }}>
+                      {m.type}
+                    </span>
+                  </div>
+
+Prototipo-Larissa
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {(activeCategory === "Todos" ? filtered.slice(1) : filtered).map(
               (m, i) => (
@@ -3035,12 +3385,58 @@ function MateriaisPage() {
                 </article>
               ),
             )}
+            
+                  {/* Conteúdo */}
+                  <div className="p-6 flex flex-col flex-1">
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="text-xs px-2.5 py-1 rounded-full border border-border bg-muted text-muted-foreground font-medium" style={{ fontFamily: BODY }}>
+                        {m.category}
+                      </span>
+                    </div>
+
+                    <h3 
+                      className="font-bold text-foreground text-xl leading-snug mb-3 group-hover:text-accent transition-colors" 
+                      style={{ fontFamily: HEADING }}
+                    >
+                      {m.title}
+                    </h3>
+                    
+                    <p 
+                      className="text-sm text-muted-foreground line-clamp-3 mb-6 flex-1" 
+                      style={{ fontFamily: BODY }}
+                    >
+                      {m.excerpt}
+                    </p>
+
+                    {/* Botão fixo no rodapé com hover isolado */}
+                    <button 
+                      className="w-full flex items-center justify-center gap-2 text-sm font-bold bg-secondary text-foreground group-hover:bg-accent group-hover:text-white hover:!bg-[#f26821] hover:scale-[1.02] active:scale-95 py-3.5 rounded-xl transition-all duration-200" 
+                      style={{ fontFamily: BODY }}
+                    >
+                      <Download size={16} />
+                      Baixar Material
+                    </button>
+                  </div>
+                </article>
+              )
+            })}
+ main
           </div>
 
+          {/* Empty State */}
           {filtered.length === 0 && (
+ Prototipo-Larissa
             <div className="text-center py-20">
               <p className="text-muted-foreground" style={{ fontFamily: BODY }}>
                 Nenhum material encontrado nesta categoria.
+            <div className="text-center py-24 bg-card border border-border rounded-2xl">
+              <div className="w-16 h-16 mx-auto bg-muted rounded-2xl flex items-center justify-center mb-4">
+                <Box size={24} className="text-muted-foreground" />
+              </div>
+              <h3 className="text-xl font-bold text-foreground mb-2" style={{ fontFamily: HEADING }}>Nenhum material encontrado</h3>
+              <p className="text-muted-foreground text-sm" style={{ fontFamily: BODY }}>
+                Ainda não liberamos recursos para esta categoria. Fique de olho!
+ main
               </p>
             </div>
           )}
@@ -3075,7 +3471,7 @@ function BlogPage({ setPage }: { setPage: (p: Page) => void }) {
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage:
-              "url(https://placehold.co/1600x600/1a1a1a/666666?text=Placeholder)",
+              "url(https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600&h=600&fit=crop&auto=format)",
           }}
         />
         <div className="absolute inset-0 bg-primary/80" />
@@ -3125,9 +3521,9 @@ function BlogPage({ setPage }: { setPage: (p: Page) => void }) {
       </section>
 
       {/* Posts */}
-      <section className="bg-background py-16">
+      <section className="bg-background py-16 pb-32">
         <div className="max-w-7xl mx-auto px-6">
-          {/* Featured */}
+          {/* Featured Post */}
           {activeCategory === "Todos" && (
             <div
               onClick={() => BLOG_POSTS[0].page && setPage(BLOG_POSTS[0].page)}
@@ -3138,54 +3534,61 @@ function BlogPage({ setPage }: { setPage: (p: Page) => void }) {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 bg-card border border-border rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300">
                 <div
                   className="overflow-hidden bg-muted"
-                  style={{ minHeight: 280 }}
+                  style={{ minHeight: 320 }}
                 >
                   <img
                     src={`https://images.unsplash.com/${BLOG_POSTS[0].img}?w=800&h=500&fit=crop&auto=format`}
                     alt={BLOG_POSTS[0].title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    style={{ minHeight: 280 }}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    style={{ minHeight: 320 }}
                   />
                 </div>
                 <div className="p-10 flex flex-col justify-center">
-                  <div className="flex items-center gap-3 mb-4">
+                  <div className="flex items-center gap-3 mb-5">
                     <span
-                      className="text-xs px-2.5 py-1 rounded-full bg-accent/10 text-accent font-semibold"
+                      className="text-xs px-3 py-1.5 rounded-full bg-accent/10 text-accent font-bold uppercase tracking-wider"
                       style={{ fontFamily: BODY }}
                     >
                       {BLOG_POSTS[0].category}
                     </span>
                     <span
-                      className="text-xs text-muted-foreground flex items-center gap-1"
+                      className="text-sm font-medium text-muted-foreground flex items-center gap-1.5"
                       style={{ fontFamily: BODY }}
                     >
+Prototipo-Larissa
                       <Clock size={11} /> {BLOG_POSTS[0].readTime}
+
+                      <Clock size={14} />{" "}
+                      {BLOG_POSTS[0].readTime}
+ main
                     </span>
                   </div>
+                  {/* Título do destaque aumentado de 2xl para 3xl/4xl */}
                   <h2
-                    className="text-2xl font-bold text-foreground mb-3 group-hover:text-accent transition-colors"
+                    className="text-3xl lg:text-4xl font-bold text-foreground mb-4 group-hover:text-accent transition-colors leading-tight"
                     style={{ fontFamily: HEADING }}
                   >
                     {BLOG_POSTS[0].title}
                   </h2>
+                  {/* Legenda do destaque aumentada de sm para base/lg */}
                   <p
-                    className="text-sm text-muted-foreground leading-relaxed mb-6"
+                    className="text-base lg:text-lg text-muted-foreground leading-relaxed mb-8"
                     style={{ fontFamily: BODY }}
                   >
                     {BLOG_POSTS[0].excerpt}
                   </p>
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between mt-auto">
                     <span
-                      className="text-xs text-muted-foreground"
+                      className="text-sm font-medium text-muted-foreground"
                       style={{ fontFamily: BODY }}
                     >
                       {BLOG_POSTS[0].date}
                     </span>
                     <div
-                      className="flex items-center gap-1.5 text-accent text-sm font-semibold"
+                      className="flex items-center gap-1.5 text-accent text-sm font-bold"
                       style={{ fontFamily: BODY }}
                     >
-                      Ler artigo <ExternalLink size={14} />
+                      Ler artigo <ExternalLink size={16} />
                     </div>
                   </div>
                 </div>
@@ -3193,6 +3596,7 @@ function BlogPage({ setPage }: { setPage: (p: Page) => void }) {
             </div>
           )}
 
+ Prototipo-Larissa
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {(activeCategory === "Todos" ? filtered.slice(1) : filtered).map(
               (post, i) => (
@@ -3257,11 +3661,88 @@ function BlogPage({ setPage }: { setPage: (p: Page) => void }) {
             <div className="text-center py-20">
               <p className="text-muted-foreground" style={{ fontFamily: BODY }}>
                 Nenhum artigo encontrado nesta categoria.
+
+          {/* Grid de Posts Normais */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {(activeCategory === "Todos"
+              ? filtered.slice(1)
+              : filtered
+            ).map((post, i) => (
+              <article
+                key={i}
+                onClick={() => post.page && setPage(post.page)}
+                className={`group flex flex-col bg-card border border-border rounded-2xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 ${
+                  post.page ? "cursor-pointer" : "cursor-default"
+                }`}
+              >
+                <div
+                  className="overflow-hidden bg-muted shrink-0"
+                  style={{ height: 220 }}
+                >
+                  <img
+                    src={`https://images.unsplash.com/${post.img}?w=500&h=300&fit=crop&auto=format`}
+                    alt={post.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div className="p-6 flex flex-col flex-1">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span
+                      className="text-[10px] px-2.5 py-1 rounded-full bg-accent/10 text-accent font-bold uppercase tracking-wider"
+                      style={{ fontFamily: BODY }}
+                    >
+                      <Tag size={10} className="inline mr-1" />
+                      {post.category}
+                    </span>
+                    <span
+                      className="text-xs font-medium text-muted-foreground flex items-center gap-1"
+                      style={{ fontFamily: BODY }}
+                    >
+                      <Clock size={12} /> {post.readTime}
+                    </span>
+                  </div>
+                  {/* Título dos posts na grid aumentados de text-base para text-xl */}
+                  <h3
+                    className="font-bold text-foreground text-xl leading-snug mb-3 group-hover:text-accent transition-colors"
+                    style={{ fontFamily: HEADING }}
+                  >
+                    {post.title}
+                  </h3>
+                  {/* Legenda dos posts aumentados de text-xs para text-sm */}
+                  <p
+                    className="text-sm text-muted-foreground leading-relaxed mb-6 flex-1"
+                    style={{ fontFamily: BODY }}
+                  >
+                    {post.excerpt}
+                  </p>
+                  {/* Data aumentada e presa ao rodapé do card */}
+                  <div className="mt-auto pt-4 border-t border-border/50">
+                    <p
+                      className="text-sm font-medium text-muted-foreground"
+                      style={{ fontFamily: BODY }}
+                    >
+                      {post.date}
+                    </p>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          {filtered.length === 0 && (
+            <div className="text-center py-20 bg-card border border-border rounded-2xl">
+              <p
+                className="text-muted-foreground text-lg"
+                style={{ fontFamily: BODY }}
+              >
+                Nenhum artigo encontrado nesta categoria no momento.
+ main
               </p>
             </div>
           )}
         </div>
       </section>
+ Prototipo-Larissa
 
       {/* Newsletter */}
       <section className="bg-primary py-20">
@@ -3296,6 +3777,8 @@ function BlogPage({ setPage }: { setPage: (p: Page) => void }) {
           </form>
         </div>
       </section>
+
+ main
     </div>
   );
 }
@@ -3597,6 +4080,7 @@ function PostLeanManufacturingPage({
   setPage: (p: Page) => void;
 }) {
   return (
+ Prototipo-Larissa
     <div className="pt-16 min-h-screen bg-background">
       <section className="bg-primary py-24 relative overflow-hidden mb-12">
         <div
@@ -3635,12 +4119,61 @@ function PostLeanManufacturingPage({
             </span>
             <span className="text-white/40">•</span>
             <span className="flex items-center gap-1">
+
+    <div className="pt-16">
+      {/* Hero */}
+      <section className="bg-primary py-28 relative overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: `url(https://images.unsplash.com/${post.img}?w=1600&h=600&fit=crop&auto=format)`,
+          }}
+        />
+        <div className="absolute inset-0 bg-primary/80" />
+        <div className="relative max-w-7xl mx-auto px-6 text-center">
+          <p
+            className="text-accent text-xs font-semibold uppercase tracking-widest mb-4"
+            style={{ fontFamily: BODY }}
+          >
+            Artigo • {post.category}
+          </p>
+          <h1
+            className="text-5xl lg:text-6xl font-bold text-white mb-6"
+            style={{ fontFamily: HEADING }}
+          >
+            {post.title}
+          </h1>
+
+          <div className="flex items-center justify-center gap-3">
+            <div className="h-8 w-8 rounded-full bg-accent flex items-center justify-center font-bold text-white text-xs shrink-0">
+              LJ
+            </div>
+            <p
+              className="text-sm text-white"
+              style={{ fontFamily: BODY }}
+            >
+              Por Consultor Líder Júnior
+            </p>
+            <span className="text-white/40">•</span>
+            <span
+              className="flex items-center gap-1.5 text-sm text-white/70"
+              style={{ fontFamily: BODY }}
+            >
+              <Calendar size={14} /> 17 Jul, 2026
+            </span>
+            <span className="text-white/40">•</span>
+            <span
+              className="flex items-center gap-1.5 text-sm text-white/70"
+              style={{ fontFamily: BODY }}
+            >
+ main
               <Clock size={14} /> 5 min de leitura
             </span>
           </div>
         </div>
       </section>
 
+Prototipo-Larissa
       <div className="max-w-3xl mx-auto px-6 pb-16">
         <button
           onClick={() => setPage("blog")}
@@ -3659,6 +4192,31 @@ function PostLeanManufacturingPage({
           />
         </div>
 
+      {/* Voltar para o Blog */}
+      <section className="bg-background pt-10">
+        <div className="max-w-7xl mx-auto px-6">
+          <button
+            onClick={() => setPage("blog")}
+            className="inline-flex items-center gap-1.5 text-foreground hover:text-accent text-sm font-semibold transition-colors"
+            style={{ fontFamily: BODY }}
+          >
+            <ChevronLeft size={16} />
+            Voltar para o Blog
+          </button>
+        </div>
+      </section>
+
+      {/* Artigo */}
+      <section className="bg-background pt-16 pb-24">
+        <div className="max-w-7xl mx-auto px-6">
+          <p
+            className="text-lg text-foreground leading-relaxed mb-8"
+            style={{ fontFamily: BODY }}
+          >
+            {post.excerpt}
+          </p>
+main
+
         <h2
             className="text-2xl font-bold text-foreground mb-4"
             style={{ fontFamily: HEADING }}
@@ -3666,7 +4224,7 @@ function PostLeanManufacturingPage({
             O que é Lean Manufacturing
           </h2>
           <p
-            className="text-muted-foreground leading-relaxed mb-6"
+            className="text-foreground leading-relaxed mb-6"
             style={{ fontFamily: BODY }}
           >
             Lean Manufacturing é uma filosofia de gestão originada no
@@ -3677,7 +4235,7 @@ function PostLeanManufacturingPage({
             serviço?
           </p>
           <p
-            className="text-muted-foreground leading-relaxed mb-10"
+            className="text-foreground leading-relaxed mb-10"
             style={{ fontFamily: BODY }}
           >
             Para pequenas empresas, o Lean costuma parecer distante da
@@ -3745,7 +4303,7 @@ function PostLeanManufacturingPage({
                     {item.title}
                   </p>
                   <p
-                    className="text-sm text-muted-foreground leading-relaxed"
+                    className="text-sm text-foreground leading-relaxed"
                     style={{ fontFamily: BODY }}
                   >
                     {item.desc}
@@ -3762,7 +4320,7 @@ function PostLeanManufacturingPage({
             Como começar na sua empresa
           </h2>
           <p
-            className="text-muted-foreground leading-relaxed mb-10"
+            className="text-foreground leading-relaxed mb-10"
             style={{ fontFamily: BODY }}
           >
             O primeiro passo não é comprar ferramentas ou treinamentos
@@ -3772,75 +4330,89 @@ function PostLeanManufacturingPage({
             gargalos mais fáceis de atacar primeiro.
           </p>
 
-          <div className="flex flex-wrap gap-2 mb-10">
-            {["Lean", "Processos", "PMEs"].map((tag) => (
-              <span
-                key={tag}
-                className="text-xs px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground font-medium"
-                style={{ fontFamily: BODY }}
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
+        </div>
+      </section>
 
-          <div className="flex items-center gap-3 pt-8 border-t border-border">
-            <div className="w-11 h-11 rounded-full bg-accent/10 flex items-center justify-center shrink-0">
-              <span
-                className="text-accent font-bold text-sm"
-                style={{ fontFamily: HEADING }}
-              >
-                LJ
-              </span>
-            </div>
-            <div>
-              <p
-                className="font-semibold text-foreground text-sm"
+      {/* CTA */}
+      <section className="bg-background py-4">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="bg-primary rounded-2xl p-10 sm:p-16 text-center">
+            <h2
+              className="text-4xl font-bold text-white mb-3"
+              style={{ fontFamily: HEADING }}
+            >
+              Quer aplicar o Lean na sua empresa?
+            </h2>
+            <p
+              className="text-white/60 text-base mb-8 max-w-xl mx-auto"
+              style={{ fontFamily: BODY }}
+            >
+              Nossa equipe pode ajudar a mapear seus processos e encontrar
+              oportunidades reais de melhoria.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <button
+                onClick={() => setPage("contato")}
+                className="px-6 py-3 bg-accent text-white font-semibold rounded-lg hover:bg-[#f26821] transition-colors text-sm"
                 style={{ fontFamily: BODY }}
               >
-                Equipe Líder Jr.
-              </p>
-              <p
-                className="text-muted-foreground text-xs"
+                Fale Conosco
+              </button>
+              <button
+                onClick={() => setPage("blog")}
+                className="flex items-center gap-2 px-6 py-3 border border-white/20 text-white font-semibold rounded-lg hover:bg-white/10 transition-colors text-sm"
                 style={{ fontFamily: BODY }}
               >
-                Consultoria em Engenharia de Produção
-              </p>
+                Ver outros artigos <ArrowRight size={14} />
+              </button>
             </div>
           </div>
         </div>
 
-      {/* CTA */}
-      <section className="bg-primary py-20">
-        <div className="max-w-xl mx-auto px-6 text-center">
-          <h2
-            className="text-3xl font-bold text-white mb-3"
+      {/* Outros artigos */}
+      <section className="bg-background py-24">
+        <div className="max-w-7xl mx-auto px-6">
+          <h3
+            className="text-lg font-bold text-foreground mb-6"
             style={{ fontFamily: HEADING }}
           >
-            Quer aplicar o Lean na sua empresa?
-          </h2>
-          <p
-            className="text-white/60 text-sm mb-8"
-            style={{ fontFamily: BODY }}
-          >
-            Nossa equipe pode ajudar a mapear seus processos e encontrar
-            oportunidades reais de melhoria.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button
-              onClick={() => setPage("contato")}
-              className="px-6 py-3 bg-accent text-white font-semibold rounded-lg hover:bg-[#f26821] transition-colors text-sm"
-              style={{ fontFamily: BODY }}
-            >
-              Fale Conosco
-            </button>
-            <button
-              onClick={() => setPage("blog")}
-              className="px-6 py-3 border border-white/20 text-white rounded-lg hover:bg-white/10 transition-colors text-sm"
-              style={{ fontFamily: BODY }}
-            >
-              Ver outros artigos
-            </button>
+            Conheça outros artigos do blog
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {BLOG_POSTS.filter((p) => p.title !== post.title)
+              .slice(0, 3)
+              .map((item, index) => (
+                <div
+                  key={index}
+                  onClick={() => setPage(item.page ?? "blog")}
+                  className="group p-5 rounded-xl border border-border bg-card hover:border-accent hover:shadow-md transition-all duration-200 cursor-pointer"
+                >
+                  <span
+                    className="text-[10px] font-bold text-accent uppercase bg-accent/10 px-2 py-0.5 rounded-full"
+                    style={{ fontFamily: BODY }}
+                  >
+                    {item.category}
+                  </span>
+                  <h4
+                    className="font-bold text-foreground group-hover:text-accent transition-colors text-sm mt-3 mb-1"
+                    style={{ fontFamily: HEADING }}
+                  >
+                    {item.title}
+                  </h4>
+                  <p
+                    className="text-xs text-muted-foreground line-clamp-2"
+                    style={{ fontFamily: BODY }}
+                  >
+                    {item.excerpt}
+                  </p>
+                  <span
+                    className="inline-block text-[11px] font-semibold text-accent mt-3 opacity-0 group-hover:opacity-100 transition-all transform translate-x-[-4px] group-hover:translate-x-0"
+                    style={{ fontFamily: BODY }}
+                  >
+                    Ler artigo →
+                  </span>
+                </div>
+              ))}
           </div>
         </div>
       </section>
@@ -3857,7 +4429,7 @@ function ContatoPage() {
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage:
-              "url(https://placehold.co/1600x600/1a1a1a/666666?text=Placeholder)",
+              "url(https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1600&h=600&fit=crop&auto=format)",
           }}
         />
         <div className="absolute inset-0 bg-primary/80" />
@@ -3936,6 +4508,7 @@ function ContatoPage() {
                   </p>
                 </div>
               </div>
+ Prototipo-Larissa
 
               <div className="flex gap-4">
                 <MapPin className="text-accent shrink-0" size={22} />
@@ -3951,6 +4524,8 @@ function ContatoPage() {
                   </p>
                 </div>
               </div>
+
+ main
             </div>
           </div>
 
@@ -4026,7 +4601,7 @@ export default function App() {
       <main>
         {page === "home" && <HomePage setPage={navigate} />}
         {page === "quem-somos" && <QuemSomosPage />}
-        {page === "servicos" && <ServicosPage />}
+        {page === "servicos" && <ServicosPage setPage={setPage} />}
         {page === "mapeamento-processos" && (
           <MapeamentoProcessosPage setPage={navigate} />
         )}
