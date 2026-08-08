@@ -22,6 +22,9 @@ import {
   Tag,
   Box,
   Download,
+  TrendingDown, 
+  ShieldCheck, 
+  Lightbulb
   Target,
   Quote,
   Calendar,
@@ -2118,76 +2121,115 @@ function ServicosPage({ setPage }: { setPage: (p: Page) => void }) {
             ))}
           </div>
 
-          {/* Process */}
-          <div className="bg-primary rounded-2xl p-12">
-            <div className="text-center mb-12">
-              <p
-                className="text-accent text-xs font-semibold uppercase tracking-widest mb-3"
-                style={{ fontFamily: BODY }}
-              >
-                Como trabalhamos
-              </p>
-              <h2
-                className="text-4xl font-bold text-white"
-                style={{ fontFamily: HEADING }}
-              >
-                Nosso processo
-              </h2>
+          {/* Mapeamento de Processos (Substituindo a antiga seção Process) */}
+          <div className="flex flex-col gap-24 mt-12">
+            {/* Como Funciona */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <p
+                  className="text-accent text-xs font-semibold uppercase tracking-widest mb-3"
+                  style={{ fontFamily: BODY }}
+                >
+                  Como funciona
+                </p>
+                <h2
+                  className="text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight"
+                  style={{ fontFamily: HEADING }}
+                >
+                  Enxergue sua operação com clareza
+                </h2>
+                <p
+                  className="text-muted-foreground text-lg mb-6 leading-relaxed"
+                  style={{ fontFamily: BODY }}
+                >
+                  Levantamos, documentamos e analisamos os processos da sua empresa para identificar gargalos, retrabalho e pontos de melhoria — antes de propor qualquer mudança.
+                </p>
+                <p
+                  className="text-muted-foreground text-lg mb-8 leading-relaxed"
+                  style={{ fontFamily: BODY }}
+                >
+                  Usamos metodologias consolidadas como BPMN, fluxogramas e Value Stream Mapping (VSM) para transformar processos informais em fluxos claros e mensuráveis.
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  {["Lean", "BPMN", "VSM"].map((tag) => (
+                    <span
+                      key={tag}
+                      className="text-sm px-4 py-2 rounded-full bg-secondary text-secondary-foreground font-medium"
+                      style={{ fontFamily: BODY }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div className="w-full relative rounded-2xl overflow-hidden bg-[#1a1a1a] aspect-[4/3] shadow-xl flex items-center justify-center">
+                <span className="text-white/20 text-4xl md:text-5xl font-bold tracking-wider" style={{ fontFamily: HEADING }}>Placeholder</span>
+              </div>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-              {[
-                {
-                  step: "01",
-                  title: "Diagnóstico",
-                  desc: "Entendemos a fundo seu negócio, identificando dores, objetivos e oportunidades de melhoria.",
-                },
-                {
-                  step: "02",
-                  title: "Proposta",
-                  desc: "Elaboramos uma proposta detalhada com escopo, metodologia, prazos e investimento necessário.",
-                },
-                {
-                  step: "03",
-                  title: "Execução",
-                  desc: "Executamos o projeto com rigor técnico, comunicação contínua e supervisão de professores.",
-                },
-                {
-                  step: "04",
-                  title: "Entrega",
-                  desc: "Apresentamos resultados concretos, com relatório completo e plano de implementação.",
-                },
-              ].map((item, i) => (
-                <div key={i} className="relative">
-                  <div
-                    className="text-6xl font-bold text-white/5 absolute -top-2 -left-2"
-                    style={{ fontFamily: HEADING }}
-                  >
-                    {item.step}
-                  </div>
-                  <div className="relative">
-                    <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center mb-4">
+
+            {/* Metodologia */}
+            <div className="bg-secondary/30 rounded-3xl p-10 md:p-16 border border-border/50">
+              <div className="text-center mb-12 md:mb-16">
+                <p
+                  className="text-accent text-xs font-semibold uppercase tracking-widest mb-3"
+                  style={{ fontFamily: BODY }}
+                >
+                  Metodologia
+                </p>
+                <h2
+                  className="text-3xl md:text-4xl font-bold text-foreground"
+                  style={{ fontFamily: HEADING }}
+                >
+                  Etapas do mapeamento
+                </h2>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {[
+                  {
+                    step: "01",
+                    title: "Levantamento",
+                    desc: "Entrevistas e observação in loco para entender o processo como ele realmente acontece.",
+                  },
+                  {
+                    step: "02",
+                    title: "Modelagem",
+                    desc: "Construção do fluxo atual (AS IS) em notação BPMN, deixando visível cada etapa e responsável.",
+                  },
+                  {
+                    step: "03",
+                    title: "Diagnóstico",
+                    desc: "Identificação de gargalos, desperdícios e retrabalho ao longo do fluxo mapeado.",
+                  },
+                  {
+                    step: "04",
+                    title: "Redesenho",
+                    desc: "Proposta do processo futuro (TO BE), com melhorias validadas junto à equipe.",
+                  },
+                ].map((item, i) => (
+                  <div key={i} className="bg-card border border-border hover:border-accent/40 rounded-2xl p-8 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                    <div className="w-12 h-12 rounded-xl bg-accent flex items-center justify-center mb-6 shadow-sm">
                       <span
-                        className="text-white text-xs font-bold"
+                        className="text-white text-sm font-bold"
                         style={{ fontFamily: BODY }}
                       >
                         {item.step}
                       </span>
                     </div>
                     <h3
-                      className="font-bold text-white mb-2"
+                      className="font-bold text-foreground text-xl mb-3"
                       style={{ fontFamily: HEADING }}
                     >
                       {item.title}
                     </h3>
                     <p
-                      className="text-sm text-white/60 leading-relaxed"
+                      className="text-sm text-muted-foreground leading-relaxed"
                       style={{ fontFamily: BODY }}
                     >
                       {item.desc}
                     </p>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -2206,7 +2248,7 @@ function MapeamentoProcessosPage({
 
   return (
     <div className="pt-16">
-      {/* Hero */}
+      {/* Hero (Intacto) */}
       <section className="bg-primary py-28 relative overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
@@ -2238,9 +2280,9 @@ function MapeamentoProcessosPage({
         </div>
       </section>
 
-      {/* Sobre */}
+      {/* Sobre / Como Funciona */}
       <section className="bg-background py-24">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div>
             <p
               className="text-accent text-xs font-semibold uppercase tracking-widest mb-3"
@@ -2249,13 +2291,13 @@ function MapeamentoProcessosPage({
               Como funciona
             </p>
             <h2
-              className="text-4xl font-bold text-foreground mb-6"
+              className="text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight"
               style={{ fontFamily: HEADING }}
             >
               Enxergue sua operação com clareza
             </h2>
             <p
-              className="text-muted-foreground leading-relaxed mb-4"
+              className="text-muted-foreground text-lg leading-relaxed mb-6"
               style={{ fontFamily: BODY }}
             >
               Levantamos, documentamos e analisamos os processos da sua
@@ -2263,18 +2305,18 @@ function MapeamentoProcessosPage({
               melhoria — antes de propor qualquer mudança.
             </p>
             <p
-              className="text-muted-foreground leading-relaxed"
+              className="text-muted-foreground text-lg leading-relaxed mb-8"
               style={{ fontFamily: BODY }}
             >
               Usamos metodologias consolidadas como BPMN, fluxogramas e
               Value Stream Mapping (VSM) para transformar processos
               informais em fluxos claros e mensuráveis.
             </p>
-            <div className="flex flex-wrap gap-2 mt-6">
+            <div className="flex flex-wrap gap-3 mt-6">
               {service.tags.map((t) => (
                 <span
                   key={t}
-                  className="text-xs px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground font-medium"
+                  className="text-sm px-4 py-2 rounded-full bg-secondary text-secondary-foreground font-medium"
                   style={{ fontFamily: BODY }}
                 >
                   {t}
@@ -2282,19 +2324,21 @@ function MapeamentoProcessosPage({
               ))}
             </div>
           </div>
-          <img
-            src="https://placehold.co/700x500/1a1a1a/666666?text=Placeholder"
-            alt="Mapeamento de processos"
-            className="w-full rounded-2xl object-cover"
-            style={{ height: 380 }}
-          />
+          <div className="w-full relative rounded-2xl overflow-hidden bg-primary aspect-[4/3] shadow-xl flex items-center justify-center">
+            <span
+              className="text-white/20 text-4xl md:text-5xl font-bold tracking-wider"
+              style={{ fontFamily: HEADING }}
+            >
+              Placeholder
+            </span>
+          </div>
         </div>
       </section>
 
-      {/* Etapas */}
-      <section className="bg-muted py-24">
+      {/* Etapas / Metodologia (Design de Linha do Tempo/Fluxo) */}
+      <section className="bg-muted py-24 border-y border-border/50">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-14">
+          <div className="text-center mb-20">
             <p
               className="text-accent text-xs font-semibold uppercase tracking-widest mb-3"
               style={{ fontFamily: BODY }}
@@ -2302,58 +2346,122 @@ function MapeamentoProcessosPage({
               Metodologia
             </p>
             <h2
-              className="text-4xl font-bold text-foreground"
+              className="text-3xl md:text-4xl font-bold text-foreground"
               style={{ fontFamily: HEADING }}
             >
-              Etapas do mapeamento
+              As etapas do nosso mapeamento
             </h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                step: "01",
-                title: "Levantamento",
-                desc: "Entrevistas e observação in loco para entender o processo como ele realmente acontece.",
-              },
-              {
-                step: "02",
-                title: "Modelagem",
-                desc: "Construção do fluxo atual (AS IS) em notação BPMN, deixando visível cada etapa e responsável.",
-              },
-              {
-                step: "03",
-                title: "Diagnóstico",
-                desc: "Identificação de gargalos, desperdícios e retrabalho ao longo do fluxo mapeado.",
-              },
-              {
-                step: "04",
-                title: "Redesenho",
-                desc: "Proposta do processo futuro (TO BE), com melhorias validadas junto à equipe.",
-              },
-            ].map((item, i) => (
-              <div
-                key={i}
-                className="bg-card border border-border rounded-xl p-6"
-              >
-                <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center mb-4">
-                  <span
-                    className="text-white text-xs font-bold"
+          
+          <div className="relative">
+            {/* Linha conectora (Visível apenas em Desktop) */}
+            <div className="hidden lg:block absolute top-6 left-[12.5%] right-[12.5%] h-[2px] bg-border z-0"></div>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-6">
+              {[
+                {
+                  step: "01",
+                  title: "Levantamento",
+                  desc: "Entrevistas e observação in loco para entender o processo como ele realmente acontece.",
+                },
+                {
+                  step: "02",
+                  title: "Modelagem",
+                  desc: "Construção do fluxo atual (AS IS) em notação BPMN, deixando visível cada etapa e responsável.",
+                },
+                {
+                  step: "03",
+                  title: "Diagnóstico",
+                  desc: "Identificação de gargalos, desperdícios e retrabalho ao longo do fluxo mapeado.",
+                },
+                {
+                  step: "04",
+                  title: "Redesenho",
+                  desc: "Proposta do processo futuro (TO BE), com melhorias validadas junto à equipe.",
+                },
+              ].map((item, i) => (
+                <div key={i} className="relative z-10 flex flex-col items-center text-center group">
+                  <div className="w-14 h-14 rounded-full bg-background border-4 border-muted flex items-center justify-center mb-6 group-hover:border-accent group-hover:bg-accent transition-colors duration-300 shadow-md">
+                    <span
+                      className="text-foreground group-hover:text-white font-bold text-sm transition-colors"
+                      style={{ fontFamily: BODY }}
+                    >
+                      {item.step}
+                    </span>
+                  </div>
+                  <h3
+                    className="font-bold text-foreground text-xl mb-3"
+                    style={{ fontFamily: HEADING }}
+                  >
+                    {item.title}
+                  </h3>
+                  <p
+                    className="text-sm text-muted-foreground leading-relaxed max-w-[260px]"
                     style={{ fontFamily: BODY }}
                   >
-                    {item.step}
-                  </span>
+                    {item.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* NOVA SEÇÃO: Resultados Esperados (Atualizada com a Identidade da Líder Jr.) */}
+      <section className="bg-background py-24">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="mb-16">
+            <h2
+              className="text-3xl md:text-4xl font-bold text-foreground mb-4"
+              style={{ fontFamily: HEADING }}
+            >
+              Por que mapear seus processos?
+            </h2>
+            <p
+              className="text-muted-foreground text-lg max-w-2xl"
+              style={{ fontFamily: BODY }}
+            >
+              O mapeamento não é apenas um desenho. É uma ferramenta estratégica que gera impactos diretos nos resultados da sua empresa.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                icon: TrendingDown,
+                title: "Redução de Desperdícios",
+                desc: "Eliminamos passos desnecessários, reduzindo o tempo de ciclo da operação e cortando custos invisíveis que afetam sua margem.",
+              },
+              {
+                icon: ShieldCheck,
+                title: "Padronização e Qualidade",
+                desc: "Garantimos que as tarefas sejam executadas sempre da melhor forma, diminuindo a dependência de funcionários específicos.",
+              },
+              {
+                icon: Lightbulb,
+                title: "Base para Inovação",
+                desc: "Um processo mapeado e claro é o primeiro passo obrigatório antes de implementar qualquer automação ou novo software.",
+              },
+            ].map((result, i) => (
+              <div 
+                key={i} 
+                className="bg-card border-x border-b border-border border-t-4 border-t-accent rounded-b-2xl rounded-t-sm p-8 transition-all duration-300 hover:border-x-accent/50 hover:border-b-accent/50 hover:shadow-lg hover:shadow-accent/5 hover:-translate-y-1"
+              >
+                <div className="w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center mb-6">
+                  <result.icon size={28} className="text-accent" />
                 </div>
                 <h3
-                  className="font-bold text-foreground mb-2"
+                  className="font-bold text-foreground text-xl mb-3"
                   style={{ fontFamily: HEADING }}
                 >
-                  {item.title}
+                  {result.title}
                 </h3>
                 <p
-                  className="text-sm text-muted-foreground leading-relaxed"
+                  className="text-muted-foreground text-sm leading-relaxed"
                   style={{ fontFamily: BODY }}
                 >
-                  {item.desc}
+                  {result.desc}
                 </p>
               </div>
             ))}
@@ -2361,8 +2469,8 @@ function MapeamentoProcessosPage({
         </div>
       </section>
 
-      {/* Depoimento */}
-      <section className="bg-background py-24">
+      {/* Depoimento (Intacto) */}
+      <section className="bg-muted py-24 border-t border-border/50">
         <div className="max-w-3xl mx-auto px-6 text-center">
           <div className="flex justify-center gap-1 mb-6">
             {[...Array(5)].map((_, i) => (
@@ -2408,7 +2516,7 @@ function MapeamentoProcessosPage({
         </div>
       </section>
 
-      {/* CTA */}
+      {/* CTA (Intacto) */}
       <section className="bg-primary py-24 relative overflow-hidden">
         <div
           className="absolute inset-0 opacity-10"
