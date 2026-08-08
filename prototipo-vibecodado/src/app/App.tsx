@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { ArrowLeft, Calendar, BarChart3, Target, Quote, Sparkles, Eye} from "lucide-react";
 import {
   Menu,
   X,
@@ -29,6 +30,9 @@ import {
   Quote,
   Calendar,
 } from "lucide-react";
+import { Avatar, AvatarImage, AvatarFallback } from "./components/ui/avatar";
+import { Badge } from "./components/ui/badge";
+import { Card, CardContent } from "./components/ui/card";
 
 type Page =
   | "home"
@@ -194,8 +198,7 @@ const BLOG_POSTS: {
   page?: Page;
 }[] = [
   {
-    title:
-      "Como o Lean Manufacturing pode transformar sua pequena empresa",
+    title: "Como o Lean Manufacturing pode transformar sua pequena empresa",
     excerpt:
       "Conheça os princípios do Lean e como aplicá-los na redução de desperdícios e aumento da produtividade em negócios de pequeno porte.",
     date: "15 Jun 2026",
@@ -232,8 +235,7 @@ const BLOG_POSTS: {
     img: "photo-1552664730-d307ca884978",
   },
   {
-    title:
-      "Ferramentas da qualidade: um guia prático para iniciantes",
+    title: "Ferramentas da qualidade: um guia prático para iniciantes",
     excerpt:
       "Do diagrama de Ishikawa ao Controle Estatístico de Processo, este guia apresenta as sete ferramentas da qualidade de forma acessível.",
     date: "14 Mai 2026",
@@ -242,8 +244,7 @@ const BLOG_POSTS: {
     img: "photo-1454165804606-c3d57bc86b40",
   },
   {
-    title:
-      "Por que sua empresa precisa de uma pesquisa de mercado agora",
+    title: "Por que sua empresa precisa de uma pesquisa de mercado agora",
     excerpt:
       "Em um cenário competitivo, decidir sem dados é apostas no escuro. Saiba como uma pesquisa bem conduzida pode mudar o rumo do seu negócio.",
     date: "05 Mai 2026",
@@ -363,14 +364,23 @@ function CasesCarousel({ setPage }: { setPage: (p: Page) => void }) {
       >
         {c.result}
       </p>
-      <p className="font-semibold text-foreground mb-5" style={{ fontFamily: BODY }}>
+      <p
+        className="font-semibold text-foreground mb-5"
+        style={{ fontFamily: BODY }}
+      >
         {c.metric}
       </p>
       <div className="w-12 h-px bg-border mb-5" />
-      <h3 className="text-lg font-bold text-foreground mb-3" style={{ fontFamily: HEADING }}>
+      <h3
+        className="text-lg font-bold text-foreground mb-3"
+        style={{ fontFamily: HEADING }}
+      >
         {c.company}
       </h3>
-      <p className="leading-7 text-sm mb-6 text-muted-foreground" style={{ fontFamily: BODY }}>
+      <p
+        className="leading-7 text-sm mb-6 text-muted-foreground"
+        style={{ fontFamily: BODY }}
+      >
         {c.desc}
       </p>
       <div className="flex flex-wrap gap-2 mb-6">
@@ -385,7 +395,10 @@ function CasesCarousel({ setPage }: { setPage: (p: Page) => void }) {
         ))}
       </div>
       {isCenter && (
-        <div className="flex items-center gap-2 text-accent font-semibold text-sm" style={{ fontFamily: BODY }}>
+        <div
+          className="flex items-center gap-2 text-accent font-semibold text-sm"
+          style={{ fontFamily: BODY }}
+        >
           Ver case <ArrowRight size={16} />
         </div>
       )}
@@ -406,7 +419,10 @@ function CasesCarousel({ setPage }: { setPage: (p: Page) => void }) {
           centro no momento (dupCenter), e renderizamos ela + as duas vizinhas.
           Isso garante cobertura em qualquer valor de currentIndex, girando o
           quanto for, sem nunca faltar uma cópia posicionada corretamente. */}
-      <div className="hidden md:block relative flex-1 max-w-5xl overflow-hidden" style={{ height: 500 }}>
+      <div
+        className="hidden md:block relative flex-1 max-w-5xl overflow-hidden"
+        style={{ height: 500 }}
+      >
         {CASES.map((c, i) => {
           const dupCenter = Math.round((currentIndex - i) / total);
 
@@ -445,7 +461,10 @@ function CasesCarousel({ setPage }: { setPage: (p: Page) => void }) {
 
       {/* Mobile: só o card central */}
       <div className="md:hidden flex-1 max-w-md">
-        <div key={CASES[centerRealIndex].company} className="animate-[fadeIn_0.5s_ease-out]">
+        <div
+          key={CASES[centerRealIndex].company}
+          className="animate-[fadeIn_0.5s_ease-out]"
+        >
           {cardBody(CASES[centerRealIndex], true)}
         </div>
       </div>
@@ -482,8 +501,7 @@ function AnimatedStat({ value }: { value: string }) {
     let frame: number;
 
     // easeOutExpo: começa rápido e desacelera de forma bem suave e gradual
-    const easeOutExpo = (t: number) =>
-      t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+    const easeOutExpo = (t: number) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t));
 
     const step = (timestamp: number) => {
       if (start === null) start = timestamp;
@@ -591,13 +609,7 @@ function ClientsMarquee() {
   );
 }
 
-function Navbar({
-  page,
-  setPage,
-}: {
-  page: Page;
-  setPage: (p: Page) => void;
-}) {
+function Navbar({ page, setPage }: { page: Page; setPage: (p: Page) => void }) {
   const [open, setOpen] = useState(false);
   const [servicosMobileOpen, setServicosMobileOpen] = useState(false);
 
@@ -719,7 +731,9 @@ function Navbar({
                       setOpen(false);
                     }}
                     className={`flex-1 text-left px-3 py-2 rounded text-sm font-medium transition-colors ${
-                      isServicosActive ? "text-accent bg-white/10" : "text-white/70"
+                      isServicosActive
+                        ? "text-accent bg-white/10"
+                        : "text-white/70"
                     }`}
                     style={{ fontFamily: BODY }}
                   >
@@ -806,14 +820,11 @@ function CTASectionDepoimento({ setPage }: { setPage: (p: Page) => void }) {
             className="text-white text-2xl lg:text-3xl leading-relaxed max-w-3xl mx-auto mb-6"
             style={{ fontFamily: SERIF }}
           >
-            "A Líder Jr. reorganizou nosso processo produtivo em poucas
-            semanas. O nível de profissionalismo superou nossa expectativa
-            para uma consultoria júnior."
+            "A Líder Jr. reorganizou nosso processo produtivo em poucas semanas.
+            O nível de profissionalismo superou nossa expectativa para uma
+            consultoria júnior."
           </p>
-          <p
-            className="text-white font-semibold"
-            style={{ fontFamily: BODY }}
-          >
+          <p className="text-white font-semibold" style={{ fontFamily: BODY }}>
             Marcos Andrade
           </p>
           <p className="text-white/50 text-sm" style={{ fontFamily: BODY }}>
@@ -835,8 +846,8 @@ function CTASectionDepoimento({ setPage }: { setPage: (p: Page) => void }) {
             className="text-white/70 text-lg max-w-2xl mx-auto leading-8 mb-10"
             style={{ fontFamily: BODY }}
           >
-            Conte-nos os desafios da sua empresa. Nossa equipe irá entender
-            sua necessidade e propor uma solução personalizada.
+            Conte-nos os desafios da sua empresa. Nossa equipe irá entender sua
+            necessidade e propor uma solução personalizada.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <button
@@ -899,8 +910,8 @@ function CTASectionRapida({ setPage }: { setPage: (p: Page) => void }) {
             className="text-white/70 text-lg leading-8"
             style={{ fontFamily: BODY }}
           >
-            Deixe seu contato e nossa equipe retorna em até 24 horas úteis
-            com o próximo passo — sem compromisso.
+            Deixe seu contato e nossa equipe retorna em até 24 horas úteis com o
+            próximo passo — sem compromisso.
           </p>
         </div>
 
@@ -972,11 +983,7 @@ function Footer({ setPage }: { setPage: (p: Page) => void }) {
             <span className="text-accent">Líder Jr.</span>
           </p>
           <div className="w-20 h-20 bg-accent rounded-xl flex items-center justify-center">
-            <Box
-              size={44}
-              className="text-white"
-              strokeWidth={1.4}
-            />
+            <Box size={44} className="text-white" strokeWidth={1.4} />
           </div>
         </div>
 
@@ -1047,41 +1054,30 @@ function Footer({ setPage }: { setPage: (p: Page) => void }) {
                 key={i}
                 className="flex items-start gap-2 text-sm text-white/60"
               >
-                <Icon
-                  size={14}
-                  className="mt-0.5 shrink-0 text-accent"
-                />
+                <Icon size={14} className="mt-0.5 shrink-0 text-accent" />
                 <span style={{ fontFamily: BODY }}>{text}</span>
               </div>
             ))}
           </div>
           <div className="flex gap-3">
-            {([Linkedin, Instagram, Facebook] as const).map(
-              (Icon, i) => (
-                <a
-                  key={i}
-                  href="#"
-                  className="w-9 h-9 rounded bg-white/10 hover:bg-accent flex items-center justify-center transition-colors"
-                >
-                  <Icon size={16} />
-                </a>
-              ),
-            )}
+            {([Linkedin, Instagram, Facebook] as const).map((Icon, i) => (
+              <a
+                key={i}
+                href="#"
+                className="w-9 h-9 rounded bg-white/10 hover:bg-accent flex items-center justify-center transition-colors"
+              >
+                <Icon size={16} />
+              </a>
+            ))}
           </div>
         </div>
       </div>
 
       <div className="border-t border-white/10 max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-2">
-        <p
-          className="text-xs text-white/40"
-          style={{ fontFamily: BODY }}
-        >
+        <p className="text-xs text-white/40" style={{ fontFamily: BODY }}>
           © 2026 Líder Jr. Todos os direitos reservados.
         </p>
-        <p
-          className="text-xs text-white/40"
-          style={{ fontFamily: BODY }}
-        >
+        <p className="text-xs text-white/40" style={{ fontFamily: BODY }}>
           Empresa Júnior certificada pela Brasil Júnior
         </p>
       </div>
@@ -1091,7 +1087,8 @@ function Footer({ setPage }: { setPage: (p: Page) => void }) {
 
 function WhatsAppButton() {
   const phone = "5515998277936"; // código do país + DDD + número, sem espaços/símbolos
-  const message = "Olá! Gostaria de saber mais sobre a consultoria da Líder Jr.";
+  const message =
+    "Olá! Gostaria de saber mais sobre a consultoria da Líder Jr.";
 
   return (
     <a
@@ -1115,7 +1112,11 @@ function WhatsAppButton() {
   );
 }
 
-function CTASectionDepoimentoColunas({ setPage }: { setPage: (p: Page) => void }) {
+function CTASectionDepoimentoColunas({
+  setPage,
+}: {
+  setPage: (p: Page) => void;
+}) {
   return (
     <section className="bg-primary py-24 relative overflow-hidden">
       <div
@@ -1132,11 +1133,7 @@ function CTASectionDepoimentoColunas({ setPage }: { setPage: (p: Page) => void }
           <div className="bg-white/5 border border-white/10 rounded-2xl p-10">
             <div className="flex gap-1 mb-6">
               {[...Array(5)].map((_, i) => (
-                <Star
-                  key={i}
-                  size={16}
-                  className="text-accent fill-accent"
-                />
+                <Star key={i} size={16} className="text-accent fill-accent" />
               ))}
             </div>
 
@@ -1145,8 +1142,8 @@ function CTASectionDepoimentoColunas({ setPage }: { setPage: (p: Page) => void }
               style={{ fontFamily: SERIF }}
             >
               "A Líder Jr. reorganizou nosso processo produtivo em poucas
-              semanas. O nível de profissionalismo superou nossa
-              expectativa para uma consultoria júnior."
+              semanas. O nível de profissionalismo superou nossa expectativa
+              para uma consultoria júnior."
             </p>
 
             <div className="flex items-center gap-3">
@@ -1195,9 +1192,9 @@ function CTASectionDepoimentoColunas({ setPage }: { setPage: (p: Page) => void }
               className="text-white/70 text-lg leading-8 mb-10"
               style={{ fontFamily: BODY }}
             >
-              Assim como fizemos por essa empresa, nossa equipe pode
-              entender os desafios do seu negócio e propor uma solução
-              personalizada — sem custo no diagnóstico inicial.
+              Assim como fizemos por essa empresa, nossa equipe pode entender os
+              desafios do seu negócio e propor uma solução personalizada — sem
+              custo no diagnóstico inicial.
             </p>
 
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
@@ -1255,16 +1252,15 @@ function HomePage({ setPage }: { setPage: (p: Page) => void }) {
               className="text-5xl lg:text-6xl font-bold text-white leading-tight mb-6"
               style={{ fontFamily: HEADING }}
             >
-              <span className="text-accent">Líder Jr.</span>{" "}
-              Consultoria Empresarial
+              <span className="text-accent">Líder Jr.</span> Consultoria
+              Empresarial
             </h1>
 
             <p
               className="text-white/60 text-lg leading-relaxed mb-10 max-w-lg"
               style={{ fontFamily: BODY }}
             >
-              A solução que você precisa, com a qualidade que só
-              um Líder tem!
+              A solução que você precisa, com a qualidade que só um Líder tem!
             </p>
 
             <div className="flex gap-4">
@@ -1301,10 +1297,7 @@ function HomePage({ setPage }: { setPage: (p: Page) => void }) {
                 >
                   <AnimatedStat value={s.value} />
                 </p>
-                <p
-                  className="text-sm text-white"
-                  style={{ fontFamily: BODY }}
-                >
+                <p className="text-sm text-white" style={{ fontFamily: BODY }}>
                   {s.label}
                 </p>
               </div>
@@ -1320,9 +1313,7 @@ function HomePage({ setPage }: { setPage: (p: Page) => void }) {
             <div
               key={i}
               className={`rounded-2xl p-6 shadow-sm ${
-                i === 0
-                  ? "bg-accent"
-                  : "bg-card border border-border"
+                i === 0 ? "bg-accent" : "bg-card border border-border"
               }`}
             >
               <p
@@ -1336,9 +1327,7 @@ function HomePage({ setPage }: { setPage: (p: Page) => void }) {
 
               <p
                 className={`text-sm ${
-                  i === 0
-                    ? "text-white/80"
-                    : "text-muted-foreground"
+                  i === 0 ? "text-white/80" : "text-muted-foreground"
                 }`}
                 style={{ fontFamily: BODY }}
               >
@@ -1439,10 +1428,7 @@ function HomePage({ setPage }: { setPage: (p: Page) => void }) {
               >
                 +100
               </p>
-              <p
-                className="text-white/80 text-xs"
-                style={{ fontFamily: BODY }}
-              >
+              <p className="text-white/80 text-xs" style={{ fontFamily: BODY }}>
                 Projetos entregues
               </p>
             </div>
@@ -1459,16 +1445,14 @@ function HomePage({ setPage }: { setPage: (p: Page) => void }) {
               className="text-4xl font-bold text-foreground mb-6"
               style={{ fontFamily: HEADING }}
             >
-              Conhecimento acadêmico aplicado aos desafios da
-              sua empresa
+              Conhecimento acadêmico aplicado aos desafios da sua empresa
             </h2>
             <p
               className="text-base leading-7 mb-6"
               style={{ fontFamily: BODY }}
             >
-              A Lider Jr. conecta conhecimento acadêmico,
-              inovação e supervisão especializada para
-              desenvolver projetos que geram resultados reais
+              A Lider Jr. conecta conhecimento acadêmico, inovação e supervisão
+              especializada para desenvolver projetos que geram resultados reais
               para empresas de diferentes segmentos.
             </p>
             <ul className="flex flex-col gap-3 mb-8">
@@ -1514,14 +1498,14 @@ function HomePage({ setPage }: { setPage: (p: Page) => void }) {
               >
                 Cases em destaque
               </p>
-      
+
               <h2
                 className="text-4xl font-bold text-foreground"
                 style={{ fontFamily: HEADING }}
               >
                 Resultados que geram confiança
               </h2>
-      
+
               <p
                 className="mt-4 max-w-2xl text-muted-foreground"
                 style={{ fontFamily: BODY }}
@@ -1530,7 +1514,7 @@ function HomePage({ setPage }: { setPage: (p: Page) => void }) {
                 que nossas soluções proporcionaram para diferentes empresas.
               </p>
             </div>
-      
+
             <button
               onClick={() => setPage("cases")}
               className="flex items-center gap-1.5 text-sm font-semibold text-accent hover:underline shrink-0"
@@ -1539,7 +1523,7 @@ function HomePage({ setPage }: { setPage: (p: Page) => void }) {
               Ver todos <ChevronRight size={16} />
             </button>
           </div>
-      
+
           <CasesCarousel setPage={setPage} />
         </div>
       </section>
@@ -1657,10 +1641,9 @@ function HomePage({ setPage }: { setPage: (p: Page) => void }) {
                 className="text-white/70 text-lg leading-8 mb-10 max-w-xl"
                 style={{ fontFamily: BODY }}
               >
-                Conte-nos os desafios da sua empresa. Nossa equipe irá
-                entender sua necessidade e propor uma solução
-                personalizada para gerar resultados reais para o seu
-                negócio.
+                Conte-nos os desafios da sua empresa. Nossa equipe irá entender
+                sua necessidade e propor uma solução personalizada para gerar
+                resultados reais para o seu negócio.
               </p>
 
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
@@ -1743,7 +1726,7 @@ function HomePage({ setPage }: { setPage: (p: Page) => void }) {
           </div>
         </div>
       </section>
-      
+
       {/* CTA */}
       <section className="bg-primary py-24 relative overflow-hidden">
         <div
@@ -1773,10 +1756,9 @@ function HomePage({ setPage }: { setPage: (p: Page) => void }) {
             className="text-white/70 text-lg max-w-2xl mx-auto leading-8 mb-10"
             style={{ fontFamily: BODY }}
           >
-            Conte-nos os desafios da sua empresa. Nossa equipe
-            irá entender sua necessidade e propor uma solução
-            personalizada para gerar resultados reais para o seu
-            negócio.
+            Conte-nos os desafios da sua empresa. Nossa equipe irá entender sua
+            necessidade e propor uma solução personalizada para gerar resultados
+            reais para o seu negócio.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -1801,8 +1783,7 @@ function HomePage({ setPage }: { setPage: (p: Page) => void }) {
             className="text-white/50 text-sm mt-8"
             style={{ fontFamily: BODY }}
           >
-            Responderemos sua solicitação o mais rápido
-            possível.
+            Responderemos sua solicitação o mais rápido possível.
           </p>
         </div>
       </section>
@@ -1811,184 +1792,230 @@ function HomePage({ setPage }: { setPage: (p: Page) => void }) {
 }
 
 function QuemSomosPage() {
+  const valores = [
+    {
+      titulo: "Inovação",
+      desc: "Buscamos constantemente novas abordagens e metodologias para resolver desafios complexos de engenharia com criatividade.",
+      icon: <Sparkles className="w-6 h-6 text-accent" />,
+    },
+    {
+      titulo: "Comprometimento",
+      desc: "Tratamos cada projeto com total dedicação e responsabilidade, garantindo entregas que superam as expectativas dos clientes.",
+      icon: <Target className="w-6 h-6 text-accent" />,
+    },
+    {
+      titulo: "Ética",
+      desc: "Atuamos com transparência, integridade e respeito em todas as nossas relações com membros, parceiros e clientes.",
+      icon: <Award className="w-6 h-6 text-accent" />,
+    },
+    {
+      titulo: "Aprendizado Contínuo",
+      desc: "Fomentamos a evolução diária através do conhecimento, prática constante e desenvolvimento de novas competências.",
+      icon: <Users className="w-6 h-6 text-accent" />,
+    },
+  ];
+
+  // Filiações atualizadas idênticas à imagem enviada
+  const filiacoes = [
+    { nome: "Universidade (UFSCar)" },
+    { nome: "Núcleo Campinas" },
+    { nome: "FEJESP" },
+    { nome: "Brasil Júnior" },
+  ];
+
   return (
-    <div className="pt-16">
-      {/* Hero */}
-      <section className="bg-primary py-28 relative overflow-hidden">
+    <div className="pt-16 min-h-screen bg-background">
+      {/* HERO DA PÁGINA */}
+      <section className="bg-primary py-24 relative overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage:
+ Prototipo-Larissa
+              "url(https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1600&auto=format&fit=crop&q=80)",
+
               "url(https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1600&h=600&fit=crop&auto=format)",
+ main
           }}
         />
-        <div className="absolute inset-0 bg-primary/80" />
-        <div className="relative max-w-7xl mx-auto px-6 text-center">
-          <p
-            className="text-accent text-xs font-semibold uppercase tracking-widest mb-4"
+        <div className="absolute inset-0 bg-primary/85" />
+        <div className="relative max-w-4xl mx-auto px-6 text-center">
+          <span 
+            className="text-accent text-xs font-bold uppercase tracking-widest bg-accent/10 px-3 py-1 rounded-full inline-block mb-4"
             style={{ fontFamily: BODY }}
           >
-            Nossa empresa
-          </p>
-          <h1
-            className="text-5xl lg:text-6xl font-bold text-white mb-6"
+            Sobre Nós
+          </span>
+          <h1 
+            className="text-4xl lg:text-5xl font-bold text-white leading-tight mb-4"
             style={{ fontFamily: HEADING }}
           >
             Quem Somos
           </h1>
-          <p
-            className="text-white/60 text-lg max-w-2xl mx-auto"
+          <p 
+            className="text-white/80 text-base lg:text-lg max-w-2xl mx-auto leading-relaxed"
             style={{ fontFamily: BODY }}
           >
-            Somos a Líder Jr., empresa júnior do curso de
-            Engenharia de Produção, formada por estudantes
-            apaixonados por soluções que fazem diferença.
+           Somos a Líder Jr., empresa júnior do curso de Engenharia de Produção, formada por estudantes apaixonados por soluções que fazem diferença.
           </p>
         </div>
       </section>
 
-      {/* História */}
-      <section className="bg-background py-24">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+  {/* SEÇÃO: NOSSA HISTÓRIA */}
+      <section className="bg-black text-white py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-l from-accent/20 via-accent/5 to-transparent pointer-events-none" />
+      
+        <div className="absolute -top-24 -right-24 w-80 h-80 bg-accent/15 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="relative max-w-6xl mx-auto px-6 z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <p
-                className="text-accent text-xs font-semibold uppercase tracking-widest mb-3"
+              <span 
+                className="text-accent text-xs font-bold uppercase tracking-widest bg-accent/10 px-3 py-1 rounded-full inline-block mb-3"
                 style={{ fontFamily: BODY }}
               >
-                Nossa história
-              </p>
-              <h2
-                className="text-4xl font-bold text-foreground mb-6"
+                Trajetória & Legado
+              </span>
+              <h2 
+                className="text-3xl lg:text-4xl font-bold mb-6 text-white" 
                 style={{ fontFamily: HEADING }}
               >
-                Nascemos para conectar academia e mercado
+                Nossa História
               </h2>
-              <p
-                className="text-muted-foreground leading-relaxed mb-4"
-                style={{ fontFamily: BODY }}
-              >
-                Fundada por um grupo de alunos motivados do
-                curso de Engenharia de Produção, a Líder Jr.
-                surgiu como resposta a uma necessidade clara:
-                pequenas e médias empresas precisavam de
-                consultoria de qualidade a preços acessíveis.
-              </p>
-              <p
-                className="text-muted-foreground leading-relaxed"
-                style={{ fontFamily: BODY }}
-              >
-                Ao longo dos anos, crescemos, obtivemos
-                certificação pela Brasil Júnior e construímos um
-                portfólio diversificado de projetos em setores
-                como indústria, varejo, serviços e agronegócio.
-              </p>
+              <div className="space-y-4 text-white/70 text-base leading-relaxed" style={{ fontFamily: BODY }}>
+                <p>
+                  Fundada com o propósito de aproximar a vivência prática do mercado à formação acadêmica, a Líder Júnior nasceu do inconformismo de estudantes de Engenharia de Produção focados em gerar impacto real.
+                </p>
+                <p>
+                  Ao longo dos anos, consolidamos nossa atuação no ecossistema regional, entregando projetos de alta qualidade técnica em consultoria empresarial, otimização de processos e gestão estratégica para empresas de diversos portes.
+                </p>
+              </div>
             </div>
-            <img
-              src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=700&h=500&fit=crop&auto=format"
-              alt="Equipe Líder Jr. trabalhando em projeto"
-              className="w-full rounded-2xl object-cover"
-              style={{ height: 380 }}
-            />
+
+            <div className="relative">
+              <div className="absolute -inset-2 bg-gradient-to-r from-accent/20 to-transparent rounded-2xl blur-lg opacity-30 pointer-events-none" />
+              <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl h-[360px]">
+                <img 
+                  src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&auto=format&fit=crop&q=80" 
+                  alt="Equipe da Líder Júnior reunida em projeto" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Cultura */}
-      <section className="bg-muted py-24">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-14">
-            <p
-              className="text-accent text-xs font-semibold uppercase tracking-widest mb-3"
-              style={{ fontFamily: BODY }}
-            >
-              Cultura
+      {/* SEÇÃO: MISSÃO, VISÃO E VALORES */}
+      <section className="py-20 max-w-6xl mx-auto px-6">
+        <div className="text-center mb-16">
+          <span 
+            className="text-accent text-xs font-bold uppercase tracking-widest bg-accent/10 px-3 py-1 rounded-full inline-block mb-3"
+            style={{ fontFamily: BODY }}
+          >
+            Cultura
+          </span>
+          <h2 
+            className="text-3xl lg:text-4xl font-bold text-foreground"
+            style={{ fontFamily: HEADING }}
+          >
+            O que nos move diariamente
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+          <div className="bg-card border border-border p-8 rounded-2xl relative overflow-hidden shadow-sm group hover:border-accent transition-colors">
+            <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
+              <Target className="w-6 h-6 text-accent" />
+            </div>
+            <h3 className="text-2xl font-bold text-foreground mb-3" style={{ fontFamily: HEADING }}>
+              Missão
+            </h3>
+            <p className="text-muted-foreground text-sm leading-relaxed" style={{ fontFamily: BODY }}>
+              Oferecer soluções inovadoras em Engenharia de Produção, desenvolvendo competências nos nossos membros e gerando valor real para clientes.
             </p>
-            <h2
-              className="text-4xl font-bold text-foreground"
-              style={{ fontFamily: HEADING }}
-            >
-              O que nos guia
-            </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              {
-                label: "Missão",
-                text: "Oferecer soluções inovadoras em Engenharia de Produção, desenvolvendo competências nos nossos membros e gerando valor real para clientes.",
-                icon: "🎯",
-              },
-              {
-                label: "Visão",
-                text: "Ser referência nacional em consultoria júnior, reconhecida pela excelência técnica, impacto nos negócios e formação de líderes.",
-                icon: "🔭",
-              },
-              {
-                label: "Valores",
-                text: "Inovação, comprometimento, ética e aprendizado contínuo são os pilares que guiam cada projeto e cada decisão da Líder Jr.",
-                icon: "⚡",
-              },
-            ].map((item, i) => (
-              <div
-                key={i}
-                className="bg-card border border-border rounded-xl p-8"
+          <div className="bg-card border border-border p-8 rounded-2xl relative overflow-hidden shadow-sm group hover:border-accent transition-colors">
+            <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
+              <Eye className="w-6 h-6 text-accent" />
+            </div>
+            <h3 className="text-2xl font-bold text-foreground mb-3" style={{ fontFamily: HEADING }}>
+              Visão
+            </h3>
+            <p className="text-muted-foreground text-sm leading-relaxed" style={{ fontFamily: BODY }}>
+              Ser referência nacional em consultoria júnior, reconhecida pela excelência técnica, impacto nos negócios e formação de líderes.
+            </p>
+          </div>
+        </div>
+
+        <div>
+          <h4 className="text-xl font-bold text-foreground mb-8 text-center" style={{ fontFamily: HEADING }}>
+            NOSSOS VALORES
+          </h4>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {valores.map((val, idx) => (
+              <div 
+                key={idx} 
+                className="p-6 bg-card border border-border rounded-2xl flex flex-col justify-between shadow-sm hover:border-accent hover:shadow-md transition-all duration-300"
               >
-                <div className="text-3xl mb-4">{item.icon}</div>
-                <h3
-                  className="font-bold text-foreground text-lg mb-3"
-                  style={{ fontFamily: HEADING }}
-                >
-                  {item.label}
-                </h3>
-                <p
-                  className="text-sm text-muted-foreground leading-relaxed"
-                  style={{ fontFamily: BODY }}
-                >
-                  {item.text}
-                </p>
+                <div>
+                  <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-5">
+                    {val.icon}
+                  </div>
+                  <h5 className="font-bold text-foreground text-lg mb-2" style={{ fontFamily: HEADING }}>
+                    {val.titulo}
+                  </h5>
+                  <p className="text-xs text-muted-foreground leading-relaxed" style={{ fontFamily: BODY }}>
+                    {val.desc}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Filiações */}
-      <section className="bg-background py-24">
-        <div className="max-w-7xl mx-auto px-6">
+{/* SEÇÃO FILIAÇÕES */}
+      <section className="py-24 bg-secondary/40 w-full relative overflow-hidden">
+
+        <div className="absolute -top-24 -left-24 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="max-w-6xl mx-auto px-6 relative z-10">
           <div className="text-center mb-14">
-            <p
-              className="text-accent text-xs font-semibold uppercase tracking-widest mb-3"
+            <span 
+              className="text-accent text-xs font-bold uppercase tracking-widest bg-accent/10 px-3.5 py-1.5 rounded-full inline-block mb-3 border-accent/20"
               style={{ fontFamily: BODY }}
             >
               Parcerias
-            </p>
-            <h2
-              className="text-4xl font-bold text-foreground"
+            </span>
+            <h2 
+              className="text-3xl lg:text-4xl font-bold text-foreground"
               style={{ fontFamily: HEADING }}
             >
-              Filiações
+              Nossas Filiações
             </h2>
+            <p className="text-muted-foreground text-sm max-w-xl mx-auto mt-2" style={{ fontFamily: BODY }}>
+              Conexões que garantem nossa governança e impacto.
+            </p>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-            {AFFILIATIONS.map((a, i) => (
-              <div
-                key={i}
-                className="bg-card border border-border rounded-xl p-8 text-center"
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {filiacoes.map((item, idx) => (
+              <div 
+                key={idx} 
+                className="group relative bg-card border border-border/80 rounded-2xl p-6 text-center flex flex-col items-center justify-between shadow-sm hover:shadow-xl hover:border-accent/50 hover:-translate-y-1 transition-all duration-300"
               >
-                <div className="w-full h-20 rounded-lg bg-muted flex items-center justify-center mb-4">
-                  <span
-                    className="text-xs text-muted-foreground uppercase tracking-widest"
-                    style={{ fontFamily: BODY }}
-                  >
-                    Logo
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-0 group-hover:w-1/2 h-1 bg-accent rounded-b-full transition-all duration-300" />
+
+                <div className="w-full h-28 bg-background/80 rounded-xl flex items-center justify-center mb-4 border border-border/60 group-hover:bg-accent/5 group-hover:border-accent/30 transition-colors">
+                  <span className="text-xs font-bold text-muted-foreground/50 group-hover:text-accent uppercase tracking-widest transition-colors" style={{ fontFamily: BODY }}>
+                    LOGO
                   </span>
                 </div>
-                <h3
-                  className="font-bold text-foreground"
-                  style={{ fontFamily: HEADING }}
-                >
-                  {a.name}
+
+                <h3 className="text-base font-bold text-foreground group-hover:text-accent transition-colors mb-1" style={{ fontFamily: HEADING }}>
+                  {item.nome}
                 </h3>
               </div>
             ))}
@@ -2029,9 +2056,8 @@ function ServicosPage({ setPage }: { setPage: (p: Page) => void }) {
             className="text-white/60 text-lg max-w-2xl mx-auto"
             style={{ fontFamily: BODY }}
           >
-            Soluções completas em Engenharia de Produção para
-            empresas que querem crescer com inteligência e
-            eficiência.
+            Soluções completas em Engenharia de Produção para empresas que
+            querem crescer com inteligência e eficiência.
           </p>
         </div>
       </section>
@@ -2043,9 +2069,18 @@ function ServicosPage({ setPage }: { setPage: (p: Page) => void }) {
             {SERVICES.map((s, i) => (
               <div
                 key={i}
+Prototipo-Larissa
+                className={`group bg-card border rounded-xl p-8 cursor-pointer transition-all duration-300 ${
+                  selected === i
+                    ? "border-accent shadow-lg shadow-accent/10"
+                    : "border-border hover:border-accent/40 hover:shadow-md"
+                }`}
+                onClick={() => setSelected(selected === i ? null : i)}
+
                 className="group relative flex flex-col bg-card border border-border rounded-2xl overflow-hidden shadow-sm cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-accent/30"
                 style={{ minHeight: 530 }}
                 onClick={() => setPage(s.page)}
+main
               >
                 {/* Imagem com corte diagonal */}
                 <div
@@ -2195,16 +2230,11 @@ function ServicosPage({ setPage }: { setPage: (p: Page) => void }) {
           </div>
         </div>
       </section>
-
     </div>
   );
 }
 
-function MapeamentoProcessosPage({
-  setPage,
-}: {
-  setPage: (p: Page) => void;
-}) {
+function MapeamentoProcessosPage({ setPage }: { setPage: (p: Page) => void }) {
   const service = SERVICES[0];
 
   return (
@@ -2261,17 +2291,17 @@ function MapeamentoProcessosPage({
               className="text-foreground text-lg leading-relaxed mb-6"
               style={{ fontFamily: BODY }}
             >
-              Levantamos, documentamos e analisamos os processos da sua
-              empresa para identificar gargalos, retrabalho e pontos de
-              melhoria — antes de propor qualquer mudança.
+              Levantamos, documentamos e analisamos os processos da sua empresa
+              para identificar gargalos, retrabalho e pontos de melhoria — antes
+              de propor qualquer mudança.
             </p>
             <p
               className="text-foreground text-lg leading-relaxed mb-8"
               style={{ fontFamily: BODY }}
             >
-              Usamos metodologias consolidadas como BPMN, fluxogramas e
-              Value Stream Mapping (VSM) para transformar processos
-              informais em fluxos claros e mensuráveis.
+              Usamos metodologias consolidadas como BPMN, fluxogramas e Value
+              Stream Mapping (VSM) para transformar processos informais em
+              fluxos claros e mensuráveis.
             </p>
             <div className="flex flex-wrap gap-3 mt-6">
               {service.tags.map((t) => (
@@ -2438,20 +2468,16 @@ function MapeamentoProcessosPage({
         <div className="max-w-3xl mx-auto px-6 text-center">
           <div className="flex justify-center gap-1 mb-6">
             {[...Array(5)].map((_, i) => (
-              <Star
-                key={i}
-                size={18}
-                className="text-accent fill-accent"
-              />
+              <Star key={i} size={18} className="text-accent fill-accent" />
             ))}
           </div>
           <p
             className="text-foreground text-2xl lg:text-3xl leading-relaxed mb-8"
             style={{ fontFamily: SERIF }}
           >
-            "O mapeamento mostrou gargalos que a gente nem enxergava mais
-            de tão acostumados com a rotina. Em poucas semanas reduzimos
-            o tempo de produção reorganizando o fluxo de ponta a ponta."
+            "O mapeamento mostrou gargalos que a gente nem enxergava mais de tão
+            acostumados com a rotina. Em poucas semanas reduzimos o tempo de
+            produção reorganizando o fluxo de ponta a ponta."
           </p>
           <div className="flex items-center justify-center gap-3">
             <div className="w-11 h-11 rounded-full bg-accent/10 flex items-center justify-center shrink-0">
@@ -2508,8 +2534,8 @@ function MapeamentoProcessosPage({
               style={{ fontFamily: BODY }}
             >
               Fale com a nossa equipe e entenda como podemos ajudar a
-              identificar oportunidades de melhoria no seu negócio, com
-              um diagnóstico inicial sem custo.
+              identificar oportunidades de melhoria no seu negócio, com um
+              diagnóstico inicial sem custo.
             </p>
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
               <button
@@ -2612,7 +2638,13 @@ function CasesPage({ setPage }: { setPage: (p: Page) => void }) {
             className="text-white/60 text-lg max-w-2xl mx-auto"
             style={{ fontFamily: BODY }}
           >
+Prototipo-Larissa
+            Conheça alguns dos projetos desenvolvidos pela Lider Jr. e descubra
+            como ajudamos empresas a alcançarem melhores resultados por meio da
+            Engenharia de Produção.
+
             Conheça os projetos desenvolvidos pela Líder Jr. e o impacto real que a Engenharia de Produção gerou na produtividade e no faturamento dos nossos clientes.
+ main
           </p>
         </div>
       </section>
@@ -2679,6 +2711,77 @@ function CasesPage({ setPage }: { setPage: (p: Page) => void }) {
                   </span>
                 </div>
 
+ Prototipo-Larissa
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {(activeCategory === "Todos" ? filtered.slice(1) : filtered).map(
+              (c, i) => (
+                <article
+                  key={i}
+                  onClick={() => c.page && setPage(c.page)}
+                  className={`group bg-card border border-border rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 ${
+                    c.page ? "cursor-pointer" : "cursor-default"
+                  }`}
+                >
+                  <div
+                    className="overflow-hidden bg-muted"
+                    style={{ height: 200 }}
+                  >
+                    <img
+                      src={`https://placehold.co/500x300/1a1a1a/666666?text=${encodeURIComponent(c.company)}`}
+                      alt={c.company}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <div className="flex items-center gap-3 mb-3">
+                      <span
+                        className="text-xs px-2.5 py-1 rounded-full bg-accent/10 text-accent font-semibold"
+                        style={{ fontFamily: BODY }}
+                      >
+                        <Tag size={10} className="inline mr-1" />
+                        {c.category}
+                      </span>
+                      <span
+                        className="font-bold text-accent"
+                        style={{ fontFamily: HEADING }}
+                      >
+                        {c.result}
+                      </span>
+                    </div>
+                    <h3
+                      className="font-bold text-foreground text-base leading-snug mb-2 group-hover:text-accent transition-colors"
+                      style={{ fontFamily: HEADING }}
+                    >
+                      {c.company}
+                    </h3>
+                    <p
+                      className="text-xs text-muted-foreground leading-relaxed mb-4"
+                      style={{ fontFamily: BODY }}
+                    >
+                      {c.desc}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {c.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-xs px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground font-medium"
+                          style={{ fontFamily: BODY }}
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </article>
+              ),
+            )}
+          </div>
+
+          {filtered.length === 0 && (
+            <div className="text-center py-20">
+              <p className="text-muted-foreground" style={{ fontFamily: BODY }}>
+                Nenhum case encontrado nesta categoria.
+
                 <h2
                   className="text-3xl lg:text-4xl font-bold text-foreground mb-4 leading-tight group-hover:text-accent transition-colors duration-300"
                   style={{ fontFamily: HEADING }}
@@ -2731,6 +2834,7 @@ function CasesPage({ setPage }: { setPage: (p: Page) => void }) {
             <div className="text-center py-20 bg-card border border-border rounded-2xl">
               <p className="text-muted-foreground text-lg" style={{ fontFamily: BODY }}>
                 Nenhum projeto encontrado nesta categoria no momento.
+main
               </p>
             </div>
           )}
@@ -2740,46 +2844,87 @@ function CasesPage({ setPage }: { setPage: (p: Page) => void }) {
   );
 }
 
-function CaseMetalurgicaPage({
-  setPage,
-}: {
-  setPage: (p: Page) => void;
-}) {
-  const caseData = CASES[1];
+function CaseMetalurgicaPage({ setPage }: { setPage: (p: Page) => void }) {
+  const outrosCases = [
+    { title: "Indústria Metalúrgica X", desc: "Aumento de 40% na produtividade.", category: "Processos", targetPage: "case-metalurgica" as Page },
+    { title: "Logística Express", desc: "Redução de 25% no tempo de entrega.", category: "Logística", targetPage: "cases" as Page },
+    { title: "AgroTech Brasil", desc: "Otimização de processos e insumos.", category: "Qualidade", targetPage: "cases" as Page },
+  ];
 
   return (
-    <div className="pt-16">
-      {/* Hero */}
-      <section className="bg-primary py-28 relative overflow-hidden">
+    <div className="pt-16 min-h-screen bg-background flex flex-col justify-between">
+      <div>
+        {/* Hero */}
+      <section className="bg-primary py-24 relative overflow-hidden mb-12">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
+ Prototipo-Larissa
+            backgroundImage: "url(https://images.unsplash.com/photo-1537462715879-360eeb61a0bc?w=1600&auto=format&fit=crop&q=80)",
+
             backgroundImage:
               "url(https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1600&h=600&fit=crop&auto=format)",
+ main
           }}
         />
-        <div className="absolute inset-0 bg-primary/80" />
-        <div className="relative max-w-7xl mx-auto px-6 text-center">
-          <p
-            className="text-accent text-xs font-semibold uppercase tracking-widest mb-4"
+        <div className="absolute inset-0 bg-primary/85" />
+        <div className="relative max-w-4xl mx-auto px-6 text-center">
+          <span 
+            className="text-accent text-xs font-bold uppercase tracking-widest bg-accent/10 px-3 py-1 rounded-full inline-block mb-4"
             style={{ fontFamily: BODY }}
           >
-            Case • {caseData.category}
-          </p>
-          <h1
-            className="text-5xl lg:text-6xl font-bold text-white mb-6"
+           Case - Qualidade
+          </span>
+
+          <h1 
+            className="text-4xl lg:text-5xl font-bold text-white leading-tight mb-4"
             style={{ fontFamily: HEADING }}
           >
-            {caseData.company}
+            Indústria metalúrgica
           </h1>
-          <p
-            className="text-white/60 text-lg max-w-2xl mx-auto"
+   
+          <p 
+            className="text-white/80 text-base lg:text-lg max-w-2xl mx-auto leading-relaxed"
             style={{ fontFamily: BODY }}
           >
-            {caseData.desc}
+            Mapeamento e padronização dos processos resultando em entregas mais rápidas e organizadas.
           </p>
         </div>
       </section>
+
+ Prototipo-Larissa
+        {/* MÉTRICAS CONSOLIDADAS: IMPACTO DO PROJETO */}
+        <section className="max-w-5xl mx-auto px-6 mb-16 text-center">
+          <span 
+            className="text-accent text-xs font-bold tracking-widest uppercase block mb-2"
+            style={{ fontFamily: BODY }}
+          >
+            Impacto do Projeto
+          </span>
+          <h2 
+            className="text-3xl font-bold text-foreground mb-8"
+            style={{ fontFamily: HEADING }}
+          >
+            Resultados em números
+          </h2>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="p-6 bg-card border border-border rounded-xl flex flex-col items-center justify-center shadow-sm">
+              <div className="p-2 bg-accent/10 rounded-lg text-accent mb-2"><TrendingUp size={18} /></div>
+              <p className="text-3xl font-bold text-accent" style={{ fontFamily: HEADING }}>+35%</p>
+              <p className="text-xs text-muted-foreground font-semibold mt-1" style={{ fontFamily: BODY }}>Eficiência Global</p>
+            </div>
+
+            <div className="p-6 bg-card border border-border rounded-xl flex flex-col items-center justify-center shadow-sm">
+              <div className="p-2 bg-accent/10 rounded-lg text-accent mb-2"><BarChart3 size={18} /></div>
+              <p className="text-3xl font-bold text-accent" style={{ fontFamily: HEADING }}>-20%</p>
+              <p className="text-xs text-muted-foreground font-semibold mt-1" style={{ fontFamily: BODY }}>Desperdício de Material</p>
+            </div>
+
+            <div className="p-6 bg-card border border-border rounded-xl flex flex-col items-center justify-center shadow-sm">
+              <div className="p-2 bg-accent/10 rounded-lg text-accent mb-2"><Target size={18} /></div>
+              <p className="text-3xl font-bold text-accent" style={{ fontFamily: HEADING }}>R$ 150k</p>
+              <p className="text-xs text-muted-foreground font-semibold mt-1" style={{ fontFamily: BODY }}>Economia Anual</p>
 
       {/* Voltar aos Cases */}
       <section className="bg-background pt-10">
@@ -2855,6 +3000,7 @@ function CaseMetalurgicaPage({
                 visibilidade real sobre o processo, servindo de base
                 para futuras melhorias contínuas.
               </p>
+ main
             </div>
 
             {/* Relato do Cliente */}
@@ -2930,8 +3076,56 @@ function CaseMetalurgicaPage({
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+
+ Prototipo-Larissa
+        {/* Conteúdo Principal */}
+        <div className="max-w-5xl mx-auto px-6 pb-16">
+          <button 
+            onClick={() => setPage("cases")}
+            className="flex items-center text-muted-foreground hover:text-accent transition-colors mb-8 text-sm font-semibold"
+            style={{ fontFamily: BODY }}
+          >
+            <ArrowLeft size={16} className="mr-2" /> Voltar aos Cases
+          </button>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+            <div className="lg:col-span-2 space-y-8 text-muted-foreground text-base" style={{ fontFamily: BODY }}>
+              <div>
+                <h3 className="text-xl font-bold text-foreground mb-3" style={{ fontFamily: HEADING }}>O Desafio</h3>
+                <p>A empresa enfrentava gargalos severos na etapa de montagem mecânica, gerando atrasos frequentes nas entregas contratuais...</p>
+              </div>
+              
+              <div>
+                <h3 className="text-xl font-bold text-foreground mb-3" style={{ fontFamily: HEADING }}>A Solução</h3>
+                <p>Implementamos um mapeamento detalhado do fluxo de valor (VSM) e redesenhamos o layout produtivo com foco em células modulares...</p>
+              </div>
+
+              <div>
+                <h3 className="text-xl font-bold text-foreground mb-3" style={{ fontFamily: HEADING }}>Os Resultados</h3>
+                <p>
+                  Como impacto direto das ações, obtivemos uma expressiva <strong>Redução do Lead Time</strong>, onde o tempo total de fabricação caiu de 14 para 9 dias úteis. Além disso, consolidamos uma <strong>Cultura Lean Estabelecida</strong> com mais de 45 colaboradores treinados nas novas metodologias ágeis de chão de fábrica, garantindo um excelente <strong>Retorno sobre o Investimento (ROI)</strong>, com o custo total da consultoria sendo pago em apenas 45 dias após a virada do layout.
+                </p>
+              </div>
+            </div>
+
+            {/* Relato do Cliente */}
+            <div className="lg:col-span-1">
+              <div className="relative bg-secondary/40 border border-border rounded-2xl p-6 shadow-sm overflow-hidden">
+                <Quote size={80} className="absolute -right-4 -top-4 text-accent/5 pointer-events-none transform rotate-12" />
+                <p className="text-sm italic text-foreground leading-relaxed relative z-10 mb-6" style={{ fontFamily: BODY }}>
+                  "A consultoria da Líder Júnior superou todas as nossas expectativas. Conseguimos destravar gargalos históricos em menos de 3 meses de projeto."
+                </p>
+                <div className="flex items-center gap-3">
+                  <div className="h-9 w-9 rounded-full bg-accent text-white flex items-center justify-center font-bold text-xs">
+                    DM
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold text-foreground" style={{ fontFamily: BODY }}>Diretor de Operações</p>
+                    <p className="text-[10px] text-muted-foreground" style={{ fontFamily: BODY }}>Grande Indústria Metalúrgica</p>
+                  </div>
+                </div>
+              </div>
 
       {/* CTA */}
       <section className="bg-background py-4">
@@ -2965,11 +3159,69 @@ function CaseMetalurgicaPage({
               >
                 Conhecer o serviço <ArrowRight size={14} />
               </button>
+ main
             </div>
           </div>
-        </div>
-      </section>
 
+          {/* Outros cases clicáveis */}
+          <section className="mt-16 pt-8 border-t border-border">
+            <h3 className="text-lg font-bold text-foreground mb-6" style={{ fontFamily: HEADING }}>Conheça outros resultados de sucesso</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {outrosCases.map((item, index) => (
+                <div 
+                  key={index} 
+                  onClick={() => setPage(item.targetPage)}
+                  className="group p-5 rounded-xl border border-border bg-card hover:border-accent hover:shadow-md transition-all duration-200 cursor-pointer"
+                >
+                  <span className="text-[10px] font-bold text-accent uppercase bg-accent/10 px-2 py-0.5 rounded-full" style={{ fontFamily: BODY }}>
+                    {item.category}
+                  </span>
+                  <h4 className="font-bold text-foreground group-hover:text-accent transition-colors text-sm mt-3 mb-1" style={{ fontFamily: HEADING }}>
+                    {item.title}
+                  </h4>
+                  <p className="text-xs text-muted-foreground line-clamp-2" style={{ fontFamily: BODY }}>
+                    {item.desc}
+                  </p>
+                  <span className="inline-block text-[11px] font-semibold text-accent mt-3 opacity-0 group-hover:opacity-100 transition-all transform translate-x-[-4px] group-hover:translate-x-0" style={{ fontFamily: BODY }}>
+                    Ver case →
+                  </span>
+                </div>
+              ))}
+            </div>
+          </section>
+        </div>
+      </div>
+
+ Prototipo-Larissa
+      <section className="bg-[#030303] text-white py-16 text-center w-full mt-auto">
+        <div className="max-w-4xl mx-auto px-6">
+          <h2 
+            className="text-3xl lg:text-4xl font-bold mb-4"
+            style={{ fontFamily: HEADING }}
+          >
+            Quer um resultado parecido?
+          </h2>
+          <p 
+            className="text-white/60 text-sm lg:text-base max-w-2xl mx-auto mb-8 leading-relaxed"
+            style={{ fontFamily: BODY }}
+          >
+            Fale com a nossa equipe e entenda como podemos ajudar a sua empresa a alcançar melhores resultados.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <button
+              onClick={() => setPage("contato")}
+              className="px-6 py-3 bg-accent hover:bg-[#f26821] text-white font-bold rounded-lg transition-colors text-sm"
+              style={{ fontFamily: BODY }}
+            >
+              Fale Conosco
+            </button>
+            <button
+              onClick={() => setPage("cases")}
+              className="px-6 py-3 bg-transparent border border-white/20 hover:border-white/40 text-white font-bold rounded-lg transition-colors text-sm"
+              style={{ fontFamily: BODY }}
+            >
+              Ver outros cases
+            </button>
       {/* Outros cases clicáveis */}
       <section className="bg-background py-24">
         <div className="max-w-7xl mx-auto px-6">
@@ -3014,6 +3266,7 @@ function CaseMetalurgicaPage({
                   </span>
                 </div>
               ))}
+ main
           </div>
         </div>
       </section>
@@ -3094,7 +3347,13 @@ function MateriaisPage() {
             className="text-white/60 text-lg max-w-2xl mx-auto"
             style={{ fontFamily: BODY }}
           >
+Prototipo-Larissa
+            Acesse e-books, guias, planilhas e outros materiais desenvolvidos
+            para compartilhar conhecimento e apoiar o crescimento de empresas e
+            empreendedores.
+
             Acesse e-books, guias, planilhas e templates práticos. Ferramentas reais estruturadas para impulsionar a gestão do seu negócio.
+main
           </p>
         </div>
       </section>
@@ -3145,6 +3404,60 @@ function MateriaisPage() {
                     </span>
                   </div>
 
+Prototipo-Larissa
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {(activeCategory === "Todos" ? filtered.slice(1) : filtered).map(
+              (m, i) => (
+                <article
+                  key={i}
+                  className="group bg-card border border-border rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer"
+                >
+                  <div
+                    className="overflow-hidden bg-muted"
+                    style={{ height: 200 }}
+                  >
+                    <img
+                      src={`https://placehold.co/500x300/1a1a1a/666666?text=${encodeURIComponent(m.type)}`}
+                      alt={m.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <div className="flex items-center gap-3 mb-3">
+                      <span
+                        className="text-xs px-2.5 py-1 rounded-full bg-accent/10 text-accent font-semibold"
+                        style={{ fontFamily: BODY }}
+                      >
+                        <Tag size={10} className="inline mr-1" />
+                        {m.category}
+                      </span>
+                      <span
+                        className="text-xs text-muted-foreground flex items-center gap-1"
+                        style={{ fontFamily: BODY }}
+                      >
+                        <BookOpen size={11} /> {m.type}
+                      </span>
+                    </div>
+                    <h3
+                      className="font-bold text-foreground text-base leading-snug mb-2 group-hover:text-accent transition-colors"
+                      style={{ fontFamily: HEADING }}
+                    >
+                      {m.title}
+                    </h3>
+                    <p
+                      className="text-xs text-muted-foreground leading-relaxed mb-4"
+                      style={{ fontFamily: BODY }}
+                    >
+                      {m.excerpt}
+                    </p>
+                    <div className="flex items-center gap-1.5 text-accent text-xs font-semibold">
+                      Baixar material <Download size={12} />
+                    </div>
+                  </div>
+                </article>
+              ),
+            )}
+            
                   {/* Conteúdo */}
                   <div className="p-6 flex flex-col flex-1">
                     <div className="flex items-center gap-2 mb-3">
@@ -3179,10 +3492,15 @@ function MateriaisPage() {
                 </article>
               )
             })}
+ main
           </div>
 
           {/* Empty State */}
           {filtered.length === 0 && (
+ Prototipo-Larissa
+            <div className="text-center py-20">
+              <p className="text-muted-foreground" style={{ fontFamily: BODY }}>
+                Nenhum material encontrado nesta categoria.
             <div className="text-center py-24 bg-card border border-border rounded-2xl">
               <div className="w-16 h-16 mx-auto bg-muted rounded-2xl flex items-center justify-center mb-4">
                 <Box size={24} className="text-muted-foreground" />
@@ -3190,6 +3508,7 @@ function MateriaisPage() {
               <h3 className="text-xl font-bold text-foreground mb-2" style={{ fontFamily: HEADING }}>Nenhum material encontrado</h3>
               <p className="text-muted-foreground text-sm" style={{ fontFamily: BODY }}>
                 Ainda não liberamos recursos para esta categoria. Fique de olho!
+ main
               </p>
             </div>
           )}
@@ -3245,9 +3564,8 @@ function BlogPage({ setPage }: { setPage: (p: Page) => void }) {
             className="text-white/60 text-lg max-w-2xl mx-auto"
             style={{ fontFamily: BODY }}
           >
-            Conteúdo prático e acessível sobre Engenharia de
-            Produção, gestão empresarial e inovação para
-            empreendedores e estudantes.
+            Conteúdo prático e acessível sobre Engenharia de Produção, gestão
+            empresarial e inovação para empreendedores e estudantes.
           </p>
         </div>
       </section>
@@ -3309,8 +3627,12 @@ function BlogPage({ setPage }: { setPage: (p: Page) => void }) {
                       className="text-sm font-medium text-muted-foreground flex items-center gap-1.5"
                       style={{ fontFamily: BODY }}
                     >
+Prototipo-Larissa
+                      <Clock size={11} /> {BLOG_POSTS[0].readTime}
+
                       <Clock size={14} />{" "}
                       {BLOG_POSTS[0].readTime}
+ main
                     </span>
                   </div>
                   {/* Título do destaque aumentado de 2xl para 3xl/4xl */}
@@ -3345,6 +3667,72 @@ function BlogPage({ setPage }: { setPage: (p: Page) => void }) {
               </div>
             </div>
           )}
+
+ Prototipo-Larissa
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {(activeCategory === "Todos" ? filtered.slice(1) : filtered).map(
+              (post, i) => (
+                <article
+                  key={i}
+                  onClick={() => post.page && setPage(post.page)}
+                  className={`group bg-card border border-border rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 ${
+                    post.page ? "cursor-pointer" : "cursor-default"
+                  }`}
+                >
+                  <div
+                    className="overflow-hidden bg-muted"
+                    style={{ height: 200 }}
+                  >
+                    <img
+                      src={`https://images.unsplash.com/${post.img}?w=500&h=300&fit=crop&auto=format`}
+                      alt={post.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <div className="flex items-center gap-3 mb-3">
+                      <span
+                        className="text-xs px-2.5 py-1 rounded-full bg-accent/10 text-accent font-semibold"
+                        style={{ fontFamily: BODY }}
+                      >
+                        <Tag size={10} className="inline mr-1" />
+                        {post.category}
+                      </span>
+                      <span
+                        className="text-xs text-muted-foreground flex items-center gap-1"
+                        style={{ fontFamily: BODY }}
+                      >
+                        <Clock size={11} /> {post.readTime}
+                      </span>
+                    </div>
+                    <h3
+                      className="font-bold text-foreground text-base leading-snug mb-2 group-hover:text-accent transition-colors"
+                      style={{ fontFamily: HEADING }}
+                    >
+                      {post.title}
+                    </h3>
+                    <p
+                      className="text-xs text-muted-foreground leading-relaxed mb-4"
+                      style={{ fontFamily: BODY }}
+                    >
+                      {post.excerpt}
+                    </p>
+                    <p
+                      className="text-xs text-muted-foreground"
+                      style={{ fontFamily: BODY }}
+                    >
+                      {post.date}
+                    </p>
+                  </div>
+                </article>
+              ),
+            )}
+          </div>
+
+          {filtered.length === 0 && (
+            <div className="text-center py-20">
+              <p className="text-muted-foreground" style={{ fontFamily: BODY }}>
+                Nenhum artigo encontrado nesta categoria.
 
           {/* Grid de Posts Normais */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -3420,11 +3808,340 @@ function BlogPage({ setPage }: { setPage: (p: Page) => void }) {
                 style={{ fontFamily: BODY }}
               >
                 Nenhum artigo encontrado nesta categoria no momento.
+ main
               </p>
             </div>
           )}
         </div>
       </section>
+ Prototipo-Larissa
+
+      {/* Newsletter */}
+      <section className="bg-primary py-20">
+        <div className="max-w-xl mx-auto px-6 text-center">
+          <h2
+            className="text-3xl font-bold text-white mb-3"
+            style={{ fontFamily: HEADING }}
+          >
+            Fique por dentro
+          </h2>
+          <p
+            className="text-white/60 text-sm mb-8"
+            style={{ fontFamily: BODY }}
+          >
+            Assine nossa newsletter e receba conteúdos exclusivos sobre
+            Engenharia de Produção e gestão empresarial.
+          </p>
+          <form className="flex gap-3" onSubmit={(e) => e.preventDefault()}>
+            <input
+              type="email"
+              placeholder="seu@email.com.br"
+              className="flex-1 px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder:text-white/40 text-sm focus:outline-none focus:border-accent transition-colors"
+              style={{ fontFamily: BODY }}
+            />
+            <button
+              type="submit"
+              className="px-6 py-3 bg-accent text-white font-semibold rounded-lg hover:bg-[#f26821] transition-colors shrink-0 text-sm"
+              style={{ fontFamily: BODY }}
+            >
+              Assinar
+            </button>
+          </form>
+        </div>
+      </section>
+
+ main
+    </div>
+  );
+}
+
+function BlogPostPage({ setPage }: { setPage: (p: any) => void }) {
+  return (
+    <div className="pt-16 min-h-screen bg-background">
+      <div className="max-w-3xl mx-auto px-6 py-12">
+        <button
+          onClick={() => setPage("blog")}
+          className="flex items-center text-muted-foreground hover:text-accent transition-colors mb-8 text-sm font-semibold"
+          style={{ fontFamily: BODY }}
+        >
+          <ArrowLeft size={16} className="mr-2" /> Voltar ao Blog
+        </button>
+
+        <header className="mb-8">
+          <span
+            className="inline-block text-xs px-2.5 py-1 rounded-full bg-accent/10 text-accent font-semibold mb-4"
+            style={{ fontFamily: BODY }}
+          >
+            Processos
+          </span>
+          <h1
+            className="text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight"
+            style={{ fontFamily: HEADING }}
+          >
+            Como o Lean Manufacturing Transforma a Eficiência Operacional
+          </h1>
+
+          <div className="flex items-center gap-4 border-y border-border py-4">
+            <div className="h-10 w-10 rounded-full bg-accent/20 flex items-center justify-center font-bold text-accent text-sm">
+              LJ
+            </div>
+            <div>
+              <p
+                className="text-sm font-bold text-foreground"
+                style={{ fontFamily: BODY }}
+              >
+                Consultor Líder Júnior
+              </p>
+              <div
+                className="flex items-center gap-4 text-xs text-muted-foreground mt-0.5"
+                style={{ fontFamily: BODY }}
+              >
+                <span className="flex items-center gap-1">
+                  <Calendar size={13} /> 17 Jul, 2026
+                </span>
+                <span className="flex items-center gap-1">
+                  <Clock size={13} /> 5 min de leitura
+                </span>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        {/* Removido o conflito de tamanho de texto aqui */}
+        <article
+          className="text-muted-foreground leading-relaxed space-y-6 text-base"
+          style={{ fontFamily: BODY }}
+        >
+          <p className="text-lg text-foreground font-medium">
+            O Lean Manufacturing vai além de uma simples metodologia de redução
+            de desperdícios; trata-se de uma mudança cultural completa...
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </article>
+      </div>
+    </div>
+  );
+}
+
+function CaseStudyPage({ setPage }: { setPage: (p: any) => void }) {
+  const outrosCases = [
+    {
+      title: "Indústria Metalúrgica X",
+      desc: "Aumento de 40% na produtividade.",
+      category: "Processos",
+    },
+    {
+      title: "Logística Express",
+      desc: "Redução de 25% no tempo de entrega.",
+      category: "Logística",
+    },
+    {
+      title: "AgroTech Brasil",
+      desc: "Otimização de processos e insumos.",
+      category: "Qualidade",
+    },
+  ];
+
+  return (
+    <div className="pt-16 min-h-screen bg-background">
+      <div className="max-w-5xl mx-auto px-6 py-12">
+        <button
+          onClick={() => setPage("cases")}
+          className="flex items-center text-muted-foreground hover:text-accent transition-colors mb-8 text-sm font-semibold"
+          style={{ fontFamily: BODY }}
+        >
+          <ArrowLeft size={16} className="mr-2" /> Voltar aos Cases
+        </button>
+
+        <header className="mb-10">
+          <span
+            className="inline-block text-xs font-bold tracking-widest text-accent uppercase bg-accent/10 px-3 py-1 rounded-full"
+            style={{ fontFamily: BODY }}
+          >
+            Estudo de Caso • Indústria Metalúrgica
+          </span>
+          <h1
+            className="text-4xl lg:text-5xl font-bold text-foreground mt-4 mb-8"
+            style={{ fontFamily: HEADING }}
+          >
+            Otimização de Linha de Produção com Engenharia Reversa
+          </h1>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-8">
+            <div className="p-6 bg-card border border-border rounded-xl flex items-center gap-4 shadow-sm">
+              <div className="p-3 bg-accent/10 rounded-xl text-accent">
+                <TrendingUp size={24} />
+              </div>
+              <div>
+                <p
+                  className="text-2xl font-bold text-foreground"
+                  style={{ fontFamily: HEADING }}
+                >
+                  +35%
+                </p>
+                <p
+                  className="text-xs text-muted-foreground font-semibold"
+                  style={{ fontFamily: BODY }}
+                >
+                  Eficiência Global
+                </p>
+              </div>
+            </div>
+            <div className="p-6 bg-card border border-border rounded-xl flex items-center gap-4 shadow-sm">
+              <div className="p-3 bg-accent/10 rounded-xl text-accent">
+                <BarChart3 size={24} />
+              </div>
+              <div>
+                <p
+                  className="text-2xl font-bold text-foreground"
+                  style={{ fontFamily: HEADING }}
+                >
+                  -20%
+                </p>
+                <p
+                  className="text-xs text-muted-foreground font-semibold"
+                  style={{ fontFamily: BODY }}
+                >
+                  Desperdício de Material
+                </p>
+              </div>
+            </div>
+            <div className="p-6 bg-card border border-border rounded-xl flex items-center gap-4 shadow-sm">
+              <div className="p-3 bg-accent/10 rounded-xl text-accent">
+                <Target size={24} />
+              </div>
+              <div>
+                <p
+                  className="text-2xl font-bold text-foreground"
+                  style={{ fontFamily: HEADING }}
+                >
+                  R$ 150k
+                </p>
+                <p
+                  className="text-xs text-muted-foreground font-semibold"
+                  style={{ fontFamily: BODY }}
+                >
+                  Economia Anual
+                </p>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+          {/* Corrigido conflito de classes na linha abaixo tirando as duplicadas de tamanho */}
+          <div
+            className="lg:col-span-2 space-y-6 text-muted-foreground text-base"
+            style={{ fontFamily: BODY }}
+          >
+            <h3
+              className="text-xl font-bold text-foreground"
+              style={{ fontFamily: HEADING }}
+            >
+              O Desafio
+            </h3>
+            <p>
+              A empresa enfrentava gargalos severos na etapa de montagem
+              mecânica, gerando atrasos frequentes nas entregas contratuais...
+            </p>
+
+            <h3
+              className="text-xl font-bold text-foreground"
+              style={{ fontFamily: HEADING }}
+            >
+              A Solução
+            </h3>
+            <p>
+              Implementamos um mapeamento detalhado do fluxo de valor (VSM) e
+              redesenhamos o layout produtivo com foco em células modulares...
+            </p>
+          </div>
+
+          <div className="lg:col-span-1">
+            <div className="relative bg-secondary/40 border border-border rounded-2xl p-6 shadow-sm overflow-hidden">
+              <Quote
+                size={80}
+                className="absolute -right-4 -top-4 text-accent/5 pointer-events-none transform rotate-12"
+              />
+              <p
+                className="text-sm italic text-foreground leading-relaxed relative z-10 mb-6"
+                style={{ fontFamily: BODY }}
+              >
+                "A consultoria da Líder Júnior superou todas as nossas
+                expectativas. Conseguimos destravar gargalos históricos em menos
+                de 3 meses de projeto."
+              </p>
+              <div className="flex items-center gap-3">
+                <div className="h-9 w-9 rounded-full bg-accent text-white flex items-center justify-center font-bold text-xs">
+                  DM
+                </div>
+                <div>
+                  <p
+                    className="text-xs font-bold text-foreground"
+                    style={{ fontFamily: BODY }}
+                  >
+                    Diretor de Operações
+                  </p>
+                  <p
+                    className="text-[10px] text-muted-foreground"
+                    style={{ fontFamily: BODY }}
+                  >
+                    Grande Indústria Metalúrgica
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <section className="mt-16 pt-8 border-t border-border">
+          <h3
+            className="text-lg font-bold text-foreground mb-6"
+            style={{ fontFamily: HEADING }}
+          >
+            Conheça outros resultados de success
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {outrosCases.map((item, index) => (
+              <div
+                key={index}
+                onClick={() => setPage("cases")}
+                className="group p-5 rounded-xl border border-border bg-card hover:border-accent hover:shadow-md transition-all duration-200 cursor-pointer"
+              >
+                <span
+                  className="text-[10px] font-bold text-accent uppercase bg-accent/10 px-2 py-0.5 rounded-full"
+                  style={{ fontFamily: BODY }}
+                >
+                  {item.category}
+                </span>
+                <h4
+                  className="font-bold text-foreground group-hover:text-accent transition-colors text-sm mt-3 mb-1"
+                  style={{ fontFamily: HEADING }}
+                >
+                  {item.title}
+                </h4>
+                <p
+                  className="text-xs text-muted-foreground line-clamp-2"
+                  style={{ fontFamily: BODY }}
+                >
+                  {item.desc}
+                </p>
+                <span
+                  className="inline-block text-[11px] font-semibold text-accent mt-3 opacity-0 group-hover:opacity-100 transition-all transform translate-x-[-4px] group-hover:translate-x-0"
+                  style={{ fontFamily: BODY }}
+                >
+                  Ver case →
+                </span>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
     </div>
   );
 }
@@ -3434,9 +4151,47 @@ function PostLeanManufacturingPage({
 }: {
   setPage: (p: Page) => void;
 }) {
-  const post = BLOG_POSTS[0];
-
   return (
+ Prototipo-Larissa
+    <div className="pt-16 min-h-screen bg-background">
+      <section className="bg-primary py-24 relative overflow-hidden mb-12">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage:
+              "url(https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1600&auto=format&fit=crop&q=80)",
+          }}
+        />
+        <div className="absolute inset-0 bg-primary/85" />
+        <div className="relative max-w-4xl mx-auto px-6 text-center">
+          <span
+            className="text-accent text-xs font-bold uppercase tracking-widest bg-accent/10 px-3 py-1 rounded-full inline-block mb-4"
+            style={{ fontFamily: BODY }}
+          >
+            Artigo Exclusivo • Processos
+          </span>
+          <h1
+            className="text-4xl lg:text-5xl font-bold text-white leading-tight mb-6"
+            style={{ fontFamily: HEADING }}
+          >
+            Como o Lean Manufacturing Transforma a Eficiência Operacional
+          </h1>
+
+          <div
+            className="flex items-center justify-center gap-4 text-white/80 text-sm"
+            style={{ fontFamily: BODY }}
+          >
+            <div className="h-8 w-8 rounded-full bg-accent text-white flex items-center justify-center font-bold text-xs">
+              LJ
+            </div>
+            <span>Por Consultor Líder Júnior</span>
+            <span className="text-white/40">•</span>
+            <span className="flex items-center gap-1">
+              <Calendar size={14} /> 17 Jul, 2026
+            </span>
+            <span className="text-white/40">•</span>
+            <span className="flex items-center gap-1">
+
     <div className="pt-16">
       {/* Hero */}
       <section className="bg-primary py-28 relative overflow-hidden">
@@ -3483,11 +4238,31 @@ function PostLeanManufacturingPage({
               className="flex items-center gap-1.5 text-sm text-white/70"
               style={{ fontFamily: BODY }}
             >
+ main
               <Clock size={14} /> 5 min de leitura
             </span>
           </div>
         </div>
       </section>
+
+Prototipo-Larissa
+      <div className="max-w-3xl mx-auto px-6 pb-16">
+        <button
+          onClick={() => setPage("blog")}
+          className="flex items-center text-muted-foreground hover:text-accent transition-colors mb-8 text-sm font-semibold"
+          style={{ fontFamily: BODY }}
+        >
+          <ArrowLeft size={16} className="mr-2" /> Voltar ao Blog
+        </button>
+
+        {/* Foto do Tema do Blog (Grande destaque interno) */}
+        <div className="w-full h-[400px] rounded-2xl overflow-hidden shadow-md mb-8">
+          <img
+            src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1000&auto=format&fit=crop&q=80"
+            alt="Lean Manufacturing em execução"
+            className="w-full h-full object-cover"
+          />
+        </div>
 
       {/* Voltar para o Blog */}
       <section className="bg-background pt-10">
@@ -3512,8 +4287,9 @@ function PostLeanManufacturingPage({
           >
             {post.excerpt}
           </p>
+main
 
-          <h2
+        <h2
             className="text-2xl font-bold text-foreground mb-4"
             style={{ fontFamily: HEADING }}
           >
@@ -3552,6 +4328,7 @@ function PostLeanManufacturingPage({
             </p>
           </div>
 
+            
           <h2
             className="text-2xl font-bold text-foreground mb-4"
             style={{ fontFamily: HEADING }}
@@ -3663,7 +4440,6 @@ function PostLeanManufacturingPage({
             </div>
           </div>
         </div>
-      </section>
 
       {/* Outros artigos */}
       <section className="bg-background py-24">
@@ -3749,9 +4525,8 @@ function ContatoPage() {
             className="text-white/60 text-lg max-w-2xl mx-auto"
             style={{ fontFamily: BODY }}
           >
-            Conte-nos sobre o seu desafio. Nossa equipe entrará
-            em contato para entender sua necessidade e
-            apresentar a melhor solução.
+            Conte-nos sobre o seu desafio. Nossa equipe entrará em contato para
+            entender sua necessidade e apresentar a melhor solução.
           </p>
         </div>
       </section>
@@ -3777,15 +4552,9 @@ function ContatoPage() {
 
             <div className="space-y-6">
               <div className="flex gap-4">
-                <Phone
-                  className="text-accent shrink-0"
-                  size={22}
-                />
+                <Phone className="text-accent shrink-0" size={22} />
                 <div>
-                  <p
-                    className="font-semibold"
-                    style={{ fontFamily: BODY }}
-                  >
+                  <p className="font-semibold" style={{ fontFamily: BODY }}>
                     Telefone
                   </p>
                   <p
@@ -3798,15 +4567,9 @@ function ContatoPage() {
               </div>
 
               <div className="flex gap-4">
-                <Mail
-                  className="text-accent shrink-0"
-                  size={22}
-                />
+                <Mail className="text-accent shrink-0" size={22} />
                 <div>
-                  <p
-                    className="font-semibold"
-                    style={{ fontFamily: BODY }}
-                  >
+                  <p className="font-semibold" style={{ fontFamily: BODY }}>
                     E-mail
                   </p>
                   <p
@@ -3817,6 +4580,24 @@ function ContatoPage() {
                   </p>
                 </div>
               </div>
+ Prototipo-Larissa
+
+              <div className="flex gap-4">
+                <MapPin className="text-accent shrink-0" size={22} />
+                <div>
+                  <p className="font-semibold" style={{ fontFamily: BODY }}>
+                    Endereço
+                  </p>
+                  <p
+                    className="text-muted-foreground"
+                    style={{ fontFamily: BODY }}
+                  >
+                    Universidade • Cidade • Estado
+                  </p>
+                </div>
+              </div>
+
+ main
             </div>
           </div>
 
@@ -3878,8 +4659,7 @@ function ContatoPage() {
 export default function App() {
   const [page, setPage] = useState<Page>("home");
 
-  const scrollToTop = () =>
-    window.scrollTo({ top: 0, behavior: "smooth" });
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
   const navigate = (p: Page) => {
     setPage(p);
@@ -3887,10 +4667,7 @@ export default function App() {
   };
 
   return (
-    <div
-      className="min-h-screen bg-background"
-      style={{ fontFamily: BODY }}
-    >
+    <div className="min-h-screen bg-background" style={{ fontFamily: BODY }}>
       <Navbar page={page} setPage={navigate} />
 
       <main>
