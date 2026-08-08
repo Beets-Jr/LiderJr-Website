@@ -24,7 +24,7 @@ import {
   Download,
   TrendingDown, 
   ShieldCheck, 
-  Lightbulb
+  Lightbulb,
   Target,
   Quote,
   Calendar,
@@ -2121,115 +2121,76 @@ function ServicosPage({ setPage }: { setPage: (p: Page) => void }) {
             ))}
           </div>
 
-          {/* Mapeamento de Processos (Substituindo a antiga seção Process) */}
-          <div className="flex flex-col gap-24 mt-12">
-            {/* Como Funciona */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <p
-                  className="text-accent text-xs font-semibold uppercase tracking-widest mb-3"
-                  style={{ fontFamily: BODY }}
-                >
-                  Como funciona
-                </p>
-                <h2
-                  className="text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight"
-                  style={{ fontFamily: HEADING }}
-                >
-                  Enxergue sua operação com clareza
-                </h2>
-                <p
-                  className="text-muted-foreground text-lg mb-6 leading-relaxed"
-                  style={{ fontFamily: BODY }}
-                >
-                  Levantamos, documentamos e analisamos os processos da sua empresa para identificar gargalos, retrabalho e pontos de melhoria — antes de propor qualquer mudança.
-                </p>
-                <p
-                  className="text-muted-foreground text-lg mb-8 leading-relaxed"
-                  style={{ fontFamily: BODY }}
-                >
-                  Usamos metodologias consolidadas como BPMN, fluxogramas e Value Stream Mapping (VSM) para transformar processos informais em fluxos claros e mensuráveis.
-                </p>
-                <div className="flex flex-wrap gap-3">
-                  {["Lean", "BPMN", "VSM"].map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-sm px-4 py-2 rounded-full bg-secondary text-secondary-foreground font-medium"
-                      style={{ fontFamily: BODY }}
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <div className="w-full relative rounded-2xl overflow-hidden bg-[#1a1a1a] aspect-[4/3] shadow-xl flex items-center justify-center">
-                <span className="text-white/20 text-4xl md:text-5xl font-bold tracking-wider" style={{ fontFamily: HEADING }}>Placeholder</span>
-              </div>
+          {/* Process */}
+          <div className="bg-primary rounded-2xl p-12">
+            <div className="text-center mb-12">
+              <p
+                className="text-accent text-xs font-semibold uppercase tracking-widest mb-3"
+                style={{ fontFamily: BODY }}
+              >
+                Como trabalhamos
+              </p>
+              <h2
+                className="text-4xl font-bold text-white"
+                style={{ fontFamily: HEADING }}
+              >
+                Nosso processo
+              </h2>
             </div>
-
-            {/* Metodologia */}
-            <div className="bg-secondary/30 rounded-3xl p-10 md:p-16 border border-border/50">
-              <div className="text-center mb-12 md:mb-16">
-                <p
-                  className="text-accent text-xs font-semibold uppercase tracking-widest mb-3"
-                  style={{ fontFamily: BODY }}
-                >
-                  Metodologia
-                </p>
-                <h2
-                  className="text-3xl md:text-4xl font-bold text-foreground"
-                  style={{ fontFamily: HEADING }}
-                >
-                  Etapas do mapeamento
-                </h2>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {[
-                  {
-                    step: "01",
-                    title: "Levantamento",
-                    desc: "Entrevistas e observação in loco para entender o processo como ele realmente acontece.",
-                  },
-                  {
-                    step: "02",
-                    title: "Modelagem",
-                    desc: "Construção do fluxo atual (AS IS) em notação BPMN, deixando visível cada etapa e responsável.",
-                  },
-                  {
-                    step: "03",
-                    title: "Diagnóstico",
-                    desc: "Identificação de gargalos, desperdícios e retrabalho ao longo do fluxo mapeado.",
-                  },
-                  {
-                    step: "04",
-                    title: "Redesenho",
-                    desc: "Proposta do processo futuro (TO BE), com melhorias validadas junto à equipe.",
-                  },
-                ].map((item, i) => (
-                  <div key={i} className="bg-card border border-border hover:border-accent/40 rounded-2xl p-8 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-                    <div className="w-12 h-12 rounded-xl bg-accent flex items-center justify-center mb-6 shadow-sm">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {[
+                {
+                  step: "01",
+                  title: "Diagnóstico",
+                  desc: "Entendemos a fundo seu negócio, identificando dores, objetivos e oportunidades de melhoria.",
+                },
+                {
+                  step: "02",
+                  title: "Proposta",
+                  desc: "Elaboramos uma proposta detalhada com escopo, metodologia, prazos e investimento necessário.",
+                },
+                {
+                  step: "03",
+                  title: "Execução",
+                  desc: "Executamos o projeto com rigor técnico, comunicação contínua e supervisão de professores.",
+                },
+                {
+                  step: "04",
+                  title: "Entrega",
+                  desc: "Apresentamos resultados concretos, com relatório completo e plano de implementação.",
+                },
+              ].map((item, i) => (
+                <div key={i} className="relative">
+                  <div
+                    className="text-6xl font-bold text-white/5 absolute -top-2 -left-2"
+                    style={{ fontFamily: HEADING }}
+                  >
+                    {item.step}
+                  </div>
+                  <div className="relative">
+                    <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center mb-4">
                       <span
-                        className="text-white text-sm font-bold"
+                        className="text-white text-xs font-bold"
                         style={{ fontFamily: BODY }}
                       >
                         {item.step}
                       </span>
                     </div>
                     <h3
-                      className="font-bold text-foreground text-xl mb-3"
+                      className="font-bold text-white mb-2"
                       style={{ fontFamily: HEADING }}
                     >
                       {item.title}
                     </h3>
                     <p
-                      className="text-sm text-muted-foreground leading-relaxed"
+                      className="text-sm text-white/60 leading-relaxed"
                       style={{ fontFamily: BODY }}
                     >
                       {item.desc}
                     </p>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -2297,7 +2258,7 @@ function MapeamentoProcessosPage({
               Enxergue sua operação com clareza
             </h2>
             <p
-              className="text-muted-foreground text-lg leading-relaxed mb-6"
+              className="text-foreground text-lg leading-relaxed mb-6"
               style={{ fontFamily: BODY }}
             >
               Levantamos, documentamos e analisamos os processos da sua
@@ -2305,7 +2266,7 @@ function MapeamentoProcessosPage({
               melhoria — antes de propor qualquer mudança.
             </p>
             <p
-              className="text-muted-foreground text-lg leading-relaxed mb-8"
+              className="text-foreground text-lg leading-relaxed mb-8"
               style={{ fontFamily: BODY }}
             >
               Usamos metodologias consolidadas como BPMN, fluxogramas e
@@ -2324,13 +2285,16 @@ function MapeamentoProcessosPage({
               ))}
             </div>
           </div>
-          <div className="w-full relative rounded-2xl overflow-hidden bg-primary aspect-[4/3] shadow-xl flex items-center justify-center">
-            <span
-              className="text-white/20 text-4xl md:text-5xl font-bold tracking-wider"
-              style={{ fontFamily: HEADING }}
-            >
-              Placeholder
-            </span>
+          <div
+            className="w-full relative rounded-2xl overflow-hidden bg-primary aspect-[4/3] shadow-xl flex items-center justify-center"
+            style={{
+              backgroundImage:
+                "url(https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=800&h=600&fit=crop&auto=format)",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            }}
+          >
           </div>
         </div>
       </section>
@@ -2396,7 +2360,7 @@ function MapeamentoProcessosPage({
                     {item.title}
                   </h3>
                   <p
-                    className="text-sm text-muted-foreground leading-relaxed max-w-[260px]"
+                    className="text-sm text-foreground leading-relaxed max-w-[260px]"
                     style={{ fontFamily: BODY }}
                   >
                     {item.desc}
@@ -2419,7 +2383,7 @@ function MapeamentoProcessosPage({
               Por que mapear seus processos?
             </h2>
             <p
-              className="text-muted-foreground text-lg max-w-2xl"
+              className="text-foreground text-lg max-w-2xl"
               style={{ fontFamily: BODY }}
             >
               O mapeamento não é apenas um desenho. É uma ferramenta estratégica que gera impactos diretos nos resultados da sua empresa.
@@ -2458,7 +2422,7 @@ function MapeamentoProcessosPage({
                   {result.title}
                 </h3>
                 <p
-                  className="text-muted-foreground text-sm leading-relaxed"
+                  className="text-foreground text-sm leading-relaxed"
                   style={{ fontFamily: BODY }}
                 >
                   {result.desc}
@@ -2506,7 +2470,7 @@ function MapeamentoProcessosPage({
                 Roberto Martins
               </p>
               <p
-                className="text-muted-foreground text-xs"
+                className="text-foreground text-xs"
                 style={{ fontFamily: BODY }}
               >
                 Gerente de Produção, Indústria Metalúrgica
