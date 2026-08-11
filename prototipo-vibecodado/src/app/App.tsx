@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import {
+  Search, FileText, GraduationCap,
   Menu,
   X,
   ArrowRight,
@@ -316,10 +317,10 @@ const STATS = [
 ];
 
 const AFFILIATIONS = [
-  { name: "Universidade (UFSCar)" },
-  { name: "Núcleo Campinas" },
-  { name: "FEJESP" },
-  { name: "Brasil Júnior" },
+  { name: "UFSCar", logo: "https://www.beetsjr.com.br/assets/ufscar-logo.svg", description: "Somos orientados por doutores da Universidade Federal de São Carlos, uma das 15 melhores universidades da América Latina, recebendo apoio de profissionais com larga experiência na área.", },
+  { name: "Núcleo Campinas", logo: "https://www.beetsjr.com.br/assets/nuca-logo.svg", description: "O Núcleo Campinas de Empresas Juniores (NuCa) é uma instância regional da Rede Paulista, com um total de 44 EJs afiliadas. A Beets Jr. se filiou ao NuCa em julho de 2020, onde iniciou sua imersão no MEJ Paulista.", },
+  { name: "FEJESP", logo: "https://www.beetsjr.com.br/assets/fejesp-logo.svg", description: "A Federação de Empresas Juniores do Estado de São Paulo é uma associação que representa e potencializa as EJs do Estado de São Paulo. A instância estadual representa o MEJ Paulista desde 1990.", },
+  { name: "Brasil Júnior", logo: "https://www.beetsjr.com.br/assets/brjunior-logo.svg", description: "Integração com o Movimento Empresa Júnior Brasileiro, conectados com EJs dos mais variados ramos de serviço em todo o país, em prol da evolução da prática empreendedora.", },
 ];
 
 const CLIENTS_ROW_1 = [
@@ -370,7 +371,7 @@ function CasesCarousel({ setPage }: { setPage: (p: Page) => void }) {
       <h3 className="text-lg font-bold text-foreground mb-3" style={{ fontFamily: HEADING }}>
         {c.company}
       </h3>
-      <p className="leading-7 text-sm mb-6 text-muted-foreground" style={{ fontFamily: BODY }}>
+      <p className="leading-7 text-sm mb-6 text-foreground" style={{ fontFamily: BODY }}>
         {c.desc}
       </p>
       <div className="flex flex-wrap gap-2 mb-6">
@@ -1338,7 +1339,7 @@ function HomePage({ setPage }: { setPage: (p: Page) => void }) {
                 className={`text-sm ${
                   i === 0
                     ? "text-white/80"
-                    : "text-muted-foreground"
+                    : "text-foreground"
                 }`}
                 style={{ fontFamily: BODY }}
               >
@@ -1523,7 +1524,7 @@ function HomePage({ setPage }: { setPage: (p: Page) => void }) {
               </h2>
       
               <p
-                className="mt-4 max-w-2xl text-muted-foreground"
+                className="mt-4 max-w-2xl text-foreground"
                 style={{ fontFamily: BODY }}
               >
                 Conheça alguns projetos desenvolvidos pela Lider Jr. e o impacto
@@ -1597,7 +1598,7 @@ function HomePage({ setPage }: { setPage: (p: Page) => void }) {
                       {post.category}
                     </span>
                     <span
-                      className="text-xs text-muted-foreground flex items-center gap-1"
+                      className="text-xs text-foreground flex items-center gap-1"
                       style={{ fontFamily: BODY }}
                     >
                       <Clock size={11} /> {post.readTime}
@@ -1610,7 +1611,7 @@ function HomePage({ setPage }: { setPage: (p: Page) => void }) {
                     {post.title}
                   </h3>
                   <p
-                    className="text-xs text-muted-foreground leading-relaxed"
+                    className="text-xs text-foreground leading-relaxed"
                     style={{ fontFamily: BODY }}
                   >
                     {post.date}
@@ -1865,7 +1866,7 @@ function QuemSomosPage() {
                 Nascemos para conectar academia e mercado
               </h2>
               <p
-                className="text-muted-foreground leading-relaxed mb-4"
+                className="text-foreground leading-relaxed mb-4"
                 style={{ fontFamily: BODY }}
               >
                 Fundada por um grupo de alunos motivados do
@@ -1875,7 +1876,7 @@ function QuemSomosPage() {
                 consultoria de qualidade a preços acessíveis.
               </p>
               <p
-                className="text-muted-foreground leading-relaxed"
+                className="text-foreground leading-relaxed"
                 style={{ fontFamily: BODY }}
               >
                 Ao longo dos anos, crescemos, obtivemos
@@ -1895,8 +1896,19 @@ function QuemSomosPage() {
       </section>
 
       {/* Cultura */}
-      <section className="bg-muted py-24">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="bg-muted py-24 relative overflow-hidden">
+        {/* grid técnico de fundo */}
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.04]"
+          style={{
+            backgroundImage:
+              "linear-gradient(currentColor 1px, transparent 1px), linear-gradient(90deg, currentColor 1px, transparent 1px)",
+            backgroundSize: "40px 40px",
+            color: "var(--accent)",
+          }}
+        />
+
+        <div className="max-w-7xl mx-auto px-6 relative">
           <div className="text-center mb-14">
             <p
               className="text-accent text-xs font-semibold uppercase tracking-widest mb-3"
@@ -1915,26 +1927,64 @@ function QuemSomosPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               {
+                code: "M / 01",
                 label: "Missão",
                 text: "Oferecer soluções inovadoras em Engenharia de Produção, desenvolvendo competências nos nossos membros e gerando valor real para clientes.",
-                icon: "🎯",
+                icon: (
+                  <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7">
+                    <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" />
+                    <circle cx="12" cy="12" r="5" stroke="currentColor" strokeWidth="1.5" />
+                    <circle cx="12" cy="12" r="1.2" fill="currentColor" />
+                  </svg>
+                ),
               },
               {
+                code: "V / 02",
                 label: "Visão",
                 text: "Ser referência nacional em consultoria júnior, reconhecida pela excelência técnica, impacto nos negócios e formação de líderes.",
-                icon: "🔭",
+                icon: (
+                  <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7">
+                    <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" />
+                    <path d="M15.5 8.5L13 13l-4.5 2.5L11 11l4.5-2.5z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+                    <circle cx="12" cy="12" r="0.8" fill="currentColor" />
+                  </svg>
+                ),
               },
               {
+                code: "P / 03",
                 label: "Valores",
                 text: "Inovação, comprometimento, ética e aprendizado contínuo são os pilares que guiam cada projeto e cada decisão da Líder Jr.",
-                icon: "⚡",
+                icon: (
+                  <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7">
+                    <line x1="2.5" y1="6" x2="21.5" y2="6" stroke="currentColor" strokeWidth="1.5" />
+                    <line x1="2.5" y1="19" x2="21.5" y2="19" stroke="currentColor" strokeWidth="1.5" />
+                    <line x1="6" y1="6" x2="6" y2="19" stroke="currentColor" strokeWidth="1.5" />
+                    <line x1="12" y1="6" x2="12" y2="19" stroke="currentColor" strokeWidth="1.5" />
+                    <line x1="18" y1="6" x2="18" y2="19" stroke="currentColor" strokeWidth="1.5" />
+                  </svg>
+                ),
               },
             ].map((item, i) => (
               <div
                 key={i}
-                className="bg-card border border-border rounded-xl p-8"
+                className="group relative bg-card border border-border rounded-xl p-8 transition-colors hover:border-accent/40"
               >
-                <div className="text-3xl mb-4">{item.icon}</div>
+                {/* marcações de canto, estilo desenho técnico */}
+                <span className="absolute top-3 left-3 w-3 h-3 border-t border-l border-accent/30 group-hover:border-accent/60 transition-colors" />
+                <span className="absolute top-3 right-3 w-3 h-3 border-t border-r border-accent/30 group-hover:border-accent/60 transition-colors" />
+                <span className="absolute bottom-3 left-3 w-3 h-3 border-b border-l border-accent/30 group-hover:border-accent/60 transition-colors" />
+                <span className="absolute bottom-3 right-3 w-3 h-3 border-b border-r border-accent/30 group-hover:border-accent/60 transition-colors" />
+
+                <div className="flex items-start justify-between mb-6">
+                  <div className="text-accent">{item.icon}</div>
+                  <span
+                    className="text-[11px] tracking-widest text-muted-foreground"
+                    style={{ fontFamily: "monospace" }}
+                  >
+                    {item.code}
+                  </span>
+                </div>
+
                 <h3
                   className="font-bold text-foreground text-lg mb-3"
                   style={{ fontFamily: HEADING }}
@@ -1942,7 +1992,7 @@ function QuemSomosPage() {
                   {item.label}
                 </h3>
                 <p
-                  className="text-sm text-muted-foreground leading-relaxed"
+                  className="text-sm text-foreground leading-relaxed"
                   style={{ fontFamily: BODY }}
                 >
                   {item.text}
@@ -1955,8 +2005,8 @@ function QuemSomosPage() {
 
       {/* Filiações */}
       <section className="bg-background py-24">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-14">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="text-center mb-16">
             <p
               className="text-accent text-xs font-semibold uppercase tracking-widest mb-3"
               style={{ fontFamily: BODY }}
@@ -1970,28 +2020,70 @@ function QuemSomosPage() {
               Filiações
             </h2>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-            {AFFILIATIONS.map((a, i) => (
-              <div
-                key={i}
-                className="bg-card border border-border rounded-xl p-8 text-center"
-              >
-                <div className="w-full h-20 rounded-lg bg-muted flex items-center justify-center mb-4">
-                  <span
-                    className="text-xs text-muted-foreground uppercase tracking-widest"
-                    style={{ fontFamily: BODY }}
+
+          <div className="relative border-t border-border">
+            {AFFILIATIONS.map((a, i) => {
+              const reversed = i % 2 === 1;
+              const isLast = i === AFFILIATIONS.length - 1;
+
+              return (
+                <div key={i} className="relative">
+                  <div
+                    className={`group flex flex-col md:flex-row ${
+                      reversed ? "md:flex-row-reverse" : ""
+                    } items-center gap-8 md:gap-14 py-12`}
                   >
-                    Logo
-                  </span>
+                    {/* logo */}
+                    <div className="relative flex-shrink-0 w-full md:w-52">
+                      <div className="w-full h-36 flex items-center justify-center">
+                        {a.logo ? (
+                          <img
+                            src={a.logo}
+                            alt={a.name}
+                            className="max-w-full max-h-full object-contain"
+                          />
+                        ) : (
+                          <span
+                            className="text-xs text-muted-foreground uppercase tracking-widest"
+                            style={{ fontFamily: BODY }}
+                          >
+                            Logo
+                          </span>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* texto */}
+                    <div className="flex-1 text-center md:text-left">
+                      <h3
+                        className="font-bold text-foreground text-lg mb-2"
+                        style={{ fontFamily: HEADING }}
+                      >
+                        {a.name}
+                      </h3>
+                      <p
+                        className="text-sm text-foreground leading-relaxed"
+                        style={{ fontFamily: BODY }}
+                      >
+                        {a.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* divisor entre linhas */}
+                  <div className="relative border-t border-border">
+                    {!isLast && (
+                      <span className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 top-0 w-6 h-6 rounded-full bg-background border border-border flex items-center justify-center">
+                        <svg viewBox="0 0 24 24" className="w-3 h-3">
+                          <line x1="12" y1="4" x2="12" y2="20" stroke="currentColor" strokeWidth="1.5" className="text-accent/50" />
+                          <line x1="4" y1="12" x2="20" y2="12" stroke="currentColor" strokeWidth="1.5" className="text-accent/50" />
+                        </svg>
+                      </span>
+                    )}
+                  </div>
                 </div>
-                <h3
-                  className="font-bold text-foreground"
-                  style={{ fontFamily: HEADING }}
-                >
-                  {a.name}
-                </h3>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -2121,76 +2213,104 @@ function ServicosPage({ setPage }: { setPage: (p: Page) => void }) {
             ))}
           </div>
 
-          {/* Process */}
-          <div className="bg-primary rounded-2xl p-12">
-            <div className="text-center mb-12">
+          {/* New Process*/}
+          <div className="rounded-2xl p-8 sm:p-12 bg-primary">
+            {/* Header */}
+            <div className="mb-14 max-w-2xl">
               <p
-                className="text-accent text-xs font-semibold uppercase tracking-widest mb-3"
-                style={{ fontFamily: BODY }}
+                className="text-xs font-semibold uppercase tracking-[0.2em] mb-3"
+                style={{ fontFamily: BODY, color: "#ff751f" }}
               >
-                Como trabalhamos
+                Do primeiro contato à entrega
               </p>
               <h2
-                className="text-4xl font-bold text-white"
+                className="text-3xl sm:text-4xl font-semibold text-white"
                 style={{ fontFamily: HEADING }}
               >
                 Nosso processo
               </h2>
+              <p
+                className="mt-4 text-sm sm:text-base leading-relaxed text-white"
+                style={{ fontFamily: BODY }}
+              >
+                Quatro etapas, sem atalhos. Cada projeto passa pelo mesmo rigor —
+                da escuta inicial até o relatório final nas suas mãos.
+              </p>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-              {[
-                {
-                  step: "01",
-                  title: "Diagnóstico",
-                  desc: "Entendemos a fundo seu negócio, identificando dores, objetivos e oportunidades de melhoria.",
-                },
-                {
-                  step: "02",
-                  title: "Proposta",
-                  desc: "Elaboramos uma proposta detalhada com escopo, metodologia, prazos e investimento necessário.",
-                },
-                {
-                  step: "03",
-                  title: "Execução",
-                  desc: "Executamos o projeto com rigor técnico, comunicação contínua e supervisão de professores.",
-                },
-                {
-                  step: "04",
-                  title: "Entrega",
-                  desc: "Apresentamos resultados concretos, com relatório completo e plano de implementação.",
-                },
-              ].map((item, i) => (
-                <div key={i} className="relative">
-                  <div
-                    className="text-6xl font-bold text-white/5 absolute -top-2 -left-2"
-                    style={{ fontFamily: HEADING }}
-                  >
-                    {item.step}
-                  </div>
-                  <div className="relative">
-                    <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center mb-4">
+
+            {/* Timeline */}
+            <div className="relative">
+              {/* linha conectora (desktop) */}
+              <div
+                className="hidden lg:block absolute top-[22px] left-0 right-0 h-px"
+                style={{
+                  background:
+                    "linear-gradient(90deg, transparent, rgba(201,164,98,0.35) 8%, rgba(201,164,98,0.35) 92%, transparent)",
+                }}
+              />
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
+                {[
+                  {
+                    num: "01",
+                    icon: Search,
+                    title: "Diagnóstico",
+                    desc: "Ouvimos o time, mapeamos o cenário atual e identificamos as causas reais do problema — não só os sintomas.",
+                  },
+                  {
+                    num: "02",
+                    icon: FileText,
+                    title: "Proposta",
+                    desc: "Traduzimos o diagnóstico em um plano claro: escopo, cronograma, entregáveis e investimento, sem letra miúda.",
+                  },
+                  {
+                    num: "03",
+                    icon: GraduationCap,
+                    title: "Execução",
+                    desc: "Equipe dedicada em campo, com acompanhamento semanal e supervisão acadêmica em cada etapa crítica.",
+                    badge: "Com supervisão de professores",
+                  },
+                  {
+                    num: "04",
+                    icon: CheckCircle2,
+                    title: "Entrega",
+                    desc: "Resultado documentado e validado, com plano de continuidade para depois que o projeto termina.",
+                  },
+                ].map((item, i) => {
+                  const Icon = item.icon;
+                  return (
+                    <div key={i} className="relative group">
+                      <div
+                        className="relative z-10 w-11 h-11 rounded-full flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110"
+                        style={{ backgroundColor: "#ff751f", boxShadow: "0 0 0 6px rgba(0, 0, 0, 0.12)" }}
+                      >
+                        <Icon className="w-5 h-5" style={{ color: "#0E1626" }} strokeWidth={2.25} />
+                      </div>
+
                       <span
-                        className="text-white text-xs font-bold"
+                        className="block text-[11px] font-semibold tracking-[0.2em] mb-2"
+                        style={{ fontFamily: BODY, color: "#ff751f" }}
+                      >
+                        {item.num}
+                      </span>
+
+                      <h3
+                        className="text-lg font-semibold text-white mb-2"
+                        style={{ fontFamily: HEADING }}
+                      >
+                        {item.title}
+                      </h3>
+
+                      <p
+                        className="text-sm leading-relaxed text-white"
                         style={{ fontFamily: BODY }}
                       >
-                        {item.step}
-                      </span>
+                        {item.desc}
+                      </p>
                     </div>
-                    <h3
-                      className="font-bold text-white mb-2"
-                      style={{ fontFamily: HEADING }}
-                    >
-                      {item.title}
-                    </h3>
-                    <p
-                      className="text-sm text-white/60 leading-relaxed"
-                      style={{ fontFamily: BODY }}
-                    >
-                      {item.desc}
-                    </p>
-                  </div>
-                </div>
-              ))}
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
@@ -2573,6 +2693,7 @@ function CasesPage({ setPage }: { setPage: (p: Page) => void }) {
     "Agronegócio",
     "Serviços",
     "Logística",
+    "Inovação",
   ];
 
   const filtered =
@@ -2687,7 +2808,7 @@ function CasesPage({ setPage }: { setPage: (p: Page) => void }) {
                 </h2>
                 
                 <p
-                  className="text-lg text-muted-foreground leading-relaxed mb-8"
+                  className="text-lg text-foreground leading-relaxed mb-8"
                   style={{ fontFamily: BODY }}
                 >
                   {c.desc}
@@ -2697,7 +2818,7 @@ function CasesPage({ setPage }: { setPage: (p: Page) => void }) {
                   {c.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="text-xs px-3 py-1.5 rounded-full border border-border bg-muted text-muted-foreground font-medium"
+                      className="text-xs px-3 py-1.5 rounded-full border border-border bg-muted text-foreground font-medium"
                       style={{ fontFamily: BODY }}
                     >
                       {tag}
@@ -2884,7 +3005,7 @@ function CaseMetalurgicaPage({
                       Diretor de Operações
                     </p>
                     <p
-                      className="text-[10px] text-muted-foreground"
+                      className="text-[10px] text-foreground"
                       style={{ fontFamily: BODY }}
                     >
                       Grande Indústria Metalúrgica
@@ -2920,7 +3041,7 @@ function CaseMetalurgicaPage({
                       R$ 150k
                     </p>
                     <p
-                      className="text-xs text-muted-foreground font-semibold mt-1"
+                      className="text-xs text-foreground font-semibold mt-1"
                       style={{ fontFamily: BODY }}
                     >
                       Economia Anual
@@ -3001,7 +3122,7 @@ function CaseMetalurgicaPage({
                     {item.company}
                   </h4>
                   <p
-                    className="text-xs text-muted-foreground line-clamp-2"
+                    className="text-xs text-foreground line-clamp-2"
                     style={{ fontFamily: BODY }}
                   >
                     {item.desc}
@@ -3031,6 +3152,7 @@ function MateriaisPage() {
     "Estratégia",
     "Gestão",
     "Financeiro",
+    "Inovação",
   ];
 
   const filtered =
@@ -3148,7 +3270,7 @@ function MateriaisPage() {
                   {/* Conteúdo */}
                   <div className="p-6 flex flex-col flex-1">
                     <div className="flex items-center gap-2 mb-3">
-                      <span className="text-xs px-2.5 py-1 rounded-full border border-border bg-muted text-muted-foreground font-medium" style={{ fontFamily: BODY }}>
+                      <span className="text-xs px-2.5 py-1 rounded-full border border-border bg-muted text-foreground font-medium" style={{ fontFamily: BODY }}>
                         {m.category}
                       </span>
                     </div>
@@ -3161,7 +3283,7 @@ function MateriaisPage() {
                     </h3>
                     
                     <p 
-                      className="text-sm text-muted-foreground line-clamp-3 mb-6 flex-1" 
+                      className="text-sm text-foreground line-clamp-3 mb-6 flex-1" 
                       style={{ fontFamily: BODY }}
                     >
                       {m.excerpt}
@@ -3209,6 +3331,7 @@ function BlogPage({ setPage }: { setPage: (p: Page) => void }) {
     "Estratégia",
     "Qualidade",
     "Mercado",
+    "Inovação",
   ];
 
   const filtered =
@@ -3306,7 +3429,7 @@ function BlogPage({ setPage }: { setPage: (p: Page) => void }) {
                       {BLOG_POSTS[0].category}
                     </span>
                     <span
-                      className="text-sm font-medium text-muted-foreground flex items-center gap-1.5"
+                      className="text-sm font-medium text-foreground flex items-center gap-1.5"
                       style={{ fontFamily: BODY }}
                     >
                       <Clock size={14} />{" "}
@@ -3322,14 +3445,14 @@ function BlogPage({ setPage }: { setPage: (p: Page) => void }) {
                   </h2>
                   {/* Legenda do destaque aumentada de sm para base/lg */}
                   <p
-                    className="text-base lg:text-lg text-muted-foreground leading-relaxed mb-8"
+                    className="text-base lg:text-lg text-foreground leading-relaxed mb-8"
                     style={{ fontFamily: BODY }}
                   >
                     {BLOG_POSTS[0].excerpt}
                   </p>
                   <div className="flex items-center justify-between mt-auto">
                     <span
-                      className="text-sm font-medium text-muted-foreground"
+                      className="text-sm font-medium text-foreground"
                       style={{ fontFamily: BODY }}
                     >
                       {BLOG_POSTS[0].date}
@@ -3379,7 +3502,7 @@ function BlogPage({ setPage }: { setPage: (p: Page) => void }) {
                       {post.category}
                     </span>
                     <span
-                      className="text-xs font-medium text-muted-foreground flex items-center gap-1"
+                      className="text-xs font-medium text-foreground flex items-center gap-1"
                       style={{ fontFamily: BODY }}
                     >
                       <Clock size={12} /> {post.readTime}
@@ -3394,7 +3517,7 @@ function BlogPage({ setPage }: { setPage: (p: Page) => void }) {
                   </h3>
                   {/* Legenda dos posts aumentados de text-xs para text-sm */}
                   <p
-                    className="text-sm text-muted-foreground leading-relaxed mb-6 flex-1"
+                    className="text-sm text-foreground leading-relaxed mb-6 flex-1"
                     style={{ fontFamily: BODY }}
                   >
                     {post.excerpt}
@@ -3402,7 +3525,7 @@ function BlogPage({ setPage }: { setPage: (p: Page) => void }) {
                   {/* Data aumentada e presa ao rodapé do card */}
                   <div className="mt-auto pt-4 border-t border-border/50">
                     <p
-                      className="text-sm font-medium text-muted-foreground"
+                      className="text-sm font-medium text-foreground"
                       style={{ fontFamily: BODY }}
                     >
                       {post.date}
@@ -3696,7 +3819,7 @@ function PostLeanManufacturingPage({
                     {item.title}
                   </h4>
                   <p
-                    className="text-xs text-muted-foreground line-clamp-2"
+                    className="text-xs text-foreground line-clamp-2"
                     style={{ fontFamily: BODY }}
                   >
                     {item.excerpt}
@@ -3789,7 +3912,7 @@ function ContatoPage() {
                     Telefone
                   </p>
                   <p
-                    className="text-muted-foreground"
+                    className="text-foreground"
                     style={{ fontFamily: BODY }}
                   >
                     (15) 99827-7936
@@ -3810,7 +3933,7 @@ function ContatoPage() {
                     E-mail
                   </p>
                   <p
-                    className="text-muted-foreground"
+                    className="text-foreground"
                     style={{ fontFamily: BODY }}
                   >
                     contato@liderjr.com
