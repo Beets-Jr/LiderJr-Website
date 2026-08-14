@@ -1,0 +1,5 @@
+{
+  "permissions": {
+    "deny": ["Edit(./prototipo-vibecodado/**)", "Write(./prototipo-vibecodado/**)"]
+  }
+}

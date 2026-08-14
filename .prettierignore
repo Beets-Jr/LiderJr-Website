@@ -1,0 +1,7 @@
+# Protótipo aprovado — referência somente-leitura, nunca formatar.
+prototipo-vibecodado/
+
+.next/
+node_modules/
+package-lock.json
+public/

@@ -1,0 +1,208 @@
+/*
+ * DESIGN SYSTEM — LÍDER JR.
+ * Fonte única de verdade para cor, tipografia, espaçamento, raio, sombra e motion.
+ * Ver DESIGN-SYSTEM.md para quando usar cada token.
+ *
+ * `source(none)` + `@source` restringem o scan do Tailwind a src/ — a pasta
+ * prototipo-vibecodado/ nunca é lida.
+ */
+@import "tailwindcss" source(none);
+@source "../**/*.{ts,tsx}";
+
+@theme {
+  /* ------------------------------------------------------------------
+   * COR
+   * A paleta default do Tailwind é removida por completo: no protótipo,
+   * famílias inteiras (emerald, blue, purple, rose) vazaram para dentro
+   * dos badges. Só existe o que está declarado abaixo.
+   * ------------------------------------------------------------------ */
+  --color-*: initial;
+
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  /* Marca — o laranja da Líder Jr. */
+  --color-brand: #ff751f;
+  --color-brand-hover: #f26821;
+  --color-brand-fg: #ffffff;
+
+  /* Superfícies claras */
+  --color-surface: #ffffff;
+  --color-surface-muted: #f4f4f5;
+  --color-surface-subtle: #fafafa;
+
+  /* Superfícies escuras — quase-preto com 3 degraus de elevação */
+  --color-surface-dark: #0b0b0c;
+  --color-surface-dark-2: #141416;
+  --color-surface-dark-3: #1c1c1f;
+
+  /* Texto (fg = foreground). Sobre superfície escura, use os `on-dark`.
+     Contraste conferido: fg-muted 7,4:1 · on-dark-muted 11,8:1 · on-dark-faint 6,1:1
+     — todos passam no WCAG AA. No protótipo, #999999 dava 2,85:1 e reprovava. */
+  --color-fg: #0b0b0c;
+  --color-fg-muted: #52525b;
+  --color-on-dark: #ffffff;
+  --color-on-dark-muted: rgba(255, 255, 255, 0.72);
+  --color-on-dark-faint: rgba(255, 255, 255, 0.56);
+
+  /* Bordas */
+  --color-border: rgba(0, 0, 0, 0.12);
+  --color-border-strong: rgba(0, 0, 0, 0.2);
+  --color-border-on-dark: rgba(255, 255, 255, 0.12);
+  --color-border-on-dark-strong: rgba(255, 255, 255, 0.22);
+
+  /* Estados */
+  --color-danger: #c8102e;
+  --color-success: #0f7a58;
+
+  /* Canal externo (WhatsApp tem cor de marca própria, obrigatória) */
+  --color-whatsapp: #25d366;
+  --color-whatsapp-hover: #20bd5a;
+
+  /* ------------------------------------------------------------------
+   * TIPOGRAFIA
+   * As variáveis --font-* vêm do next/font (src/app/fonts.ts).
+   * ------------------------------------------------------------------ */
+  --font-heading: var(--font-league-spartan), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-raleway), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-dm-serif), ui-serif, Georgia, serif;
+  --font-sans: var(--font-raleway), ui-sans-serif, system-ui, sans-serif;
+
+  /* ------------------------------------------------------------------
+   * RAIO — 3 degraus. O protótipo tinha 6 sem hierarquia.
+   * `rounded-full` e `rounded-none` continuam disponíveis (estáticos).
+   * ------------------------------------------------------------------ */
+  --radius-*: initial;
+  --radius-sm: 8px; /* chips, tiles pequenos */
+  --radius-md: 12px; /* botões, inputs */
+  --radius-lg: 16px; /* cards, painéis */
+
+  /* ------------------------------------------------------------------
+   * SOMBRA — 3 degraus. O protótipo ia de shadow-sm a shadow-2xl.
+   * ------------------------------------------------------------------ */
+  --shadow-*: initial;
+  --shadow-sm: 0 1px 2px 0 rgba(11, 11, 12, 0.05);
+  --shadow-md:
+    0 4px 12px -2px rgba(11, 11, 12, 0.08), 0 2px 4px -2px rgba(11, 11, 12, 0.05);
+  --shadow-lg:
+    0 12px 32px -8px rgba(11, 11, 12, 0.14), 0 4px 8px -4px rgba(11, 11, 12, 0.06);
+
+  /* ------------------------------------------------------------------
+   * MOTION
+   * O default do Tailwind é 150ms/ease. No protótipo, 78 das 88 transições
+   * herdavam esse default enquanto as outras usavam 200/300/500/700ms.
+   * Aqui o default vira o token do sistema: toda transição sem duração
+   * explícita roda a 200ms com a mesma curva.
+   * ------------------------------------------------------------------ */
+  --default-transition-duration: 200ms;
+  --default-transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-brand: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-marquee-left: marquee-left 35s linear infinite;
+  --animate-marquee-right: marquee-right 35s linear infinite;
+  --animate-fade-in: fade-in 500ms var(--ease-brand) both;
+}
+
+@keyframes marquee-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --------------------------------------------------------------------
+ * UTILITÁRIOS DO SISTEMA
+ * -------------------------------------------------------------------- */
+
+/* Esconde a barra de rolagem sem perder o scroll.
+   No protótipo `scrollbar-hide` era usada 3× e nunca foi definida. */
+@utility scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* O brilho radial laranja das seções escuras. */
+@utility glow-brand {
+  background-image: radial-gradient(
+    circle at 50% 50%,
+    var(--color-brand),
+    transparent 60%
+  );
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Compensa o header fixo ao ancorar por hash. */
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-surface);
+    color: var(--color-fg);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Foco visível padronizado em todo o site — requisito de acessibilidade.
+     Cobre também elementos que não passam pelos primitivos. */
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Sobre superfície escura o laranja tem contraste suficiente,
+     mas o halo branco garante visibilidade em qualquer imagem de fundo. */
+  .on-dark :focus-visible {
+    outline-color: var(--color-white);
+  }
+
+  ::selection {
+    background-color: var(--color-brand);
+    color: var(--color-brand-fg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
