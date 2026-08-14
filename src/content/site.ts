@@ -1,4 +1,5 @@
-import type { ConteudoDoSite } from "@/types/site";
+import { getHrefDoServico, getTodosServicos } from "@/content/servicos";
+import type { ConteudoDoSite, LinkDeNavegacao } from "@/types/site";
 
 /**
  * ============================================================================
@@ -87,16 +88,14 @@ export const site: ConteudoDoSite = {
 };
 
 /**
- * TEMPORÁRIO — Fase 1.
- * Alimenta o submenu "Serviços" do menu e a coluna "Serviços" do rodapé.
- * Na Fase 2 este array é substituído por `getTodosServicos()` do registry
- * (src/content/servicos/index.ts) e apagado daqui.
+ * Links do submenu "Serviços" do menu e da coluna "Serviços" do rodapé.
+ *
+ * Vêm do registry de serviços — não há lista escrita à mão. Serviços que ainda
+ * não têm página apontam para a listagem /servicos.
  */
-export const navegacaoDeServicos = [
-  { label: "Mapeamento de Processos", href: "/servicos/mapeamento-de-processos" },
-  { label: "Gestão da Qualidade", href: "/servicos/gestao-da-qualidade" },
-  { label: "Pesquisa de Mercado", href: "/servicos/pesquisa-de-mercado" },
-  { label: "Planejamento Estratégico", href: "/servicos/planejamento-estrategico" },
-  { label: "Custos e Precificação", href: "/servicos/custos-e-precificacao" },
-  { label: "Consultoria em Estoque", href: "/servicos/consultoria-em-estoque" },
-];
+export function getLinksDeServicos(): LinkDeNavegacao[] {
+  return getTodosServicos().map((servico) => ({
+    label: servico.titulo,
+    href: getHrefDoServico(servico) ?? "/servicos",
+  }));
+}

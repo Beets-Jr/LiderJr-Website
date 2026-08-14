@@ -3,7 +3,7 @@ import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
 import { SkipLink } from "@/components/layout/skip-link";
 import { WhatsAppFab } from "@/components/layout/whatsapp-fab";
-import { navegacaoDeServicos, site } from "@/content/site";
+import { getLinksDeServicos, site } from "@/content/site";
 import { fontVariables } from "./fonts";
 import "./globals.css";
 
@@ -26,6 +26,8 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const linksDeServicos = getLinksDeServicos();
+
   return (
     <html lang="pt-BR" className={fontVariables}>
       <body className="font-body">
@@ -35,7 +37,7 @@ export default function RootLayout({
           nome={site.nome}
           navegacao={site.navegacao}
           ctaDoMenu={site.ctaDoMenu}
-          submenus={{ "/servicos": navegacaoDeServicos }}
+          submenus={{ "/servicos": linksDeServicos }}
         />
 
         {/* pt-16 compensa a altura do header fixo. */}
@@ -43,7 +45,7 @@ export default function RootLayout({
           {children}
         </main>
 
-        <Footer site={site} servicos={navegacaoDeServicos} />
+        <Footer site={site} servicos={linksDeServicos} />
         <WhatsAppFab whatsapp={site.whatsapp} />
       </body>
     </html>
