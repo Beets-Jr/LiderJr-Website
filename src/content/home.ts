@@ -85,6 +85,11 @@ export const home: ConteudoDaHome = {
     descricao:
       "Conheça alguns projetos desenvolvidos pela Líder Jr. e o impacto que nossas soluções proporcionaram para diferentes empresas.",
     link: { label: "Ver todos", href: "/cases" },
+    carrossel: {
+      anterior: "Case anterior",
+      proximo: "Próximo case",
+      regiao: "Carrossel de cases em destaque",
+    },
   },
 
   blog: {

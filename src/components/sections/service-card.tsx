@@ -1,0 +1,144 @@
+import { ArrowRight, ChevronRight } from "lucide-react";
+import Link from "next/link";
+import { Badge, Card, Foto, Heading, IconTile, Text } from "@/components/ui";
+import { getIcone } from "@/lib/icones";
+import type { Servico } from "@/types/servico";
+
+/**
+ * Os dois formatos de card de serviço do protótipo.
+ * O compacto é a prévia da Home; o completo é a listagem /servicos.
+ *
+ * Em ambos, o card inteiro é clicável mas existe UM só link — o do título,
+ * esticado por cima do card com `after:absolute`. No protótipo o card era uma
+ * <div onClick>, invisível para o teclado e para buscadores.
+ */
+
+function ehClicavel(servico: Servico): string | undefined {
+  return servico.detalhe ? `/servicos/${servico.slug}` : undefined;
+}
+
+/* -------------------------------------------------------------------------- */
+
+export function ServiceCardCompacto({
+  servico,
+  rotuloDoLink,
+}: {
+  servico: Servico;
+  rotuloDoLink: string;
+}) {
+  const href = ehClicavel(servico);
+  const Icone = getIcone(servico.icone);
+
+  return (
+    <Card
+      as="article"
+      interactive={Boolean(href)}
+      className="group relative flex flex-col"
+    >
+      <IconTile icon={Icone} />
+
+      <Heading as="h3" level="card" className="mt-6">
+        {href ? (
+          <Link href={href} className="rounded-sm after:absolute after:inset-0">
+            {servico.titulo}
+          </Link>
+        ) : (
+          servico.titulo
+        )}
+      </Heading>
+
+      <Text size="base" tone="muted" className="mt-3">
+        {servico.descricao}
+      </Text>
+
+      <ul className="mt-6 flex flex-wrap gap-1.5">
+        {servico.tags.map((tag) => (
+          <li key={tag}>
+            <Badge>{tag}</Badge>
+          </li>
+        ))}
+      </ul>
+
+      {href ? (
+        <p className="text-brand font-body mt-6 flex items-center gap-2 text-sm font-semibold">
+          {rotuloDoLink}
+          <ChevronRight
+            size={16}
+            aria-hidden="true"
+            className="transition-transform group-hover:translate-x-1"
+          />
+        </p>
+      ) : null}
+    </Card>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+
+export function ServiceCardCompleto({
+  servico,
+  rotuloDoLink,
+}: {
+  servico: Servico;
+  rotuloDoLink: string;
+}) {
+  const href = ehClicavel(servico);
+
+  return (
+    <Card
+      as="article"
+      padding="none"
+      interactive={Boolean(href)}
+      className="group relative flex flex-col overflow-hidden"
+    >
+      {/* Capa com o corte diagonal característico do protótipo. */}
+      <div
+        className="relative h-64 shrink-0 overflow-hidden"
+        style={{ clipPath: "polygon(0 0, 100% 0, 100% 40%, 0 85%)" }}
+      >
+        <Foto
+          imagem={servico.imagem}
+          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+          className="transition-transform duration-500 group-hover:scale-105"
+        />
+        <div className="bg-surface-dark/40 absolute inset-0" />
+      </div>
+
+      {/* O conteúdo sobe para ocupar o espaço aberto pelo corte. */}
+      <div className="relative z-10 -mt-20 flex flex-1 flex-col px-6 pb-6">
+        {/* h2: na listagem /servicos cada card é um item de primeiro nível,
+            logo abaixo do h1 da página. Na Home o card compacto usa h3, porque
+            lá ele fica sob o h2 da seção "Nossas áreas de atuação". */}
+        <Heading
+          as="h2"
+          level="card"
+          tone="brand"
+          className="ml-auto max-w-[80%] text-right text-2xl uppercase"
+        >
+          {href ? (
+            <Link href={href} className="rounded-sm after:absolute after:inset-0">
+              {servico.titulo}
+            </Link>
+          ) : (
+            servico.titulo
+          )}
+        </Heading>
+
+        <Text size="sm" tone="brand" weight="bold" className="mt-3">
+          {servico.chamada}
+        </Text>
+
+        <Text size="sm" tone="muted" className="mt-4 flex-1">
+          {servico.descricao}
+        </Text>
+
+        {href ? (
+          <p className="bg-brand text-brand-fg font-body group-hover:bg-brand-hover mt-8 ml-auto flex w-fit items-center gap-2 rounded-md px-5 py-2.5 text-sm font-semibold transition-colors">
+            {rotuloDoLink}
+            <ArrowRight size={14} aria-hidden="true" />
+          </p>
+        ) : null}
+      </div>
+    </Card>
+  );
+}

@@ -216,7 +216,7 @@ function ItemComSubmenu({
         className="bg-surface-dark border-border-on-dark absolute top-full left-0 w-72 rounded-md border py-2 shadow-lg"
       >
         {submenu.map((sub) => (
-          <li key={sub.href}>
+          <li key={sub.label}>
             <Link
               href={sub.href}
               className="font-body text-on-dark-muted hover:text-on-dark hover:bg-surface-dark-3 block px-4 py-2 text-sm transition-colors"
@@ -310,7 +310,7 @@ function MenuMobile({
                 {submenu && submenu.length > 0 ? (
                   <ul id={idSubmenu} hidden={!expandido} className="pb-2 pl-4">
                     {submenu.map((sub) => (
-                      <li key={sub.href}>
+                      <li key={sub.label}>
                         <Link
                           href={sub.href}
                           className="font-body text-on-dark-faint hover:text-on-dark block rounded-sm px-3 py-2 text-sm transition-colors"

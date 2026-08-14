@@ -26,11 +26,13 @@ export const site: ConteudoDoSite = {
   contato: {
     telefone: {
       icone: "telefone",
+      rotulo: "Telefone",
       texto: "(15) 99827-7936",
       href: "tel:+5515998277936",
     },
     email: {
       icone: "email",
+      rotulo: "E-mail",
       texto: "contato@liderjr.com",
       href: "mailto:contato@liderjr.com",
     },

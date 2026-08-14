@@ -30,14 +30,14 @@ export function Footer({ site, servicos }: FooterProps) {
         {rodape.colunas.map((coluna) => (
           <ColunaDoRodape key={coluna.titulo} titulo={coluna.titulo}>
             {coluna.links.map((link) => (
-              <LinkDoRodape key={link.href} link={link} />
+              <LinkDoRodape key={link.label} link={link} />
             ))}
           </ColunaDoRodape>
         ))}
 
         <ColunaDoRodape titulo={rodape.tituloColunaServicos}>
           {servicos.map((servico) => (
-            <LinkDoRodape key={servico.href} link={servico} />
+            <LinkDoRodape key={servico.label} link={servico} />
           ))}
           <LinkDoRodape link={rodape.linkVerTodosServicos} />
         </ColunaDoRodape>

@@ -32,18 +32,21 @@ export const quemSomos: ConteudoQuemSomos = {
     pilares: [
       {
         codigo: "M / 01",
+        icone: "alvo",
         titulo: "Missão",
         descricao:
           "Oferecer soluções inovadoras em Engenharia de Produção, desenvolvendo competências nos nossos membros e gerando valor real para clientes.",
       },
       {
         codigo: "V / 02",
+        icone: "bussola",
         titulo: "Visão",
         descricao:
           "Ser referência nacional em consultoria júnior, reconhecida pela excelência técnica, impacto nos negócios e formação de líderes.",
       },
       {
         codigo: "P / 03",
+        icone: "colunas",
         titulo: "Valores",
         descricao:
           "Inovação, comprometimento, ética e aprendizado contínuo são os pilares que guiam cada projeto e cada decisão da Líder Jr.",

@@ -16,6 +16,7 @@ export {
   type AvatarProps,
   type IconTileProps,
 } from "./decorations";
+export { Foto, type FotoProps } from "./foto";
 export {
   Field,
   Input,

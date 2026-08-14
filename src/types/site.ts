@@ -24,8 +24,10 @@ export interface LinkExterno {
 export type NomeDeIcone =
   | "alvo"
   | "award"
+  | "bussola"
   | "calendario"
   | "check"
+  | "colunas"
   | "download"
   | "escudo"
   | "estrela"
@@ -56,6 +58,8 @@ export interface Imagem {
 /** Um item de contato exibido com ícone. */
 export interface ItemDeContato {
   icone: NomeDeIcone;
+  /** Nome do canal, ex.: "Telefone". Exibido na página Fale Conosco. */
+  rotulo: string;
   /** O que o usuário lê, ex.: "(15) 99827-7936". */
   texto: string;
   /** Para onde vai o clique, ex.: "tel:+5515998277936". */

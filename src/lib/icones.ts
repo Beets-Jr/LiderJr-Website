@@ -1,5 +1,7 @@
 import {
   Award,
+  Columns3,
+  Compass,
   BookOpen,
   Calendar,
   CheckCircle2,
@@ -31,8 +33,10 @@ import type { NomeDeIcone } from "@/types/site";
 export const ICONES: Record<NomeDeIcone, LucideIcon> = {
   alvo: Target,
   award: Award,
+  bussola: Compass,
   calendario: Calendar,
   check: CheckCircle2,
+  colunas: Columns3,
   download: Download,
   escudo: ShieldCheck,
   estrela: Star,

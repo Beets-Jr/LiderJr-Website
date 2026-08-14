@@ -10,6 +10,7 @@ import type {
   LinkDeNavegacao,
   ListaDeChecagem,
   Metadados,
+  NomeDeIcone,
 } from "./comum";
 
 /**
@@ -53,7 +54,11 @@ export interface ConteudoDaHome {
     linhaInferior: string[];
   };
 
-  cases: CabecalhoDeSecao;
+  cases: CabecalhoDeSecao & {
+    /** Rótulos do carrossel — lidos por leitores de tela. */
+    carrossel: { anterior: string; proximo: string; regiao: string };
+  };
+
   blog: CabecalhoDeSecao;
 
   /** O CTA final: depoimento acima, chamada abaixo. */
@@ -76,6 +81,7 @@ export interface Filiacao {
 export interface PilarDeCultura {
   /** Código no canto do card, estilo desenho técnico. Ex.: "M / 01". */
   codigo: string;
+  icone: NomeDeIcone;
   titulo: string;
   descricao: string;
 }
