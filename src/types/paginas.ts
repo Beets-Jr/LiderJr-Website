@@ -156,6 +156,8 @@ export interface ConteudoDoBlog {
   rotuloDoLink: string;
   /** Rótulo do "Artigo •" acima do título, na página do post. */
   rotuloDoArtigo: string;
+  /** Vem antes do nome do autor na assinatura. Ex.: "Por". */
+  prefixoDoAutor: string;
   /** Rótulos usados nas páginas de post individuais. */
   navegacaoDeDetalhe: TextosDeNavegacaoDeDetalhe;
 }
