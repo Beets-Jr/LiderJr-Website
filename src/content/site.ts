@@ -17,6 +17,7 @@ import type { ConteudoDoSite, LinkDeNavegacao } from "@/types/site";
 export const site: ConteudoDoSite = {
   nome: "Líder Jr.",
   nomeCompleto: "Líder Junior",
+  tituloPadrao: "Consultoria em Engenharia de Produção",
   descricao:
     "Empresa júnior de Engenharia de Produção. Consultoria em processos, qualidade, estratégia e custos para pequenas e médias empresas.",
 
@@ -87,6 +88,14 @@ export const site: ConteudoDoSite = {
   },
 
   pularParaConteudo: "Pular para o conteúdo",
+
+  naoEncontrado: {
+    codigo: "404",
+    titulo: "Página não encontrada",
+    descricao:
+      "O endereço que você tentou acessar não existe ou foi movido. Use o menu acima ou volte para a página inicial.",
+    botao: { label: "Voltar para a Home", href: "/" },
+  },
 };
 
 /**

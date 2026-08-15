@@ -10,7 +10,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.nomeCompleto} — Consultoria em Engenharia de Produção`,
+    default: `${site.nomeCompleto} — ${site.tituloPadrao}`,
     template: `%s | ${site.nome}`,
   },
   description: site.descricao,
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "pt_BR",
     siteName: site.nome,
-    title: `${site.nomeCompleto} — Consultoria em Engenharia de Produção`,
+    title: `${site.nomeCompleto} — ${site.tituloPadrao}`,
     description: site.descricao,
   },
 };

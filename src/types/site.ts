@@ -76,6 +76,11 @@ export interface ConteudoDoSite {
   nome: string;
   /** Nome por extenso, usado em textos e metadata. */
   nomeCompleto: string;
+  /**
+   * Título padrão do site: aparece na aba do navegador, no Google e na imagem
+   * exibida ao compartilhar o link.
+   */
+  tituloPadrao: string;
   /** Uma frase sobre a empresa. Usada como descrição padrão de SEO. */
   descricao: string;
   /** URL de produção, sem barra no final. Usada em sitemap e Open Graph. */
@@ -114,4 +119,12 @@ export interface ConteudoDoSite {
 
   /** Texto do link que pula direto para o conteúdo (acessibilidade). */
   pularParaConteudo: string;
+
+  /** A página exibida quando o endereço não existe. */
+  naoEncontrado: {
+    codigo: string;
+    titulo: string;
+    descricao: string;
+    botao: LinkDeNavegacao;
+  };
 }
