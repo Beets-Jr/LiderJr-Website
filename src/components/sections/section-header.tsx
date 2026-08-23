@@ -37,10 +37,11 @@ export function SectionHeader({
       )}
     >
       <div className={cn("max-w-2xl", centro && "text-center")}>
+        {/* O eyebrow é laranja também sobre o escuro — é assim no hero das
+            páginas internas e no painel de impacto do case. Sobre o preto o
+            laranja dá 7,82:1, bem acima do mínimo do WCAG AA. */}
         {conteudo.eyebrow ? (
-          <Eyebrow tone={escuro ? "onDarkFaint" : "brand"} className="mb-3">
-            {conteudo.eyebrow}
-          </Eyebrow>
+          <Eyebrow className="mb-3">{conteudo.eyebrow}</Eyebrow>
         ) : null}
 
         <Heading as={as} level="section" tone={escuro ? "onDark" : "default"}>

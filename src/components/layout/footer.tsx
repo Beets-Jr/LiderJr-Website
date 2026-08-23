@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { Container, Text } from "@/components/ui";
 import { getIcone } from "@/lib/icones";
 import type { ConteudoDoSite, LinkDeNavegacao } from "@/types/site";
+import { LinkDaMesmaPagina } from "./link-da-mesma-pagina";
 import { Logo } from "./logo";
 
 export interface FooterProps {
@@ -126,12 +126,14 @@ function ColunaDoRodape({
 function LinkDoRodape({ link }: { link: LinkDeNavegacao }) {
   return (
     <li>
-      <Link
+      {/* Clicar no link da página em que já se está leva ao topo — ver
+          LinkDaMesmaPagina. */}
+      <LinkDaMesmaPagina
         href={link.href}
         className="font-body text-on-dark-muted hover:text-on-dark rounded-sm text-sm transition-colors"
       >
         {link.label}
-      </Link>
+      </LinkDaMesmaPagina>
     </li>
   );
 }

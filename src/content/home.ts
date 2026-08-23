@@ -58,24 +58,31 @@ export const home: ConteudoDaHome = {
   },
 
   clientes: {
+    eyebrow: "Confiança",
+    titulo: "Nossos Clientes",
     rotulo: "Empresas que já trabalharam com a Líder Jr.",
     // TODO: nomes fictícios herdados do protótipo. Substituir pelos clientes
     // reais (ou remover a seção) quando a lista for definida. Ver PENDENCIAS.md.
+    //
+    // PARA COLOCAR O LOGO: declare a imagem em src/content/imagens.ts (arquivo
+    // em public/imagens/clientes/, PNG ou SVG) e acrescente `logo:` ao item —
+    // ex.: { nome: "TechSul", logo: logosDeClientes.techSul }. Quem tiver logo
+    // mostra a imagem; quem não tiver continua mostrando o nome escrito.
     linhaSuperior: [
-      "Empresa Alpha",
-      "Grupo Nova",
-      "TechSul",
-      "Metalúrgica Vitória",
-      "AgroPrime",
-      "Comércio Estrela",
+      { nome: "Empresa Alpha" },
+      { nome: "Grupo Nova" },
+      { nome: "TechSul" },
+      { nome: "Metalúrgica Vitória" },
+      { nome: "AgroPrime" },
+      { nome: "Comércio Estrela" },
     ],
     linhaInferior: [
-      "Indústria Confiança",
-      "GrupoMax",
-      "Vertex Solutions",
-      "Prime Foods",
-      "Construtora Horizonte",
-      "LogTech",
+      { nome: "Indústria Confiança" },
+      { nome: "GrupoMax" },
+      { nome: "Vertex Solutions" },
+      { nome: "Prime Foods" },
+      { nome: "Construtora Horizonte" },
+      { nome: "LogTech" },
     ],
   },
 
@@ -89,6 +96,10 @@ export const home: ConteudoDaHome = {
       anterior: "Case anterior",
       proximo: "Próximo case",
       regiao: "Carrossel de cases em destaque",
+      rotuloComPagina: "Ver case",
+      // Os cases sem página própria (ver PENDENCIAS.md) mostram este aviso no
+      // lugar do link, como já acontece na listagem de /cases.
+      rotuloSemPagina: "Case em breve",
     },
   },
 

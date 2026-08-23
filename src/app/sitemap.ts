@@ -11,7 +11,7 @@ import { site } from "@/content/site";
  * registries. Publicar um conteúdo novo já o coloca no sitemap — não há lista
  * para manter em dia.
  */
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = site.url;
   const agora = new Date();
 
@@ -38,14 +38,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  const cases: MetadataRoute.Sitemap = getCasesComPagina().map((item) => ({
+  const cases: MetadataRoute.Sitemap = (await getCasesComPagina()).map((item) => ({
     url: `${base}/cases/${item.slug}`,
     lastModified: agora,
     changeFrequency: "yearly",
     priority: 0.6,
   }));
 
-  const posts: MetadataRoute.Sitemap = getPostsComPagina().map((post) => ({
+  const posts: MetadataRoute.Sitemap = (await getPostsComPagina()).map((post) => ({
     url: `${base}/blog/${post.slug}`,
     // A data de publicação do post é o que importa para o buscador.
     lastModified: new Date(`${post.data}T00:00:00Z`),

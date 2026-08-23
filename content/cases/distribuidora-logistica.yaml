@@ -1,0 +1,13 @@
+empresa: 'Distribuidora logística'
+resultado: '-40%'
+metrica: 'Tempo de entrega'
+descricao: 'Otimizamos rotas e a gestão de estoque, reduzindo prazos de entrega e custos operacionais.'
+tags:
+  - 'Logística'
+  - 'Processos'
+categoria: 'Logística'
+imagem:
+  arquivo: /imagens/cases/distribuidora-logistica.jpg
+  alt: 'Duas pessoas analisando um fluxo de processo desenhado à mão sobre a mesa, ao lado de notebooks'
+historia:
+  discriminant: false

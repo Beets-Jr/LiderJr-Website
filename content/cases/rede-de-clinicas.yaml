@@ -1,0 +1,13 @@
+empresa: 'Rede de clínicas'
+resultado: '+31%'
+metrica: 'Satisfação dos pacientes'
+descricao: 'Redesenhamos o fluxo de atendimento e implantamos indicadores de qualidade para elevar a experiência do paciente.'
+tags:
+  - 'Qualidade'
+  - 'Serviços'
+categoria: 'Serviços'
+imagem:
+  arquivo: /imagens/cases/rede-de-clinicas.jpg
+  alt: 'Profissional apresentando resultados para uma equipe sentada em uma sala de reunião'
+historia:
+  discriminant: false

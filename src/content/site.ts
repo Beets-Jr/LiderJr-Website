@@ -1,4 +1,5 @@
-import { getHrefDoServico, getTodosServicos } from "@/content/servicos";
+import { getTodosServicos } from "@/content/servicos";
+import { getHrefDoServico } from "@/lib/hrefs";
 import type { ConteudoDoSite, LinkDeNavegacao } from "@/types/site";
 
 /**
@@ -21,8 +22,7 @@ export const site: ConteudoDoSite = {
   descricao:
     "Empresa júnior de Engenharia de Produção. Consultoria em processos, qualidade, estratégia e custos para pequenas e médias empresas.",
 
-  // TODO: trocar pelo domínio real antes de publicar.
-  url: "https://www.liderjr.com.br",
+  url: "https://www.liderjr.com",
 
   contato: {
     telefone: {
@@ -45,11 +45,10 @@ export const site: ConteudoDoSite = {
     rotulo: "Falar com a Líder Jr. pelo WhatsApp",
   },
 
-  // TODO: substituir os "#" pelos perfis reais. No protótipo os três já eram "#".
   redes: [
-    { label: "LinkedIn", href: "#", icone: "linkedin" },
-    { label: "Instagram", href: "#", icone: "instagram" },
-    { label: "Facebook", href: "#", icone: "facebook" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/company/liderempresajr/", icone: "linkedin" },
+    { label: "Instagram", href: "https://www.instagram.com/lider.jr/", icone: "instagram" },
+    { label: "Facebook", href: "https://www.facebook.com/liderempresajr/", icone: "facebook" },
   ],
 
   navegacao: [

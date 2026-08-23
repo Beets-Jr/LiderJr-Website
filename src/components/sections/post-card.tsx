@@ -1,7 +1,7 @@
 import { Clock, Tag } from "lucide-react";
 import Link from "next/link";
 import { Badge, Card, Foto, Heading, Text } from "@/components/ui";
-import { getHrefDoPost } from "@/content/blog";
+import { getHrefDoPost } from "@/lib/hrefs";
 import { formatarData } from "@/lib/datas";
 import type { Post } from "@/types/post";
 

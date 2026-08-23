@@ -3,8 +3,12 @@
 Este guia é para quem vai **escrever e trocar o conteúdo** do site da Líder Jr.
 Você não precisa saber programar.
 
-Todo o texto e toda imagem do site estão numa pasta só: **`src/content/`**.
-Você nunca vai precisar abrir nenhuma outra pasta.
+O conteúdo do site fica em dois lugares, e este guia diz qual usar em cada caso:
+
+- **Blog, Cases e Materiais** — na interface do CMS, em `/keystatic`. Sem abrir
+  código.
+- **O resto** (textos das páginas, serviços, contato) — nos arquivos de
+  `src/content/`.
 
 ---
 
@@ -47,10 +51,11 @@ Para evitar isso, use aspas curvas — que ficam mais bonitas: `“foi ótimo”
 | Página de Serviços (a listagem)               | `src/content/servicos/pagina.ts` |
 | Um serviço específico                         | `src/content/servicos/`          |
 | Página de Cases (a listagem)                  | `src/content/cases/pagina.ts`    |
-| Um case específico                            | `src/content/cases/`             |
+| Quais cases aparecem na Home                  | **o CMS**, em `/keystatic`       |
+| Um case específico                            | **o CMS**, em `/keystatic`       |
 | Página do Blog (a listagem)                   | `src/content/blog/pagina.ts`     |
-| Um post específico                            | `src/content/blog/`              |
-| Materiais para download                       | `src/content/materiais.ts`       |
+| Um post específico                            | **o CMS**, em `/keystatic`       |
+| Materiais para download                       | **o CMS**, em `/keystatic`       |
 | Fale Conosco                                  | `src/content/fale-conosco.ts`    |
 | Qualquer imagem                               | `src/content/imagens.ts`         |
 
@@ -128,100 +133,73 @@ Toda página que usava aquela imagem passa a usar a nova.
 
 ---
 
-## Publicar um post no blog
+## Publicar post, case ou material — pelo CMS
 
-**Passo 1.** Copie o arquivo `src/content/blog/lean-manufacturing.ts` e dê ao
-novo o nome do endereço que você quer. Para o post aparecer em
-`/blog/5-erros-de-estoque`, o arquivo se chama `5-erros-de-estoque.ts`.
+Blog, Cases e Materiais **não são mais editados em arquivo**. Eles têm uma
+interface própria, com campos, upload de imagem e botão de salvar.
 
-**Passo 2.** Abra o arquivo novo e troque o conteúdo:
+**Como abrir.** Com o site rodando (`npm run dev`), acesse
+**http://localhost:3000/keystatic**. No ar, é o endereço do site seguido de
+`/keystatic`, e entra-se com a conta do GitHub.
 
-```ts
-export const cincoErrosDeEstoque: Post = {
-  slug: "5-erros-de-estoque", // igual ao nome do arquivo, sem .ts
-  titulo: "5 erros de estoque que custam caro",
-  resumo: "O parágrafo de abertura, que aparece no card da listagem.",
-  data: "2026-08-20", // sempre ANO-MÊS-DIA
-  categoria: "Logística",
-  tempoDeLeitura: "5 min",
-  imagem: imagens.dashboardIndicadores, // uma das imagens de imagens.ts
+**Como publicar.** Escolha a coleção no menu da esquerda, clique em criar, e
+preencha. Os campos têm explicação embaixo do rótulo. Ao salvar:
 
-  detalhe: {
-    metadados: {
-      titulo: "5 erros de estoque que custam caro",
-      descricao: "Aparece embaixo do título no Google. Entre 120 e 160 letras.",
-    },
-    autor: { nome: "Consultor Líder Júnior", iniciais: "LJ" },
-    corpo: [/* ver a próxima seção */],
-    cta: {
-      titulo: "Quer organizar seu estoque?",
-      descricao: "Nossa equipe pode ajudar.",
-      botaoPrimario: { label: "Fale Conosco", href: "/fale-conosco" },
-      botaoSecundario: { label: "Ver outros artigos", href: "/blog" },
-    },
-  },
-};
-```
+- **na sua máquina**, o arquivo aparece em `content/<coleção>/` — é só commitar;
+- **no ar**, a publicação vira um commit no repositório e a Vercel refaz o site
+  em cerca de um minuto.
 
-Repare no nome logo depois de `export const`: escolha um nome sem acento e sem
-espaço (`cincoErrosDeEstoque`). Você vai usá-lo no passo 3.
+**O que o CMS não deixa passar.** Resumo curto demais, categoria em branco,
+imagem sem descrição (`alt`): o formulário acusa antes de salvar. E se um
+arquivo chegar quebrado no repositório, o build falha em vez de publicar uma
+página torta.
 
-**Passo 3.** Abra `src/content/blog/index.ts` e faça duas coisas:
+**Post e case sem texto pronto.** Existe a chave "tem página própria". Desmarcada,
+o item aparece como card na listagem e não vira link — que é como cinco dos seis
+posts e cinco dos seis cases estão hoje. Marque quando o texto estiver pronto.
 
-```ts
-import { cincoErrosDeEstoque } from "./5-erros-de-estoque";   // ← 1. no topo
+**O corpo do artigo é montado em blocos** — parágrafo, subtítulo, citação, lista,
+lista numerada e imagem. Escolha o tipo, escreva, arraste para reordenar.
+Ninguém digita HTML, e é por isso que todo artigo sai com a mesma cara.
 
-const posts: Post[] = [
-  cincoErrosDeEstoque,                                        // ← 2. na lista
-  leanManufacturing,
-  ...
-```
+> **Endereço (slug):** é o nome do arquivo e a URL. Mudar o slug de algo já
+> publicado quebra os links antigos e a posição no Google. Na dúvida, não mude.
 
-Pronto. O post aparece no blog, na Home, no filtro de categorias e no mapa do
-site. **A ordem da lista não importa** — os posts se organizam sozinhos por
-data, do mais novo para o mais antigo.
+---
 
-### Como escrever o corpo do artigo
+## O que aparece na Home
 
-O texto é montado por **blocos**, na ordem em que você escrever. São seis tipos:
+As duas seções da Home seguem regras **opostas**, e é de propósito:
 
-```ts
-corpo: [
-  { tipo: "subtitulo", texto: "O primeiro erro" },
+| Seção na Home         | Como escolhe                                            |
+| --------------------- | ------------------------------------------------------- |
+| **Últimas do blog**   | Automático: os três posts com a data mais recente       |
+| **Cases em destaque** | Manual: os que você escolher em `/keystatic` → **Home** |
 
-  { tipo: "paragrafo", texto: "Um parágrafo comum de texto." },
+**Blog.** Publicou um post com data mais nova que os outros, ele entra na Home
+sozinho e o mais antigo sai. Ninguém precisa lembrar de atualizar a Home — é
+justamente o que "últimas" quer dizer. Quem manda é o campo **Data de
+publicação**, não a ordem em que os posts foram criados.
 
-  { tipo: "citacao", texto: "Uma frase em destaque, com barra laranja." },
-  { tipo: "citacao", texto: "Com autor.", autor: "Maria Silva" },
+**Cases.** A Home é vitrine, e vitrine se escolhe. Publicar um case novo **não**
+muda a Home. Para trocar, abra `/keystatic` → **Home — cases em destaque**,
+escolha os três e arraste para ordenar: o primeiro da lista abre no centro do
+carrossel.
 
-  { tipo: "lista", itens: ["Primeiro item", "Segundo item"] },
-
-  {
-    tipo: "listaNumerada",
-    itens: [
-      { titulo: "Valor", descricao: "O que importa para o cliente." },
-      { titulo: "Fluxo", descricao: "Mapear todas as etapas." },
-    ],
-  },
-
-  {
-    tipo: "imagem",
-    imagem: imagens.workshopPostIts,
-    legenda: "Legenda opcional, embaixo da imagem.",
-  },
-],
-```
-
-Use quantos quiser, na ordem que quiser, repetindo à vontade.
+> **Se você apagar um case que está em destaque**, o site avisa na hora de
+> publicar, dizendo o nome dele — em vez de a Home ir ao ar com um card a menos.
+> É só voltar nessa tela e escolher outro.
 
 ---
 
 ## Criar uma página de serviço
 
-O funcionamento é o mesmo do blog, com uma diferença importante:
+O funcionamento é o mesmo do blog.
 
-> **Os seis serviços já aparecem na listagem `/servicos`.** O que o passo abaixo
-> faz é dar **página própria** a um deles. Hoje só o Mapeamento de Processos tem.
+> **Os seis serviços já têm página própria**, uma por arquivo em
+> `src/content/servicos/`. O texto de cinco delas é provisório e está marcado no
+> topo do arquivo — para revisar, é só editar o arquivo do serviço. O passo a
+> passo abaixo serve para criar um serviço **novo**. Ver PENDENCIAS.md.
 
 **Passo 1.** Copie `src/content/servicos/mapeamento-de-processos.ts` e nomeie o
 arquivo com o endereço desejado, ex.: `gestao-da-qualidade.ts`.
@@ -236,48 +214,34 @@ arquivo com o endereço desejado, ex.: `gestao-da-qualidade.ts`.
 | `depoimento`  | Opcional — a citação em destaque                   |
 | `cta`         | A chamada final, com a lista "O que você recebe"   |
 
-**Passo 3.** Abra `src/content/servicos/index.ts`. Se o serviço **já está** na
-lista (é o caso dos seis atuais), **apague o bloco antigo dele** e coloque no
-lugar o nome importado:
+**Passo 3.** Abra `src/content/servicos/index.ts`, importe o arquivo no topo e
+acrescente o nome na lista:
 
 ```ts
-import { gestaoDaQualidade } from "./gestao-da-qualidade";    // ← no topo
+import { gestaoDaQualidade } from "./gestao-da-qualidade"; // ← no topo
 
 export const servicos: Servico[] = [
   mapeamentoDeProcessos,
-  gestaoDaQualidade,                    // ← substitui o bloco que estava aqui
-  { slug: "pesquisa-de-mercado", ... },
+  gestaoDaQualidade, // ← a ordem aqui é a ordem no site
+  pesquisaDeMercado,
+];
 ```
 
 A página `/servicos/gestao-da-qualidade` passa a existir, o card na listagem
 vira link e o item entra no mapa do site.
 
-**Case de sucesso** funciona exatamente igual: copie
-`src/content/cases/industria-metalurgica.ts` e registre em
-`src/content/cases/index.ts`.
+> **Case de sucesso não funciona mais assim** — ele virou publicação do CMS.
+> Ver a seção "Publicar post, case ou material".
 
 ---
 
 ## Adicionar um material para download
 
-Abra `src/content/materiais.ts` e acrescente um item na lista:
+Pelo CMS, em `/keystatic` → **Materiais** → criar. O arquivo do PDF ou da
+planilha entra no próprio formulário, no campo "Arquivo para download".
 
-```ts
-{
-  slug: "guia-de-indicadores",
-  titulo: "Guia de indicadores para PMEs",
-  resumo: "Um resumo de duas linhas.",
-  tipo: "E-book",          // E-book, Planilha, Guia, Template ou Webinar
-  categoria: "Gestão",
-  arquivo: "/materiais/guia-de-indicadores.pdf",
-},
-```
-
-O campo **`arquivo`** é o que libera o download. Coloque o PDF ou a planilha na
-pasta `public/materiais/` e escreva o caminho aqui.
-
-**Sem `arquivo`, o botão aparece desabilitado, escrito "Em breve"** — que é como
-todos os seis materiais estão hoje, porque nenhum arquivo foi entregue ainda.
+Sem arquivo, o material aparece na listagem com o botão desabilitado, escrito
+"Em breve" — que é como os seis materiais de hoje estão.
 
 ---
 

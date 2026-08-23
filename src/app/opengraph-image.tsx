@@ -22,7 +22,7 @@ export default function ImagemDeCompartilhamento() {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        background: "#0b0b0c",
+        background: "#000000",
         padding: "80px",
         position: "relative",
       }}

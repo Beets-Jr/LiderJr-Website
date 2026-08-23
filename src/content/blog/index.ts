@@ -1,92 +1,128 @@
-import { imagens } from "@/content/imagens";
-import type { Post, PostComPagina } from "@/types/post";
-import { leanManufacturing } from "./lean-manufacturing";
+import { createReader } from "@keystatic/core/reader";
+import keystaticConfig from "../../../keystatic.config";
+import { montarImagem } from "@/lib/imagem";
+import type { BlocoDePost, Post, PostComPagina } from "@/types/post";
+import { paginaDoBlog } from "./pagina";
 
 /**
  * ============================================================================
  * REGISTRY DO BLOG
  * ============================================================================
- * Alimenta a página /blog, a prévia na Home, o filtro de categorias e as
- * páginas /blog/<slug>.
+ * Os posts vêm dos arquivos em `content/blog/*.yaml`, escritos pelo CMS em
+ * /keystatic. Este arquivo é o ADAPTER: lê as entradas e converte cada uma para
+ * o tipo `Post` — que é o que a Home, a listagem e a página do post consomem.
  *
- * PARA PUBLICAR UM POST NOVO:
- *   1. crie o arquivo de conteúdo (copie lean-manufacturing.ts)
- *   2. importe aqui em cima
- *   3. acrescente na lista `posts`
+ * Nada além deste arquivo sabe que o conteúdo vem de YAML.
  *
- * A ORDEM DA LISTA NÃO IMPORTA: os posts são ordenados por data, do mais novo
- * para o mais antigo, automaticamente.
+ * Um post só vira página quando o campo "tem página própria" está marcado no
+ * CMS. Sem ele, o post aparece como card na listagem e não leva a lugar nenhum
+ * — que é o estado de cinco dos seis posts de hoje.
  * ============================================================================
  */
-const posts: Post[] = [
-  leanManufacturing,
 
-  {
-    slug: "indicadores-de-desempenho-para-pmes",
-    titulo: "5 indicadores de desempenho essenciais para PMEs",
-    resumo:
-      "KPIs bem definidos são o termômetro da saúde do seu negócio. Saiba quais métricas acompanhar para tomar decisões mais assertivas.",
-    data: "2026-06-08",
-    categoria: "Gestão",
-    tempoDeLeitura: "5 min",
-    imagem: imagens.dashboardIndicadores,
-  },
-  {
-    slug: "gestao-de-estoques",
-    titulo: "Gestão de estoques: quando o excesso vira prejuízo",
-    resumo:
-      "Manter estoque além do necessário tem custo. Entenda como a curva ABC e o ponto de pedido podem equilibrar oferta e demanda.",
-    data: "2026-06-01",
-    categoria: "Logística",
-    tempoDeLeitura: "7 min",
-    // No protótipo esta imagem eram figurinhas do Mario. Ver PENDENCIAS.md.
-    imagem: imagens.dashboardIndicadores,
-  },
-  {
-    slug: "planejamento-estrategico-do-papel-a-execucao",
-    titulo: "Planejamento estratégico: do papel à execução",
-    resumo:
-      "Muitas empresas elaboram planos que nunca saem do PowerPoint. Veja como estruturar um planejamento que realmente se transforma em ação.",
-    data: "2026-05-22",
-    categoria: "Estratégia",
-    tempoDeLeitura: "8 min",
-    imagem: imagens.workshopPostIts,
-  },
-  {
-    slug: "ferramentas-da-qualidade",
-    titulo: "Ferramentas da qualidade: um guia prático para iniciantes",
-    resumo:
-      "Do diagrama de Ishikawa ao Controle Estatístico de Processo, este guia apresenta as sete ferramentas da qualidade de forma acessível.",
-    data: "2026-05-14",
-    categoria: "Qualidade",
-    tempoDeLeitura: "9 min",
-    imagem: imagens.analiseDeFluxoEmPapel,
-  },
-  {
-    slug: "por-que-fazer-pesquisa-de-mercado",
-    titulo: "Por que sua empresa precisa de uma pesquisa de mercado agora",
-    resumo:
-      "Em um cenário competitivo, decidir sem dados é apostar no escuro. Saiba como uma pesquisa bem conduzida pode mudar o rumo do seu negócio.",
-    data: "2026-05-05",
-    categoria: "Mercado",
-    tempoDeLeitura: "6 min",
-    imagem: imagens.painelDeGestao,
-  },
-];
+const leitor = createReader(process.cwd(), keystaticConfig);
+
+/** Uma entrada do CMS, já lida. O tipo sai do próprio schema. */
+type EntradaDePost = Awaited<
+  ReturnType<typeof leitor.collections.posts.all>
+>[number];
+
+/**
+ * Converte os blocos do CMS para `BlocoDePost`. O formato do CMS separa o tipo
+ * (`discriminant`) do conteúdo (`value`); o do site guarda os dois juntos em
+ * `tipo`. É só essa a diferença.
+ */
+function montarCorpo(
+  corpo: NonNullable<EntradaDePost["entry"]["artigo"]["value"]>["corpo"],
+): BlocoDePost[] {
+  return corpo.map((bloco): BlocoDePost => {
+    switch (bloco.discriminant) {
+      case "subtitulo":
+        return { tipo: "subtitulo", texto: bloco.value };
+      case "citacao":
+        return {
+          tipo: "citacao",
+          texto: bloco.value.texto,
+          autor: bloco.value.autor || undefined,
+        };
+      case "lista":
+        return { tipo: "lista", itens: [...bloco.value] };
+      case "listaNumerada":
+        return { tipo: "listaNumerada", itens: bloco.value.map((i) => ({ ...i })) };
+      case "imagem":
+        return {
+          tipo: "imagem",
+          imagem: montarImagem(bloco.value.imagem.arquivo, bloco.value.imagem.alt),
+          legenda: bloco.value.legenda || undefined,
+        };
+      default:
+        return { tipo: "paragrafo", texto: bloco.value };
+    }
+  });
+}
+
+function montarPost({ slug, entry }: EntradaDePost): Post {
+  const resumo: Post = {
+    slug,
+    titulo: entry.titulo,
+    resumo: entry.resumo,
+    data: entry.data,
+    categoria: entry.categoria,
+    tempoDeLeitura: entry.tempoDeLeitura,
+    imagem: montarImagem(entry.imagem.arquivo, entry.imagem.alt),
+  };
+
+  const artigo = entry.artigo.discriminant ? entry.artigo.value : null;
+  if (!artigo) return resumo;
+
+  return {
+    ...resumo,
+    detalhe: {
+      // Sem título/descrição de SEO próprios, o post reaproveita os do card —
+      // um campo a menos para preencher, sem página nenhuma ficar sem metadado.
+      metadados: {
+        titulo: artigo.tituloSeo || entry.titulo,
+        descricao: artigo.descricaoSeo || entry.resumo,
+      },
+      autor: { nome: artigo.autor.nome, iniciais: artigo.autor.iniciais },
+      corpo: montarCorpo(artigo.corpo),
+      cta: {
+        titulo: artigo.cta.titulo,
+        descricao: artigo.cta.descricao,
+        botaoPrimario: paginaDoBlog.botoesDoCta.primario,
+        botaoSecundario: paginaDoBlog.botoesDoCta.secundario,
+      },
+    },
+  };
+}
 
 /** Todos os posts, do mais recente para o mais antigo. */
-export function getTodosPosts(): Post[] {
-  return [...posts].sort((a, b) => b.data.localeCompare(a.data));
+export async function getTodosPosts(): Promise<Post[]> {
+  const entradas = await leitor.collections.posts.all();
+  return entradas
+    .map(montarPost)
+    .sort((a, b) => b.data.localeCompare(a.data));
 }
 
-export function getPostsComPagina(): PostComPagina[] {
-  return getTodosPosts().filter((p): p is PostComPagina => p.detalhe !== undefined);
+/**
+ * Os posts mais recentes, para a prévia da Home.
+ *
+ * A seleção é automática por decisão de projeto: "Últimas do blog" precisa
+ * mostrar o que saiu por último, sem ninguém lembrar de atualizar a Home a cada
+ * publicação. Publicou, entrou. (Os cases da Home seguem a regra oposta — lá a
+ * escolha é editorial; ver `getCasesEmDestaque`.)
+ */
+export async function getUltimosPosts(quantidade: number): Promise<Post[]> {
+  const todos = await getTodosPosts();
+  return todos.slice(0, quantidade);
 }
 
-export function getPostPorSlug(slug: string): Post | undefined {
-  return posts.find((p) => p.slug === slug);
+export async function getPostsComPagina(): Promise<PostComPagina[]> {
+  const todos = await getTodosPosts();
+  return todos.filter((p): p is PostComPagina => p.detalhe !== undefined);
 }
 
-export function getHrefDoPost(post: Post): string | undefined {
-  return post.detalhe ? `/blog/${post.slug}` : undefined;
+export async function getPostPorSlug(slug: string): Promise<Post | undefined> {
+  const entrada = await leitor.collections.posts.read(slug);
+  return entrada ? montarPost({ slug, entry: entrada }) : undefined;
 }

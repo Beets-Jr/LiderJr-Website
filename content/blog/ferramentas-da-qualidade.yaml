@@ -1,0 +1,10 @@
+titulo: 'Ferramentas da qualidade: um guia prático para iniciantes'
+resumo: 'Do diagrama de Ishikawa ao Controle Estatístico de Processo, este guia apresenta as sete ferramentas da qualidade de forma acessível.'
+data: 2026-05-14
+categoria: 'Qualidade'
+tempoDeLeitura: '9 min'
+imagem:
+  arquivo: /imagens/blog/ferramentas-da-qualidade.jpg
+  alt: 'Duas pessoas analisando um fluxo de processo desenhado à mão em uma folha de papel'
+artigo:
+  discriminant: false

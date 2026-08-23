@@ -38,23 +38,25 @@ npm run lint && npm run typecheck && npm run format:check && npm run build
 ```
 src/
 ├── app/                    Rotas. Cada pasta com page.tsx vira uma página.
-│   ├── layout.tsx          Cabeçalho, rodapé e metadata que valem para o site todo
+│   ├── layout.tsx          Só <html>, fontes e CSS — vale para tudo, inclusive o CMS
 │   ├── globals.css         DESIGN TOKENS — cor, tipografia, espaçamento, sombra
-│   ├── page.tsx            Home
-│   ├── servicos/[slug]/    Template de página de serviço
-│   ├── cases/[slug]/       Template de página de case
-│   ├── blog/[slug]/        Template de página de post
+│   ├── (site)/             O SITE. Cabeçalho, rodapé e as páginas públicas
+│   │   ├── layout.tsx      O chrome: menu, rodapé, botão do WhatsApp
+│   │   ├── page.tsx        Home
+│   │   └── servicos|cases|blog/[slug]/   Templates das páginas de detalhe
+│   ├── keystatic/          A interface do CMS (fora do (site), sem o menu)
+│   ├── api/keystatic/      Autenticação do CMS pelo GitHub
 │   ├── sitemap.ts          Mapa do site, montado a partir do conteúdo
 │   ├── robots.ts           Instruções para buscadores
 │   └── opengraph-image.tsx Imagem exibida ao compartilhar o link
 │
-├── content/                ★ TODO O TEXTO E TODA IMAGEM DO SITE
+├── content/                ★ TEXTOS DAS PÁGINAS (o que não é publicação)
 │   ├── site.ts             Dados globais: telefone, e-mail, menu, rodapé
 │   ├── imagens.ts          Banco de imagens, com a descrição (alt) de cada uma
 │   ├── home.ts             …um arquivo por página
 │   ├── servicos/           pagina.ts (listagem) + um arquivo por serviço + index.ts
-│   ├── cases/              mesma estrutura
-│   └── blog/               mesma estrutura
+│   ├── cases/              pagina.ts + index.ts (o ADAPTER que lê o CMS)
+│   └── blog/               idem
 │
 ├── components/
 │   ├── ui/                 Primitivos sem domínio: Button, Card, Section, Heading…
@@ -66,6 +68,12 @@ src/
 
 public/imagens/             Os arquivos de imagem
 prototipo-vibecodado/       Protótipo aprovado — referência, fora do build
+
+content/                    ★ AS PUBLICAÇÕES, escritas pelo CMS (YAML)
+├── blog/                   um arquivo por post
+├── cases/                  um arquivo por case
+└── materiais/              um arquivo por material
+keystatic.config.ts         O schema do CMS — que campos cada publicação tem
 ```
 
 ---
@@ -74,13 +82,18 @@ prototipo-vibecodado/       Protótipo aprovado — referência, fora do build
 
 ### 1. Conteúdo separado da apresentação
 
-**Nenhum texto visível ao usuário existe dentro de um componente.** Todo texto e
-toda imagem vivem em `src/content/`, em arquivos tipados. Um componente nunca
-importa conteúdo: recebe tudo por props, vindo da página.
+**Nenhum texto visível ao usuário existe dentro de um componente.** Um componente
+nunca importa conteúdo: recebe tudo por props, vindo da página.
 
-O motivo é prático: quem escreve o conteúdo do site não precisa abrir um arquivo
-de código nem saber React. E o TypeScript garante que nenhum campo obrigatório
-seja esquecido — inclusive o `alt` de toda imagem.
+O conteúdo mora em dois lugares, por natureza diferente:
+
+- **Publicações** (blog, cases, materiais) — arquivos YAML em `content/`,
+  escritos pela interface do CMS em `/keystatic`. Quem publica não abre código.
+- **Cópia de página** (textos da Home, dos serviços, do contato) — arquivos
+  TypeScript em `src/content/`. Muda raramente e junto com o layout.
+
+Nos dois casos, o campo obrigatório é obrigatório: no primeiro pelo schema do
+CMS, no segundo pelo TypeScript. Inclusive o `alt` de toda imagem.
 
 ### 2. Serviços, cases e posts têm duas camadas
 

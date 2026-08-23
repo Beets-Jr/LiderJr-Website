@@ -73,7 +73,9 @@ export function MaterialCard({
           <a
             href={material.arquivo}
             download
-            className="bg-surface-muted text-fg group-hover:bg-brand group-hover:text-brand-fg font-body mt-6 flex w-full items-center justify-center gap-2 rounded-md py-3.5 text-sm font-bold transition-colors"
+            /* O card inteiro pinta o botão de laranja; o ponteiro sobre o
+               próprio botão escurece mais um degrau. */
+            className="bg-surface-muted text-fg group-hover:bg-brand group-hover:text-brand-fg hover:bg-brand-hover hover:text-brand-fg font-body mt-6 flex w-full items-center justify-center gap-2 rounded-md py-3.5 text-sm font-bold transition-colors"
           >
             <Download size={16} aria-hidden="true" />
             {rotuloDoBotao}

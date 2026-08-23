@@ -1,0 +1,13 @@
+empresa: 'Empresa do setor alimentício'
+resultado: '+28%'
+metrica: 'Produtividade'
+descricao: 'Reestruturamos os processos produtivos reduzindo desperdícios e aumentando a eficiência operacional.'
+tags:
+  - 'Lean'
+  - 'Processos'
+categoria: 'Processos'
+imagem:
+  arquivo: /imagens/cases/setor-alimenticio.jpg
+  alt: 'Engenheira trabalhando em um notebook ao lado de uma linha de montagem industrial'
+historia:
+  discriminant: false

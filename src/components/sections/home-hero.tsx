@@ -15,7 +15,13 @@ export function HomeHero({
   estatisticas: ConteudoDaHome["estatisticas"];
 }) {
   return (
-    <Section tone="dark" spacing="none" className="flex min-h-[85vh] items-center">
+    // 4rem = altura do header fixo (o `pt-16` do <main>). Descontá-la faz o
+    // hero terminar exatamente no fim da primeira tela, sem gerar rolagem.
+    <Section
+      tone="dark"
+      spacing="none"
+      className="flex min-h-[calc(100dvh-4rem)] items-center"
+    >
       {/* Brilho laranja atrás do conteúdo. */}
       <div className="glow-brand pointer-events-none absolute inset-0 opacity-10" />
 

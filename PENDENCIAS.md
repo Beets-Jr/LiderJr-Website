@@ -59,18 +59,49 @@ aparecem desabilitados, escritos "Em breve".
 No protótipo o botão parecia ativo e não fazia nada — preferimos ser honestos
 com o visitante.
 
-**Para liberar:** coloque o arquivo em `public/materiais/` e preencha o campo
-`arquivo` do item.
-📄 `src/content/materiais.ts`
+**Para liberar:** abra o material em `/keystatic` e envie o arquivo no campo
+"Arquivo para download". Ele vai para `public/materiais/` sozinho.
+📄 `content/materiais/*.yaml`
 
-### 1.6 Nomes de clientes
+### 1.6 Texto de cinco páginas de serviço
+
+Só a página de **Mapeamento de Processos** tem texto validado. As outras cinco
+(Gestão da Qualidade, Pesquisa de Mercado, Planejamento Estratégico, Custos e
+Precificação, Consultoria em Estoque) foram escritas para o site ficar completo
+e descrevem cada serviço de forma genérica, no formato do modelo — **precisam da
+revisão da Líder Jr. antes de publicar**, porque afirmam o que a empresa entrega.
+
+Cada arquivo abre com um aviso de conteúdo provisório. Revise em especial a
+`metodologia` (as quatro etapas) e o `checklist` do CTA ("O que você recebe"),
+que descrevem entregáveis concretos.
+
+**Os cinco depoimentos são forjados** — pessoa, empresa e fala inventadas, a
+pedido, para a seção existir enquanto não há citação real. O mesmo vale para o
+depoimento da página de Mapeamento de Processos, herdado do protótipo. São seis
+ao todo, cada um marcado com `⚠️ DEPOIMENTO FORJADO` na linha acima do campo.
+
+> **Publicar depoimento inventado como se fosse de cliente é propaganda
+> enganosa.** Antes de o site ir ao ar: substituir por depoimentos reais, com
+> autorização de quem falou, ou apagar o campo `depoimento` — ele é opcional e a
+> página continua íntegra sem ele.
+
+📄 `src/content/servicos/*.ts`
+
+### 1.7 Clientes da faixa da Home — nomes e logos
 
 Os 12 nomes que passam na faixa da Home são fictícios, herdados do protótipo
 ("Empresa Alpha", "TechSul", "GrupoMax"…). Substituir pelos clientes reais — ou
 remover a seção.
-📄 `src/content/home.ts`
 
-### 1.7 Domínio de produção
+A faixa já aceita **logo em imagem** (PNG ou SVG) no lugar do nome escrito.
+Cada item é `{ nome, logo? }`: com `logo`, aparece a imagem; sem, o nome. Para
+ligar um logo, declare o arquivo em `src/content/imagens.ts` (guardado em
+`public/imagens/clientes/`) e acrescente o campo ao item. O `nome` continua
+obrigatório mesmo com logo — é ele que vira o `alt` de fallback e o que sobra
+se a imagem falhar.
+📄 `src/content/home.ts` · `src/content/imagens.ts`
+
+### 1.8 Domínio de produção
 
 `site.url` está com um valor provisório (`https://www.liderjr.com.br`). Ele
 alimenta o `sitemap.xml`, o `robots.txt` e as URLs de compartilhamento —
@@ -91,14 +122,14 @@ O cliente gostou dos dois formatos de CTA com depoimento e ainda não escolheu.
 
 Para trocar, use o outro componente na Home e passe `ctaFinalEmColunas`, que já
 está escrito em `src/content/home.ts`.
-📄 `src/app/page.tsx` · `src/components/sections/cta.tsx`
+📄 `src/app/(site)/page.tsx` · `src/components/sections/cta.tsx`
 
 ### 2.2 Contraste do laranja da marca — a única reprovação de WCAG AA
 
 O laranja `#ff751f` contra fundos claros dá **2,69:1**; o mínimo AA é 4,5:1.
 Afeta o texto branco sobre o laranja (botão primário, badge sólido, primeiro card
 de números) e o texto laranja sobre branco (eyebrows, links "Ver todos"). Sobre
-o fundo escuro o mesmo laranja dá 7,32:1 e passa.
+o fundo escuro o mesmo laranja dá 7,82:1 e passa.
 
 **Decisão tomada:** manter, preservando o visual aprovado. Fica registrado para
 o cliente reavaliar. As alternativas foram medidas:
@@ -166,7 +197,7 @@ O card do blog dizia "15 Jun 2026 · 6 min"; a página do post dizia "17 Jul, 20
 | Cards clicáveis eram `<div onClick>`                  | Um único link, o do título, esticado sobre o card                |
 | Formulário com placeholder no lugar de label          | Toda `<label>` associada, erro anunciado por `role="alert"`      |
 | `--muted-foreground: #999999` — 2,85:1                | `#52525b` — 7,73:1                                               |
-| `text-white/40` sobre escuro — 3,4:1                  | Piso em 56% — 6,46:1                                             |
+| `text-white/40` sobre escuro — 3,4:1                  | Piso em 56% — 6,49:1                                             |
 | Contadores animavam na montagem                       | Só ao entrar na tela; respeitam `prefers-reduced-motion`         |
 | `lang="en"` e `noindex, nofollow`                     | `lang="pt-BR"`, indexável, com sitemap                           |
 
@@ -180,7 +211,7 @@ O card do blog dizia "15 Jun 2026 · 6 min"; a página do post dizia "17 Jul, 20
 | Receitas de título de seção  | 8 competindo                                       | 1                        |
 | Níveis de branco translúcido | 11 ad-hoc                                          | 3 superfícies opacas     |
 | Duração de transição         | 78 de 88 herdavam 150ms; as outras 200/300/500/700 | 200ms como padrão        |
-| Cor de fundo escuro          | `#000000` puro                                     | `#0b0b0c` com 3 degraus  |
+| Cor de fundo escuro          | `#000000` puro, sem degraus                        | `#000000` com 3 degraus  |
 | `scrollbar-hide`             | usada 3×, nunca definida                           | definida                 |
 | Largura do texto do artigo   | 1280px                                             | `max-w-3xl`              |
 | Espaçamento de seção         | fixo em mobile e desktop                           | responsivo               |
@@ -208,9 +239,24 @@ real. O componente `ContactForm` não precisa mudar.
 Ao integrar, **remova também o aviso** exibido abaixo do botão — está em
 `src/content/fale-conosco.ts`, campo `formulario.aviso`.
 
-### 4.2 Fora de escopo por decisão
+### 4.2 CMS — implantado
 
-Não há backend, banco de dados, CMS nem analytics. O site é estático.
+Blog, Cases e Materiais são editados em **/keystatic**, uma interface gráfica
+que escreve arquivos YAML em `content/`. Publicar vira commit; o commit dispara
+o deploy; o site continua 100% estático.
+
+**Falta para ir ao ar:** criar o GitHub App (o próprio Keystatic guia pela tela
+de configuração), levar as variáveis do `.env.local` para a Vercel e apontar
+`repo` em `keystatic.config.ts` para o repositório real. Enquanto isso, o CMS
+roda em modo local — grava direto no disco de quem está com o projeto aberto.
+
+📄 `keystatic.config.ts` · `src/content/*/index.ts`
+
+### 4.3 Fora de escopo por decisão
+
+Não há backend, banco de dados nem analytics. Serviços e os textos das páginas
+seguem em arquivo TypeScript — são páginas de produto e cópia institucional,
+não publicações.
 
 ---
 

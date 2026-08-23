@@ -33,9 +33,9 @@ Fonte única de verdade do visual do site. Os tokens vivem em
 
 | Token            | Valor     | Onde usar                         |
 | ---------------- | --------- | --------------------------------- |
-| `surface-dark`   | `#0b0b0c` | Seções escuras, cabeçalho, rodapé |
-| `surface-dark-2` | `#141416` | Card sobre superfície escura      |
-| `surface-dark-3` | `#1c1c1f` | Hover sobre superfície escura     |
+| `surface-dark`   | `#000000` | Seções escuras, cabeçalho, rodapé |
+| `surface-dark-2` | `#0b0b0c` | Card sobre superfície escura      |
+| `surface-dark-3` | `#141416` | Hover sobre superfície escura     |
 
 ### Texto
 
@@ -43,9 +43,9 @@ Fonte única de verdade do visual do site. Os tokens vivem em
 | --------------- | ---------- | -------------------------------------------------- |
 | `fg`            | `#0b0b0c`  | 19,67:1 sobre branco                               |
 | `fg-muted`      | `#52525b`  | 7,73:1 sobre branco · 7,03:1 sobre `surface-muted` |
-| `on-dark`       | branco     | 19,67:1 sobre `surface-dark`                       |
-| `on-dark-muted` | branco 72% | 10,21:1                                            |
-| `on-dark-faint` | branco 56% | 6,46:1 — o piso; não escureça mais                 |
+| `on-dark`       | branco     | 21:1 sobre `surface-dark`                          |
+| `on-dark-muted` | branco 72% | 10,47:1                                            |
+| `on-dark-faint` | branco 56% | 6,49:1 — o piso; não escureça mais                 |
 
 ### Bordas e estados
 
@@ -62,7 +62,7 @@ O laranja da marca contra fundos claros dá **2,69:1**, abaixo do mínimo de
   de números;
 - **texto laranja sobre branco** — eyebrows, links "Ver todos", rótulos de card.
 
-Sobre o fundo escuro o mesmo laranja dá 7,32:1 e passa sem problema.
+Sobre o fundo escuro o mesmo laranja dá 7,82:1 e passa sem problema.
 
 Foi mantido por decisão de projeto, para preservar o visual aprovado pelo
 cliente. As alternativas medidas e o custo de cada uma estão em

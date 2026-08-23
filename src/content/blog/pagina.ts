@@ -35,6 +35,11 @@ export const paginaDoBlog: ConteudoDoBlog = {
   prefixoDoAutor: "Por",
 
   // Textos que aparecem nas páginas individuais de post.
+  botoesDoCta: {
+    primario: { label: "Fale Conosco", href: "/fale-conosco" },
+    secundario: { label: "Ver outros artigos", href: "/blog" },
+  },
+
   navegacaoDeDetalhe: {
     voltar: { label: "Voltar para o Blog", href: "/blog" },
     relacionados: {

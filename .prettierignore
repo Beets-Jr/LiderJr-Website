@@ -5,3 +5,8 @@ prototipo-vibecodado/
 node_modules/
 package-lock.json
 public/
+
+# Publicações escritas pelo CMS. Quem formata estes arquivos é o Keystatic —
+# se o Prettier mexer, toda publicação vira um diff de formatação e o CMS
+# desfaz na gravação seguinte.
+content/

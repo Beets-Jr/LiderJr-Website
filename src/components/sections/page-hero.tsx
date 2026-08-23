@@ -25,7 +25,16 @@ export function PageHero({
   priority = true,
 }: PageHeroProps) {
   return (
-    <Section tone="dark" spacing="hero" className="overflow-hidden">
+    /* Altura fixa em todas as páginas: o hero não cresce nem encolhe conforme
+       o título ocupa uma ou quatro linhas — o conteúdo fica centrado dentro da
+       mesma caixa. 480px comporta o caso mais alto do site (o hero de post, com
+       título de quatro linhas no celular mais o autor/data/tempo de leitura),
+       que media 472px antes desta mudança. */
+    <Section
+      tone="dark"
+      spacing="none"
+      className="flex h-120 items-center overflow-hidden"
+    >
       <div className="absolute inset-0">
         <Foto imagem={conteudo.imagemDeFundo} sizes="100vw" priority={priority} />
         {/* Véu que garante contraste do texto sobre qualquer imagem. */}

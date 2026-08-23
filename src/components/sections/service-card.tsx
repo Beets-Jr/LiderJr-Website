@@ -1,7 +1,9 @@
 import { ArrowRight, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { Badge, Card, Foto, Heading, IconTile, Text } from "@/components/ui";
+import { cn } from "@/lib/cn";
 import { getIcone } from "@/lib/icones";
+import type { LinkDeNavegacao } from "@/types/site";
 import type { Servico } from "@/types/servico";
 
 /**
@@ -35,7 +37,11 @@ export function ServiceCardCompacto({
       interactive={Boolean(href)}
       className="group relative flex flex-col"
     >
-      <IconTile icon={Icone} />
+      {/* No hover do card o tile inverte: fundo laranja sólido, traço branco. */}
+      <IconTile
+        icon={Icone}
+        className="group-hover:bg-brand group-hover:text-brand-fg transition-colors"
+      />
 
       <Heading as="h3" level="card" className="mt-6">
         {href ? (
@@ -60,7 +66,7 @@ export function ServiceCardCompacto({
       </ul>
 
       {href ? (
-        <p className="text-brand font-body mt-6 flex items-center gap-2 text-sm font-semibold">
+        <p className="text-brand group-hover:text-brand-hover font-body mt-6 flex items-center gap-2 text-sm font-semibold transition-colors">
           {rotuloDoLink}
           <ChevronRight
             size={16}
@@ -75,12 +81,29 @@ export function ServiceCardCompacto({
 
 /* -------------------------------------------------------------------------- */
 
+/**
+ * O botão no rodapé do card grande. Os dois estados usam exatamente as mesmas
+ * classes para a fileira de cards terminar alinhada; o que muda é o destino.
+ */
+const BOTAO_DO_CARD =
+  "bg-brand text-brand-fg font-body group-hover:bg-brand-hover mt-8 ml-auto flex w-fit items-center gap-2 rounded-md px-5 py-2.5 text-sm font-semibold transition-[background-color,box-shadow]";
+
+/**
+ * Acréscimo do botão que é link de verdade: além de escurecer junto com o card,
+ * ele ganha sombra quando o ponteiro está sobre ele próprio. É o que separa
+ * "estou em algum lugar do card" de "estou no botão".
+ */
+const HOVER_DO_BOTAO = "hover:bg-brand-hover hover:shadow-md";
+
 export function ServiceCardCompleto({
   servico,
   rotuloDoLink,
+  botaoSemPagina,
 }: {
   servico: Servico;
   rotuloDoLink: string;
+  /** Para onde vai o card do serviço que ainda não tem página própria. */
+  botaoSemPagina: LinkDeNavegacao;
 }) {
   const href = ehClicavel(servico);
 
@@ -113,7 +136,7 @@ export function ServiceCardCompleto({
           as="h2"
           level="card"
           tone="brand"
-          className="ml-auto max-w-[80%] text-right text-2xl uppercase"
+          className="ml-auto max-w-[80%] text-right text-2xl whitespace-pre-line uppercase"
         >
           {href ? (
             <Link href={href} className="rounded-sm after:absolute after:inset-0">
@@ -132,12 +155,23 @@ export function ServiceCardCompleto({
           {servico.descricao}
         </Text>
 
+        {/* Com página, o botão é decorativo: quem clica é o link do título,
+            esticado sobre o card inteiro. Sem página, o botão é o único link
+            do card e leva ao contato — por isso é <Link> de verdade aqui. */}
         {href ? (
-          <p className="bg-brand text-brand-fg font-body group-hover:bg-brand-hover mt-8 ml-auto flex w-fit items-center gap-2 rounded-md px-5 py-2.5 text-sm font-semibold transition-colors">
+          <p className={BOTAO_DO_CARD}>
             {rotuloDoLink}
             <ArrowRight size={14} aria-hidden="true" />
           </p>
-        ) : null}
+        ) : (
+          <Link
+            href={botaoSemPagina.href}
+            className={cn(BOTAO_DO_CARD, HOVER_DO_BOTAO)}
+          >
+            {botaoSemPagina.label}
+            <ArrowRight size={14} aria-hidden="true" />
+          </Link>
+        )}
       </div>
     </Card>
   );

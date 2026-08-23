@@ -1,0 +1,13 @@
+empresa: 'Cooperativa agrícola'
+resultado: '-22%'
+metrica: 'Perdas na colheita'
+descricao: 'Implantamos controles de processo e logística interna que reduziram perdas e melhoraram o aproveitamento da produção.'
+tags:
+  - 'Agronegócio'
+  - 'Lean'
+categoria: 'Agronegócio'
+imagem:
+  arquivo: /imagens/cases/cooperativa-agricola.jpg
+  alt: 'Tela de notebook exibindo um painel com gráficos de indicadores de desempenho'
+historia:
+  discriminant: false

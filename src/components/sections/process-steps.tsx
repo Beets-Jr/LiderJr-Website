@@ -25,22 +25,36 @@ export function ProcessSteps({
 
   return (
     <div className="relative">
-      {/* Linha conectora, só no desktop, atrás dos marcadores. */}
-      <div
-        aria-hidden="true"
-        className={cn(
-          "absolute top-7 right-[12.5%] left-[12.5%] hidden h-px lg:block",
-          escuro ? "bg-border-on-dark" : "bg-border",
-        )}
-      />
+      {/* Na versão numerada a linha é uma só, atrás dos marcadores. Na versão
+          com ícones cada etapa desenha o próprio traço (ver abaixo), porque os
+          ícones ficam à esquerda da coluna e não no centro dela. */}
+      {comIcones ? null : (
+        <div
+          aria-hidden="true"
+          className={cn(
+            "absolute top-7 right-[12.5%] left-[12.5%] hidden h-px lg:block",
+            escuro ? "bg-border-on-dark" : "bg-border",
+          )}
+        />
+      )}
 
       <ol className="relative grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
-        {etapas.map((etapa) => (
+        {etapas.map((etapa, indice) => (
           <li
             key={etapa.numero}
             className={cn(
-              "group flex flex-col",
+              "group relative flex flex-col",
               comIcones ? "items-start" : "items-center text-center",
+              // O traço laranja sai da borda direita do ícone (left-12), na
+              // altura do centro dele (top-6). Nas etapas do meio ele atravessa
+              // o gap e encosta no ícone seguinte (-right-6); na última, em vez
+              // de parar seco, segue até o fim da coluna se desfazendo.
+              comIcones &&
+                "lg:after:absolute lg:after:top-6 lg:after:left-12 lg:after:h-px lg:after:content-['']",
+              comIcones &&
+                (indice === etapas.length - 1
+                  ? "lg:after:from-brand lg:after:right-0 lg:after:bg-linear-to-r lg:after:to-transparent"
+                  : "lg:after:bg-brand lg:after:-right-6"),
             )}
           >
             {etapa.icone ? (
@@ -48,7 +62,8 @@ export function ProcessSteps({
                 icon={getIcone(etapa.icone)}
                 tone="brandSolid"
                 size="md"
-                className="rounded-full"
+                /* Traço preto dentro do círculo laranja. */
+                className="rounded-full text-black"
               />
             ) : (
               <StepMarker numero={etapa.numero} />

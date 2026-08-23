@@ -21,6 +21,18 @@ import type {
 /* Home                                                                        */
 /* -------------------------------------------------------------------------- */
 
+/**
+ * Uma empresa da faixa de clientes da Home.
+ *
+ * O `logo` é opcional de propósito: enquanto o arquivo não existir, a faixa
+ * mostra o nome escrito. Assim que a imagem entrar no conteúdo (PNG ou SVG,
+ * qualquer um serve), ela substitui o texto sem mudança de código.
+ */
+export interface Cliente {
+  nome: string;
+  logo?: Imagem;
+}
+
 export interface ConteudoDaHome {
   metadados: Metadados;
 
@@ -46,17 +58,25 @@ export interface ConteudoDaHome {
     selo: Estatistica;
   };
 
-  clientes: {
+  clientes: CabecalhoDeSecao & {
     /** Descrição para leitores de tela do carrossel de logos. */
     rotulo: string;
     /** Duas fileiras que rolam em direções opostas. */
-    linhaSuperior: string[];
-    linhaInferior: string[];
+    linhaSuperior: Cliente[];
+    linhaInferior: Cliente[];
   };
 
   cases: CabecalhoDeSecao & {
-    /** Rótulos do carrossel — lidos por leitores de tela. */
-    carrossel: { anterior: string; proximo: string; regiao: string };
+    /** Rótulos do carrossel. `anterior`, `proximo` e `regiao` são para leitores
+     *  de tela; os dois últimos aparecem no card em destaque, conforme o case
+     *  tenha ou não página própria. */
+    carrossel: {
+      anterior: string;
+      proximo: string;
+      regiao: string;
+      rotuloComPagina: string;
+      rotuloSemPagina: string;
+    };
   };
 
   blog: CabecalhoDeSecao;
@@ -123,6 +143,12 @@ export interface ConteudoDeServicos {
   hero: HeroDePagina;
   /** Texto do botão dentro de cada card. */
   rotuloDoCard: string;
+  /**
+   * O botão dos serviços que ainda não têm página própria. Sem página não há
+   * para onde o card apontar, então o botão leva ao contato em vez de sumir e
+   * deixar o card sem saída.
+   */
+  botaoSemPagina: LinkDeNavegacao;
   processo: CabecalhoDeSecao & {
     etapas: Etapa[];
   };
@@ -138,6 +164,14 @@ export interface ConteudoDeCases {
   rotuloSemPagina: string;
   /** Rótulos usados nas páginas de case individuais. */
   navegacaoDeDetalhe: TextosDeNavegacaoDeDetalhe;
+  /**
+   * Os dois botões do convite no fim da página de case. O texto do convite é
+   * escrito por case, no CMS; os botões são navegação do site. O secundário
+   * aponta para o serviço que o case indicar — daí só o rótulo morar aqui.
+   */
+  botoesDoCta: { primario: LinkDeNavegacao; rotuloDoServico: string };
+  /** Cabeçalho do painel de números, igual em todo case. */
+  impacto: { eyebrow: string; titulo: string };
 }
 
 export interface ConteudoDeMateriais {
@@ -160,6 +194,12 @@ export interface ConteudoDoBlog {
   prefixoDoAutor: string;
   /** Rótulos usados nas páginas de post individuais. */
   navegacaoDeDetalhe: TextosDeNavegacaoDeDetalhe;
+  /**
+   * Os dois botões do CTA no fim de todo artigo. O título e o texto do CTA são
+   * escritos por post, no CMS; os botões são navegação do site e valem para
+   * todos — por isso moram aqui, e não em cada publicação.
+   */
+  botoesDoCta: { primario: LinkDeNavegacao; secundario: LinkDeNavegacao };
 }
 
 /* -------------------------------------------------------------------------- */

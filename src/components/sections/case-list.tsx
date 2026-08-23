@@ -1,7 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Badge, Foto, Heading, Text } from "@/components/ui";
-import { getHrefDoCase } from "@/content/cases";
+import { getHrefDoCase } from "@/lib/hrefs";
 import { cn } from "@/lib/cn";
 import type { Case } from "@/types/case";
 

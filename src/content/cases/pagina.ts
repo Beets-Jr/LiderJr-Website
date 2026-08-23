@@ -33,6 +33,16 @@ export const paginaDeCases: ConteudoDeCases = {
   rotuloComPagina: "Ver resultados completos",
   rotuloSemPagina: "Case em breve",
 
+  impacto: {
+    eyebrow: "Impacto do Projeto",
+    titulo: "Resultados em números",
+  },
+
+  botoesDoCta: {
+    primario: { label: "Fale Conosco", href: "/fale-conosco" },
+    rotuloDoServico: "Conhecer o serviço",
+  },
+
   // Textos que aparecem nas páginas individuais de case.
   navegacaoDeDetalhe: {
     voltar: { label: "Voltar aos Cases", href: "/cases" },

@@ -27,6 +27,14 @@ import type {
 export interface ResumoDeServico {
   /** Vira a URL: "mapeamento-de-processos" → /servicos/mapeamento-de-processos */
   slug: string;
+  /**
+   * O nome do serviço.
+   *
+   * Um `\n` aqui força a quebra de linha no card grande de /servicos, que é o
+   * único lugar que preserva a quebra (`whitespace-pre-line`). Em todos os
+   * outros — menu, rodapé, card da Home, título da página — o `\n` vira um
+   * espaço comum, como qualquer quebra em HTML.
+   */
   titulo: string;
   /** Frase de efeito curta, exibida em laranja abaixo do título. */
   chamada: string;

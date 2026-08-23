@@ -1,6 +1,10 @@
-import { imagens } from "@/content/imagens";
 import type { Servico, ServicoComPagina } from "@/types/servico";
+import { consultoriaEmEstoque } from "./consultoria-em-estoque";
+import { custosEPrecificacao } from "./custos-e-precificacao";
+import { gestaoDaQualidade } from "./gestao-da-qualidade";
 import { mapeamentoDeProcessos } from "./mapeamento-de-processos";
+import { pesquisaDeMercado } from "./pesquisa-de-mercado";
+import { planejamentoEstrategico } from "./planejamento-estrategico";
 
 /**
  * ============================================================================
@@ -16,65 +20,19 @@ import { mapeamentoDeProcessos } from "./mapeamento-de-processos";
  *   2. importe aqui em cima
  *   3. acrescente na lista `servicos`
  * A página nasce sozinha. Ver CONTEUDO.md.
+ *
+ * Os seis serviços têm página. O texto de cinco delas é PROVISÓRIO e está
+ * marcado no topo de cada arquivo — precisa da revisão da Líder Jr. antes de
+ * publicar. Ver PENDENCIAS.md.
  * ============================================================================
  */
 export const servicos: Servico[] = [
   mapeamentoDeProcessos,
-
-  // Os serviços abaixo ainda não têm página própria — aparecem só nas
-  // listagens. Para criar a página de qualquer um deles, mova-o para um
-  // arquivo próprio e preencha o campo `detalhe`.
-  {
-    slug: "gestao-da-qualidade",
-    titulo: "Gestão da Qualidade",
-    chamada: "Eleve o padrão e conquiste a confiança do mercado!",
-    descricao:
-      "Implementamos ferramentas de controle de qualidade como PDCA, 5S e FMEA para elevar o padrão dos seus processos e produtos.",
-    tags: ["PDCA", "5S", "FMEA"],
-    icone: "award",
-    imagem: imagens.analiseDeFluxoEmPapel,
-  },
-  {
-    slug: "pesquisa-de-mercado",
-    titulo: "Pesquisa de Mercado",
-    chamada: "Decisões certeiras com dados reais do seu setor!",
-    descricao:
-      "Realizamos pesquisas quantitativas e qualitativas para embasar decisões estratégicas com dados reais do seu segmento.",
-    tags: ["Dados", "Análise", "Estratégia"],
-    icone: "pessoas",
-    imagem: imagens.painelDeGestao,
-  },
-  {
-    slug: "planejamento-estrategico",
-    titulo: "Planejamento Estratégico",
-    chamada: "Trace o caminho para um crescimento sólido!",
-    descricao:
-      "Desenvolvemos planos de negócios e diagnósticos organizacionais com foco em crescimento sustentável e competitividade.",
-    tags: ["OKR", "BSC", "Swot"],
-    icone: "livro",
-    imagem: imagens.workshopPostIts,
-  },
-  {
-    slug: "custos-e-precificacao",
-    titulo: "Custos e Precificação",
-    chamada: "Precifique com inteligência e proteja sua margem!",
-    descricao:
-      "Analisamos sua estrutura de custos e desenvolvemos estratégias de precificação alinhadas ao mercado e à margem desejada.",
-    tags: ["Custos", "Precificação", "Margem"],
-    icone: "check",
-    imagem: imagens.dashboardIndicadores,
-  },
-  {
-    slug: "consultoria-em-estoque",
-    titulo: "Consultoria em Estoque",
-    chamada: "Estoque enxuto, operação mais ágil!",
-    descricao:
-      "Otimizamos a gestão de estoques com modelos de lote econômico, curva ABC e sistemas de reabastecimento inteligente.",
-    tags: ["ABC", "EOQ", "Kanban"],
-    icone: "estrela",
-    // No protótipo esta imagem eram figurinhas do Mario. Ver PENDENCIAS.md.
-    imagem: imagens.dashboardIndicadores,
-  },
+  gestaoDaQualidade,
+  pesquisaDeMercado,
+  planejamentoEstrategico,
+  custosEPrecificacao,
+  consultoriaEmEstoque,
 ];
 
 /** Todos os serviços, incluindo os que ainda não têm página. */
@@ -90,9 +48,4 @@ export function getServicosComPagina(): ServicoComPagina[] {
 /** Busca um serviço pelo slug. Devolve undefined se não existir. */
 export function getServicoPorSlug(slug: string): Servico | undefined {
   return servicos.find((s) => s.slug === slug);
-}
-
-/** O caminho da página de um serviço, ou undefined se ele não tiver página. */
-export function getHrefDoServico(servico: Servico): string | undefined {
-  return servico.detalhe ? `/servicos/${servico.slug}` : undefined;
 }

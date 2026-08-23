@@ -103,7 +103,13 @@ export function StatsBand({
             className={cn(
               "rounded-lg p-6",
               destaque && "bg-brand",
-              !destaque && escuro && "bg-surface-dark-2 border-border-on-dark border",
+              // Sobre o escuro os cards são um véu, não uma placa: deixam
+              // passar a foto e o brilho do hero. O borrão é de 2px — o mínimo
+              // que ainda tira o detalhe fino da foto de trás do número, sem
+              // que o vidro pareça fosco.
+              !destaque &&
+                escuro &&
+                "bg-surface-veil border-border-on-dark border backdrop-blur-[2px]",
               !destaque && !escuro && "bg-surface border-border border shadow-sm",
             )}
           >

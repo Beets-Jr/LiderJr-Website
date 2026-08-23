@@ -1,0 +1,13 @@
+empresa: 'Comércio varejista'
+resultado: '+18%'
+metrica: 'Faturamento'
+descricao: 'Diagnóstico estratégico e implantação de melhorias que impulsionaram os resultados da empresa.'
+tags:
+  - 'Estratégia'
+  - 'Gestão'
+categoria: 'Estratégia'
+imagem:
+  arquivo: /imagens/cases/comercio-varejista.jpg
+  alt: 'Facilitadora organizando post-its coloridos em uma parede durante um workshop de mapeamento'
+historia:
+  discriminant: false

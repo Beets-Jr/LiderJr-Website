@@ -21,6 +21,7 @@ export const paginaDeServicos: ConteudoDeServicos = {
   },
 
   rotuloDoCard: "Conhecer a solução",
+  botaoSemPagina: { label: "Fale conosco", href: "/fale-conosco" },
 
   processo: {
     eyebrow: "Do primeiro contato à entrega",
@@ -30,14 +31,14 @@ export const paginaDeServicos: ConteudoDeServicos = {
     etapas: [
       {
         numero: "01",
-        icone: "alvo",
+        icone: "lupa",
         titulo: "Diagnóstico",
         descricao:
           "Ouvimos o time, mapeamos o cenário atual e identificamos as causas reais do problema — não só os sintomas.",
       },
       {
         numero: "02",
-        icone: "livro",
+        icone: "documento",
         titulo: "Proposta",
         descricao:
           "Traduzimos o diagnóstico em um plano claro: escopo, cronograma, entregáveis e investimento, sem letra miúda.",
