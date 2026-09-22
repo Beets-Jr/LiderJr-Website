@@ -92,7 +92,7 @@ export function TextoDaChamada({
 }
 
 /* -------------------------------------------------------------------------- */
-/* Formato em uso na Home: depoimento acima, chamada abaixo                    */
+/* Formato alternativo, sem uso: depoimento acima, chamada abaixo              */
 /* -------------------------------------------------------------------------- */
 
 export interface CTATestimonialProps {
@@ -139,14 +139,11 @@ export function CTATestimonial({ depoimento, chamada }: CTATestimonialProps) {
 }
 
 /* -------------------------------------------------------------------------- */
-/* Formato disponível, não usado: depoimento à esquerda, chamada à direita     */
+/* Formato em uso na Home: depoimento à esquerda, chamada à direita            */
 /* -------------------------------------------------------------------------- */
 
 /**
- * Variante em duas colunas. Não está em uso: o cliente gostou dos dois
- * formatos e ainda não escolheu. Para trocar, use este componente no lugar do
- * CTATestimonial na Home e passe `ctaFinalEmColunas` de src/content/home.ts.
- * Ver PENDENCIAS.md.
+ * Variante em duas colunas, escolhida pelo cliente. Ver PENDENCIAS.md 2.1.
  */
 export function CTATestimonialColumns({ depoimento, chamada }: CTATestimonialProps) {
   return (

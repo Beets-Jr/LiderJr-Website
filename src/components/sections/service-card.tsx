@@ -99,11 +99,14 @@ export function ServiceCardCompleto({
   servico,
   rotuloDoLink,
   botaoSemPagina,
+  nivelDeTitulo = "h2",
 }: {
   servico: Servico;
   rotuloDoLink: string;
   /** Para onde vai o card do serviço que ainda não tem página própria. */
   botaoSemPagina: LinkDeNavegacao;
+  /** "h3" quando o card fica sob o h2 de um grupo (ver /servicos). */
+  nivelDeTitulo?: "h2" | "h3";
 }) {
   const href = ehClicavel(servico);
 
@@ -129,11 +132,12 @@ export function ServiceCardCompleto({
 
       {/* O conteúdo sobe para ocupar o espaço aberto pelo corte. */}
       <div className="relative z-10 -mt-20 flex flex-1 flex-col px-6 pb-6">
-        {/* h2: na listagem /servicos cada card é um item de primeiro nível,
-            logo abaixo do h1 da página. Na Home o card compacto usa h3, porque
-            lá ele fica sob o h2 da seção "Nossas áreas de atuação". */}
+        {/* h2 por padrão: cada card é um item de primeiro nível, logo abaixo
+            do h1 da página. Vira h3 quando a listagem agrupa os cards sob um
+            h2 de grupo (ver /servicos) — mesma lógica do card compacto da
+            Home, que usa h3 por ficar sob o h2 de "Nossas áreas de atuação". */}
         <Heading
-          as="h2"
+          as={nivelDeTitulo}
           level="card"
           tone="brand"
           className="ml-auto max-w-[80%] text-right text-2xl whitespace-pre-line uppercase"

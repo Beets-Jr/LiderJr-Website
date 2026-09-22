@@ -1,11 +1,11 @@
 "use client";
 
-import { ChevronDown, Menu, X } from "lucide-react";
+import { ChevronDown, ChevronRight, Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
-import type { LinkDeNavegacao } from "@/types/site";
+import type { GrupoDeLinks, LinkDeNavegacao } from "@/types/site";
 import { LinkDaMesmaPagina } from "./link-da-mesma-pagina";
 import { Logo } from "./logo";
 
@@ -13,8 +13,12 @@ export interface HeaderProps {
   nome: string;
   navegacao: LinkDeNavegacao[];
   ctaDoMenu: LinkDeNavegacao;
-  /** Submenus indexados pelo href do item que os abre, ex.: { "/servicos": [...] }. */
-  submenus?: Record<string, LinkDeNavegacao[]>;
+  /**
+   * Submenus indexados pelo href do item que os abre, ex.: { "/servicos": [...] }.
+   * Cada entrada é um grupo com seus próprios links — passar o mouse no item
+   * abre os grupos, passar o mouse num grupo abre os links dele ao lado.
+   */
+  submenus?: Record<string, GrupoDeLinks[]>;
 }
 
 /**
@@ -62,13 +66,13 @@ export function Header({ nome, navegacao, ctaDoMenu, submenus = {} }: HeaderProp
           <nav aria-label="Navegação principal" className="hidden lg:block">
             <ul className="flex items-center gap-3">
               {navegacao.map((item) => {
-                const submenu = submenus[item.href];
+                const grupos = submenus[item.href];
                 return (
                   <li key={item.href}>
-                    {submenu && submenu.length > 0 ? (
+                    {grupos && grupos.length > 0 ? (
                       <ItemComSubmenu
                         item={item}
-                        submenu={submenu}
+                        grupos={grupos}
                         ativo={estaAtivo(pathname, item.href)}
                       />
                     ) : (
@@ -154,21 +158,30 @@ function NavLink({ item, ativo }: { item: LinkDeNavegacao; ativo: boolean }) {
  * No protótipo este dropdown abria só por `group-hover` em CSS — quem navega
  * por teclado não conseguia alcançá-lo. Aqui ele abre por hover E por clique,
  * anuncia o estado com `aria-expanded` e fecha com Escape ou clique fora.
+ *
+ * Tem dois níveis: o primeiro lista os GRUPOS de serviços (sem página própria,
+ * por isso cada grupo é um botão que só abre/fecha, nunca um link); passar o
+ * mouse ou ativar um grupo abre o segundo nível, com os serviços dele, ao lado.
  */
 function ItemComSubmenu({
   item,
-  submenu,
+  grupos,
   ativo,
 }: {
   item: LinkDeNavegacao;
-  submenu: LinkDeNavegacao[];
+  grupos: GrupoDeLinks[];
   ativo: boolean;
 }) {
   const [aberto, setAberto] = useState(false);
+  const [grupoAberto, setGrupoAberto] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const idSubmenu = `submenu-${item.href.replace(/\W/g, "-")}`;
 
-  const fechar = useCallback(() => setAberto(false), []);
+  const fechar = useCallback(() => {
+    setAberto(false);
+    setGrupoAberto(null);
+  }, []);
+  const fecharGrupo = useCallback(() => setGrupoAberto(null), []);
 
   useEffect(() => {
     if (!aberto) return;
@@ -248,21 +261,76 @@ function ItemComSubmenu({
         hidden={!aberto}
         className="bg-surface-dark border-border-on-dark absolute top-full left-0 w-72 rounded-md border py-2 shadow-lg"
       >
-        {submenu.map((sub) => (
-          <li key={sub.label}>
+        {grupos.map((grupo, indice) => (
+          <ItemDeGrupo
+            key={grupo.titulo}
+            grupo={grupo}
+            id={`${idSubmenu}-grupo-${indice}`}
+            aberto={grupoAberto === grupo.titulo}
+            onAbrir={() => setGrupoAberto(grupo.titulo)}
+            onFecharGrupo={fecharGrupo}
+            onClicarServico={fechar}
+          />
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+/**
+ * Um grupo dentro do submenu de "Serviços". Sem página própria — o botão só
+ * abre/fecha o segundo nível (os serviços do grupo), nunca navega.
+ */
+function ItemDeGrupo({
+  grupo,
+  id,
+  aberto,
+  onAbrir,
+  onFecharGrupo,
+  onClicarServico,
+}: {
+  grupo: GrupoDeLinks;
+  id: string;
+  aberto: boolean;
+  onAbrir: () => void;
+  onFecharGrupo: () => void;
+  onClicarServico: () => void;
+}) {
+  return (
+    <li className="relative" onMouseEnter={onAbrir}>
+      <button
+        type="button"
+        onClick={() => (aberto ? onFecharGrupo() : onAbrir())}
+        aria-expanded={aberto}
+        aria-controls={id}
+        aria-label={`${aberto ? "Fechar" : "Abrir"} submenu de ${grupo.titulo}`}
+        className="font-body text-on-dark-muted hover:text-on-dark hover:bg-surface-dark-3 flex w-full items-center justify-between gap-2 px-4 py-2 text-left text-sm transition-colors focus-visible:outline-none"
+      >
+        {grupo.titulo}
+        <ChevronRight size={14} aria-hidden="true" />
+      </button>
+
+      {/* Abre ao lado (`left-full`), não embaixo — é o segundo nível do flyout. */}
+      <ul
+        id={id}
+        hidden={!aberto}
+        className="bg-surface-dark border-border-on-dark absolute top-0 left-full ml-1 w-72 rounded-md border py-2 shadow-lg"
+      >
+        {grupo.links.map((link) => (
+          <li key={link.label}>
             <LinkDaMesmaPagina
-              href={sub.href}
-              // Clicar no serviço que já está aberto não navega — sem isto o
-              // dropdown ficaria aberto enquanto a página rola para o topo.
-              onClick={fechar}
+              href={link.href}
+              // Clicar no serviço fecha os dois níveis — sem isto o dropdown
+              // ficaria aberto enquanto a página rola para o topo.
+              onClick={onClicarServico}
               className="font-body text-on-dark-muted hover:text-on-dark hover:bg-surface-dark-3 block px-4 py-2 text-sm transition-colors"
             >
-              {sub.label}
+              {link.label}
             </LinkDaMesmaPagina>
           </li>
         ))}
       </ul>
-    </div>
+    </li>
   );
 }
 
@@ -281,11 +349,12 @@ function MenuMobile({
   id: string;
   navegacao: LinkDeNavegacao[];
   ctaDoMenu: LinkDeNavegacao;
-  submenus: Record<string, LinkDeNavegacao[]>;
+  submenus: Record<string, GrupoDeLinks[]>;
   pathname: string;
   onFechar: () => void;
 }) {
   const [submenuAberto, setSubmenuAberto] = useState<string | null>(null);
+  const [grupoMobileAberto, setGrupoMobileAberto] = useState<string | null>(null);
 
   useEffect(() => {
     function aoTeclar(evento: KeyboardEvent) {
@@ -303,7 +372,7 @@ function MenuMobile({
       <nav aria-label="Navegação principal (mobile)" className="px-6 py-6">
         <ul className="flex flex-col gap-1">
           {navegacao.map((item) => {
-            const submenu = submenus[item.href];
+            const grupos = submenus[item.href];
             const ativo = estaAtivo(pathname, item.href);
             const expandido = submenuAberto === item.href;
             const idSubmenu = `submenu-mobile-${item.href.replace(/\W/g, "-")}`;
@@ -330,10 +399,15 @@ function MenuMobile({
                     {item.label}
                   </LinkDaMesmaPagina>
 
-                  {submenu && submenu.length > 0 ? (
+                  {grupos && grupos.length > 0 ? (
                     <button
                       type="button"
-                      onClick={() => setSubmenuAberto(expandido ? null : item.href)}
+                      onClick={() => {
+                        setSubmenuAberto(expandido ? null : item.href);
+                        // Reabrir "Serviços" nunca deve mostrar um grupo que
+                        // ficou expandido da vez anterior.
+                        setGrupoMobileAberto(null);
+                      }}
                       aria-expanded={expandido}
                       aria-controls={idSubmenu}
                       aria-label={`${expandido ? "Fechar" : "Abrir"} submenu de ${item.label}`}
@@ -351,19 +425,58 @@ function MenuMobile({
                   ) : null}
                 </div>
 
-                {submenu && submenu.length > 0 ? (
+                {grupos && grupos.length > 0 ? (
                   <ul id={idSubmenu} hidden={!expandido} className="pb-2 pl-4">
-                    {submenu.map((sub) => (
-                      <li key={sub.label}>
-                        <LinkDaMesmaPagina
-                          href={sub.href}
-                          onClick={onFechar}
-                          className="font-body text-on-dark-faint hover:text-on-dark block rounded-sm px-3 py-2 text-sm transition-colors"
-                        >
-                          {sub.label}
-                        </LinkDaMesmaPagina>
-                      </li>
-                    ))}
+                    {grupos.map((grupo, indice) => {
+                      const idGrupo = `${idSubmenu}-grupo-${indice}`;
+                      const chaveDoGrupo = `${item.href}-${indice}`;
+                      const grupoExpandido = grupoMobileAberto === chaveDoGrupo;
+
+                      return (
+                        <li key={grupo.titulo}>
+                          {/* Sem página própria: o grupo é só um botão que
+                              abre/fecha os serviços dele, nunca um link. */}
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setGrupoMobileAberto(grupoExpandido ? null : chaveDoGrupo)
+                            }
+                            aria-expanded={grupoExpandido}
+                            aria-controls={idGrupo}
+                            aria-label={`${grupoExpandido ? "Fechar" : "Abrir"} submenu de ${grupo.titulo}`}
+                            className="font-body text-on-dark-faint hover:text-on-dark flex w-full items-center justify-between gap-2 rounded-sm px-3 py-2 text-sm font-semibold transition-colors"
+                          >
+                            {grupo.titulo}
+                            <ChevronDown
+                              size={14}
+                              aria-hidden="true"
+                              className={cn(
+                                "transition-transform",
+                                grupoExpandido && "rotate-180",
+                              )}
+                            />
+                          </button>
+
+                          <ul
+                            id={idGrupo}
+                            hidden={!grupoExpandido}
+                            className="pb-2 pl-4"
+                          >
+                            {grupo.links.map((link) => (
+                              <li key={link.label}>
+                                <LinkDaMesmaPagina
+                                  href={link.href}
+                                  onClick={onFechar}
+                                  className="font-body text-on-dark-faint hover:text-on-dark block rounded-sm px-3 py-2 text-sm transition-colors"
+                                >
+                                  {link.label}
+                                </LinkDaMesmaPagina>
+                              </li>
+                            ))}
+                          </ul>
+                        </li>
+                      );
+                    })}
                   </ul>
                 ) : null}
               </li>

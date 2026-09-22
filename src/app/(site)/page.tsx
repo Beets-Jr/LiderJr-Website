@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { AboutStrip } from "@/components/sections/about-strip";
 import { CasesCarousel } from "@/components/sections/cases-carousel";
 import { ClientsMarquee } from "@/components/sections/clients-marquee";
-import { CTATestimonial } from "@/components/sections/cta";
+import { CTATestimonialColumns } from "@/components/sections/cta";
 import { HomeHero } from "@/components/sections/home-hero";
 import { PostCard } from "@/components/sections/post-card";
 import { SectionHeader } from "@/components/sections/section-header";
@@ -11,7 +11,7 @@ import { StatsBand } from "@/components/sections/stats-band";
 import { Container, Section } from "@/components/ui";
 import { getUltimosPosts } from "@/content/blog";
 import { getCasesEmDestaque } from "@/content/cases";
-import { home } from "@/content/home";
+import { ctaFinalEmColunas, home } from "@/content/home";
 import { paginaDeServicos } from "@/content/servicos/pagina";
 import { getTodosServicos } from "@/content/servicos";
 
@@ -87,15 +87,9 @@ export default async function PaginaInicial() {
         </Container>
       </Section>
 
-      {/*
-        Existe uma segunda versão deste CTA (depoimento ao lado, em duas
-        colunas) pronta em CTATestimonialColumns, com o conteúdo em
-        `ctaFinalEmColunas` de src/content/home.ts. O cliente ainda não escolheu
-        entre as duas. Ver PENDENCIAS.md.
-      */}
-      <CTATestimonial
-        depoimento={home.ctaFinal.depoimento}
-        chamada={home.ctaFinal.chamada}
+      <CTATestimonialColumns
+        depoimento={ctaFinalEmColunas.depoimento}
+        chamada={ctaFinalEmColunas.chamada}
       />
     </>
   );

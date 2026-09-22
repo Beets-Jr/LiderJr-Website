@@ -196,39 +196,52 @@ carrossel.
 
 O funcionamento é o mesmo do blog.
 
-> **Os seis serviços já têm página própria**, uma por arquivo em
-> `src/content/servicos/`. O texto de cinco delas é provisório e está marcado no
+> **Os onze serviços já têm página própria**, uma por arquivo em
+> `src/content/servicos/`. O texto de dez delas é provisório e está marcado no
 > topo do arquivo — para revisar, é só editar o arquivo do serviço. O passo a
 > passo abaixo serve para criar um serviço **novo**. Ver PENDENCIAS.md.
 
 **Passo 1.** Copie `src/content/servicos/mapeamento-de-processos.ts` e nomeie o
-arquivo com o endereço desejado, ex.: `gestao-da-qualidade.ts`.
+arquivo com o endereço desejado, ex.: `previsao-de-vendas.ts`.
 
-**Passo 2.** Troque o conteúdo. A página tem cinco blocos, todos obrigatórios:
+**Passo 2.** Troque o conteúdo. A página tem seis blocos, todos obrigatórios
+menos `depoimento`:
 
-| Campo         | O que aparece na página                            |
-| ------------- | -------------------------------------------------- |
-| `sobre`       | "Como funciona": texto de um lado, imagem do outro |
-| `metodologia` | A linha do tempo de etapas numeradas               |
-| `resultados`  | Os três cards de "por que contratar"               |
-| `depoimento`  | Opcional — a citação em destaque                   |
-| `cta`         | A chamada final, com a lista "O que você recebe"   |
+| Campo         | O que aparece na página                                                                              |
+| ------------- | ---------------------------------------------------------------------------------------------------- |
+| `grupoId`     | Em qual dos 4 grupos o serviço aparece no menu e em /servicos — ver `src/content/servicos/grupos.ts` |
+| `sobre`       | "Como funciona": texto de um lado, imagem do outro                                                   |
+| `metodologia` | A linha do tempo de etapas numeradas                                                                 |
+| `resultados`  | Os três cards de "por que contratar"                                                                 |
+| `depoimento`  | Opcional — a citação em destaque                                                                     |
+| `cta`         | A chamada final, com a lista "O que você recebe"                                                     |
 
 **Passo 3.** Abra `src/content/servicos/index.ts`, importe o arquivo no topo e
-acrescente o nome na lista:
+acrescente o nome na lista, dentro do bloco do grupo correspondente:
 
 ```ts
-import { gestaoDaQualidade } from "./gestao-da-qualidade"; // ← no topo
+import { previsaoDeVendas } from "./previsao-de-vendas"; // ← no topo
 
 export const servicos: Servico[] = [
+  // Otimização de Processos
   mapeamentoDeProcessos,
-  gestaoDaQualidade, // ← a ordem aqui é a ordem no site
-  pesquisaDeMercado,
+  gestaoDeEstoques,
+  cronoanalise,
+  // Empreendedorismo
+  planoDeNegocios,
+  previsaoDeDemanda,
+  planejamentoEstrategico,
+  previsaoDeVendas, // ← a ordem dentro do grupo é a ordem no site
+  // ...
 ];
 ```
 
-A página `/servicos/gestao-da-qualidade` passa a existir, o card na listagem
-vira link e o item entra no mapa do site.
+A página `/servicos/previsao-de-vendas` passa a existir, o card na listagem
+vira link e o item entra no mapa do site — dentro da seção do grupo escolhido.
+
+> **Os 4 grupos não têm página própria** — são só organizacionais. Para
+> mudá-los (nome, ordem, ou criar um novo), edite
+> `src/content/servicos/grupos.ts`. Ver PENDENCIAS.md 2.3.
 
 > **Case de sucesso não funciona mais assim** — ele virou publicação do CMS.
 > Ver a seção "Publicar post, case ou material".

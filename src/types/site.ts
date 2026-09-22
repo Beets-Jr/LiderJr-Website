@@ -73,6 +73,12 @@ export interface ColunaDoRodape {
   links: LinkDeNavegacao[];
 }
 
+/** Um grupo de links no submenu do menu — ex.: os serviços de um grupo. */
+export interface GrupoDeLinks {
+  titulo: string;
+  links: LinkDeNavegacao[];
+}
+
 export interface ConteudoDoSite {
   /** Nome curto, usado no logo e no rodapé. */
   nome: string;

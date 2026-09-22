@@ -3,7 +3,7 @@ import type { Servico } from "@/types/servico";
 
 /**
  * ============================================================================
- * SERVIÇO: CONSULTORIA EM ESTOQUE
+ * SERVIÇO: GESTÃO DE ESTOQUES
  * ============================================================================
  * ⚠️ CONTEÚDO PROVISÓRIO — escrito para dar corpo à página e mostrar o layout
  * funcionando. Precisa de revisão da Líder Jr. antes de publicar.
@@ -11,9 +11,10 @@ import type { Servico } from "@/types/servico";
  * a pedido, só para a seção existir enquanto não há uma citação real.
  * ============================================================================
  */
-export const consultoriaEmEstoque: Servico = {
-  slug: "consultoria-em-estoque",
-  titulo: "Consultoria em Estoque",
+export const gestaoDeEstoques: Servico = {
+  slug: "gestao-de-estoques",
+  grupoId: "otimizacao-de-processos",
+  titulo: "Gestão de Estoques",
   chamada: "Estoque enxuto, operação mais ágil!",
   descricao:
     "Otimizamos a gestão de estoques com modelos de lote econômico, curva ABC e sistemas de reabastecimento inteligente.",
@@ -24,7 +25,7 @@ export const consultoriaEmEstoque: Servico = {
 
   detalhe: {
     metadados: {
-      titulo: "Consultoria em Estoque",
+      titulo: "Gestão de Estoques",
       descricao:
         "Curva ABC, lote econômico e política de reposição para liberar capital parado sem correr o risco de faltar item na hora da venda.",
     },
@@ -43,7 +44,7 @@ export const consultoriaEmEstoque: Servico = {
 
     metodologia: {
       eyebrow: "Metodologia",
-      titulo: "As etapas da consultoria",
+      titulo: "As etapas da gestão",
       etapas: [
         {
           numero: "01",

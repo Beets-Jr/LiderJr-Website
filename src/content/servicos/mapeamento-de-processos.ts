@@ -14,6 +14,7 @@ import type { Servico } from "@/types/servico";
  */
 export const mapeamentoDeProcessos: Servico = {
   slug: "mapeamento-de-processos",
+  grupoId: "otimizacao-de-processos",
   titulo: "Mapeamento de Processos",
   chamada: "Transforme eficiência em vantagem competitiva!",
   descricao:

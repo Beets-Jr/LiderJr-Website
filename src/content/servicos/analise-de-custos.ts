@@ -3,7 +3,7 @@ import type { Servico } from "@/types/servico";
 
 /**
  * ============================================================================
- * SERVIÇO: CUSTOS E PRECIFICAÇÃO
+ * SERVIÇO: ANÁLISE DE CUSTOS
  * ============================================================================
  * ⚠️ CONTEÚDO PROVISÓRIO — escrito para dar corpo à página e mostrar o layout
  * funcionando. Precisa de revisão da Líder Jr. antes de publicar.
@@ -11,9 +11,10 @@ import type { Servico } from "@/types/servico";
  * a pedido, só para a seção existir enquanto não há uma citação real.
  * ============================================================================
  */
-export const custosEPrecificacao: Servico = {
-  slug: "custos-e-precificacao",
-  titulo: "Custos e\nPrecificação",
+export const analiseDeCustos: Servico = {
+  slug: "analise-de-custos",
+  grupoId: "gestao-financeira",
+  titulo: "Análise de\nCustos",
   chamada: "Precifique com inteligência e proteja sua margem!",
   descricao:
     "Analisamos sua estrutura de custos e desenvolvemos estratégias de precificação alinhadas ao mercado e à margem desejada.",
@@ -23,7 +24,7 @@ export const custosEPrecificacao: Servico = {
 
   detalhe: {
     metadados: {
-      titulo: "Custos e Precificação",
+      titulo: "Análise de Custos",
       descricao:
         "Levantamento da estrutura de custos, cálculo do custo real por produto e definição de preço com margem sustentável e coerente com o mercado.",
     },

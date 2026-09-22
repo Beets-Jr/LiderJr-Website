@@ -4,7 +4,7 @@ import { ProcessSteps } from "@/components/sections/process-steps";
 import { SectionHeader } from "@/components/sections/section-header";
 import { ServiceCardCompleto } from "@/components/sections/service-card";
 import { Card, Container, Section } from "@/components/ui";
-import { getTodosServicos } from "@/content/servicos";
+import { getServicosAgrupados } from "@/content/servicos";
 import { paginaDeServicos } from "@/content/servicos/pagina";
 
 export const metadata: Metadata = {
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 };
 
 export default function PaginaDeServicos() {
-  const servicos = getTodosServicos();
+  const grupos = getServicosAgrupados();
 
   return (
     <>
@@ -25,17 +25,23 @@ export default function PaginaDeServicos() {
 
       <Section>
         <Container>
-          <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {servicos.map((servico) => (
-              <li key={servico.slug} className="flex">
-                <ServiceCardCompleto
-                  servico={servico}
-                  rotuloDoLink={paginaDeServicos.rotuloDoCard}
-                  botaoSemPagina={paginaDeServicos.botaoSemPagina}
-                />
-              </li>
-            ))}
-          </ul>
+          {grupos.map(({ grupo, servicos }) => (
+            <div key={grupo.id} className="mb-16 last:mb-0">
+              <SectionHeader conteudo={grupo} as="h2" />
+              <ul className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {servicos.map((servico) => (
+                  <li key={servico.slug} className="flex">
+                    <ServiceCardCompleto
+                      servico={servico}
+                      rotuloDoLink={paginaDeServicos.rotuloDoCard}
+                      botaoSemPagina={paginaDeServicos.botaoSemPagina}
+                      nivelDeTitulo="h3"
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
 
           {/* O processo fica num painel escuro dentro da seção clara. */}
           <Card tone="invertido" padding="xl" className="mt-20 text-left">

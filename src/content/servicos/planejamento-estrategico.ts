@@ -13,6 +13,7 @@ import type { Servico } from "@/types/servico";
  */
 export const planejamentoEstrategico: Servico = {
   slug: "planejamento-estrategico",
+  grupoId: "empreendedorismo",
   titulo: "Planejamento Estratégico",
   chamada: "Trace o caminho para um crescimento sólido!",
   descricao:

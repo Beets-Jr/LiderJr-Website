@@ -129,14 +129,12 @@ export const home: ConteudoDaHome = {
 
 /**
  * ----------------------------------------------------------------------------
- * VARIANTE DE CTA DISPONÍVEL, NÃO USADA
+ * CONTEÚDO DO CTA EM COLUNAS — em uso na Home
  * ----------------------------------------------------------------------------
- * O cliente gostou dos dois formatos de CTA com depoimento e ainda não escolheu
- * um. A Home usa o formato acima (depoimento em cima, chamada embaixo). Este é
- * o outro: depoimento à esquerda, chamada à direita, em duas colunas.
- *
- * Para trocar, use <CTATestimonialColumns> no lugar de <CTATestimonial> na Home
- * e passe este conteúdo. Ver PENDENCIAS.md.
+ * O cliente escolheu o formato em duas colunas (depoimento à esquerda, chamada
+ * à direita), usado com <CTATestimonialColumns>. `ctaFinal` acima (depoimento
+ * em cima, chamada embaixo) fica mantido no código, sem uso. Ver PENDENCIAS.md
+ * 2.1.
  * ----------------------------------------------------------------------------
  */
 export const ctaFinalEmColunas: ConteudoDaHome["ctaFinal"] = {

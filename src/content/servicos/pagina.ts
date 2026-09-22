@@ -9,7 +9,7 @@ export const paginaDeServicos: ConteudoDeServicos = {
   metadados: {
     titulo: "Serviços",
     descricao:
-      "Mapeamento de processos, gestão da qualidade, pesquisa de mercado, planejamento estratégico, custos e estoque. Soluções em Engenharia de Produção para PMEs.",
+      "Otimização de processos, empreendedorismo, gestão financeira e captação de clientes. Soluções em Engenharia de Produção para PMEs.",
   },
 
   hero: {

@@ -13,6 +13,7 @@ import type { Servico } from "@/types/servico";
  */
 export const pesquisaDeMercado: Servico = {
   slug: "pesquisa-de-mercado",
+  grupoId: "captacao-de-clientes",
   titulo: "Pesquisa de\nMercado",
   chamada: "Decisões certeiras com dados reais do seu setor!",
   descricao:

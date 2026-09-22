@@ -1,6 +1,6 @@
-import { getTodosServicos } from "@/content/servicos";
+import { getServicosAgrupados } from "@/content/servicos";
 import { getHrefDoServico } from "@/lib/hrefs";
-import type { ConteudoDoSite, LinkDeNavegacao } from "@/types/site";
+import type { ConteudoDoSite, GrupoDeLinks, LinkDeNavegacao } from "@/types/site";
 
 /**
  * ============================================================================
@@ -98,14 +98,40 @@ export const site: ConteudoDoSite = {
 };
 
 /**
- * Links do submenu "Serviços" do menu e da coluna "Serviços" do rodapé.
+ * Links da coluna "Serviços" do rodapé, divididos em duas colunas mais curtas:
+ * os dois primeiros grupos numa, os dois últimos na outra. Sem subtítulo de
+ * grupo dentro de cada coluna — é só uma divisão visual da mesma lista.
  *
  * Vêm do registry de serviços — não há lista escrita à mão. Serviços que ainda
  * não têm página apontam para a listagem /servicos.
  */
-export function getLinksDeServicos(): LinkDeNavegacao[] {
-  return getTodosServicos().map((servico) => ({
-    label: servico.titulo,
-    href: getHrefDoServico(servico) ?? "/servicos",
+export function getColunasDeServicosParaRodape(): [LinkDeNavegacao[], LinkDeNavegacao[]] {
+  const grupos = getServicosAgrupados();
+  const metade = Math.ceil(grupos.length / 2);
+
+  const paraLinks = (grupos: ReturnType<typeof getServicosAgrupados>): LinkDeNavegacao[] =>
+    grupos.flatMap(({ servicos }) =>
+      servicos.map((servico) => ({
+        label: servico.titulo,
+        href: getHrefDoServico(servico) ?? "/servicos",
+      })),
+    );
+
+  return [paraLinks(grupos.slice(0, metade)), paraLinks(grupos.slice(metade))];
+}
+
+/**
+ * Grupos de links do submenu "Serviços" do menu: passar o mouse em "Serviços"
+ * mostra os 4 grupos, e passar o mouse num grupo mostra os serviços dele.
+ *
+ * Vêm do registry de serviços — não há lista escrita à mão.
+ */
+export function getGruposDeServicosParaNavegacao(): GrupoDeLinks[] {
+  return getServicosAgrupados().map(({ grupo, servicos }) => ({
+    titulo: grupo.titulo,
+    links: servicos.map((servico) => ({
+      label: servico.titulo,
+      href: getHrefDoServico(servico) ?? "/servicos",
+    })),
   }));
 }

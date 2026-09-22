@@ -23,10 +23,27 @@ import type {
  * ============================================================================
  */
 
+/**
+ * Os 4 grupos organizacionais do menu "Serviços" e da página /servicos.
+ * Sem página própria — servem só para agrupar. Ver src/content/servicos/grupos.ts.
+ */
+export type IdDeGrupo =
+  | "otimizacao-de-processos"
+  | "empreendedorismo"
+  | "gestao-financeira"
+  | "captacao-de-clientes";
+
+/** Um grupo de serviços: o `titulo` vira o cabeçalho da seção em /servicos. */
+export interface GrupoDeServico extends CabecalhoDeSecao {
+  id: IdDeGrupo;
+}
+
 /** A parte que aparece nos cards de listagem. */
 export interface ResumoDeServico {
   /** Vira a URL: "mapeamento-de-processos" → /servicos/mapeamento-de-processos */
   slug: string;
+  /** Em qual dos 4 grupos este serviço aparece no menu e em /servicos. */
+  grupoId: IdDeGrupo;
   /**
    * O nome do serviço.
    *

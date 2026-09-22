@@ -63,22 +63,32 @@ com o visitante.
 "Arquivo para download". Ele vai para `public/materiais/` sozinho.
 📄 `content/materiais/*.yaml`
 
-### 1.6 Texto de cinco páginas de serviço
+### 1.6 Texto de dez páginas de serviço
 
-Só a página de **Mapeamento de Processos** tem texto validado. As outras cinco
-(Gestão da Qualidade, Pesquisa de Mercado, Planejamento Estratégico, Custos e
-Precificação, Consultoria em Estoque) foram escritas para o site ficar completo
-e descrevem cada serviço de forma genérica, no formato do modelo — **precisam da
-revisão da Líder Jr. antes de publicar**, porque afirmam o que a empresa entrega.
+Só a página de **Mapeamento de Processos** tem texto validado. As outras dez
+foram escritas para o site ficar completo e descrevem cada serviço de forma
+genérica, no formato do modelo — **precisam da revisão da Líder Jr. antes de
+publicar**, porque afirmam o que a empresa entrega:
+
+- **Pesquisa de Mercado, Planejamento Estratégico, Gestão de Estoques, Análise
+  de Custos** já existiam (as duas últimas com nome e URL novos desde a
+  reorganização em grupos, ver 2.3) e têm texto provisório herdado.
+- **Cronoanálise, Plano de Negócios, Previsão de Demanda, DRE, Gestão de Fluxo
+  de Caixa, Plano de Marketing** são seis páginas novas, criadas na
+  reorganização em grupos só para o site sair completo — o texto é ainda mais
+  provisório que o das demais e nenhuma delas tem depoimento (ver abaixo).
 
 Cada arquivo abre com um aviso de conteúdo provisório. Revise em especial a
 `metodologia` (as quatro etapas) e o `checklist` do CTA ("O que você recebe"),
 que descrevem entregáveis concretos.
 
-**Os cinco depoimentos são forjados** — pessoa, empresa e fala inventadas, a
-pedido, para a seção existir enquanto não há citação real. O mesmo vale para o
-depoimento da página de Mapeamento de Processos, herdado do protótipo. São seis
-ao todo, cada um marcado com `⚠️ DEPOIMENTO FORJADO` na linha acima do campo.
+**Cinco depoimentos são forjados** — pessoa, empresa e fala inventadas, a
+pedido, para a seção existir enquanto não há citação real: Pesquisa de
+Mercado, Planejamento Estratégico, Gestão de Estoques, Análise de Custos, e o
+de Mapeamento de Processos, herdado do protótipo. Cada um está marcado com
+`⚠️ DEPOIMENTO FORJADO` na linha acima do campo. As seis páginas novas não têm
+depoimento — o campo é opcional e foi deixado de fora em vez de inventar mais
+seis citações falsas.
 
 > **Publicar depoimento inventado como se fosse de cliente é propaganda
 > enganosa.** Antes de o site ir ao ar: substituir por depoimentos reais, com
@@ -112,16 +122,18 @@ alimenta o `sitemap.xml`, o `robots.txt` e as URLs de compartilhamento —
 
 ## 2. Decisões pendentes do cliente
 
-### 2.1 Qual formato de CTA usar na Home
+### 2.1 Formato de CTA usado na Home — decidido
 
-O cliente gostou dos dois formatos de CTA com depoimento e ainda não escolheu.
+O cliente escolheu o formato em duas colunas.
 
-- **Em uso:** `CTATestimonial` — depoimento em cima, chamada embaixo.
-- **Pronto, sem uso:** `CTATestimonialColumns` — depoimento à esquerda, chamada
-  à direita.
+- **Em uso:** `CTATestimonialColumns` — depoimento à esquerda, chamada à
+  direita.
+- **Mantido no código, sem uso:** `CTATestimonial` — depoimento em cima,
+  chamada embaixo.
 
-Para trocar, use o outro componente na Home e passe `ctaFinalEmColunas`, que já
-está escrito em `src/content/home.ts`.
+Para trocar de novo, use o outro componente na Home e passe `home.ctaFinal`
+(formato empilhado) ou `ctaFinalEmColunas` (formato em colunas), ambos em
+`src/content/home.ts`.
 📄 `src/app/(site)/page.tsx` · `src/components/sections/cta.tsx`
 
 ### 2.2 Contraste do laranja da marca — a única reprovação de WCAG AA
@@ -142,6 +154,36 @@ o cliente reavaliar. As alternativas foram medidas:
 | `#c9520a`                        | 4,47:1 ✗     | ainda reprova por pouco                 |
 
 📄 `src/app/globals.css`
+
+### 2.3 Taxonomia de serviços — decidido
+
+O cliente reorganizou os serviços em **11, agrupados em 4 categorias**
+(organizacionais apenas — nenhum grupo tem página própria): Otimização de
+Processos, Empreendedorismo, Gestão Financeira e Captação de Clientes.
+
+- **Removido:** Gestão da Qualidade (não fazia parte da nova lista).
+- **Renomeados, com URL nova** (sem redirecionamento, a pedido do cliente):
+  Consultoria em Estoque → Gestão de Estoques (`/servicos/gestao-de-estoques`);
+  Custos e Precificação → Análise de Custos (`/servicos/analise-de-custos`). O
+  conteúdo provisório de ambos foi mantido — só o nome mudou.
+- **Inalterados:** Mapeamento de Processos, Planejamento Estratégico, Pesquisa
+  de Mercado.
+- **Seis serviços novos**, com conteúdo mínimo/provisório (ver 1.6):
+  Cronoanálise, Plano de Negócios, Previsão de Demanda, DRE, Gestão de Fluxo
+  de Caixa, Plano de Marketing.
+
+O grupo é um campo de conteúdo (`grupoId`), igual a `categoria` em posts e
+cases — o menu, a página /servicos e o rodapé derivam do registry, sem lista
+escrita à mão em outro lugar. No menu, passar o mouse em "Serviços" mostra os
+4 grupos; passar o mouse num grupo abre os serviços dele ao lado. No rodapé, a
+coluna "Serviços" continua uma lista simples dos 11 links, sem separação por
+grupo — decisão do cliente. Na Home, os "3 primeiros serviços" em destaque
+continuam sendo os 3 primeiros do registry (hoje, os do grupo Otimização de
+Processos) — também sem curadoria especial, por decisão do cliente.
+
+📄 `src/content/servicos/grupos.ts` · `src/content/servicos/index.ts` ·
+`src/types/servico.ts` · `src/components/layout/header.tsx` ·
+`src/app/(site)/servicos/page.tsx`
 
 ---
 
