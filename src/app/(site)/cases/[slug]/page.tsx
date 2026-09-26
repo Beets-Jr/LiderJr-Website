@@ -7,6 +7,7 @@ import { PageHero } from "@/components/sections/page-hero";
 import { RelatedCards } from "@/components/sections/related-cards";
 import { getCasePorSlug, getCasesComPagina, getTodosCases } from "@/content/cases";
 import { paginaDeCases } from "@/content/cases/pagina";
+import { getHrefDoCase } from "@/lib/hrefs";
 
 /**
  * ============================================================================
@@ -54,7 +55,7 @@ export default async function PaginaDeCase({ params }: Props) {
     .filter((outro) => outro.slug !== item.slug)
     .slice(0, 3)
     .map((outro) => ({
-      href: outro.detalhe ? `/cases/${outro.slug}` : "/cases",
+      href: getHrefDoCase(outro) ?? "/cases",
       etiqueta: outro.categoria,
       titulo: outro.empresa,
       descricao: outro.descricao,

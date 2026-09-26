@@ -10,6 +10,7 @@ import { Text } from "@/components/ui";
 import { getPostPorSlug, getPostsComPagina, getTodosPosts } from "@/content/blog";
 import { paginaDoBlog } from "@/content/blog/pagina";
 import { formatarData } from "@/lib/datas";
+import { getHrefDoPost } from "@/lib/hrefs";
 
 /**
  * ============================================================================
@@ -58,7 +59,7 @@ export default async function PaginaDePost({ params }: Props) {
     .filter((outro) => outro.slug !== post.slug)
     .slice(0, 3)
     .map((outro) => ({
-      href: outro.detalhe ? `/blog/${outro.slug}` : "/blog",
+      href: getHrefDoPost(outro) ?? "/blog",
       etiqueta: outro.categoria,
       titulo: outro.titulo,
       descricao: outro.resumo,

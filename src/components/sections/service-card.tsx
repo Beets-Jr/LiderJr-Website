@@ -2,6 +2,7 @@ import { ArrowRight, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { Badge, Card, Foto, Heading, IconTile, Text } from "@/components/ui";
 import { cn } from "@/lib/cn";
+import { getHrefDoServico } from "@/lib/hrefs";
 import { getIcone } from "@/lib/icones";
 import type { LinkDeNavegacao } from "@/types/site";
 import type { Servico } from "@/types/servico";
@@ -15,10 +16,6 @@ import type { Servico } from "@/types/servico";
  * <div onClick>, invisível para o teclado e para buscadores.
  */
 
-function ehClicavel(servico: Servico): string | undefined {
-  return servico.detalhe ? `/servicos/${servico.slug}` : undefined;
-}
-
 /* -------------------------------------------------------------------------- */
 
 export function ServiceCardCompacto({
@@ -28,7 +25,7 @@ export function ServiceCardCompacto({
   servico: Servico;
   rotuloDoLink: string;
 }) {
-  const href = ehClicavel(servico);
+  const href = getHrefDoServico(servico);
   const Icone = getIcone(servico.icone);
 
   return (
@@ -108,7 +105,7 @@ export function ServiceCardCompleto({
   /** "h3" quando o card fica sob o h2 de um grupo (ver /servicos). */
   nivelDeTitulo?: "h2" | "h3";
 }) {
-  const href = ehClicavel(servico);
+  const href = getHrefDoServico(servico);
 
   return (
     <Card

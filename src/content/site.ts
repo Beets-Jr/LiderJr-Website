@@ -1,5 +1,6 @@
 import { getServicosAgrupados } from "@/content/servicos";
 import { getHrefDoServico } from "@/lib/hrefs";
+import type { Servico } from "@/types/servico";
 import type { ConteudoDoSite, GrupoDeLinks, LinkDeNavegacao } from "@/types/site";
 
 /**
@@ -98,6 +99,14 @@ export const site: ConteudoDoSite = {
 };
 
 /**
+ * O link de um serviço no menu e no rodapé. Serviço sem página própria aponta
+ * para a listagem /servicos.
+ */
+function linkDoServico(servico: Servico): LinkDeNavegacao {
+  return { label: servico.titulo, href: getHrefDoServico(servico) ?? "/servicos" };
+}
+
+/**
  * Links da coluna "Serviços" do rodapé, divididos em duas colunas mais curtas:
  * os dois primeiros grupos numa, os dois últimos na outra. Sem subtítulo de
  * grupo dentro de cada coluna — é só uma divisão visual da mesma lista.
@@ -110,12 +119,7 @@ export function getColunasDeServicosParaRodape(): [LinkDeNavegacao[], LinkDeNave
   const metade = Math.ceil(grupos.length / 2);
 
   const paraLinks = (grupos: ReturnType<typeof getServicosAgrupados>): LinkDeNavegacao[] =>
-    grupos.flatMap(({ servicos }) =>
-      servicos.map((servico) => ({
-        label: servico.titulo,
-        href: getHrefDoServico(servico) ?? "/servicos",
-      })),
-    );
+    grupos.flatMap(({ servicos }) => servicos.map(linkDoServico));
 
   return [paraLinks(grupos.slice(0, metade)), paraLinks(grupos.slice(metade))];
 }
@@ -129,9 +133,6 @@ export function getColunasDeServicosParaRodape(): [LinkDeNavegacao[], LinkDeNave
 export function getGruposDeServicosParaNavegacao(): GrupoDeLinks[] {
   return getServicosAgrupados().map(({ grupo, servicos }) => ({
     titulo: grupo.titulo,
-    links: servicos.map((servico) => ({
-      label: servico.titulo,
-      href: getHrefDoServico(servico) ?? "/servicos",
-    })),
+    links: servicos.map(linkDoServico),
   }));
 }
