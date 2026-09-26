@@ -67,7 +67,6 @@ src/
 └── lib/                    Utilidades: datas, categorias, ícones, envio do formulário
 
 public/imagens/             Os arquivos de imagem
-prototipo-vibecodado/       Protótipo aprovado — referência, fora do build
 
 content/                    ★ AS PUBLICAÇÕES, escritas pelo CMS (YAML)
 ├── blog/                   um arquivo por post
@@ -166,12 +165,12 @@ A lista completa de pendências está em **[PENDENCIAS.md](PENDENCIAS.md)**.
 
 ---
 
-## A pasta `prototipo-vibecodado/`
+## O protótipo
 
-É o protótipo aprovado pelo cliente, mantido como referência visual. **Não deve
-ser editada.** Ela está fora do build, do lint, do Prettier e do deploy, e fora
-das buscas do editor — mas continua versionada no git de propósito.
+O protótipo aprovado pelo cliente não fica mais no repositório. Ele está
+preservado na tag git `prototipo-aprovado`:
 
-Quando não for mais necessária, remova a pasta e as exclusões que existem só por
-causa dela (`tsconfig.json`, `eslint.config.mjs`, `.prettierignore`,
-`.vercelignore`, `.vscode/settings.json`, `.claude/settings.json`).
+```bash
+# extrai o protótipo numa pasta FORA do repositório, sem mexer no projeto
+git archive prototipo-aprovado prototipo-vibecodado | tar -x -C ~/Documentos
+```

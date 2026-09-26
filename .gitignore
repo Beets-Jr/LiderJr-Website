@@ -36,7 +36,3 @@ pnpm-debug.log*
 # caches de ferramentas
 .eslintcache
 coverage/
-
-# NOTA: prototipo-vibecodado/ NÃO entra aqui de propósito.
-# Ela permanece versionada como backup do visual aprovado pelo cliente.
-# O isolamento dela é feito por tsconfig, eslint, prettier, vercel e vscode.

@@ -1,12 +1,9 @@
 {
-  "//": "O protótipo é referência somente-leitura. Fica fora das buscas e do file watcher para não poluir o editor. NÃO está no .gitignore — ele permanece versionado.",
   "search.exclude": {
-    "prototipo-vibecodado/**": true,
     "**/node_modules": true,
     "**/.next": true
   },
   "files.watcherExclude": {
-    "prototipo-vibecodado/**": true,
     "**/node_modules/**": true,
     "**/.next/**": true
   },

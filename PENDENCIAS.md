@@ -217,7 +217,8 @@ foi preservado:
 - o formulário rápido (nome + WhatsApp) e o card de confiança ("Consultoria
   inicial gratuita", "Retorno em até 24 horas úteis", "Projetos supervisionados
   por professores especialistas") **saíram do site**. Se algum desses textos
-  fizer falta, ele está no protótipo, em `App.tsx` linhas 864–961 e 1630–1746.
+  fizer falta, ele está no protótipo (tag git `prototipo-aprovado`), em
+  `prototipo-vibecodado/src/app/App.tsx`, linhas 864–961 e 1630–1746.
 
 ### 3.3 Rodapé com lorem ipsum
 
@@ -368,15 +369,8 @@ entrada a mais pela busca.
 
 ---
 
-## 6. Arquivamento do protótipo
+## 6. Arquivamento do protótipo — concluído
 
-A pasta `prototipo-vibecodado/` continua no repositório como referência. Ela está
-fora do build, do lint, do Prettier, do deploy e das buscas do editor.
-
-Quando não for mais necessária, o roteiro é: criar a tag git
-`prototipo-aprovado`, remover a pasta e limpar as exclusões que existem só por
-causa dela (`tsconfig.json`, `eslint.config.mjs`, `.prettierignore`,
-`.vercelignore`, `.vscode/settings.json`, `.claude/settings.json`).
-
-**Não há prazo e não há pressa** — as exclusões já mantêm a pasta totalmente
-inofensiva.
+A pasta `prototipo-vibecodado/` saiu do repositório, junto com as exclusões que
+existiam só por causa dela. O protótipo continua recuperável pela tag git
+`prototipo-aprovado` (ver README.md).

@@ -5,13 +5,7 @@ import prettier from "eslint-config-prettier";
 /** @type {import("eslint").Linter.Config[]} */
 const eslintConfig = [
   {
-    // O protótipo é referência somente-leitura: nunca entra no lint nem no build.
-    ignores: [
-      "prototipo-vibecodado/**",
-      ".next/**",
-      "node_modules/**",
-      "next-env.d.ts",
-    ],
+    ignores: [".next/**", "node_modules/**", "next-env.d.ts"],
   },
   ...nextCoreWebVitals,
   ...nextTypescript,

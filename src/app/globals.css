@@ -3,8 +3,8 @@
  * Fonte única de verdade para cor, tipografia, espaçamento, raio, sombra e motion.
  * Ver DESIGN-SYSTEM.md para quando usar cada token.
  *
- * `source(none)` + `@source` restringem o scan do Tailwind a src/ — a pasta
- * prototipo-vibecodado/ nunca é lida.
+ * `source(none)` + `@source` restringem o scan do Tailwind a src/ — os YAML do
+ * CMS e a documentação nunca geram classes.
  */
 @import "tailwindcss" source(none);
 @source "../**/*.{ts,tsx}";
