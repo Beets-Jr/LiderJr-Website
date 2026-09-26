@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!servico?.detalhe) return {};
 
   return montarMetadata(servico.detalhe.metadados, `/servicos/${servico.slug}`, {
-    imagem: servico.imagem,
+    imagemDaRota: true,
   });
 }
 

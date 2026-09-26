@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { site } from "@/content/site";
-import type { Imagem, Metadados } from "@/types/comum";
+import type { Metadados } from "@/types/comum";
 
 /**
  * A imagem de compartilhamento padrão, gerada por src/app/opengraph-image.tsx.
@@ -16,8 +16,12 @@ export const IMAGEM_DE_COMPARTILHAMENTO = {
 export interface OpcoesDeMetadata {
   /** "article" para posts e cases; o resto do site é "website". */
   tipo?: "website" | "article";
-  /** A imagem do card. Sem ela, entra a imagem de compartilhamento padrão. */
-  imagem?: Imagem;
+  /**
+   * A rota tem o próprio opengraph-image.tsx (serviços, cases e posts). Aí a
+   * imagem NÃO pode ser declarada aqui: o Next só usa a imagem do arquivo
+   * quando a página não declara nenhuma — declarar, mesmo a padrão, a esconde.
+   */
+  imagemDaRota?: boolean;
   /** Data AAAA-MM-DD de publicação, para posts. */
   publicadoEm?: string;
   /**
@@ -44,18 +48,12 @@ export function montarMetadata(
   opcoes: OpcoesDeMetadata = {},
 ): Metadata {
   const { titulo, descricao } = metadados;
-  const { tipo = "website", imagem, publicadoEm, tituloCompleto = false } = opcoes;
-
-  const imagens = imagem
-    ? [
-        {
-          url: imagem.src,
-          width: imagem.largura,
-          height: imagem.altura,
-          alt: imagem.alt,
-        },
-      ]
-    : [IMAGEM_DE_COMPARTILHAMENTO];
+  const {
+    tipo = "website",
+    imagemDaRota = false,
+    publicadoEm,
+    tituloCompleto = false,
+  } = opcoes;
 
   return {
     title: tituloCompleto ? { absolute: titulo } : titulo,
@@ -68,7 +66,7 @@ export function montarMetadata(
       url: caminho,
       title: titulo,
       description: descricao,
-      images: imagens,
+      ...(imagemDaRota ? {} : { images: [IMAGEM_DE_COMPARTILHAMENTO] }),
       ...(tipo === "article" && publicadoEm ? { publishedTime: publicadoEm } : {}),
     },
     twitter: { card: "summary_large_image" },

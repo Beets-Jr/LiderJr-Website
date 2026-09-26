@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return montarMetadata(item.detalhe.metadados, `/cases/${item.slug}`, {
     tipo: "article",
-    imagem: item.imagem,
+    imagemDaRota: true,
   });
 }
 

@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return montarMetadata(post.detalhe.metadados, `/blog/${post.slug}`, {
     tipo: "article",
-    imagem: post.imagem,
+    imagemDaRota: true,
     publicadoEm: post.data,
   });
 }

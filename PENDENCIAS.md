@@ -44,9 +44,10 @@ lucide) dentro de um quadrado laranja, e é isso que está no ar. O favicon
 
 **Falta:** o símbolo oficial em SVG, e uma versão em PNG de pelo menos
 112×112px. O PNG entra como `logo` nos dados estruturados da organização — é o
-logo que o Google pode exibir no painel da empresa nos resultados de busca.
+logo que o Google pode exibir no painel da empresa nos resultados de busca — e
+o símbolo substitui o "L" das imagens de compartilhamento.
 📄 `src/components/layout/logo.tsx` · `src/app/icon.svg` ·
-`src/lib/dados-estruturados.ts`
+`src/lib/dados-estruturados.ts` · `src/lib/imagem-de-compartilhamento.tsx`
 
 ### 1.4 Redes sociais — resolvido
 
@@ -333,6 +334,13 @@ só dá para fazer com o site no ar:
    resultados avançados** (https://search.google.com/test/rich-results).
 3. Conferir a prévia de compartilhamento colando um link no WhatsApp ou no
    LinkedIn (Post Inspector).
+
+**Compartilhamento.** Toda página tem prévia em 1200×630: a Home e as
+listagens usam a imagem padrão; cada serviço, case e post com página própria
+ganha um cartão com o próprio título, gerado sozinho — inclusive as
+publicações futuras, sem ninguém produzir imagem. Publicação sem página própria
+não tem link, então não tem o que compartilhar.
+📄 `src/lib/imagem-de-compartilhamento.tsx`
 
 Hoje só 1 dos 6 posts e 1 dos 6 cases têm página própria. Para o Google, o
 que não tem página não existe — cada post publicado com página é uma porta de
