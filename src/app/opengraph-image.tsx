@@ -13,6 +13,17 @@ export const alt = `${site.nomeCompleto} — ${site.descricao}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
+/**
+ * As cores da marca, repetidas de globals.css: a ImageResponse desenha a
+ * imagem sem acesso ao CSS do site, então os tokens não chegam até aqui.
+ */
+const COR = {
+  marca: "#ff751f",
+  fundo: "#000000",
+  texto: "#ffffff",
+  textoSuave: "rgba(255,255,255,0.72)",
+} as const;
+
 export default function ImagemDeCompartilhamento() {
   return new ImageResponse(
     <div
@@ -22,7 +33,7 @@ export default function ImagemDeCompartilhamento() {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        background: "#000000",
+        background: COR.fundo,
         padding: "80px",
         position: "relative",
       }}
@@ -35,7 +46,7 @@ export default function ImagemDeCompartilhamento() {
           top: 0,
           bottom: 0,
           width: 18,
-          background: "#ff751f",
+          background: COR.marca,
         }}
       />
 
@@ -45,18 +56,18 @@ export default function ImagemDeCompartilhamento() {
             width: 64,
             height: 64,
             borderRadius: 14,
-            background: "#ff751f",
+            background: COR.marca,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             fontSize: 34,
             fontWeight: 700,
-            color: "#ffffff",
+            color: COR.texto,
           }}
         >
           L
         </div>
-        <div style={{ fontSize: 40, fontWeight: 700, color: "#ffffff" }}>
+        <div style={{ fontSize: 40, fontWeight: 700, color: COR.texto }}>
           {site.nome}
         </div>
       </div>
@@ -66,7 +77,7 @@ export default function ImagemDeCompartilhamento() {
           marginTop: 48,
           fontSize: 62,
           fontWeight: 700,
-          color: "#ffffff",
+          color: COR.texto,
           lineHeight: 1.15,
           maxWidth: 940,
         }}
@@ -78,7 +89,7 @@ export default function ImagemDeCompartilhamento() {
         style={{
           marginTop: 28,
           fontSize: 28,
-          color: "rgba(255,255,255,0.72)",
+          color: COR.textoSuave,
           maxWidth: 900,
           lineHeight: 1.4,
         }}
