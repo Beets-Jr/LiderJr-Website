@@ -5,15 +5,9 @@ import { PageHero } from "@/components/sections/page-hero";
 import { Container, Section } from "@/components/ui";
 import { faleConosco } from "@/content/fale-conosco";
 import { site } from "@/content/site";
+import { montarMetadata } from "@/lib/metadados";
 
-export const metadata: Metadata = {
-  title: faleConosco.metadados.titulo,
-  description: faleConosco.metadados.descricao,
-  openGraph: {
-    title: faleConosco.metadados.titulo,
-    description: faleConosco.metadados.descricao,
-  },
-};
+export const metadata: Metadata = montarMetadata(faleConosco.metadados);
 
 export default function PaginaFaleConosco() {
   return (

@@ -6,15 +6,9 @@ import { ServiceCardCompleto } from "@/components/sections/service-card";
 import { Card, Container, Section } from "@/components/ui";
 import { getServicosAgrupados } from "@/content/servicos";
 import { paginaDeServicos } from "@/content/servicos/pagina";
+import { montarMetadata } from "@/lib/metadados";
 
-export const metadata: Metadata = {
-  title: paginaDeServicos.metadados.titulo,
-  description: paginaDeServicos.metadados.descricao,
-  openGraph: {
-    title: paginaDeServicos.metadados.titulo,
-    description: paginaDeServicos.metadados.descricao,
-  },
-};
+export const metadata: Metadata = montarMetadata(paginaDeServicos.metadados);
 
 export default function PaginaDeServicos() {
   const grupos = getServicosAgrupados();

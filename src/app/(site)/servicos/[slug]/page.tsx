@@ -10,6 +10,7 @@ import {
 } from "@/components/sections/servico-detalhe";
 import { getServicoPorSlug, getServicosComPagina } from "@/content/servicos";
 import { paginaDeServicos } from "@/content/servicos/pagina";
+import { montarMetadata } from "@/lib/metadados";
 
 /**
  * ============================================================================
@@ -32,17 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const servico = getServicoPorSlug(slug);
   if (!servico?.detalhe) return {};
 
-  const { metadados } = servico.detalhe;
-  return {
-    title: metadados.titulo,
-    description: metadados.descricao,
-    openGraph: {
-      type: "article",
-      title: metadados.titulo,
-      description: metadados.descricao,
-      images: [{ url: servico.imagem.src, alt: servico.imagem.alt }],
-    },
-  };
+  return montarMetadata(servico.detalhe.metadados, { imagem: servico.imagem });
 }
 
 export default async function PaginaDeServico({ params }: Props) {

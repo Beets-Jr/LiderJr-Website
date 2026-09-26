@@ -11,6 +11,7 @@ import { getPostPorSlug, getPostsComPagina, getTodosPosts } from "@/content/blog
 import { paginaDoBlog } from "@/content/blog/pagina";
 import { formatarData } from "@/lib/datas";
 import { getHrefDoPost } from "@/lib/hrefs";
+import { montarMetadata } from "@/lib/metadados";
 
 /**
  * ============================================================================
@@ -32,18 +33,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = await getPostPorSlug(slug);
   if (!post?.detalhe) return {};
 
-  const { metadados } = post.detalhe;
-  return {
-    title: metadados.titulo,
-    description: metadados.descricao,
-    openGraph: {
-      type: "article",
-      title: metadados.titulo,
-      description: metadados.descricao,
-      publishedTime: post.data,
-      images: [{ url: post.imagem.src, alt: post.imagem.alt }],
-    },
-  };
+  return montarMetadata(post.detalhe.metadados, {
+    imagem: post.imagem,
+    publicadoEm: post.data,
+  });
 }
 
 export default async function PaginaDePost({ params }: Props) {

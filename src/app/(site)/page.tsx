@@ -14,15 +14,9 @@ import { getCasesEmDestaque } from "@/content/cases";
 import { ctaFinalEmColunas, home } from "@/content/home";
 import { paginaDeServicos } from "@/content/servicos/pagina";
 import { getServicoPorSlug } from "@/content/servicos";
+import { montarMetadata } from "@/lib/metadados";
 
-export const metadata: Metadata = {
-  title: home.metadados.titulo,
-  description: home.metadados.descricao,
-  openGraph: {
-    title: home.metadados.titulo,
-    description: home.metadados.descricao,
-  },
-};
+export const metadata: Metadata = montarMetadata(home.metadados);
 
 export default async function PaginaInicial() {
   // Curadoria manual: um serviço de grupos diferentes, escolhidos pelo

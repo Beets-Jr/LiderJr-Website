@@ -2,15 +2,9 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/sections/page-hero";
 import { Cultura, Filiacoes, Historia } from "@/components/sections/quem-somos-secoes";
 import { quemSomos } from "@/content/quem-somos";
+import { montarMetadata } from "@/lib/metadados";
 
-export const metadata: Metadata = {
-  title: quemSomos.metadados.titulo,
-  description: quemSomos.metadados.descricao,
-  openGraph: {
-    title: quemSomos.metadados.titulo,
-    description: quemSomos.metadados.descricao,
-  },
-};
+export const metadata: Metadata = montarMetadata(quemSomos.metadados);
 
 export default function PaginaQuemSomos() {
   return (

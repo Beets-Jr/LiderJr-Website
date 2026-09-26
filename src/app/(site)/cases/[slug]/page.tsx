@@ -8,6 +8,7 @@ import { RelatedCards } from "@/components/sections/related-cards";
 import { getCasePorSlug, getCasesComPagina, getTodosCases } from "@/content/cases";
 import { paginaDeCases } from "@/content/cases/pagina";
 import { getHrefDoCase } from "@/lib/hrefs";
+import { montarMetadata } from "@/lib/metadados";
 
 /**
  * ============================================================================
@@ -28,17 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const item = await getCasePorSlug(slug);
   if (!item?.detalhe) return {};
 
-  const { metadados } = item.detalhe;
-  return {
-    title: metadados.titulo,
-    description: metadados.descricao,
-    openGraph: {
-      type: "article",
-      title: metadados.titulo,
-      description: metadados.descricao,
-      images: [{ url: item.imagem.src, alt: item.imagem.alt }],
-    },
-  };
+  return montarMetadata(item.detalhe.metadados, { imagem: item.imagem });
 }
 
 export default async function PaginaDeCase({ params }: Props) {
