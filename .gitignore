@@ -24,12 +24,18 @@ next-env.d.ts
 
 # sistema operacional
 .DS_Store
+Thumbs.db
 *.pem
 
 # logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+
+# caches de ferramentas
+.eslintcache
+coverage/
 
 # NOTA: prototipo-vibecodado/ NÃO entra aqui de propósito.
 # Ela permanece versionada como backup do visual aprovado pelo cliente.
