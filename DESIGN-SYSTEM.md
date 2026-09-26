@@ -257,7 +257,22 @@ Use `priority` só na imagem principal acima da dobra.
 ### Peças menores
 
 `IconTile` (ícone em tile laranja) · `Avatar` (iniciais) · `StepMarker` (círculo
-numerado das linhas do tempo) · `Divider`
+numerado das linhas do tempo) · `Estrelas` (nota 5 de 5 dos depoimentos) ·
+`Divider`
+
+### LinkEsticado
+
+O título de um card que é link para o card inteiro: o `<Link>` do título se
+estica por cima do card com `after:absolute`, então o card precisa de
+`relative`. Sem `href`, o título sai como texto puro.
+
+```tsx
+<Card as="article" className="group relative">
+  <Heading as="h3" level="card">
+    <LinkEsticado href={getHrefDoPost(post)}>{post.titulo}</LinkEsticado>
+  </Heading>
+</Card>
+```
 
 ---
 
