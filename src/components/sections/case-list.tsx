@@ -1,6 +1,5 @@
 import { ArrowRight } from "lucide-react";
-import Link from "next/link";
-import { Badge, Foto, Heading, Text } from "@/components/ui";
+import { Badge, Foto, Heading, LinkEsticado, Text } from "@/components/ui";
 import { getHrefDoCase } from "@/lib/hrefs";
 import { cn } from "@/lib/cn";
 import type { Case } from "@/types/case";
@@ -82,13 +81,7 @@ function CaseRow({
           level="section"
           className="group-hover:text-brand mt-6 transition-colors"
         >
-          {href ? (
-            <Link href={href} className="rounded-sm after:absolute after:inset-0">
-              {item.empresa}
-            </Link>
-          ) : (
-            item.empresa
-          )}
+          <LinkEsticado href={href}>{item.empresa}</LinkEsticado>
         </Heading>
 
         <Text size="lg" tone="muted" className="mt-4">

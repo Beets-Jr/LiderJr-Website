@@ -26,5 +26,6 @@ export {
   type TextareaProps,
 } from "./field";
 export { Heading, type HeadingProps } from "./heading";
+export { LinkEsticado } from "./link-esticado";
 export { Section, type SectionProps } from "./section";
 export { Eyebrow, Text, type TextProps } from "./text";

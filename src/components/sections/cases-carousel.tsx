@@ -1,9 +1,8 @@
 "use client";
 
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
-import Link from "next/link";
 import { useState } from "react";
-import { Badge, Card, Heading, Text } from "@/components/ui";
+import { Badge, Card, Heading, LinkEsticado, Text } from "@/components/ui";
 import { getHrefDoCase } from "@/lib/hrefs";
 import { cn } from "@/lib/cn";
 import type { Case } from "@/types/case";
@@ -295,17 +294,9 @@ function CaseSlide({
       {destaque ? <hr className="bg-border mt-6 h-px w-12 border-0" /> : null}
 
       <Heading as="h3" level="card" className="mt-6">
-        {href ? (
-          <Link
-            href={href}
-            tabIndex={alcancavel ? undefined : -1}
-            className="rounded-sm after:absolute after:inset-0"
-          >
-            {item.empresa}
-          </Link>
-        ) : (
-          item.empresa
-        )}
+        <LinkEsticado href={href} tabIndex={alcancavel ? undefined : -1}>
+          {item.empresa}
+        </LinkEsticado>
       </Heading>
 
       <Text size="sm" tone="muted" className="mt-3 flex-1">

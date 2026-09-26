@@ -1,6 +1,14 @@
 import { ArrowRight, ChevronRight } from "lucide-react";
 import Link from "next/link";
-import { Badge, Card, Foto, Heading, IconTile, Text } from "@/components/ui";
+import {
+  Badge,
+  Card,
+  Foto,
+  Heading,
+  IconTile,
+  LinkEsticado,
+  Text,
+} from "@/components/ui";
 import { cn } from "@/lib/cn";
 import { getHrefDoServico } from "@/lib/hrefs";
 import { getIcone } from "@/lib/icones";
@@ -41,13 +49,7 @@ export function ServiceCardCompacto({
       />
 
       <Heading as="h3" level="card" className="mt-6">
-        {href ? (
-          <Link href={href} className="rounded-sm after:absolute after:inset-0">
-            {servico.titulo}
-          </Link>
-        ) : (
-          servico.titulo
-        )}
+        <LinkEsticado href={href}>{servico.titulo}</LinkEsticado>
       </Heading>
 
       <Text size="base" tone="muted" className="mt-3">
@@ -142,13 +144,7 @@ export function ServiceCardCompleto({
           tone="brand"
           className="ml-auto min-h-[4.125rem] max-w-[80%] text-right text-2xl whitespace-pre-line uppercase"
         >
-          {href ? (
-            <Link href={href} className="rounded-sm after:absolute after:inset-0">
-              {servico.titulo}
-            </Link>
-          ) : (
-            servico.titulo
-          )}
+          <LinkEsticado href={href}>{servico.titulo}</LinkEsticado>
         </Heading>
 
         <Text size="sm" tone="brand" weight="bold" className="mt-3 min-h-[2.875rem]">

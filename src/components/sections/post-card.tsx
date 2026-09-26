@@ -1,6 +1,5 @@
 import { Tag } from "lucide-react";
-import Link from "next/link";
-import { Badge, Card, Foto, Heading, Text } from "@/components/ui";
+import { Badge, Card, Foto, Heading, LinkEsticado, Text } from "@/components/ui";
 import { getHrefDoPost } from "@/lib/hrefs";
 import { formatarData } from "@/lib/datas";
 import type { Post } from "@/types/post";
@@ -63,13 +62,7 @@ export function PostCard({
           level="card"
           className="group-hover:text-brand mt-4 transition-colors"
         >
-          {href ? (
-            <Link href={href} className="rounded-sm after:absolute after:inset-0">
-              {post.titulo}
-            </Link>
-          ) : (
-            post.titulo
-          )}
+          <LinkEsticado href={href}>{post.titulo}</LinkEsticado>
         </Heading>
 
         <Text size="sm" tone="muted" className="mt-3 flex-1">
@@ -122,13 +115,7 @@ export function FeaturedPost({
           level="section"
           className="group-hover:text-brand mt-5 transition-colors"
         >
-          {href ? (
-            <Link href={href} className="rounded-sm after:absolute after:inset-0">
-              {post.titulo}
-            </Link>
-          ) : (
-            post.titulo
-          )}
+          <LinkEsticado href={href}>{post.titulo}</LinkEsticado>
         </Heading>
 
         <Text size="lg" tone="muted" className="mt-4">

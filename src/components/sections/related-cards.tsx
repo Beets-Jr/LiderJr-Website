@@ -1,5 +1,12 @@
-import Link from "next/link";
-import { Badge, Card, Container, Heading, Section, Text } from "@/components/ui";
+import {
+  Badge,
+  Card,
+  Container,
+  Heading,
+  LinkEsticado,
+  Section,
+  Text,
+} from "@/components/ui";
 
 /** Um item do bloco "Conheça outros…". */
 export interface ItemRelacionado {
@@ -49,12 +56,7 @@ export function RelatedCards({
                   level="minor"
                   className="group-hover:text-brand mt-3 text-sm transition-colors"
                 >
-                  <Link
-                    href={item.href}
-                    className="rounded-sm after:absolute after:inset-0"
-                  >
-                    {item.titulo}
-                  </Link>
+                  <LinkEsticado href={item.href}>{item.titulo}</LinkEsticado>
                 </Heading>
 
                 <Text size="xs" tone="muted" className="mt-1 line-clamp-2">
