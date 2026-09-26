@@ -305,22 +305,13 @@ roda em modo local — grava direto no disco de quem está com o projeto aberto.
 
 📄 `keystatic.config.ts` · `src/content/*/index.ts`
 
-**Problema encontrado — posts e cases existentes não salvam pelo CMS.** Criar e
-apagar publicações funciona, mas editar um post ou case que já existe falha com
-_"Imagem is required"_: o campo de imagem abre vazio.
-
-A causa é o caminho da imagem nos YAML migrados. O Keystatic espera cada imagem
-numa pasta com o nome da publicação —
-`public/imagens/cases/comercio-varejista/<arquivo>.jpg`, referenciada como
-`/imagens/cases/comercio-varejista/<arquivo>.jpg` — e os arquivos migrados
-estão soltos (`/imagens/cases/comercio-varejista.jpg`). O CMS não encontra o
-arquivo e trata o campo como vazio.
-
-**Contorno provável (não testado):** ao editar, reenviar a mesma imagem no
-campo "Imagem" — o CMS a grava no lugar que espera.
-**Correção definitiva:** mover as imagens de `public/imagens/blog/` e
-`public/imagens/cases/` para a pasta de cada publicação e atualizar os YAML.
-Muda a URL das imagens (inclusive a de compartilhamento dos posts e cases).
+**Onde ficam as imagens das publicações.** O Keystatic guarda a imagem de cada
+post ou case numa pasta com o nome da publicação:
+`public/imagens/<blog|cases>/<slug>/imagem/arquivo.jpg`. Não mova nem renomeie
+esses arquivos à mão — o CMS só encontra a imagem nesse caminho. (As imagens
+migradas antes estavam soltas em `public/imagens/cases/<slug>.jpg`, o CMS não as
+achava e recusava salvar qualquer edição com _"Imagem is required"_. Corrigido
+e testado editando e salvando um post e um case pelo /keystatic.)
 
 ### 4.3 Fora de escopo por decisão
 

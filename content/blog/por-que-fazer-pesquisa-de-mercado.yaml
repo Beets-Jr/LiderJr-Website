@@ -3,7 +3,7 @@ resumo: 'Em um cenário competitivo, decidir sem dados é apostar no escuro. Sai
 data: 2026-05-05
 categoria: 'Mercado'
 imagem:
-  arquivo: /imagens/blog/por-que-fazer-pesquisa-de-mercado.jpg
+  arquivo: /imagens/blog/por-que-fazer-pesquisa-de-mercado/imagem/arquivo.jpg
   alt: 'Notebook aberto sobre uma mesa exibindo um painel de gestão com gráficos'
 artigo:
   discriminant: false

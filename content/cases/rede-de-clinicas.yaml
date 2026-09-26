@@ -7,7 +7,7 @@ tags:
   - 'Serviços'
 categoria: 'Serviços'
 imagem:
-  arquivo: /imagens/cases/rede-de-clinicas.jpg
+  arquivo: /imagens/cases/rede-de-clinicas/imagem/arquivo.jpg
   alt: 'Profissional apresentando resultados para uma equipe sentada em uma sala de reunião'
 historia:
   discriminant: false

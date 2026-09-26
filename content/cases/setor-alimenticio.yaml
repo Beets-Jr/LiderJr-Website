@@ -7,7 +7,7 @@ tags:
   - 'Processos'
 categoria: 'Processos'
 imagem:
-  arquivo: /imagens/cases/setor-alimenticio.jpg
+  arquivo: /imagens/cases/setor-alimenticio/imagem/arquivo.jpg
   alt: 'Engenheira trabalhando em um notebook ao lado de uma linha de montagem industrial'
 historia:
   discriminant: false

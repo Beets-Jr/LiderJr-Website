@@ -3,7 +3,7 @@ resumo: 'Conheça os princípios do Lean e como aplicá-los na redução de desp
 data: 2026-06-15
 categoria: 'Processos'
 imagem:
-  arquivo: /imagens/blog/lean-manufacturing.jpg
+  arquivo: /imagens/blog/lean-manufacturing/imagem/arquivo.jpg
   alt: 'Engenheira trabalhando em um notebook ao lado de uma linha de montagem industrial'
 artigo:
   discriminant: true
