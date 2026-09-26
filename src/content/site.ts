@@ -47,9 +47,21 @@ export const site: ConteudoDoSite = {
   },
 
   redes: [
-    { label: "LinkedIn", href: "https://www.linkedin.com/company/liderempresajr/", icone: "linkedin" },
-    { label: "Instagram", href: "https://www.instagram.com/lider.jr/", icone: "instagram" },
-    { label: "Facebook", href: "https://www.facebook.com/liderempresajr/", icone: "facebook" },
+    {
+      label: "LinkedIn",
+      href: "https://www.linkedin.com/company/liderempresajr/",
+      icone: "linkedin",
+    },
+    {
+      label: "Instagram",
+      href: "https://www.instagram.com/lider.jr/",
+      icone: "instagram",
+    },
+    {
+      label: "Facebook",
+      href: "https://www.facebook.com/liderempresajr/",
+      icone: "facebook",
+    },
   ],
 
   navegacao: [
@@ -114,12 +126,16 @@ function linkDoServico(servico: Servico): LinkDeNavegacao {
  * Vêm do registry de serviços — não há lista escrita à mão. Serviços que ainda
  * não têm página apontam para a listagem /servicos.
  */
-export function getColunasDeServicosParaRodape(): [LinkDeNavegacao[], LinkDeNavegacao[]] {
+export function getColunasDeServicosParaRodape(): [
+  LinkDeNavegacao[],
+  LinkDeNavegacao[],
+] {
   const grupos = getServicosAgrupados();
   const metade = Math.ceil(grupos.length / 2);
 
-  const paraLinks = (grupos: ReturnType<typeof getServicosAgrupados>): LinkDeNavegacao[] =>
-    grupos.flatMap(({ servicos }) => servicos.map(linkDoServico));
+  const paraLinks = (
+    grupos: ReturnType<typeof getServicosAgrupados>,
+  ): LinkDeNavegacao[] => grupos.flatMap(({ servicos }) => servicos.map(linkDoServico));
 
   return [paraLinks(grupos.slice(0, metade)), paraLinks(grupos.slice(metade))];
 }

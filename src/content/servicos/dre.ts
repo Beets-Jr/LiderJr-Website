@@ -53,8 +53,7 @@ export const dre: Servico = {
         {
           numero: "02",
           titulo: "Organização",
-          descricao:
-            "Organização das receitas, custos e despesas em uma única base.",
+          descricao: "Organização das receitas, custos e despesas em uma única base.",
         },
         {
           numero: "03",

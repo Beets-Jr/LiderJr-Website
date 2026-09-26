@@ -36,7 +36,9 @@ function montarCase({ slug, entry }: EntradaDeCase): Case {
   const historia = entry.historia.discriminant ? entry.historia.value : null;
   if (!historia) return resumo;
 
-  const depoimento = historia.depoimento.discriminant ? historia.depoimento.value : null;
+  const depoimento = historia.depoimento.discriminant
+    ? historia.depoimento.value
+    : null;
 
   return {
     ...resumo,

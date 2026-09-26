@@ -54,8 +54,7 @@ export const planejamentoEstrategico: Servico = {
         {
           numero: "02",
           titulo: "Cenário",
-          descricao:
-            "Análise do cenário e do mercado em que a empresa atua, com SWOT.",
+          descricao: "Análise do cenário e do mercado em que a empresa atua, com SWOT.",
         },
         {
           numero: "03",

@@ -54,26 +54,22 @@ export const pesquisaDeMercado: Servico = {
         {
           numero: "02",
           titulo: "Público e Região",
-          descricao:
-            "Definição do público a ser ouvido e da região de estudo.",
+          descricao: "Definição do público a ser ouvido e da região de estudo.",
         },
         {
           numero: "03",
           titulo: "Instrumento",
-          descricao:
-            "Estruturação do questionário e da metodologia da pesquisa.",
+          descricao: "Estruturação do questionário e da metodologia da pesquisa.",
         },
         {
           numero: "04",
           titulo: "Coleta",
-          descricao:
-            "Coleta das respostas junto ao público e à região definidos.",
+          descricao: "Coleta das respostas junto ao público e à região definidos.",
         },
         {
           numero: "05",
           titulo: "Tratamento",
-          descricao:
-            "Organização e tratamento dos dados coletados em campo.",
+          descricao: "Organização e tratamento dos dados coletados em campo.",
         },
         {
           numero: "06",

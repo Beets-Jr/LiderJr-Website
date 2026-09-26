@@ -23,9 +23,7 @@ import { paginaDoBlog } from "./pagina";
 const leitor = createReader(process.cwd(), keystaticConfig);
 
 /** Uma entrada do CMS, já lida. O tipo sai do próprio schema. */
-type EntradaDePost = Awaited<
-  ReturnType<typeof leitor.collections.posts.all>
->[number];
+type EntradaDePost = Awaited<ReturnType<typeof leitor.collections.posts.all>>[number];
 
 /**
  * Converte os blocos do CMS para `BlocoDePost`. O formato do CMS separa o tipo
@@ -97,9 +95,7 @@ function montarPost({ slug, entry }: EntradaDePost): Post {
 /** Todos os posts, do mais recente para o mais antigo. */
 export async function getTodosPosts(): Promise<Post[]> {
   const entradas = await leitor.collections.posts.all();
-  return entradas
-    .map(montarPost)
-    .sort((a, b) => b.data.localeCompare(a.data));
+  return entradas.map(montarPost).sort((a, b) => b.data.localeCompare(a.data));
 }
 
 /**
