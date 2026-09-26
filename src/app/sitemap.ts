@@ -10,10 +10,13 @@ import { site } from "@/content/site";
  * As páginas fixas estão listadas abaixo; as de serviço, case e post saem dos
  * registries. Publicar um conteúdo novo já o coloca no sitemap — não há lista
  * para manter em dia.
+ *
+ * Só os posts levam `lastModified`, com a data de publicação. As outras páginas
+ * não têm uma data real de alteração; usar a hora do build diria ao Google que
+ * o site inteiro muda a cada deploy, e ele passa a ignorar o campo.
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = site.url;
-  const agora = new Date();
 
   const fixas: MetadataRoute.Sitemap = (
     [
@@ -28,19 +31,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ).map(({ caminho, ...resto }) => ({
     ...resto,
     url: `${base}${caminho}`,
-    lastModified: agora,
   }));
 
   const servicos: MetadataRoute.Sitemap = getServicosComPagina().map((servico) => ({
     url: `${base}/servicos/${servico.slug}`,
-    lastModified: agora,
     changeFrequency: "monthly",
     priority: 0.8,
   }));
 
   const cases: MetadataRoute.Sitemap = (await getCasesComPagina()).map((item) => ({
     url: `${base}/cases/${item.slug}`,
-    lastModified: agora,
     changeFrequency: "yearly",
     priority: 0.6,
   }));
