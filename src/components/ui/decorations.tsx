@@ -1,5 +1,5 @@
 import { cva, type VariantProps } from "class-variance-authority";
-import type { LucideIcon } from "lucide-react";
+import { Star, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/cn";
 
 /**
@@ -99,6 +99,34 @@ export function StepMarker({
     >
       {numero}
     </span>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/* Estrelas — a nota 5 de 5 acima dos depoimentos                              */
+/* -------------------------------------------------------------------------- */
+
+export function Estrelas({
+  tamanho = 16,
+  className,
+}: {
+  tamanho?: number;
+  className?: string;
+}) {
+  return (
+    <div
+      className={cn("flex gap-1", className)}
+      aria-label="Avaliação: 5 de 5 estrelas"
+    >
+      {Array.from({ length: 5 }, (_, i) => (
+        <Star
+          key={i}
+          size={tamanho}
+          className="text-brand fill-brand"
+          aria-hidden="true"
+        />
+      ))}
+    </div>
   );
 }
 

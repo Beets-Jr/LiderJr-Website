@@ -1,9 +1,10 @@
-import { CheckCircle2, Star } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import {
   Avatar,
   Badge,
   Card,
   Container,
+  Estrelas,
   Foto,
   Heading,
   IconTile,
@@ -133,19 +134,7 @@ export function DepoimentoCentrado({ depoimento }: { depoimento: Depoimento }) {
     <Section tone="muted">
       <Container width="prose">
         <figure className="text-center">
-          <div
-            className="flex justify-center gap-1"
-            aria-label="Avaliação: 5 de 5 estrelas"
-          >
-            {Array.from({ length: 5 }, (_, i) => (
-              <Star
-                key={i}
-                size={18}
-                aria-hidden="true"
-                className="text-brand fill-brand"
-              />
-            ))}
-          </div>
+          <Estrelas tamanho={18} className="justify-center" />
 
           <blockquote className="mt-6">
             <Text size="lg" family="serif" className="text-2xl lg:text-3xl">

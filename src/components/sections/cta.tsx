@@ -1,10 +1,10 @@
-import { Star } from "lucide-react";
 import {
   Avatar,
   ButtonLink,
   Card,
   Container,
   Divider,
+  Estrelas,
   Eyebrow,
   Heading,
   Section,
@@ -16,16 +16,6 @@ import type { ChamadaParaAcao, Depoimento } from "@/types/comum";
 /* -------------------------------------------------------------------------- */
 /* Peças compartilhadas                                                        */
 /* -------------------------------------------------------------------------- */
-
-function Estrelas() {
-  return (
-    <div className="flex gap-1" aria-label="Avaliação: 5 de 5 estrelas">
-      {Array.from({ length: 5 }, (_, i) => (
-        <Star key={i} size={16} className="text-brand fill-brand" aria-hidden="true" />
-      ))}
-    </div>
-  );
-}
 
 function Botoes({
   chamada,

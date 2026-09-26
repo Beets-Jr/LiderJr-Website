@@ -11,6 +11,7 @@ export { Container, type ContainerProps } from "./container";
 export {
   Avatar,
   Divider,
+  Estrelas,
   IconTile,
   StepMarker,
   type AvatarProps,
