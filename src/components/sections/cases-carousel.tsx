@@ -1,7 +1,12 @@
 "use client";
 
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
-import { useState } from "react";
+import {
+  useState,
+  type CSSProperties,
+  type ReactNode,
+  type TransitionEvent,
+} from "react";
 import { Badge, Card, Heading, LinkEsticado, Text } from "@/components/ui";
 import { cn } from "@/lib/cn";
 import { getHrefDoCase } from "@/lib/hrefs";
@@ -104,7 +109,7 @@ export function CasesCarousel({
    * aqui — e como esses duram mais que o deslize, um clique disparava o salto
    * enquanto o trilho ainda estava em movimento, na frente do usuário.
    */
-  function ajustarSeSaiuDoMiolo(evento: React.TransitionEvent<HTMLUListElement>) {
+  function ajustarSeSaiuDoMiolo(evento: TransitionEvent<HTMLUListElement>) {
     if (evento.target !== evento.currentTarget) return;
 
     // O trilho parou de se mexer de verdade — pode aceitar o próximo clique.
@@ -146,7 +151,7 @@ export function CasesCarousel({
               "--desloc-desktop": posicao,
               width: `calc(${total * COPIAS} / var(--visiveis) * 100%)`,
               transform: `translateX(calc(var(--desloc) * -100% / ${total * COPIAS}))`,
-            } as React.CSSProperties
+            } as CSSProperties
           }
           className={cn(
             "flex items-center [--desloc:var(--desloc-mobile)] md:[--desloc:var(--desloc-desktop)]",
@@ -234,7 +239,7 @@ function BotaoDoCarrossel({
   onClick: () => void;
   disabled?: boolean;
   className?: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
     <button

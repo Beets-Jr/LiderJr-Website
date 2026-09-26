@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
 import { RastreadorDeOrigem } from "@/components/layout/rastreador-de-origem";
@@ -14,9 +15,7 @@ import {
  * WhatsApp. Vale para todas as páginas públicas e para nenhuma outra — é por
  * isso que ele mora aqui, e não no layout raiz.
  */
-export default function LayoutDoSite({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
+export default function LayoutDoSite({ children }: Readonly<{ children: ReactNode }>) {
   const colunasDeServicos = getColunasDeServicosParaRodape();
   const gruposDeServicos = getGruposDeServicosParaNavegacao();
 

@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { Container, Text } from "@/components/ui";
 import { getIcone } from "@/lib/icones";
 import type { ConteudoDoSite, LinkDeNavegacao } from "@/types/site";
@@ -100,7 +101,7 @@ export function Footer({ site, colunasDeServicos }: FooterProps) {
   );
 }
 
-function TituloDeColuna({ children }: { children: React.ReactNode }) {
+function TituloDeColuna({ children }: { children: ReactNode }) {
   return (
     <p className="font-body text-brand mb-4 text-xs font-semibold tracking-widest uppercase">
       {children}
@@ -142,13 +143,7 @@ function ColunaDeServicos({
   );
 }
 
-function ColunaDoRodape({
-  titulo,
-  children,
-}: {
-  titulo: string;
-  children: React.ReactNode;
-}) {
+function ColunaDoRodape({ titulo, children }: { titulo: string; children: ReactNode }) {
   return (
     <div>
       <TituloDeColuna>{titulo}</TituloDeColuna>
