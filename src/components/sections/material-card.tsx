@@ -64,9 +64,9 @@ export function MaterialCard({
         </Text>
 
         {/*
-          TODO: integração — quando os arquivos existirem, preencha o campo
-          `arquivo` em src/content/materiais.ts e o botão vira um link de
-          download. Sem arquivo, ele aparece desabilitado. No protótipo o botão
+          TODO: integração — quando os arquivos existirem, envie-os no campo
+          "Arquivo para download" do material em /keystatic e o botão vira link
+          de download. Sem arquivo, ele aparece desabilitado. No protótipo o botão
           parecia ativo e não fazia nada. Ver PENDENCIAS.md.
         */}
         {disponivel ? (
