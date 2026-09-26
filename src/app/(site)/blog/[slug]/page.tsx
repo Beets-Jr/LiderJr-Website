@@ -1,6 +1,7 @@
 import { Calendar } from "lucide-react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { DadosEstruturados } from "@/components/layout/dados-estruturados";
 import { BackLink } from "@/components/sections/back-link";
 import { CTAPanel } from "@/components/sections/cta";
 import { PageHero } from "@/components/sections/page-hero";
@@ -9,6 +10,7 @@ import { RelatedCards } from "@/components/sections/related-cards";
 import { Text } from "@/components/ui";
 import { getPostPorSlug, getPostsComPagina, getTodosPosts } from "@/content/blog";
 import { paginaDoBlog } from "@/content/blog/pagina";
+import { dadosDaTrilha, dadosDoPost } from "@/lib/dados-estruturados";
 import { formatarData } from "@/lib/datas";
 import { getHrefDoPost } from "@/lib/hrefs";
 import { montarMetadata } from "@/lib/metadados";
@@ -61,6 +63,15 @@ export default async function PaginaDePost({ params }: Props) {
 
   return (
     <>
+      <DadosEstruturados
+        nos={[
+          dadosDoPost({ ...post, detalhe }),
+          dadosDaTrilha(
+            { label: paginaDoBlog.metadados.titulo, href: "/blog" },
+            { label: post.titulo, href: `/blog/${post.slug}` },
+          ),
+        ]}
+      />
       <PageHero
         conteudo={{
           eyebrow: `${paginaDoBlog.rotuloDoArtigo} • ${post.categoria}`,

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { DadosEstruturados } from "@/components/layout/dados-estruturados";
 import { AboutStrip } from "@/components/sections/about-strip";
 import { CasesCarousel } from "@/components/sections/cases-carousel";
 import { ClientsMarquee } from "@/components/sections/clients-marquee";
@@ -14,6 +15,7 @@ import { getCasesEmDestaque } from "@/content/cases";
 import { home } from "@/content/home";
 import { getServicoPorSlug } from "@/content/servicos";
 import { paginaDeServicos } from "@/content/servicos/pagina";
+import { dadosDaOrganizacao, dadosDoSite } from "@/lib/dados-estruturados";
 import { montarMetadata } from "@/lib/metadados";
 
 export const metadata: Metadata = montarMetadata(home.metadados, "/", {
@@ -42,6 +44,7 @@ export default async function PaginaInicial() {
 
   return (
     <>
+      <DadosEstruturados nos={[dadosDaOrganizacao(), dadosDoSite()]} />
       <HomeHero conteudo={home.hero} estatisticas={home.estatisticas} />
 
       {/* No desktop os números ficam dentro do hero; aqui aparecem no mobile. */}

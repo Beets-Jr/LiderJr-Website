@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { DadosEstruturados } from "@/components/layout/dados-estruturados";
 import { BackLink } from "@/components/sections/back-link";
 import { CorpoDoCase } from "@/components/sections/case-detalhe";
 import { CTAPanel } from "@/components/sections/cta";
@@ -7,6 +8,7 @@ import { PageHero } from "@/components/sections/page-hero";
 import { RelatedCards } from "@/components/sections/related-cards";
 import { getCasePorSlug, getCasesComPagina, getTodosCases } from "@/content/cases";
 import { paginaDeCases } from "@/content/cases/pagina";
+import { dadosDaTrilha, dadosDoCase } from "@/lib/dados-estruturados";
 import { getHrefDoCase } from "@/lib/hrefs";
 import { montarMetadata } from "@/lib/metadados";
 
@@ -57,6 +59,15 @@ export default async function PaginaDeCase({ params }: Props) {
 
   return (
     <>
+      <DadosEstruturados
+        nos={[
+          dadosDoCase({ ...item, detalhe }),
+          dadosDaTrilha(
+            { label: paginaDeCases.metadados.titulo, href: "/cases" },
+            { label: item.empresa, href: `/cases/${item.slug}` },
+          ),
+        ]}
+      />
       <PageHero
         conteudo={{
           eyebrow: `${paginaDeCases.hero.eyebrow} • ${item.categoria}`,

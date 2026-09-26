@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { DadosEstruturados } from "@/components/layout/dados-estruturados";
 import { PageHero } from "@/components/sections/page-hero";
 import {
   CTAComChecklist,
@@ -10,6 +11,7 @@ import {
 } from "@/components/sections/servico-detalhe";
 import { getServicoPorSlug, getServicosComPagina } from "@/content/servicos";
 import { paginaDeServicos } from "@/content/servicos/pagina";
+import { dadosDaTrilha, dadosDoServico } from "@/lib/dados-estruturados";
 import { montarMetadata } from "@/lib/metadados";
 
 /**
@@ -49,6 +51,15 @@ export default async function PaginaDeServico({ params }: Props) {
 
   return (
     <>
+      <DadosEstruturados
+        nos={[
+          dadosDoServico({ ...servico, detalhe }),
+          dadosDaTrilha(
+            { label: paginaDeServicos.metadados.titulo, href: "/servicos" },
+            { label: servico.titulo, href: `/servicos/${servico.slug}` },
+          ),
+        ]}
+      />
       <PageHero
         conteudo={{
           eyebrow: paginaDeServicos.hero.eyebrow,
