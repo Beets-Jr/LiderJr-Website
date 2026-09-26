@@ -54,11 +54,6 @@ export const servicos: Servico[] = [
   pesquisaDeMercado,
 ];
 
-/** Todos os serviços, incluindo os que ainda não têm página. */
-export function getTodosServicos(): Servico[] {
-  return servicos;
-}
-
 /** Só os serviços que têm página própria. Usado por generateStaticParams. */
 export function getServicosComPagina(): ServicoComPagina[] {
   return servicos.filter((s): s is ServicoComPagina => s.detalhe !== undefined);

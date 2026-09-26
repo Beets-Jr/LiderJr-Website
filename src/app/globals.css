@@ -107,7 +107,6 @@
 
   --animate-marquee-left: marquee-left 35s linear infinite;
   --animate-marquee-right: marquee-right 35s linear infinite;
-  --animate-fade-in: fade-in 500ms var(--ease-brand) both;
 }
 
 @keyframes marquee-left {
@@ -125,17 +124,6 @@
   }
   to {
     transform: translateX(0);
-  }
-}
-
-@keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
 
@@ -165,9 +153,6 @@
 @layer base {
   html:focus-within {
     scroll-behavior: auto;
-  }
-  .smooth-scroll {
-    scroll-behavior: smooth;
   }
 
   body {

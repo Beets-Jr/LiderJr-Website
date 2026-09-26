@@ -9,19 +9,19 @@ import { DM_Serif_Display, League_Spartan, Raleway } from "next/font/google";
  * --font-serif em globals.css.
  */
 
-export const leagueSpartan = League_Spartan({
+const leagueSpartan = League_Spartan({
   subsets: ["latin"],
   variable: "--font-league-spartan",
   display: "swap",
 });
 
-export const raleway = Raleway({
+const raleway = Raleway({
   subsets: ["latin"],
   variable: "--font-raleway",
   display: "swap",
 });
 
-export const dmSerifDisplay = DM_Serif_Display({
+const dmSerifDisplay = DM_Serif_Display({
   subsets: ["latin"],
   weight: "400",
   variable: "--font-dm-serif",

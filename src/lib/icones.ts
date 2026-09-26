@@ -32,7 +32,7 @@ import type { NomeDeIcone } from "@/types/site";
  * Existe para que os arquivos de conteúdo escrevam `icone: "tendencia"` em vez
  * de importar um componente React. Quem edita conteúdo nunca toca em código.
  */
-export const ICONES: Record<NomeDeIcone, LucideIcon> = {
+const ICONES: Record<NomeDeIcone, LucideIcon> = {
   alvo: Target,
   award: Award,
   bussola: Compass,
