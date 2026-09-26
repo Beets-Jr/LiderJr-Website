@@ -16,7 +16,9 @@ import { getServicoPorSlug } from "@/content/servicos";
 import { paginaDeServicos } from "@/content/servicos/pagina";
 import { montarMetadata } from "@/lib/metadados";
 
-export const metadata: Metadata = montarMetadata(home.metadados);
+export const metadata: Metadata = montarMetadata(home.metadados, "/", {
+  tituloCompleto: true,
+});
 
 export default async function PaginaInicial() {
   // Curadoria manual: um serviço de grupos diferentes, escolhidos pelo

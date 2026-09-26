@@ -7,7 +7,10 @@ import { faleConosco } from "@/content/fale-conosco";
 import { site } from "@/content/site";
 import { montarMetadata } from "@/lib/metadados";
 
-export const metadata: Metadata = montarMetadata(faleConosco.metadados);
+export const metadata: Metadata = montarMetadata(
+  faleConosco.metadados,
+  "/fale-conosco",
+);
 
 export default function PaginaFaleConosco() {
   return (

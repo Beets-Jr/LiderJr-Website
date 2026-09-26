@@ -33,7 +33,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const servico = getServicoPorSlug(slug);
   if (!servico?.detalhe) return {};
 
-  return montarMetadata(servico.detalhe.metadados, { imagem: servico.imagem });
+  return montarMetadata(servico.detalhe.metadados, `/servicos/${servico.slug}`, {
+    imagem: servico.imagem,
+  });
 }
 
 export default async function PaginaDeServico({ params }: Props) {

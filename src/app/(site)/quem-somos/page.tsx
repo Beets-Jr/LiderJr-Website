@@ -4,7 +4,7 @@ import { Cultura, Filiacoes, Historia } from "@/components/sections/quem-somos-s
 import { quemSomos } from "@/content/quem-somos";
 import { montarMetadata } from "@/lib/metadados";
 
-export const metadata: Metadata = montarMetadata(quemSomos.metadados);
+export const metadata: Metadata = montarMetadata(quemSomos.metadados, "/quem-somos");
 
 export default function PaginaQuemSomos() {
   return (

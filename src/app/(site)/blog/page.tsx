@@ -5,7 +5,7 @@ import { getTodosPosts } from "@/content/blog";
 import { paginaDoBlog } from "@/content/blog/pagina";
 import { montarMetadata } from "@/lib/metadados";
 
-export const metadata: Metadata = montarMetadata(paginaDoBlog.metadados);
+export const metadata: Metadata = montarMetadata(paginaDoBlog.metadados, "/blog");
 
 export default async function PaginaDoBlog() {
   const posts = await getTodosPosts();

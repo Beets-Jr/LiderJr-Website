@@ -5,7 +5,7 @@ import { getTodosCases } from "@/content/cases";
 import { paginaDeCases } from "@/content/cases/pagina";
 import { montarMetadata } from "@/lib/metadados";
 
-export const metadata: Metadata = montarMetadata(paginaDeCases.metadados);
+export const metadata: Metadata = montarMetadata(paginaDeCases.metadados, "/cases");
 
 export default async function PaginaDeCases() {
   const cases = await getTodosCases();

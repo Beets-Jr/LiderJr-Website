@@ -4,7 +4,10 @@ import { PageHero } from "@/components/sections/page-hero";
 import { getTodosMateriais, paginaDeMateriais } from "@/content/materiais";
 import { montarMetadata } from "@/lib/metadados";
 
-export const metadata: Metadata = montarMetadata(paginaDeMateriais.metadados);
+export const metadata: Metadata = montarMetadata(
+  paginaDeMateriais.metadados,
+  "/materiais",
+);
 
 export default async function PaginaDeMateriais() {
   const materiais = await getTodosMateriais();

@@ -8,7 +8,10 @@ import { getServicosAgrupados } from "@/content/servicos";
 import { paginaDeServicos } from "@/content/servicos/pagina";
 import { montarMetadata } from "@/lib/metadados";
 
-export const metadata: Metadata = montarMetadata(paginaDeServicos.metadados);
+export const metadata: Metadata = montarMetadata(
+  paginaDeServicos.metadados,
+  "/servicos",
+);
 
 export default function PaginaDeServicos() {
   const grupos = getServicosAgrupados();

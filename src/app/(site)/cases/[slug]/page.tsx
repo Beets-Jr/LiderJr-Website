@@ -29,7 +29,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const item = await getCasePorSlug(slug);
   if (!item?.detalhe) return {};
 
-  return montarMetadata(item.detalhe.metadados, { imagem: item.imagem });
+  return montarMetadata(item.detalhe.metadados, `/cases/${item.slug}`, {
+    tipo: "article",
+    imagem: item.imagem,
+  });
 }
 
 export default async function PaginaDeCase({ params }: Props) {

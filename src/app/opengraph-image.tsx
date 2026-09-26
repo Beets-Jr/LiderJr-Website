@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { site } from "@/content/site";
+import { IMAGEM_DE_COMPARTILHAMENTO } from "@/lib/metadados";
 
 /**
  * Imagem exibida quando o site é compartilhado no WhatsApp, LinkedIn etc.
@@ -9,8 +10,11 @@ import { site } from "@/content/site";
  * TODO: quando houver identidade visual definitiva, esta imagem pode virar um
  * arquivo estático em public/. Ver PENDENCIAS.md.
  */
-export const alt = `${site.nomeCompleto} — ${site.descricao}`;
-export const size = { width: 1200, height: 630 };
+export const alt = IMAGEM_DE_COMPARTILHAMENTO.alt;
+export const size = {
+  width: IMAGEM_DE_COMPARTILHAMENTO.width,
+  height: IMAGEM_DE_COMPARTILHAMENTO.height,
+};
 export const contentType = "image/png";
 
 /**
