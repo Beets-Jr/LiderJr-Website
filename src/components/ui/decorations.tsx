@@ -106,6 +106,10 @@ export function StepMarker({
 /* Estrelas — a nota 5 de 5 acima dos depoimentos                              */
 /* -------------------------------------------------------------------------- */
 
+/**
+ * `role="img"` faz o leitor de tela anunciar o conjunto como uma imagem só,
+ * lendo o `aria-label`. Numa <div> sem papel, o rótulo era ignorado.
+ */
 export function Estrelas({
   tamanho = 16,
   className,
@@ -116,6 +120,7 @@ export function Estrelas({
   return (
     <div
       className={cn("flex gap-1", className)}
+      role="img"
       aria-label="Avaliação: 5 de 5 estrelas"
     >
       {Array.from({ length: 5 }, (_, i) => (
