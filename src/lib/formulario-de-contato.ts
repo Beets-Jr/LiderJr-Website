@@ -24,10 +24,11 @@ export type ResultadoDoEnvio =
   { situacao: "sucesso" } | { situacao: "erro"; mensagem: string };
 
 export async function enviarFormularioDeContato(
-  dados: DadosDoFormularioDeContato,
+  // Sem backend, os dados ainda não vão para lugar nenhum — o `_` só avisa ao
+  // lint que o parâmetro fica sem uso até a integração existir.
+  _dados: DadosDoFormularioDeContato,
 ): Promise<ResultadoDoEnvio> {
-  // TODO: integração — trocar por um POST real.
-  console.info("[formulário de contato] dados que seriam enviados:", dados);
+  // TODO: integração — trocar por um POST real com os dados recebidos.
 
   // Simula a latência de uma requisição para que os estados de "enviando" e
   // "enviado" possam ser vistos e revisados desde já.
