@@ -3,6 +3,7 @@
 import { ChevronDown, ChevronRight, Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { Container } from "@/components/ui";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
 import type { GrupoDeLinks, LinkDeNavegacao } from "@/types/site";
@@ -57,7 +58,7 @@ export function Header({ nome, navegacao, ctaDoMenu, submenus = {} }: HeaderProp
 
   return (
     <header className="on-dark bg-surface-dark border-border-on-dark fixed inset-x-0 top-0 z-50 h-16 border-b">
-      <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-6">
+      <Container className="flex h-full items-center justify-between">
         <Logo nome={nome} tone="brand" />
 
         {/* Navegação e CTA formam um bloco único encostado à direita — o
@@ -112,7 +113,7 @@ export function Header({ nome, navegacao, ctaDoMenu, submenus = {} }: HeaderProp
             )}
           </button>
         </div>
-      </div>
+      </Container>
 
       {menuAberto ? (
         <MenuMobile
