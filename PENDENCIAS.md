@@ -42,8 +42,11 @@ lucide) dentro de um quadrado laranja, e é isso que está no ar. O favicon
 (`src/app/icon.svg`) e a imagem de compartilhamento
 (`src/app/opengraph-image.tsx`) seguem a mesma solução provisória.
 
-**Falta:** o símbolo oficial em SVG.
-📄 `src/components/layout/logo.tsx` · `src/app/icon.svg`
+**Falta:** o símbolo oficial em SVG, e uma versão em PNG de pelo menos
+112×112px. O PNG entra como `logo` nos dados estruturados da organização — é o
+logo que o Google pode exibir no painel da empresa nos resultados de busca.
+📄 `src/components/layout/logo.tsx` · `src/app/icon.svg` ·
+`src/lib/dados-estruturados.ts`
 
 ### 1.4 Redes sociais — resolvido
 
@@ -301,11 +304,47 @@ roda em modo local — grava direto no disco de quem está com o projeto aberto.
 
 📄 `keystatic.config.ts` · `src/content/*/index.ts`
 
+**Problema encontrado — posts e cases existentes não salvam pelo CMS.** Criar e
+apagar publicações funciona, mas editar um post ou case que já existe falha com
+_"Imagem is required"_: o campo de imagem abre vazio.
+
+A causa é o caminho da imagem nos YAML migrados. O Keystatic espera cada imagem
+numa pasta com o nome da publicação —
+`public/imagens/cases/comercio-varejista/<arquivo>.jpg`, referenciada como
+`/imagens/cases/comercio-varejista/<arquivo>.jpg` — e os arquivos migrados
+estão soltos (`/imagens/cases/comercio-varejista.jpg`). O CMS não encontra o
+arquivo e trata o campo como vazio.
+
+**Contorno provável (não testado):** ao editar, reenviar a mesma imagem no
+campo "Imagem" — o CMS a grava no lugar que espera.
+**Correção definitiva:** mover as imagens de `public/imagens/blog/` e
+`public/imagens/cases/` para a pasta de cada publicação e atualizar os YAML.
+Muda a URL das imagens (inclusive a de compartilhamento dos posts e cases).
+
 ### 4.3 Fora de escopo por decisão
 
 Não há backend, banco de dados nem analytics. Serviços e os textos das páginas
 seguem em arquivo TypeScript — são páginas de produto e cópia institucional,
 não publicações.
+
+---
+
+### 4.4 SEO — depois de publicar
+
+O site já sai com URL canônica, Open Graph completo, imagem de compartilhamento
+em todas as páginas, sitemap, robots.txt e dados estruturados (JSON-LD). O que
+só dá para fazer com o site no ar:
+
+1. Cadastrar o domínio no **Google Search Console** e enviar
+   `https://www.liderjr.com/sitemap.xml`.
+2. Passar uma página de post, uma de serviço e a Home no **Teste de
+   resultados avançados** (https://search.google.com/test/rich-results).
+3. Conferir a prévia de compartilhamento colando um link no WhatsApp ou no
+   LinkedIn (Post Inspector).
+
+Hoje só 1 dos 6 posts e 1 dos 6 cases têm página própria. Para o Google, o
+que não tem página não existe — cada post publicado com página é uma porta de
+entrada a mais pela busca.
 
 ---
 
