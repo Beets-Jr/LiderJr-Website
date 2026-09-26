@@ -10,7 +10,6 @@ export { Card, type CardProps } from "./card";
 export { Container, type ContainerProps } from "./container";
 export {
   Avatar,
-  Divider,
   Estrelas,
   IconTile,
   StepMarker,

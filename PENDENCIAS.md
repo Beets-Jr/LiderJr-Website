@@ -127,14 +127,11 @@ compartilhamento.
 O cliente escolheu o formato em duas colunas.
 
 - **Em uso:** `CTATestimonialColumns` — depoimento à esquerda, chamada à
-  direita.
-- **Mantido no código, sem uso:** `CTATestimonial` — depoimento em cima,
-  chamada embaixo.
-
-Para trocar de novo, use o outro componente na Home e passe `home.ctaFinal`
-(formato empilhado) ou `ctaFinalEmColunas` (formato em colunas), ambos em
-`src/content/home.ts`.
-📄 `src/app/(site)/page.tsx` · `src/components/sections/cta.tsx`
+  direita, com o conteúdo em `home.ctaFinal` (`src/content/home.ts`).
+- O formato alternativo (depoimento em cima, chamada embaixo) e o texto de
+  chamada que o acompanhava foram removidos do código. Se um dia fizerem
+  falta, estão no histórico do git, antes do commit que os removeu.
+  📄 `src/app/(site)/page.tsx` · `src/components/sections/cta.tsx`
 
 ### 2.2 Contraste do laranja da marca — a única reprovação de WCAG AA
 
@@ -213,7 +210,7 @@ A Home terminava com **cinco seções de CTA escuras seguidas**, com o mesmo
 título repetido 3× e o mesmo depoimento 2×. Restou uma. O conteúdo das outras
 foi preservado:
 
-- a variante em colunas está em `ctaFinalEmColunas` (ver 2.1);
+- a variante em colunas é a que está em uso (ver 2.1);
 - o formulário rápido (nome + WhatsApp) e o card de confiança ("Consultoria
   inicial gratuita", "Retorno em até 24 horas úteis", "Projetos supervisionados
   por professores especialistas") **saíram do site**. Se algum desses textos

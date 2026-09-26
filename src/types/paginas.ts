@@ -81,7 +81,7 @@ export interface ConteudoDaHome {
 
   blog: CabecalhoDeSecao;
 
-  /** O CTA final: depoimento acima, chamada abaixo. */
+  /** O CTA final: depoimento à esquerda, chamada à direita. */
   ctaFinal: {
     depoimento: Depoimento;
     chamada: ChamadaParaAcao;

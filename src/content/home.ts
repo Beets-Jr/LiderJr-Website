@@ -118,33 +118,12 @@ export const home: ConteudoDaHome = {
       iniciais: "MA",
     },
     chamada: {
-      titulo: "Seu próximo resultado pode começar com uma conversa.",
+      eyebrow: "O próximo case pode ser o seu",
+      titulo: "Para ter um resultado parecido, basta entrar em contato.",
       descricao:
-        "Conte-nos os desafios da sua empresa. Nossa equipe irá entender sua necessidade e propor uma solução personalizada.",
-      botaoPrimario: { label: "Solicitar um orçamento", href: "/fale-conosco" },
-      botaoSecundario: { label: "Conhecer nossos serviços", href: "/servicos" },
+        "Assim como fizemos por essa empresa, nossa equipe pode entender os desafios do seu negócio e propor uma solução personalizada — sem custo no diagnóstico inicial.",
+      botaoPrimario: { label: "Quero um resultado assim", href: "/fale-conosco" },
+      botaoSecundario: { label: "Ver outros cases", href: "/cases" },
     },
-  },
-};
-
-/**
- * ----------------------------------------------------------------------------
- * CONTEÚDO DO CTA EM COLUNAS — em uso na Home
- * ----------------------------------------------------------------------------
- * O cliente escolheu o formato em duas colunas (depoimento à esquerda, chamada
- * à direita), usado com <CTATestimonialColumns>. `ctaFinal` acima (depoimento
- * em cima, chamada embaixo) fica mantido no código, sem uso. Ver PENDENCIAS.md
- * 2.1.
- * ----------------------------------------------------------------------------
- */
-export const ctaFinalEmColunas: ConteudoDaHome["ctaFinal"] = {
-  depoimento: home.ctaFinal.depoimento,
-  chamada: {
-    eyebrow: "O próximo case pode ser o seu",
-    titulo: "Para ter um resultado parecido, basta entrar em contato.",
-    descricao:
-      "Assim como fizemos por essa empresa, nossa equipe pode entender os desafios do seu negócio e propor uma solução personalizada — sem custo no diagnóstico inicial.",
-    botaoPrimario: { label: "Quero um resultado assim", href: "/fale-conosco" },
-    botaoSecundario: { label: "Ver outros cases", href: "/cases" },
   },
 };

@@ -3,7 +3,6 @@ import {
   ButtonLink,
   Card,
   Container,
-  Divider,
   Estrelas,
   Eyebrow,
   Heading,
@@ -44,8 +43,8 @@ function Botoes({
 }
 
 /**
- * O texto da chamada, sem a caixa. Reaproveitado pelos dois formatos de CTA e
- * pelo painel escuro das páginas de detalhe.
+ * O texto da chamada, sem a caixa. Reaproveitado pelo CTA da Home, pelo CTA
+ * das páginas de serviço e pelo painel escuro das páginas de detalhe.
  */
 export function TextoDaChamada({
   chamada,
@@ -82,7 +81,7 @@ export function TextoDaChamada({
 }
 
 /* -------------------------------------------------------------------------- */
-/* Formato alternativo, sem uso: depoimento acima, chamada abaixo              */
+/* CTA final da Home: depoimento à esquerda, chamada à direita                 */
 /* -------------------------------------------------------------------------- */
 
 export interface CTATestimonialProps {
@@ -90,51 +89,7 @@ export interface CTATestimonialProps {
   chamada: ChamadaParaAcao;
 }
 
-export function CTATestimonial({ depoimento, chamada }: CTATestimonialProps) {
-  return (
-    <Section tone="dark" glow>
-      <Container width="narrow">
-        <figure className="text-center">
-          <div className="flex justify-center">
-            <Estrelas />
-          </div>
-
-          <blockquote className="mt-6">
-            <Text
-              size="lg"
-              tone="onDark"
-              family="serif"
-              className="mx-auto max-w-3xl text-2xl lg:text-3xl"
-            >
-              {`“${depoimento.texto}”`}
-            </Text>
-          </blockquote>
-
-          <figcaption className="mt-6">
-            <Text weight="semibold" tone="onDark">
-              {depoimento.autor}
-            </Text>
-            <Text size="sm" tone="onDarkFaint">
-              {depoimento.cargo}
-            </Text>
-          </figcaption>
-        </figure>
-
-        <Divider tone="onDark" className="mx-auto my-14 w-16" />
-
-        <TextoDaChamada chamada={chamada} centralizado />
-      </Container>
-    </Section>
-  );
-}
-
-/* -------------------------------------------------------------------------- */
-/* Formato em uso na Home: depoimento à esquerda, chamada à direita            */
-/* -------------------------------------------------------------------------- */
-
-/**
- * Variante em duas colunas, escolhida pelo cliente. Ver PENDENCIAS.md 2.1.
- */
+/** Formato em duas colunas, escolhido pelo cliente. Ver PENDENCIAS.md 2.1. */
 export function CTATestimonialColumns({ depoimento, chamada }: CTATestimonialProps) {
   return (
     <Section tone="dark" glow>

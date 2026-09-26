@@ -257,8 +257,7 @@ Use `priority` só na imagem principal acima da dobra.
 ### Peças menores
 
 `IconTile` (ícone em tile laranja) · `Avatar` (iniciais) · `StepMarker` (círculo
-numerado das linhas do tempo) · `Estrelas` (nota 5 de 5 dos depoimentos) ·
-`Divider`
+numerado das linhas do tempo) · `Estrelas` (nota 5 de 5 dos depoimentos)
 
 ### LinkEsticado
 

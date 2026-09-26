@@ -134,25 +134,3 @@ export function Estrelas({
     </div>
   );
 }
-
-/* -------------------------------------------------------------------------- */
-/* Divider                                                                     */
-/* -------------------------------------------------------------------------- */
-
-export function Divider({
-  tone = "light",
-  className,
-}: {
-  tone?: "light" | "onDark";
-  className?: string;
-}) {
-  return (
-    <hr
-      className={cn(
-        "h-px border-0",
-        tone === "light" ? "bg-border" : "bg-border-on-dark",
-        className,
-      )}
-    />
-  );
-}

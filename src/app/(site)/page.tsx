@@ -11,7 +11,7 @@ import { StatsBand } from "@/components/sections/stats-band";
 import { Container, Section } from "@/components/ui";
 import { getUltimosPosts } from "@/content/blog";
 import { getCasesEmDestaque } from "@/content/cases";
-import { ctaFinalEmColunas, home } from "@/content/home";
+import { home } from "@/content/home";
 import { getServicoPorSlug } from "@/content/servicos";
 import { paginaDeServicos } from "@/content/servicos/pagina";
 import { montarMetadata } from "@/lib/metadados";
@@ -92,8 +92,8 @@ export default async function PaginaInicial() {
       </Section>
 
       <CTATestimonialColumns
-        depoimento={ctaFinalEmColunas.depoimento}
-        chamada={ctaFinalEmColunas.chamada}
+        depoimento={home.ctaFinal.depoimento}
+        chamada={home.ctaFinal.chamada}
       />
     </>
   );
