@@ -3,8 +3,8 @@
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
 import { Badge, Card, Heading, LinkEsticado, Text } from "@/components/ui";
-import { getHrefDoCase } from "@/lib/hrefs";
 import { cn } from "@/lib/cn";
+import { getHrefDoCase } from "@/lib/hrefs";
 import type { Case } from "@/types/case";
 import type { ConteudoDaHome } from "@/types/paginas";
 

@@ -1,8 +1,8 @@
 import { Heading, Text } from "@/components/ui";
-import { SectionHeader } from "./section-header";
 import { getIcone } from "@/lib/icones";
-import type { ConteudoDoSite } from "@/types/site";
 import type { ConteudoFaleConosco } from "@/types/paginas";
+import type { ConteudoDoSite } from "@/types/site";
+import { SectionHeader } from "./section-header";
 
 /** A coluna de telefone e e-mail ao lado do formulário. */
 export function ContactInfo({

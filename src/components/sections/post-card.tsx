@@ -1,7 +1,7 @@
 import { Tag } from "lucide-react";
 import { Badge, Card, Foto, Heading, LinkEsticado, Text } from "@/components/ui";
-import { getHrefDoPost } from "@/lib/hrefs";
 import { formatarData } from "@/lib/datas";
+import { getHrefDoPost } from "@/lib/hrefs";
 import type { Post } from "@/types/post";
 
 /** Categoria, a linha de metadados de todo card de post. */

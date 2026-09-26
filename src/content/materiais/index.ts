@@ -1,6 +1,6 @@
 import { createReader } from "@keystatic/core/reader";
-import keystaticConfig from "../../../keystatic.config";
 import type { Material } from "@/types/material";
+import keystaticConfig from "../../../keystatic.config";
 
 /**
  * ============================================================================

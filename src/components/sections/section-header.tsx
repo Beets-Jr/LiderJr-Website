@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { ChevronRight } from "lucide-react";
+import Link from "next/link";
 import { Eyebrow, Heading, Text } from "@/components/ui";
 import { cn } from "@/lib/cn";
 import type { CabecalhoDeSecao } from "@/types/comum";

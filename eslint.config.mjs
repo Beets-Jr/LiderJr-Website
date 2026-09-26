@@ -1,6 +1,6 @@
-import prettier from "eslint-config-prettier";
 import nextCoreWebVitals from "eslint-config-next/core-web-vitals";
 import nextTypescript from "eslint-config-next/typescript";
+import prettier from "eslint-config-prettier";
 
 /** @type {import("eslint").Linter.Config[]} */
 const eslintConfig = [
@@ -25,6 +25,18 @@ const eslintConfig = [
       "@typescript-eslint/no-unused-vars": [
         "error",
         { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
+      ],
+      // Pacotes externos primeiro, depois os caminhos "@/…" do projeto, depois
+      // os relativos — cada grupo em ordem alfabética.
+      "import/order": [
+        "error",
+        {
+          groups: ["builtin", "external", "internal", "parent", "sibling", "index"],
+          pathGroups: [{ pattern: "@/**", group: "internal" }],
+          pathGroupsExcludedImportTypes: ["builtin"],
+          "newlines-between": "never",
+          alphabetize: { order: "asc", caseInsensitive: true },
+        },
       ],
     },
   },

@@ -12,8 +12,8 @@ import {
 import { cn } from "@/lib/cn";
 import { getHrefDoServico } from "@/lib/hrefs";
 import { getIcone } from "@/lib/icones";
-import type { LinkDeNavegacao } from "@/types/site";
 import type { Servico } from "@/types/servico";
+import type { LinkDeNavegacao } from "@/types/site";
 
 /**
  * Os dois formatos de card de serviço do protótipo.

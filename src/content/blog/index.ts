@@ -1,7 +1,7 @@
 import { createReader } from "@keystatic/core/reader";
-import keystaticConfig from "../../../keystatic.config";
 import { montarImagem } from "@/lib/imagem";
 import type { BlocoDePost, Post, PostComPagina } from "@/types/post";
+import keystaticConfig from "../../../keystatic.config";
 import { paginaDoBlog } from "./pagina";
 
 /**

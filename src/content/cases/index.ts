@@ -1,7 +1,7 @@
 import { createReader } from "@keystatic/core/reader";
-import keystaticConfig from "../../../keystatic.config";
 import { montarImagem } from "@/lib/imagem";
 import type { Case, CaseComPagina } from "@/types/case";
+import keystaticConfig from "../../../keystatic.config";
 import { paginaDeCases } from "./pagina";
 
 /**

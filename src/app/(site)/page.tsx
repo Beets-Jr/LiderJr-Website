@@ -12,8 +12,8 @@ import { Container, Section } from "@/components/ui";
 import { getUltimosPosts } from "@/content/blog";
 import { getCasesEmDestaque } from "@/content/cases";
 import { ctaFinalEmColunas, home } from "@/content/home";
-import { paginaDeServicos } from "@/content/servicos/pagina";
 import { getServicoPorSlug } from "@/content/servicos";
+import { paginaDeServicos } from "@/content/servicos/pagina";
 import { montarMetadata } from "@/lib/metadados";
 
 export const metadata: Metadata = montarMetadata(home.metadados);

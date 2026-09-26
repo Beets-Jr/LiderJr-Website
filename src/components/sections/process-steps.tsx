@@ -1,6 +1,6 @@
 import { Heading, IconTile, StepMarker, Text } from "@/components/ui";
-import { getIcone } from "@/lib/icones";
 import { cn } from "@/lib/cn";
+import { getIcone } from "@/lib/icones";
 import type { Etapa } from "@/types/comum";
 
 /**
