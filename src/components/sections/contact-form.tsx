@@ -7,6 +7,7 @@ import {
   pareceEmailValido,
   type DadosDoFormularioDeContato,
 } from "@/lib/formulario-de-contato";
+import { getOrigemDoVisitante } from "@/lib/origem-do-visitante";
 import type { CampoDoFormulario, ConteudoFaleConosco } from "@/types/paginas";
 
 type Erros = Record<string, string>;
@@ -60,7 +61,11 @@ export function ContactForm({
     if (Object.keys(encontrados).length > 0) return;
 
     setSituacao("enviando");
-    await enviarFormularioDeContato(valores);
+    // Campo que a pessoa não vê: de onde ela veio até o formulário.
+    await enviarFormularioDeContato({
+      ...valores,
+      paginaDeOrigem: getOrigemDoVisitante(),
+    });
     setSituacao("enviado");
   }
 

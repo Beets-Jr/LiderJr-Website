@@ -13,7 +13,7 @@ export interface PageHeroProps {
   conteudo: HeroDePagina;
   /** Sobrescreve o título vindo do conteúdo. Usado pelas páginas de detalhe. */
   titulo?: string;
-  /** Conteúdo extra abaixo do texto: autor, data, tempo de leitura. */
+  /** Conteúdo extra abaixo do texto (ex.: a data de um post). */
   children?: ReactNode;
   priority?: boolean;
 }

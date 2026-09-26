@@ -1,11 +1,11 @@
-import { Clock, Tag } from "lucide-react";
+import { Tag } from "lucide-react";
 import Link from "next/link";
 import { Badge, Card, Foto, Heading, Text } from "@/components/ui";
 import { getHrefDoPost } from "@/lib/hrefs";
 import { formatarData } from "@/lib/datas";
 import type { Post } from "@/types/post";
 
-/** Categoria + tempo de leitura, a linha de metadados de todo card de post. */
+/** Categoria, a linha de metadados de todo card de post. */
 function MetaDoPost({ post }: { post: Post }) {
   return (
     <div className="flex items-center gap-3">
@@ -13,10 +13,6 @@ function MetaDoPost({ post }: { post: Post }) {
         <Tag size={10} aria-hidden="true" />
         {post.categoria}
       </Badge>
-      <span className="font-body text-fg-muted flex items-center gap-1 text-xs">
-        <Clock size={12} aria-hidden="true" />
-        {post.tempoDeLeitura}
-      </span>
     </div>
   );
 }

@@ -36,8 +36,8 @@ export const gestaoDeEstoques: Servico = {
       eyebrow: "Como funciona",
       titulo: "O equilíbrio entre faltar e sobrar",
       paragrafos: [
-        "Estoque é dinheiro parado na prateleira — mas estoque de menos é venda perdida e cliente atendido com atraso. O trabalho é encontrar o ponto entre os dois, item por item.",
-        "Classificamos os itens por relevância com a curva ABC, calculamos o lote econômico de compra e definimos ponto de pedido e estoque de segurança para cada faixa, com uma política que a equipe consegue seguir no dia a dia.",
+        "Excesso de produtos parados, faltas recorrentes, perdas ou a falta de um critério claro para decidir quando e quanto comprar — os sintomas variam, mas a raiz costuma ser a mesma: ninguém está olhando os dados de perto o suficiente.",
+        "Analisamos os dados e o comportamento de cada item em estoque para organizar esse controle. Classificamos os itens por relevância com a curva ABC, calculamos o lote econômico de compra e definimos ponto de pedido e estoque de segurança por faixa, dando mais segurança às decisões de compra e reposição.",
       ],
       imagem: imagens.analiseDeFluxoEmPapel,
     },
@@ -48,27 +48,39 @@ export const gestaoDeEstoques: Servico = {
       etapas: [
         {
           numero: "01",
-          titulo: "Inventário",
+          titulo: "Diagnóstico",
           descricao:
-            "Levantamento do que existe, do giro de cada item e do capital hoje imobilizado em estoque.",
+            "Levantamento da situação atual da gestão de estoques: o que falta, o que sobra e por quê.",
         },
         {
           numero: "02",
-          titulo: "Classificação",
+          titulo: "Organização dos Dados",
           descricao:
-            "Curva ABC para separar os poucos itens que respondem pela maior parte do valor movimentado.",
+            "Levantamento e organização dos dados existentes sobre movimentação e níveis de estoque.",
         },
         {
           numero: "03",
-          titulo: "Dimensionamento",
+          titulo: "Análise",
           descricao:
-            "Cálculo de lote econômico, ponto de pedido e estoque de segurança por faixa de item.",
+            "Estudo do comportamento dos produtos — consumo, giro e criticidade — item por item.",
         },
         {
           numero: "04",
-          titulo: "Política",
+          titulo: "Oportunidades",
           descricao:
-            "Regras de reposição documentadas e treinadas com quem compra e com quem controla o almoxarifado.",
+            "Identificação dos problemas atuais e das oportunidades concretas de melhoria.",
+        },
+        {
+          numero: "05",
+          titulo: "Parâmetros",
+          descricao:
+            "Definição dos métodos e parâmetros de controle — curva ABC, lote econômico, ponto de pedido.",
+        },
+        {
+          numero: "06",
+          titulo: "Ferramentas",
+          descricao:
+            "Estruturação das ferramentas de acompanhamento que a equipe vai usar no dia a dia.",
         },
       ],
     },

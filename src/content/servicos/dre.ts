@@ -34,8 +34,8 @@ export const dre: Servico = {
       eyebrow: "Como funciona",
       titulo: "Saiba se a empresa dá lucro, com números",
       paragrafos: [
-        "Caixa positivo no fim do mês não significa lucro — pode ser dinheiro de cliente que ainda vai virar despesa. A DRE separa receita, custo e despesa e mostra o resultado real do período.",
-        "Organizamos as contas da empresa na estrutura da DRE, da receita bruta ao lucro líquido, criando uma rotina simples para manter o relatório atualizado mês a mês.",
+        "Caixa positivo no fim do mês não significa lucro — pode ser dinheiro de cliente que ainda vai virar despesa. A DRE ajuda a empresa a entender como seu resultado é formado, organizando com clareza as receitas, os custos e as despesas do período.",
+        "É um trabalho útil para quem não tem visibilidade clara sobre onde está ganhando ou perdendo dinheiro. Organizamos as contas da empresa na estrutura da DRE, da receita bruta ao lucro líquido, criando uma rotina simples para manter o relatório atualizado mês a mês e analisar a rentabilidade com mais precisão.",
       ],
       imagem: imagens.dashboardIndicadores,
     },
@@ -48,25 +48,37 @@ export const dre: Servico = {
           numero: "01",
           titulo: "Levantamento",
           descricao:
-            "Reunião das receitas, custos e despesas do período em uma única base.",
+            "Levantamento dos dados financeiros da empresa no período analisado.",
         },
         {
           numero: "02",
-          titulo: "Classificação",
+          titulo: "Organização",
           descricao:
-            "Organização das contas na estrutura da DRE, do faturamento ao lucro líquido.",
+            "Organização das receitas, custos e despesas em uma única base.",
         },
         {
           numero: "03",
-          titulo: "Apuração",
+          titulo: "Estruturação",
           descricao:
-            "Cálculo do resultado do período e dos principais indicadores de margem.",
+            "Estruturação da DRE, do faturamento bruto ao lucro líquido do período.",
         },
         {
           numero: "04",
-          titulo: "Rotina",
+          titulo: "Análise",
           descricao:
-            "Modelo simples para a empresa manter a DRE atualizada nos meses seguintes.",
+            "Análise dos resultados obtidos e dos principais indicadores de margem.",
+        },
+        {
+          numero: "05",
+          titulo: "Impactos",
+          descricao:
+            "Identificação dos principais impactos sobre o resultado, para saber onde agir primeiro.",
+        },
+        {
+          numero: "06",
+          titulo: "Recomendações",
+          descricao:
+            "Apresentação das recomendações e do modelo para manter a DRE atualizada mês a mês.",
         },
       ],
     },

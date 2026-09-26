@@ -34,8 +34,8 @@ export const planoDeMarketing: Servico = {
       eyebrow: "Como funciona",
       titulo: "Atrair cliente também se planeja",
       paragrafos: [
-        "Publicar sem estratégia gasta tempo e verba sem saber, de fato, se está atraindo o cliente certo ou só gerando ruído.",
-        "Definimos o posicionamento, mapeamos os canais mais relevantes para o público da empresa e estruturamos um plano de ações com prioridade e prazo, em vez de um calendário de posts solto.",
+        "É indicado para empresas que investem em divulgação sem um direcionamento claro, ou que ainda não têm uma estratégia estruturada de marketing — publicar sem estratégia gasta tempo e verba sem saber, de fato, se está atraindo o cliente certo ou só gerando ruído.",
+        "A partir de um entendimento mais profundo do público-alvo, do mercado e da concorrência, definimos o posicionamento da empresa e estruturamos as estratégias de atração e relacionamento com os clientes mais adequadas para alcançar os objetivos definidos.",
       ],
       imagem: imagens.equipeReuniaoMesa,
     },
@@ -48,25 +48,49 @@ export const planoDeMarketing: Servico = {
           numero: "01",
           titulo: "Diagnóstico",
           descricao:
-            "Análise do posicionamento atual, do público-alvo e da concorrência direta.",
+            "Diagnóstico do negócio e do mercado em que a empresa está inserida.",
         },
         {
           numero: "02",
-          titulo: "Posicionamento",
+          titulo: "Público-Alvo",
           descricao:
-            "Definição da mensagem e da proposta de valor que a marca vai comunicar.",
+            "Definição e análise do público-alvo: quem é, o que valoriza e como decide comprar.",
         },
         {
           numero: "03",
-          titulo: "Canais",
+          titulo: "Concorrência",
           descricao:
-            "Escolha dos canais mais relevantes para alcançar o público definido.",
+            "Análise dos concorrentes diretos e de como eles se posicionam hoje.",
         },
         {
           numero: "04",
+          titulo: "Posicionamento",
+          descricao:
+            "Definição do posicionamento da empresa frente ao público e à concorrência.",
+        },
+        {
+          numero: "05",
+          titulo: "Estratégias",
+          descricao:
+            "Estruturação das estratégias de marketing — produto, preço, praça e promoção.",
+        },
+        {
+          numero: "06",
+          titulo: "Canais",
+          descricao:
+            "Definição dos canais e das ações a serem utilizados para alcançar o público.",
+        },
+        {
+          numero: "07",
           titulo: "Plano de Ação",
           descricao:
-            "Cronograma de ações prioritárias, com responsável, prazo e indicador de acompanhamento.",
+            "Construção do plano de ação, com prioridade e prazo para cada iniciativa.",
+        },
+        {
+          numero: "08",
+          titulo: "Indicadores",
+          descricao:
+            "Definição dos indicadores de acompanhamento do plano de marketing.",
         },
       ],
     },

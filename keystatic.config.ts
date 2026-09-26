@@ -219,11 +219,6 @@ export default config({
           validation: { isRequired: true },
           description: "Alimenta o filtro da página. Reaproveite uma existente.",
         }),
-        tempoDeLeitura: fields.text({
-          label: "Tempo de leitura",
-          validation: { isRequired: true },
-          description: 'No formato "6 min".',
-        }),
         imagem: imagemComAlt("Imagem de capa", "public/imagens/blog", "/imagens/blog/"),
 
         /* O artigo em si. Vazio = o post aparece na listagem mas não tem página
@@ -237,17 +232,6 @@ export default config({
           {
             false: fields.empty(),
             true: fields.object({
-              autor: fields.object({
-                nome: fields.text({
-                  label: "Autor",
-                  validation: { isRequired: true },
-                }),
-                iniciais: fields.text({
-                  label: "Iniciais",
-                  validation: { isRequired: true, length: { min: 2, max: 2 } },
-                  description: "Duas letras, exibidas no círculo laranja.",
-                }),
-              }),
               tituloSeo: fields.text({
                 label: "Título para o Google",
                 description: "Deixe vazio para usar o título do post.",

@@ -37,14 +37,11 @@ export interface ResumoDePost {
   data: string;
   /** Usada no filtro da listagem. As opções do filtro saem daqui. */
   categoria: string;
-  /** Ex.: "6 min". */
-  tempoDeLeitura: string;
   imagem: Imagem;
 }
 
 export interface DetalheDePost {
   metadados: Metadados;
-  autor: { nome: string; iniciais: string };
   corpo: BlocoDePost[];
   cta: ChamadaParaAcao;
 }

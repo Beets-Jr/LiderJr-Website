@@ -36,8 +36,8 @@ export const mapeamentoDeProcessos: Servico = {
       eyebrow: "Como funciona",
       titulo: "Enxergue sua operação com clareza",
       paragrafos: [
-        "Levantamos, documentamos e analisamos os processos da sua empresa para identificar gargalos, retrabalho e pontos de melhoria — antes de propor qualquer mudança.",
-        "Usamos metodologias consolidadas como BPMN, fluxogramas e Value Stream Mapping (VSM) para transformar processos informais em fluxos claros e mensuráveis.",
+        "Levantamos, documentamos e analisamos os processos da sua empresa para identificar gargalos, retrabalho, atividades que não agregam valor e pontos em que a responsabilidade não está bem definida — antes de propor qualquer mudança.",
+        "Usamos metodologias consolidadas como BPMN, fluxogramas e Value Stream Mapping (VSM) para transformar processos informais em fluxos claros e mensuráveis. O trabalho também serve para empresas que precisam documentar e padronizar seus processos como preparação para certificações e normas, como a ISO 9001.",
       ],
       // No protótipo esta imagem eram figurinhas do Mario. Ver PENDENCIAS.md.
       imagem: imagens.workshopPostIts,
@@ -49,27 +49,39 @@ export const mapeamentoDeProcessos: Servico = {
       etapas: [
         {
           numero: "01",
-          titulo: "Levantamento",
+          titulo: "Entendimento",
           descricao:
-            "Entrevistas e observação in loco para entender o processo como ele realmente acontece.",
+            "Compreensão do processo e do contexto da empresa antes de sair mapeando qualquer coisa.",
         },
         {
           numero: "02",
-          titulo: "Modelagem",
+          titulo: "Levantamento",
           descricao:
-            "Construção do fluxo atual (AS IS) em notação BPMN, deixando visível cada etapa e responsável.",
+            "Identificação das atividades e dos responsáveis por cada uma delas, entrevista a entrevista.",
         },
         {
           numero: "03",
-          titulo: "Diagnóstico",
+          titulo: "Mapeamento",
           descricao:
-            "Identificação de gargalos, desperdícios e retrabalho ao longo do fluxo mapeado.",
+            "Construção do fluxo atual em notação BPMN — o processo como ele realmente acontece hoje.",
         },
         {
           numero: "04",
+          titulo: "Diagnóstico",
+          descricao:
+            "Identificação de gargalos, desperdícios e oportunidades de melhoria ao longo do fluxo.",
+        },
+        {
+          numero: "05",
           titulo: "Redesenho",
           descricao:
-            "Proposta do processo futuro (TO BE), com melhorias validadas junto à equipe.",
+            "Proposta de um processo otimizado — o fluxo como ele deveria ser.",
+        },
+        {
+          numero: "06",
+          titulo: "Entrega",
+          descricao:
+            "Documentação do processo e apresentação das melhorias propostas para a equipe.",
         },
       ],
     },
@@ -87,15 +99,15 @@ export const mapeamentoDeProcessos: Servico = {
         },
         {
           icone: "escudo",
-          titulo: "Padronização e Qualidade",
+          titulo: "Responsabilidades Claras",
           descricao:
-            "Garantimos que as tarefas sejam executadas sempre da melhor forma, diminuindo a dependência de funcionários específicos.",
+            "Cada atividade passa a ter um responsável definido, diminuindo a dependência de funcionários específicos.",
         },
         {
-          icone: "lampada",
-          titulo: "Base para Inovação",
+          icone: "award",
+          titulo: "Pronta para Certificação",
           descricao:
-            "Um processo mapeado e claro é o primeiro passo obrigatório antes de implementar qualquer automação ou novo software.",
+            "Processos documentados e padronizados facilitam a preparação da empresa para certificações como a ISO 9001.",
         },
       ],
     },

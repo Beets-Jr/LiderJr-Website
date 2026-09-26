@@ -35,8 +35,8 @@ export const analiseDeCustos: Servico = {
       eyebrow: "Como funciona",
       titulo: "Saiba quanto custa antes de dizer quanto custa",
       paragrafos: [
-        "Muita empresa precifica olhando para o concorrente e descobre tarde que vende bem e ganha pouco. O ponto de partida é outro: quanto custa, de verdade, cada produto ou serviço que você entrega.",
-        "Levantamos custos fixos e variáveis, rateamos o que é indireto e chegamos ao custo unitário real. Com esse número em mãos, definimos preço, margem e ponto de equilíbrio — e aí sim comparamos com o mercado.",
+        "A análise de custos ajuda a empresa a entender como seus custos são formados e o quanto cada um deles impacta o resultado do negócio — quanto custa, de verdade, cada produto ou serviço que ela entrega.",
+        "Levantamos custos fixos e variáveis, rateamos o que é indireto e chegamos ao custo unitário real. A partir dessa análise, identificamos desperdícios, avaliamos oportunidades de redução e chegamos a uma base mais segura para as decisões de precificação.",
       ],
       imagem: imagens.painelDeGestao,
     },
@@ -49,45 +49,57 @@ export const analiseDeCustos: Servico = {
           numero: "01",
           titulo: "Levantamento",
           descricao:
-            "Mapeamento de todos os custos e despesas da operação, separando o que é fixo do que é variável.",
+            "Levantamento dos custos da empresa, separando o que é fixo do que é variável.",
         },
         {
           numero: "02",
-          titulo: "Custeio",
+          titulo: "Classificação",
           descricao:
-            "Rateio dos custos indiretos e cálculo do custo unitário real de cada produto ou serviço.",
+            "Classificação e organização dos gastos por natureza e por produto ou serviço.",
         },
         {
           numero: "03",
-          titulo: "Precificação",
+          titulo: "Composição",
           descricao:
-            "Definição de preço e margem por item, com ponto de equilíbrio e comparação com a prática do mercado.",
+            "Análise da composição dos custos e cálculo do custo unitário real de cada item.",
         },
         {
           numero: "04",
-          titulo: "Simulação",
+          titulo: "Impactos",
           descricao:
-            "Planilha para testar cenários de volume, custo e desconto antes de mexer na tabela de preços.",
+            "Identificação dos principais impactos dos custos no resultado do negócio.",
+        },
+        {
+          numero: "05",
+          titulo: "Oportunidades",
+          descricao:
+            "Identificação de oportunidades de redução de custos e de ajuste na precificação.",
+        },
+        {
+          numero: "06",
+          titulo: "Recomendações",
+          descricao:
+            "Recomendações para otimização dos custos, com base sólida para a decisão de preço.",
         },
       ],
     },
 
     resultados: {
-      titulo: "Por que revisar sua precificação?",
+      titulo: "Por que analisar seus custos?",
       descricao:
-        "Preço é a decisão que mais rápido muda o resultado da empresa — e a que mais costuma ser tomada no escuro.",
+        "Sem saber como o custo se forma, decisão de desconto, corte e preço são tomadas no escuro — e o preço é a que mais rápido muda o resultado da empresa.",
       itens: [
+        {
+          icone: "quedaGrafico",
+          titulo: "Desperdícios Identificados",
+          descricao:
+            "Custos que hoje passam despercebidos ficam visíveis, com oportunidades concretas de redução.",
+        },
         {
           icone: "escudo",
           titulo: "Margem Protegida",
           descricao:
             "Com o custo real na mão, o desconto deixa de ser um chute e passa a ter um limite conhecido.",
-        },
-        {
-          icone: "grafico",
-          titulo: "Mix Mais Rentável",
-          descricao:
-            "Fica visível quais produtos sustentam a empresa e quais só ocupam capacidade sem pagar por ela.",
         },
         {
           icone: "alvo",

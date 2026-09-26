@@ -68,7 +68,6 @@ function montarPost({ slug, entry }: EntradaDePost): Post {
     resumo: entry.resumo,
     data: entry.data,
     categoria: entry.categoria,
-    tempoDeLeitura: entry.tempoDeLeitura,
     imagem: montarImagem(entry.imagem.arquivo, entry.imagem.alt),
   };
 
@@ -84,7 +83,6 @@ function montarPost({ slug, entry }: EntradaDePost): Post {
         titulo: artigo.tituloSeo || entry.titulo,
         descricao: artigo.descricaoSeo || entry.resumo,
       },
-      autor: { nome: artigo.autor.nome, iniciais: artigo.autor.iniciais },
       corpo: montarCorpo(artigo.corpo),
       cta: {
         titulo: artigo.cta.titulo,

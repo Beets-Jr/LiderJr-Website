@@ -12,6 +12,10 @@
  * ============================================================================
  */
 
+/**
+ * Os campos visíveis do formulário, mais `paginaDeOrigem` — preenchido pelo
+ * site, não pela pessoa. Ver lib/origem-do-visitante.ts.
+ */
 export interface DadosDoFormularioDeContato {
   [campo: string]: string;
 }

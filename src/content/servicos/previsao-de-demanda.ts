@@ -35,7 +35,7 @@ export const previsaoDeDemanda: Servico = {
       titulo: "Decida compra e produção olhando para frente",
       paragrafos: [
         "Comprar e produzir olhando só para o mês passado é reagir, não planejar — e normalmente sobra estoque do item errado e falta o que vende.",
-        "Analisamos o histórico de vendas, identificamos tendência e sazonalidade e aplicamos modelos de previsão para estimar a demanda futura com margem de erro conhecida.",
+        "Estimamos o volume futuro de vendas ou consumo com base em dados históricos e em padrões de comportamento identificados na série, com margem de erro conhecida. A estimativa apoia decisões de planejamento de produção, gestão de estoques, compras e dimensionamento de capacidade.",
       ],
       imagem: imagens.analiseDeFluxoEmPapel,
     },
@@ -48,25 +48,37 @@ export const previsaoDeDemanda: Servico = {
           numero: "01",
           titulo: "Histórico",
           descricao:
-            "Levantamento e limpeza dos dados de vendas ou demanda passada.",
+            "Levantamento e organização do histórico de vendas ou consumo da empresa.",
         },
         {
           numero: "02",
-          titulo: "Padrões",
+          titulo: "Comportamento",
           descricao:
-            "Identificação de tendência, sazonalidade e variações atípicas na série.",
+            "Análise de como a demanda se comportou ao longo do tempo, período a período.",
         },
         {
           numero: "03",
-          titulo: "Modelagem",
+          titulo: "Padrões",
           descricao:
-            "Aplicação do modelo estatístico mais adequado ao comportamento identificado.",
+            "Identificação de tendência, sazonalidade e outros fatores relevantes na série.",
         },
         {
           numero: "04",
+          titulo: "Modelagem",
+          descricao:
+            "Aplicação do método de previsão mais adequado aos dados disponíveis.",
+        },
+        {
+          numero: "05",
           titulo: "Validação",
           descricao:
-            "Teste do modelo contra dados reais e ajuste até a margem de erro ficar aceitável.",
+            "Análise dos resultados obtidos e ajuste do modelo até a margem de erro ficar aceitável.",
+        },
+        {
+          numero: "06",
+          titulo: "Previsão Final",
+          descricao:
+            "Definição da previsão final e recomendações de como a empresa deve utilizá-la.",
         },
       ],
     },

@@ -34,8 +34,8 @@ export const planoDeNegocios: Servico = {
       eyebrow: "Como funciona",
       titulo: "Da ideia ao plano que sustenta uma decisão",
       paragrafos: [
-        "Toda ideia de negócio parece boa por dentro da cabeça de quem a teve. O plano de negócios é o que testa essa ideia no papel, antes de comprometer tempo e dinheiro de verdade.",
-        "Estruturamos o modelo de negócio, dimensionamos o mercado e a operação e projetamos o financeiro, para que a decisão de investir — ou não — seja tomada com informação, não só com entusiasmo.",
+        "Toda ideia de negócio parece boa por dentro da cabeça de quem a teve. O plano de negócios é o que testa essa ideia no papel, antes de comprometer tempo e dinheiro de verdade — seja antes de abrir, seja já em operação.",
+        "Estruturamos o modelo de negócio e analisamos mercado, público-alvo, concorrentes e fornecedores. Definimos a operação, as estratégias de marketing e as projeções financeiras, para que a decisão de investir — ou não — seja tomada com informação, não só com entusiasmo.",
       ],
       imagem: imagens.apresentacaoParaEquipe,
     },
@@ -48,25 +48,55 @@ export const planoDeNegocios: Servico = {
           numero: "01",
           titulo: "Modelo de Negócio",
           descricao:
-            "Definição da proposta de valor, do público e de como a empresa vai gerar receita.",
+            "Estruturação do modelo de negócio em Business Model Canvas: proposta de valor, público e receita.",
         },
         {
           numero: "02",
           titulo: "Mercado",
           descricao:
-            "Dimensionamento do mercado, da concorrência e do posicionamento pretendido.",
+            "Pesquisa e análise de mercado para dimensionar o cenário em que o negócio vai operar.",
         },
         {
           numero: "03",
-          titulo: "Operação",
+          titulo: "Público e Concorrência",
           descricao:
-            "Estrutura necessária para entregar o produto ou serviço no dia a dia.",
+            "Definição do público-alvo, com análise de concorrentes e fornecedores.",
         },
         {
           numero: "04",
-          titulo: "Financeiro",
+          titulo: "Plano Operacional",
+          descricao:
+            "Estruturação da operação necessária para entregar o produto ou serviço no dia a dia.",
+        },
+        {
+          numero: "05",
+          titulo: "Plano de Marketing",
+          descricao:
+            "Estruturação das estratégias de atração e relacionamento com os clientes.",
+        },
+        {
+          numero: "06",
+          titulo: "Plano Financeiro",
           descricao:
             "Projeção de investimento inicial, receita, custos e ponto de equilíbrio.",
+        },
+        {
+          numero: "07",
+          titulo: "Análise Estratégica",
+          descricao:
+            "Análise SWOT para mapear forças, fraquezas, oportunidades e ameaças do negócio.",
+        },
+        {
+          numero: "08",
+          titulo: "Metas e Indicadores",
+          descricao:
+            "Definição de metas e KPIs para acompanhar a empresa depois que o plano sai do papel.",
+        },
+        {
+          numero: "09",
+          titulo: "Consolidação",
+          descricao:
+            "Reunião das informações em um plano único e apresentação dos resultados do projeto.",
         },
       ],
     },
@@ -74,7 +104,7 @@ export const planoDeNegocios: Servico = {
     resultados: {
       titulo: "Por que fazer um plano de negócios?",
       descricao:
-        "A maior parte dos negócios que fecham cedo não tinha o básico calculado antes de abrir.",
+        "Serve para quem ainda não abriu e para quem já opera, mas precisa organizar melhor suas informações e decisões.",
       itens: [
         {
           icone: "alvo",
@@ -107,10 +137,10 @@ export const planoDeNegocios: Servico = {
       checklist: {
         titulo: "O que você recebe",
         itens: [
-          "Modelo de negócio estruturado",
-          "Análise de mercado e concorrência",
-          "Estrutura operacional definida",
-          "Projeção financeira e ponto de equilíbrio",
+          "Modelo de negócio em Business Model Canvas",
+          "Análise de mercado, público-alvo e concorrência",
+          "Plano operacional, de marketing e financeiro",
+          "Análise SWOT e metas de acompanhamento (KPIs)",
         ],
       },
     },

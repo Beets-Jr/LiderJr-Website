@@ -77,6 +77,14 @@ export function CasesCarousel({
    */
   const [posicao, setPosicao] = useState(total - 1);
   const [animando, setAnimando] = useState(true);
+  /**
+   * Trava as setas enquanto o trilho está em movimento. Sem isto, clicar mais
+   * rápido que os 700ms do deslize empilha vários passos antes do
+   * `ajustarSeSaiuDoMiolo` rodar — e como ele só desloca uma lista inteira por
+   * vez, a posição escapava da faixa seguro e o trilho parava num trecho sem
+   * cópia nenhuma por baixo (tela vazia). Destrava no fim de cada transição.
+   */
+  const [travado, setTravado] = useState(false);
 
   if (total === 0) return null;
 
@@ -99,6 +107,9 @@ export function CasesCarousel({
    */
   function ajustarSeSaiuDoMiolo(evento: React.TransitionEvent<HTMLUListElement>) {
     if (evento.target !== evento.currentTarget) return;
+
+    // O trilho parou de se mexer de verdade — pode aceitar o próximo clique.
+    setTravado(false);
 
     if (posicao >= total * 2 - 1) {
       setAnimando(false);
@@ -187,7 +198,11 @@ export function CasesCarousel({
       <div className="mt-8 flex items-center justify-center gap-3 md:mt-0 md:block">
         <BotaoDoCarrossel
           rotulo={textos.anterior}
-          onClick={() => setPosicao(posicao - 1)}
+          disabled={travado}
+          onClick={() => {
+            setTravado(true);
+            setPosicao(posicao - 1);
+          }}
           className="md:absolute md:top-1/2 md:left-0 md:-translate-y-1/2"
         >
           <ChevronLeft size={18} aria-hidden="true" />
@@ -195,7 +210,11 @@ export function CasesCarousel({
 
         <BotaoDoCarrossel
           rotulo={textos.proximo}
-          onClick={() => setPosicao(posicao + 1)}
+          disabled={travado}
+          onClick={() => {
+            setTravado(true);
+            setPosicao(posicao + 1);
+          }}
           className="md:absolute md:top-1/2 md:right-0 md:-translate-y-1/2"
         >
           <ChevronRight size={18} aria-hidden="true" />
@@ -208,11 +227,13 @@ export function CasesCarousel({
 function BotaoDoCarrossel({
   rotulo,
   onClick,
+  disabled,
   className,
   children,
 }: {
   rotulo: string;
   onClick: () => void;
+  disabled?: boolean;
   className?: string;
   children: React.ReactNode;
 }) {
@@ -220,9 +241,11 @@ function BotaoDoCarrossel({
     <button
       type="button"
       onClick={onClick}
+      disabled={disabled}
       aria-label={rotulo}
       className={cn(
         "border-border bg-surface text-fg hover:bg-brand hover:border-brand hover:text-brand-fg z-10 flex h-11 w-11 items-center justify-center rounded-full border shadow-sm transition-colors",
+        "disabled:pointer-events-none disabled:opacity-50",
         className,
       )}
     >

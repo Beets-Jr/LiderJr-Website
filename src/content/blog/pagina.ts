@@ -32,7 +32,6 @@ export const paginaDoBlog: ConteudoDoBlog = {
 
   rotuloDoLink: "Ler artigo",
   rotuloDoArtigo: "Artigo",
-  prefixoDoAutor: "Por",
 
   // Textos que aparecem nas páginas individuais de post.
   botoesDoCta: {

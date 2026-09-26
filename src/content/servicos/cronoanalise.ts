@@ -34,8 +34,8 @@ export const cronoanalise: Servico = {
       eyebrow: "Como funciona",
       titulo: "O tempo real da sua operação, cronometrado",
       paragrafos: [
-        "Prazos e dimensionamento de equipe muitas vezes partem de uma estimativa que ninguém cronometrou. A cronoanálise troca a estimativa pelo tempo medido em campo, tarefa por tarefa.",
-        "Cronometramos as etapas do processo, aplicamos as tolerâncias adequadas e calculamos o tempo padrão de cada atividade — base para metas, escalas e custos de mão de obra realistas.",
+        "A cronoanálise é indicada para quem precisa entender quanto tempo suas atividades realmente consomem — seja para identificar onde há desperdício de tempo, seja para estabelecer uma referência confiável de quanto tempo uma tarefa deveria levar.",
+        "Cronometramos as etapas do processo, aplicamos as tolerâncias adequadas e calculamos o tempo padrão de cada atividade — base para quem busca aumentar a produtividade da operação ou dimensionar melhor equipe e recursos.",
       ],
       imagem: imagens.workshopPostIts,
     },
@@ -46,27 +46,45 @@ export const cronoanalise: Servico = {
       etapas: [
         {
           numero: "01",
-          titulo: "Preparação",
+          titulo: "Estudo do Processo",
           descricao:
-            "Escolha das atividades a cronometrar e explicação do método para quem será observado.",
+            "Entendimento de como o processo é realizado hoje e definição do que será analisado.",
         },
         {
           numero: "02",
-          titulo: "Cronometragem",
+          titulo: "Definição",
           descricao:
-            "Coleta dos tempos em campo, com repetições suficientes para representar a operação real.",
+            "Estruturação dos microprocessos que compõem o processo, definindo o que entra na cronoanálise.",
         },
         {
           numero: "03",
-          titulo: "Tratamento",
+          titulo: "Plano Amostral",
           descricao:
-            "Aplicação de tolerâncias e cálculo do tempo padrão de cada tarefa.",
+            "Definição de quantas medições são necessárias para que os dados coletados sejam confiáveis.",
         },
         {
           numero: "04",
-          titulo: "Relatório",
+          titulo: "Cronometragem",
           descricao:
-            "Tempos padrão documentados, prontos para dimensionar equipe, prazo e capacidade.",
+            "Coleta dos tempos em campo, considerando as condições reais em que cada atividade acontece.",
+        },
+        {
+          numero: "05",
+          titulo: "Análise dos Dados",
+          descricao:
+            "Tratamento estatístico dos tempos coletados para entender o comportamento de cada microprocesso.",
+        },
+        {
+          numero: "06",
+          titulo: "Oportunidades",
+          descricao:
+            "Identificação dos principais pontos de melhoria e desenvolvimento de propostas específicas.",
+        },
+        {
+          numero: "07",
+          titulo: "Consolidação",
+          descricao:
+            "Organização dos resultados e apresentação das melhorias propostas para o processo.",
         },
       ],
     },

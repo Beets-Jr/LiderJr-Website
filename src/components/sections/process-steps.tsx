@@ -12,6 +12,13 @@ import type { Etapa } from "@/types/comum";
  * site); a da página de serviço usava círculos numerados com borda e linha
  * cinza. Aqui existe uma só, que mostra ícone quando o conteúdo informa um e
  * o número quando não informa.
+ *
+ * As etapas de serviço variam de 4 a 9 (ver documento "Descrição dos
+ * Serviços"), então a grade não pode assumir uma linha só de 4 colunas: os
+ * múltiplos de 3 (6, 9) usam 3 colunas por linha, o resto usa 4. A linha
+ * conectora da versão numerada é desenhada etapa a etapa (não uma tarja única
+ * atrás de tudo) para saber parar no fim de cada linha, sem atravessar a
+ * quebra para a etapa de baixo.
  */
 export function ProcessSteps({
   etapas,
@@ -22,24 +29,20 @@ export function ProcessSteps({
 }) {
   const escuro = tone === "onDark";
   const comIcones = etapas.some((etapa) => etapa.icone);
+  const colunas = etapas.length % 3 === 0 ? 3 : 4;
 
   return (
-    <div className="relative">
-      {/* Na versão numerada a linha é uma só, atrás dos marcadores. Na versão
-          com ícones cada etapa desenha o próprio traço (ver abaixo), porque os
-          ícones ficam à esquerda da coluna e não no centro dela. */}
-      {comIcones ? null : (
-        <div
-          aria-hidden="true"
-          className={cn(
-            "absolute top-7 right-[12.5%] left-[12.5%] hidden h-px lg:block",
-            escuro ? "bg-border-on-dark" : "bg-border",
-          )}
-        />
+    <ol
+      className={cn(
+        "grid grid-cols-1 gap-12 sm:grid-cols-2 lg:gap-x-6 lg:gap-y-16",
+        colunas === 3 ? "lg:grid-cols-3" : "lg:grid-cols-4",
       )}
+    >
+      {etapas.map((etapa, indice) => {
+        const finalDaLinha =
+          (indice + 1) % colunas === 0 || indice === etapas.length - 1;
 
-      <ol className="relative grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
-        {etapas.map((etapa, indice) => (
+        return (
           <li
             key={etapa.numero}
             className={cn(
@@ -57,6 +60,18 @@ export function ProcessSteps({
                   : "lg:after:bg-brand lg:after:-right-6"),
             )}
           >
+            {/* Versão numerada: um traço por etapa, do centro do marcador ao
+                centro do próximo — não desenha no fim de cada linha da grade. */}
+            {!comIcones && !finalDaLinha && (
+              <span
+                aria-hidden="true"
+                className={cn(
+                  "absolute top-7 left-1/2 hidden h-px w-[calc(100%+1.5rem)] lg:block",
+                  escuro ? "bg-border-on-dark" : "bg-border",
+                )}
+              />
+            )}
+
             {etapa.icone ? (
               <IconTile
                 icon={getIcone(etapa.icone)}
@@ -92,8 +107,8 @@ export function ProcessSteps({
               {etapa.descricao}
             </Text>
           </li>
-        ))}
-      </ol>
-    </div>
+        );
+      })}
+    </ol>
   );
 }

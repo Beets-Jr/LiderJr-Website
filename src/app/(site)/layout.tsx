@@ -1,5 +1,6 @@
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
+import { RastreadorDeOrigem } from "@/components/layout/rastreador-de-origem";
 import { SkipLink } from "@/components/layout/skip-link";
 import { WhatsAppFab } from "@/components/layout/whatsapp-fab";
 import {
@@ -37,6 +38,7 @@ export default function LayoutDoSite({
 
       <Footer site={site} colunasDeServicos={colunasDeServicos} />
       <WhatsAppFab whatsapp={site.whatsapp} />
+      <RastreadorDeOrigem />
     </>
   );
 }

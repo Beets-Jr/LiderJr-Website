@@ -2,16 +2,12 @@ titulo: 'Como o Lean Manufacturing pode transformar sua pequena empresa'
 resumo: 'Conheça os princípios do Lean e como aplicá-los na redução de desperdícios e aumento da produtividade em negócios de pequeno porte.'
 data: 2026-06-15
 categoria: 'Processos'
-tempoDeLeitura: '6 min'
 imagem:
   arquivo: /imagens/blog/lean-manufacturing.jpg
   alt: 'Engenheira trabalhando em um notebook ao lado de uma linha de montagem industrial'
 artigo:
   discriminant: true
   value:
-    autor:
-      nome: 'Consultor Líder Júnior'
-      iniciais: 'LJ'
     tituloSeo: 'Como o Lean Manufacturing pode transformar sua pequena empresa'
     descricaoSeo: 'Os cinco princípios do Lean explicados de forma prática, com o primeiro passo para aplicá-los em uma pequena empresa sem investimento alto.'
     corpo:

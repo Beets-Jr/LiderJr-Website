@@ -26,7 +26,7 @@ export const planejamentoEstrategico: Servico = {
     metadados: {
       titulo: "Planejamento Estratégico",
       descricao:
-        "Diagnóstico organizacional, definição de objetivos e plano de ação com SWOT, BSC e OKR para transformar intenção de crescimento em rotina de execução.",
+        "Diagnóstico interno e externo, definição de objetivos e construção de um plano de ação com indicadores, para alinhar as áreas da empresa em torno da mesma direção.",
     },
 
     imagemDeFundo: comoFundo(imagens.workshopPostIts),
@@ -35,8 +35,8 @@ export const planejamentoEstrategico: Servico = {
       eyebrow: "Como funciona",
       titulo: "Do desejo de crescer ao plano de execução",
       paragrafos: [
-        "Boa parte das empresas sabe aonde quer chegar, mas não tem o caminho escrito: as prioridades mudam a cada semana e o dia a dia consome o que era estratégico.",
-        "Conduzimos o diagnóstico da empresa e do mercado com SWOT, traduzimos a estratégia em objetivos mensuráveis com BSC ou OKR e fechamos com um plano de ação que tem responsável e prazo em cada linha.",
+        "O planejamento estratégico ajuda a empresa a definir para onde quer ir e como pretende chegar lá. Boa parte das empresas sabe a resposta da primeira pergunta, mas não tem a segunda escrita — e o dia a dia acaba consumindo o que era estratégico.",
+        "A partir do entendimento da situação atual do negócio e do cenário em que ele está inserido, definimos objetivos, prioridades e ações. O resultado é mais alinhamento entre as áreas da empresa e um acompanhamento mais claro dos resultados ao longo do tempo.",
       ],
       imagem: imagens.equipeReuniaoMesa,
     },
@@ -47,27 +47,45 @@ export const planejamentoEstrategico: Servico = {
       etapas: [
         {
           numero: "01",
-          titulo: "Diagnóstico",
+          titulo: "Diagnóstico Interno",
           descricao:
-            "Análise interna e do mercado com SWOT, ouvindo a liderança e olhando os números que a empresa já tem.",
+            "Análise interna e externa da empresa, ouvindo a liderança e olhando os números que ela já tem.",
         },
         {
           numero: "02",
-          titulo: "Direcionamento",
+          titulo: "Cenário",
           descricao:
-            "Definição de aonde a empresa quer chegar no horizonte escolhido, com metas que dá para medir.",
+            "Análise do cenário e do mercado em que a empresa atua, com SWOT.",
         },
         {
           numero: "03",
-          titulo: "Desdobramento",
+          titulo: "Direcionadores",
           descricao:
-            "Tradução dos objetivos em indicadores e iniciativas por área, usando BSC ou OKR conforme o porte.",
+            "Definição ou revisão dos direcionadores estratégicos — missão, visão e valores, quando cabível.",
         },
         {
           numero: "04",
-          titulo: "Plano de ação",
+          titulo: "Objetivos",
           descricao:
-            "O que será feito, por quem e até quando — mais a rotina de acompanhamento que mantém o plano vivo.",
+            "Definição dos objetivos estratégicos: aonde a empresa quer chegar no horizonte escolhido.",
+        },
+        {
+          numero: "05",
+          titulo: "Priorização",
+          descricao:
+            "Priorização das iniciativas, para que a equipe saiba o que realmente vem primeiro.",
+        },
+        {
+          numero: "06",
+          titulo: "Plano de Ação",
+          descricao:
+            "Construção do plano de ação: o que será feito, por quem e até quando.",
+        },
+        {
+          numero: "07",
+          titulo: "Indicadores",
+          descricao:
+            "Definição dos indicadores que mantêm o plano vivo e acompanhado ao longo do tempo.",
         },
       ],
     },

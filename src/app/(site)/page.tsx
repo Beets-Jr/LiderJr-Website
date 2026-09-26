@@ -13,7 +13,7 @@ import { getUltimosPosts } from "@/content/blog";
 import { getCasesEmDestaque } from "@/content/cases";
 import { ctaFinalEmColunas, home } from "@/content/home";
 import { paginaDeServicos } from "@/content/servicos/pagina";
-import { getTodosServicos } from "@/content/servicos";
+import { getServicoPorSlug } from "@/content/servicos";
 
 export const metadata: Metadata = {
   title: home.metadados.titulo,
@@ -25,7 +25,17 @@ export const metadata: Metadata = {
 };
 
 export default async function PaginaInicial() {
-  const servicos = getTodosServicos().slice(0, 3);
+  // Curadoria manual: um serviço de grupos diferentes, escolhidos pelo
+  // cliente para representar "Nossas áreas de atuação" — não é mais
+  // automático. Ver PENDENCIAS.md 2.3.
+  const slugsEmDestaque = [
+    "mapeamento-de-processos",
+    "plano-de-negocios",
+    "pesquisa-de-mercado",
+  ] as const;
+  const servicos = slugsEmDestaque
+    .map((slug) => getServicoPorSlug(slug))
+    .filter((s) => s !== undefined);
   // Duas regras opostas, de propósito: o carrossel mostra os cases ESCOLHIDOS
   // em /keystatic e não muda quando um case novo é publicado; o blog mostra
   // sempre os três posts mais recentes, sem ninguém precisar mexer na Home.

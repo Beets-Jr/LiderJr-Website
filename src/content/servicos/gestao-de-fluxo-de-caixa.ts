@@ -35,8 +35,8 @@ export const gestaoDeFluxoDeCaixa: Servico = {
       eyebrow: "Como funciona",
       titulo: "Saiba hoje o caixa de daqui a 30 dias",
       paragrafos: [
-        "Boa parte dos apertos financeiros não pega a empresa de surpresa de verdade — só ninguém tinha o fluxo de caixa organizado para enxergar com antecedência.",
-        "Estruturamos as entradas e saídas em um fluxo de caixa por data, com projeção para as próximas semanas, para que decisões como pagar, receber ou investir sejam tomadas antes do aperto, não durante ele.",
+        "É comum um negócio ter dificuldade em prever se vai ter recursos suficientes para honrar seus compromissos nos próximos meses — a boa notícia é que a maioria dos apertos financeiros não pega a empresa de surpresa de verdade, só ninguém tinha o fluxo organizado para enxergar com antecedência.",
+        "Estruturamos as entradas e saídas em um fluxo de caixa por data, com projeção para as próximas semanas, dando mais controle sobre a situação atual do caixa e antecipando períodos de aperto ou de folga financeira.",
       ],
       imagem: imagens.painelDeGestao,
     },
@@ -49,25 +49,37 @@ export const gestaoDeFluxoDeCaixa: Servico = {
           numero: "01",
           titulo: "Levantamento",
           descricao:
-            "Mapeamento de todas as entradas e saídas de caixa da empresa.",
+            "Levantamento de todas as movimentações financeiras — entradas e saídas — da empresa.",
         },
         {
           numero: "02",
-          titulo: "Estruturação",
+          titulo: "Organização",
           descricao:
-            "Organização do fluxo por data, separando o que é recorrente do que é pontual.",
+            "Organização das entradas e saídas, separando o que é recorrente do que é pontual.",
         },
         {
           numero: "03",
-          titulo: "Projeção",
+          titulo: "Estruturação",
           descricao:
-            "Estimativa do saldo de caixa para as próximas semanas, com cenários de atraso e antecipação.",
+            "Estruturação do fluxo de caixa por data, pronto para consulta e acompanhamento.",
         },
         {
           numero: "04",
-          titulo: "Rotina",
+          titulo: "Análise",
           descricao:
-            "Modelo simples para a equipe manter o fluxo atualizado no dia a dia.",
+            "Análise do comportamento do caixa ao longo do tempo, identificando os padrões da empresa.",
+        },
+        {
+          numero: "05",
+          titulo: "Projeção",
+          descricao:
+            "Projeção das movimentações futuras, com cenários de atraso e antecipação de recebimentos.",
+        },
+        {
+          numero: "06",
+          titulo: "Oportunidades",
+          descricao:
+            "Identificação de necessidades e oportunidades de melhoria na gestão do caixa.",
         },
       ],
     },

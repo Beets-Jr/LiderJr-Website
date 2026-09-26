@@ -35,8 +35,8 @@ export const pesquisaDeMercado: Servico = {
       eyebrow: "Como funciona",
       titulo: "Decida com dados, não com achismo",
       paragrafos: [
-        "Toda pesquisa começa pela pergunta certa: o que a empresa precisa decidir? Lançar um produto, entrar em uma nova região, ajustar o preço ou entender por que o cliente não volta.",
-        "A partir dessa pergunta definimos o método — questionários, entrevistas em profundidade ou análise de concorrência — coletamos os dados e entregamos a leitura deles, não a planilha crua.",
+        "A pesquisa de mercado ajuda a empresa a conhecer melhor o público em que está inserida — suas necessidades, preferências, comportamentos e percepções sobre produtos ou serviços. Esse conhecimento reduz incertezas na tomada de decisão e serve de base para estratégias de marketing e de negócio.",
+        "Um exemplo de aplicação já realizado pela Líder foi uma pesquisa de público-alvo para uma empresa do setor de massas de pizza: definimos a região de interesse, estruturamos o instrumento de pesquisa, coletamos as respostas e fizemos uma análise detalhada para entender características e hábitos do público consumidor.",
       ],
       imagem: imagens.equipeReuniaoMesa,
     },
@@ -47,27 +47,51 @@ export const pesquisaDeMercado: Servico = {
       etapas: [
         {
           numero: "01",
-          titulo: "Escopo",
+          titulo: "Objetivo",
           descricao:
-            "Definição da pergunta de pesquisa, do público a ser ouvido e da decisão que os dados precisam sustentar.",
+            "Definição do objetivo da pesquisa: a decisão que os dados precisam sustentar.",
         },
         {
           numero: "02",
-          titulo: "Instrumento",
+          titulo: "Público e Região",
           descricao:
-            "Construção do questionário ou do roteiro de entrevista, com teste piloto antes de ir a campo.",
+            "Definição do público a ser ouvido e da região de estudo.",
         },
         {
           numero: "03",
-          titulo: "Campo",
+          titulo: "Instrumento",
           descricao:
-            "Coleta junto ao público definido, acompanhando a amostra para que ela represente o mercado estudado.",
+            "Estruturação do questionário e da metodologia da pesquisa.",
         },
         {
           numero: "04",
+          titulo: "Coleta",
+          descricao:
+            "Coleta das respostas junto ao público e à região definidos.",
+        },
+        {
+          numero: "05",
+          titulo: "Tratamento",
+          descricao:
+            "Organização e tratamento dos dados coletados em campo.",
+        },
+        {
+          numero: "06",
           titulo: "Análise",
           descricao:
-            "Tratamento dos dados e relatório com as conclusões e as recomendações práticas para a decisão.",
+            "Análise dos resultados para entender o comportamento do público pesquisado.",
+        },
+        {
+          numero: "07",
+          titulo: "Insights",
+          descricao:
+            "Identificação de insights e oportunidades a partir do que a pesquisa revelou.",
+        },
+        {
+          numero: "08",
+          titulo: "Conclusões",
+          descricao:
+            "Apresentação das conclusões e recomendações práticas para a decisão da empresa.",
         },
       ],
     },

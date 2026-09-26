@@ -136,11 +136,14 @@ export function ServiceCardCompleto({
             do h1 da página. Vira h3 quando a listagem agrupa os cards sob um
             h2 de grupo (ver /servicos) — mesma lógica do card compacto da
             Home, que usa h3 por ficar sob o h2 de "Nossas áreas de atuação". */}
+        {/* min-h reserva o espaço de 2 linhas: título e chamada variam de 1 a
+            2 linhas conforme o serviço, e sem essa reserva cada card do grupo
+            começa o texto em uma altura diferente, desnivelando a fileira. */}
         <Heading
           as={nivelDeTitulo}
           level="card"
           tone="brand"
-          className="ml-auto max-w-[80%] text-right text-2xl whitespace-pre-line uppercase"
+          className="ml-auto min-h-[4.125rem] max-w-[80%] text-right text-2xl whitespace-pre-line uppercase"
         >
           {href ? (
             <Link href={href} className="rounded-sm after:absolute after:inset-0">
@@ -151,7 +154,7 @@ export function ServiceCardCompleto({
           )}
         </Heading>
 
-        <Text size="sm" tone="brand" weight="bold" className="mt-3">
+        <Text size="sm" tone="brand" weight="bold" className="mt-3 min-h-[2.875rem]">
           {servico.chamada}
         </Text>
 

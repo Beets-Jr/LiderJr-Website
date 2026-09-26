@@ -1,4 +1,4 @@
-import { Calendar, Clock } from "lucide-react";
+import { Calendar } from "lucide-react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { BackLink } from "@/components/sections/back-link";
@@ -6,7 +6,7 @@ import { CTAPanel } from "@/components/sections/cta";
 import { PageHero } from "@/components/sections/page-hero";
 import { PostBody } from "@/components/sections/post-body";
 import { RelatedCards } from "@/components/sections/related-cards";
-import { Avatar, Text } from "@/components/ui";
+import { Text } from "@/components/ui";
 import { getPostPorSlug, getPostsComPagina, getTodosPosts } from "@/content/blog";
 import { paginaDoBlog } from "@/content/blog/pagina";
 import { formatarData } from "@/lib/datas";
@@ -40,7 +40,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: metadados.titulo,
       description: metadados.descricao,
       publishedTime: post.data,
-      authors: [post.detalhe.autor.nome],
       images: [{ url: post.imagem.src, alt: post.imagem.alt }],
     },
   };
@@ -75,19 +74,8 @@ export default async function PaginaDePost({ params }: Props) {
           imagemDeFundo: { ...post.imagem, alt: "" },
         }}
       >
-        {/* Assinatura, data e tempo de leitura — todos vindos do conteúdo.
-            No protótipo a data e o tempo eram digitados de novo aqui e
-            discordavam do card na listagem. */}
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-          <Avatar iniciais={detalhe.autor.iniciais} tone="brandSolid" size="sm" />
-          <Text as="span" size="sm" tone="onDark">
-            {`${paginaDoBlog.prefixoDoAutor} ${detalhe.autor.nome}`}
-          </Text>
-
-          <span aria-hidden="true" className="text-on-dark-faint">
-            •
-          </span>
-
+        {/* Data de publicação — vinda do conteúdo, a mesma do card na listagem. */}
+        <div className="mt-8 flex justify-center">
           <Text
             as="span"
             size="sm"
@@ -96,20 +84,6 @@ export default async function PaginaDePost({ params }: Props) {
           >
             <Calendar size={14} aria-hidden="true" />
             <time dateTime={post.data}>{formatarData(post.data)}</time>
-          </Text>
-
-          <span aria-hidden="true" className="text-on-dark-faint">
-            •
-          </span>
-
-          <Text
-            as="span"
-            size="sm"
-            tone="onDarkMuted"
-            className="flex items-center gap-1.5"
-          >
-            <Clock size={14} aria-hidden="true" />
-            {post.tempoDeLeitura}
           </Text>
         </div>
       </PageHero>

@@ -45,10 +45,10 @@ lucide) dentro de um quadrado laranja, e é isso que está no ar. O favicon
 **Falta:** o símbolo oficial em SVG.
 📄 `src/components/layout/logo.tsx` · `src/app/icon.svg`
 
-### 1.4 Redes sociais
+### 1.4 Redes sociais — resolvido
 
-Os três links (LinkedIn, Instagram, Facebook) apontam para `#`, exatamente como
-no protótipo. **Faltam as URLs dos perfis.**
+Os três links (LinkedIn, Instagram, Facebook) já apontam para os perfis reais
+da Líder Jr.
 📄 `src/content/site.ts`
 
 ### 1.5 Arquivos dos materiais
@@ -111,11 +111,11 @@ obrigatório mesmo com logo — é ele que vira o `alt` de fallback e o que sobr
 se a imagem falhar.
 📄 `src/content/home.ts` · `src/content/imagens.ts`
 
-### 1.8 Domínio de produção
+### 1.8 Domínio de produção — confirmado
 
-`site.url` está com um valor provisório (`https://www.liderjr.com.br`). Ele
-alimenta o `sitemap.xml`, o `robots.txt` e as URLs de compartilhamento —
-**precisa ser o domínio real antes de publicar.**
+O domínio real é `liderjr.com`. `site.url` já está em `https://www.liderjr.com`,
+valor que alimenta o `sitemap.xml`, o `robots.txt` e as URLs de
+compartilhamento.
 📄 `src/content/site.ts`
 
 ---
@@ -176,14 +176,19 @@ O grupo é um campo de conteúdo (`grupoId`), igual a `categoria` em posts e
 cases — o menu, a página /servicos e o rodapé derivam do registry, sem lista
 escrita à mão em outro lugar. No menu, passar o mouse em "Serviços" mostra os
 4 grupos; passar o mouse num grupo abre os serviços dele ao lado. No rodapé, a
-coluna "Serviços" continua uma lista simples dos 11 links, sem separação por
-grupo — decisão do cliente. Na Home, os "3 primeiros serviços" em destaque
-continuam sendo os 3 primeiros do registry (hoje, os do grupo Otimização de
-Processos) — também sem curadoria especial, por decisão do cliente.
+coluna "Serviços" virou duas colunas lado a lado (6 links cada, incluindo
+"Ver todos" na segunda) para não ficar muito mais alta que as outras colunas —
+sem subtítulo de grupo, é só uma divisão visual da mesma lista.
+
+Na Home, a seção "Nossas áreas de atuação" **é curada, não automática**: o
+cliente escolheu Mapeamento de Processos, Plano de Negócios e Pesquisa de
+Mercado — um de três grupos diferentes, nessa ordem. Para trocar, edite
+`slugsEmDestaque` em `src/app/(site)/page.tsx`.
 
 📄 `src/content/servicos/grupos.ts` · `src/content/servicos/index.ts` ·
 `src/types/servico.ts` · `src/components/layout/header.tsx` ·
-`src/app/(site)/servicos/page.tsx`
+`src/app/(site)/servicos/page.tsx` · `src/components/layout/footer.tsx` ·
+`src/app/(site)/page.tsx`
 
 ---
 
@@ -277,6 +282,11 @@ console.info("[formulário de contato] dados que seriam enviados:", dados);
 
 A assinatura da função e o tipo do resultado já estão prontos para uma chamada
 real. O componente `ContactForm` não precisa mudar.
+
+Além dos campos visíveis, o envio leva `paginaDeOrigem`: a página do site em que
+a pessoa estava antes do formulário (ex.: `/servicos/dre`), ou, se ela entrou
+direto no Fale Conosco, `externo: <site>` / `acesso direto`. Ver
+`src/lib/origem-do-visitante.ts`. A integração deve repassar esse campo.
 
 Ao integrar, **remova também o aviso** exibido abaixo do botão — está em
 `src/content/fale-conosco.ts`, campo `formulario.aviso`.
