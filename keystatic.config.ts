@@ -192,7 +192,7 @@ export default config({
       slugField: "titulo",
       path: "content/blog/*",
       format: { data: "yaml" },
-      columns: ["titulo", "data", "categoria"],
+      columns: ["titulo", "data"],
       schema: {
         titulo: fields.slug({
           name: { label: "Título", validation: { isRequired: true } },
@@ -275,14 +275,14 @@ export default config({
       slugField: "empresa",
       path: "content/cases/*",
       format: { data: "yaml" },
-      columns: ["empresa", "resultado", "categoria"],
+      columns: ["empresa", "data"],
       schema: {
         empresa: fields.slug({
           name: {
-            label: "Cliente",
+            label: "Título",
             validation: { isRequired: true },
             description:
-              "Como o cliente aparece no site. Use o setor quando o nome não puder ser divulgado.",
+              "Aparece no card e no topo da página do case. Use o nome do cliente, ou o setor quando o nome não puder ser divulgado.",
           },
           slug: {
             label: "Endereço (slug)",
@@ -298,6 +298,13 @@ export default config({
           label: "O que o número mede",
           validation: { isRequired: true },
           description: 'Ex.: "Tempo de produção".',
+        }),
+        data: fields.date({
+          label: "Data de publicação",
+          validation: { isRequired: true },
+          defaultValue: { kind: "today" },
+          description:
+            "Organiza a lista de cases aqui no CMS. Já vem preenchida com a data de hoje.",
         }),
         descricao: fields.text({
           label: "Descrição",
@@ -435,7 +442,7 @@ export default config({
       slugField: "titulo",
       path: "content/materiais/*",
       format: { data: "yaml" },
-      columns: ["titulo", "tipo", "categoria"],
+      columns: ["titulo", "data"],
       schema: {
         titulo: fields.slug({
           name: {
@@ -453,6 +460,13 @@ export default config({
           multiline: true,
           validation: { isRequired: true, length: { min: 40, max: 220 } },
           description: "Duas linhas explicando o que a pessoa vai baixar.",
+        }),
+        data: fields.date({
+          label: "Data de publicação",
+          validation: { isRequired: true },
+          defaultValue: { kind: "today" },
+          description:
+            "Organiza a lista de materiais aqui no CMS. Já vem preenchida com a data de hoje.",
         }),
         tipo: fields.select({
           label: "Tipo",
