@@ -68,9 +68,9 @@ src/
 
 public/imagens/             Os arquivos de imagem
 
-content/                    ★ AS PUBLICAÇÕES, escritas pelo CMS (YAML)
-├── blog/                   um arquivo por post
-├── cases/                  um arquivo por case
+content/                    ★ AS PUBLICAÇÕES, escritas pelo CMS
+├── blog/                   um arquivo .mdoc por post (Markdown + campos)
+├── cases/                  um arquivo .mdoc por case (Markdown + campos)
 └── materiais/              um arquivo por material
 keystatic.config.ts         O schema do CMS — que campos cada publicação tem
 ```
@@ -86,7 +86,8 @@ nunca importa conteúdo: recebe tudo por props, vindo da página.
 
 O conteúdo mora em dois lugares, por natureza diferente:
 
-- **Publicações** (blog, cases, materiais) — arquivos YAML em `content/`,
+- **Publicações** (blog, cases, materiais) — arquivos em `content/` (`.mdoc`
+  com o texto em blog e cases; YAML nos materiais),
   escritos pela interface do CMS em `/keystatic`. Quem publica não abre código.
 - **Cópia de página** (textos da Home, dos serviços, do contato) — arquivos
   TypeScript em `src/content/`. Muda raramente e junto com o layout.
@@ -154,12 +155,10 @@ animações são CSS.
 
 ## O que ainda não existe
 
-O site é **estático**. Não há backend, banco de dados nem CMS.
-
-O formulário de contato valida no navegador mas **não envia para lugar nenhum**.
-O ponto de integração está isolado em
-[`src/lib/formulario-de-contato.ts`](src/lib/formulario-de-contato.ts) — é o
-único arquivo a mudar quando houver servidor.
+As páginas são **estáticas**. Não há banco de dados. O único trecho que roda no
+servidor é [`/api/contato`](src/app/api/contato/route.ts), que leva o
+formulário de contato para o ActiveCampaign — precisa das variáveis
+`ACTIVECAMPAIGN_*` (ver PENDENCIAS.md, seção 4.1).
 
 A lista completa de pendências está em **[PENDENCIAS.md](PENDENCIAS.md)**.
 

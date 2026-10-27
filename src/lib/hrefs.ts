@@ -6,8 +6,8 @@ import type { Servico } from "@/types/servico";
  * ============================================================================
  * ENDEREÇOS DE PÁGINA
  * ============================================================================
- * Regra única do site: um conteúdo só vira link quando tem `detalhe`. Sem ele,
- * o card aparece na listagem mas não leva a lugar nenhum.
+ * Cases e posts sempre têm página. Serviços só viram link quando têm
+ * `detalhe`; sem ele, o card aparece na listagem mas não leva a lugar nenhum.
  *
  * Estas funções moram aqui, e não nos registries, porque são puras — recebem o
  * objeto já carregado e não tocam na fonte de dados. Assim um componente de
@@ -16,12 +16,12 @@ import type { Servico } from "@/types/servico";
  * ============================================================================
  */
 
-export function getHrefDoCase(item: Case): string | undefined {
-  return item.detalhe ? `/cases/${item.slug}` : undefined;
+export function getHrefDoCase(item: Case): string {
+  return `/cases/${item.slug}`;
 }
 
-export function getHrefDoPost(post: Post): string | undefined {
-  return post.detalhe ? `/blog/${post.slug}` : undefined;
+export function getHrefDoPost(post: Post): string {
+  return `/blog/${post.slug}`;
 }
 
 export function getHrefDoServico(servico: Servico): string | undefined {

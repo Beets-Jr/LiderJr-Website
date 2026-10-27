@@ -5,124 +5,93 @@ import type { Servico } from "@/types/servico";
  * ============================================================================
  * SERVIÇO: PLANEJAMENTO ESTRATÉGICO
  * ============================================================================
- * ⚠️ CONTEÚDO PROVISÓRIO — escrito para dar corpo à página e mostrar o layout
- * funcionando. Precisa de revisão da Líder Jr. antes de publicar.
- * Ver PENDENCIAS.md. O `depoimento` também é FORJADO: pessoa e fala inventadas,
- * a pedido, só para a seção existir enquanto não há uma citação real.
+ * Topo, "Como funciona", metodologia e benefícios: texto da Líder Jr.
+ * ⚠️ Ainda provisório: o `cta`. Ver PENDENCIAS.md.
  * ============================================================================
  */
 export const planejamentoEstrategico: Servico = {
   slug: "planejamento-estrategico",
   grupoId: "empreendedorismo",
   titulo: "Planejamento Estratégico",
-  chamada: "Trace o caminho para um crescimento sólido!",
+  chamada: "Defina onde sua empresa quer chegar e como chegar lá!",
   descricao:
-    "Desenvolvemos planos de negócios e diagnósticos organizacionais com foco em crescimento sustentável e competitividade.",
-  tags: ["OKR", "BSC", "Swot"],
+    "Analisamos o cenário atual da empresa e estruturamos objetivos, prioridades, iniciativas e indicadores para transformar a estratégia em um plano de ação claro.",
+  tags: ["Estratégia", "Objetivos", "Indicadores"],
   icone: "livro",
-  imagem: imagens.workshopPostIts,
+  imagem: imagens.graficosSobreAMesa,
 
   detalhe: {
     metadados: {
       titulo: "Planejamento Estratégico",
       descricao:
-        "Diagnóstico interno e externo, definição de objetivos e construção de um plano de ação com indicadores, para alinhar as áreas da empresa em torno da mesma direção.",
+        "Analisamos o cenário da empresa e estruturamos objetivos, prioridades, ações e indicadores para transformar a estratégia em um direcionamento claro.",
     },
 
-    imagemDeFundo: comoFundo(imagens.workshopPostIts),
+    descricaoDoTopo:
+      "Analisamos o cenário da empresa e estruturamos objetivos, prioridades, ações e indicadores para transformar a estratégia em um direcionamento claro.",
+
+    imagemDeFundo: comoFundo(imagens.graficosSobreAMesa),
 
     sobre: {
       eyebrow: "Como funciona",
-      titulo: "Do desejo de crescer ao plano de execução",
+      titulo: "Transforme objetivos em um direcionamento claro",
       paragrafos: [
-        "O planejamento estratégico ajuda a empresa a definir para onde quer ir e como pretende chegar lá. Boa parte das empresas sabe a resposta da primeira pergunta, mas não tem a segunda escrita — e o dia a dia acaba consumindo o que era estratégico.",
-        "A partir do entendimento da situação atual do negócio e do cenário em que ele está inserido, definimos objetivos, prioridades e ações. O resultado é mais alinhamento entre as áreas da empresa e um acompanhamento mais claro dos resultados ao longo do tempo.",
+        "Analisamos a situação atual da empresa e o ambiente em que ela está inserida para definir onde o negócio quer chegar e quais caminhos devem ser priorizados.",
+        "A partir disso, estruturamos objetivos, iniciativas, planos de ação e indicadores para acompanhar a execução da estratégia.",
       ],
-      imagem: imagens.equipeReuniaoMesa,
+      imagem: imagens.graficosSobreAMesa,
     },
 
     metodologia: {
       eyebrow: "Metodologia",
-      titulo: "As etapas do planejamento",
+      titulo: "As etapas do nosso planejamento estratégico",
       etapas: [
         {
           numero: "01",
-          titulo: "Diagnóstico Interno",
-          descricao:
-            "Análise interna e externa da empresa, ouvindo a liderança e olhando os números que ela já tem.",
+          titulo: "Diagnóstico",
+          descricao: "Analisamos o cenário interno e externo da organização.",
         },
         {
           numero: "02",
-          titulo: "Cenário",
-          descricao: "Análise do cenário e do mercado em que a empresa atua, com SWOT.",
+          titulo: "Direcionamento",
+          descricao: "Definimos ou revisamos os principais objetivos estratégicos.",
         },
         {
           numero: "03",
-          titulo: "Direcionadores",
-          descricao:
-            "Definição ou revisão dos direcionadores estratégicos — missão, visão e valores, quando cabível.",
+          titulo: "Priorização",
+          descricao: "Estruturamos iniciativas e priorizamos as ações mais relevantes.",
         },
         {
           numero: "04",
-          titulo: "Objetivos",
+          titulo: "Acompanhamento",
           descricao:
-            "Definição dos objetivos estratégicos: aonde a empresa quer chegar no horizonte escolhido.",
-        },
-        {
-          numero: "05",
-          titulo: "Priorização",
-          descricao:
-            "Priorização das iniciativas, para que a equipe saiba o que realmente vem primeiro.",
-        },
-        {
-          numero: "06",
-          titulo: "Plano de Ação",
-          descricao:
-            "Construção do plano de ação: o que será feito, por quem e até quando.",
-        },
-        {
-          numero: "07",
-          titulo: "Indicadores",
-          descricao:
-            "Definição dos indicadores que mantêm o plano vivo e acompanhado ao longo do tempo.",
+            "Construímos planos de ação e indicadores para acompanhar os resultados.",
         },
       ],
     },
 
     resultados: {
-      titulo: "Por que planejar formalmente?",
-      descricao:
-        "Estratégia que não vira rotina é intenção. O planejamento existe para que a decisão de hoje conserve a direção de longo prazo.",
+      titulo: "Por que fazer um planejamento estratégico?",
       itens: [
         {
-          icone: "bussola",
-          titulo: "Direção Compartilhada",
-          descricao:
-            "Toda a equipe passa a saber quais são as prioridades do ano — e o que fica de fora delas.",
-        },
-        {
-          icone: "grafico",
-          titulo: "Crescimento Sustentável",
-          descricao:
-            "Metas ligadas à capacidade real da operação evitam o crescimento que quebra a entrega ou o caixa.",
-        },
-        {
           icone: "alvo",
-          titulo: "Foco na Execução",
+          titulo: "Defina o que realmente importa",
           descricao:
-            "Cada objetivo vira iniciativa com responsável e prazo, com rotina de acompanhamento definida.",
+            "Evite dispersar esforços e estabeleça prioridades para o crescimento da empresa.",
+        },
+        {
+          icone: "rota",
+          titulo: "Tire os objetivos do papel",
+          descricao:
+            "Transforme direcionamentos estratégicos em iniciativas e ações executáveis.",
+        },
+        {
+          icone: "velocimetro",
+          titulo: "Meça o avanço da estratégia",
+          descricao:
+            "Acompanhe resultados com indicadores e ajuste o caminho quando necessário.",
         },
       ],
-    },
-
-    // ⚠️ DEPOIMENTO FORJADO — pessoa e fala inventadas, a pedido, só para a
-    // seção aparecer enquanto não há depoimento real. TROCAR ANTES DE PUBLICAR.
-    depoimento: {
-      texto:
-        "Tínhamos metas na cabeça e nenhuma no papel. Sair da reunião com objetivo, responsável e prazo escritos mudou o jeito que a diretoria conduz o mês — e as prioridades pararam de virar do avesso toda semana.",
-      autor: "Simone Vasques",
-      cargo: "Diretora Administrativa, Empresa de Serviços",
-      iniciais: "SV",
     },
 
     cta: {

@@ -55,12 +55,14 @@ export function Cultura({ conteudo }: { conteudo: ConteudoQuemSomos["cultura"] }
           alinhamento="centro"
         />
 
-        <ul className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
+        {/* Três colunas lado a lado; a linha da grade estica e o `flex` no
+            <li> faz os três cards terem a mesma altura do mais longo. */}
+        <ul className="mt-14 grid grid-cols-1 gap-6 lg:grid-cols-3">
           {conteudo.pilares.map((pilar) => {
             const Icone = getIcone(pilar.icone);
             return (
               <li key={pilar.codigo} className="flex">
-                <Card className="group hover:border-brand relative w-full transition-colors">
+                <Card className="group hover:border-brand relative flex w-full flex-col transition-colors">
                   <MarcasDeCanto />
 
                   <div className="mb-6 flex items-start justify-between">
@@ -75,13 +77,36 @@ export function Cultura({ conteudo }: { conteudo: ConteudoQuemSomos["cultura"] }
                     </span>
                   </div>
 
-                  <Heading as="h3" level="card">
+                  <Heading as="h3" level="card" className="text-center">
                     {pilar.titulo}
                   </Heading>
 
-                  <Text size="sm" tone="muted" className="mt-3">
-                    {pilar.descricao}
-                  </Text>
+                  {/* Título fixo no topo; o texto fica centralizado no espaço
+                      que sobra, porque os cards têm a altura do de Valores e o
+                      texto curto de Missão e Visão deixaria um vão embaixo. */}
+                  <div className="mt-3 flex flex-1 flex-col items-center justify-center text-center">
+                    {pilar.descricao ? (
+                      <Text size="sm" tone="muted">
+                        {pilar.descricao}
+                      </Text>
+                    ) : null}
+
+                    {pilar.itens ? (
+                      <ul className="flex flex-col items-center gap-1.5">
+                        {pilar.itens.map((item) => (
+                          <li key={item} className="flex items-center gap-2">
+                            <span
+                              aria-hidden="true"
+                              className="bg-brand h-1.5 w-1.5 shrink-0 rounded-full"
+                            />
+                            <Text as="span" size="sm" tone="muted">
+                              {item}
+                            </Text>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : null}
+                  </div>
                 </Card>
               </li>
             );
@@ -112,7 +137,7 @@ function MarcasDeCanto() {
 
 export function Filiacoes({ conteudo }: { conteudo: ConteudoQuemSomos["filiacoes"] }) {
   return (
-    <Section>
+    <Section tone="muted">
       <Container width="narrow">
         <SectionHeader
           conteudo={{ eyebrow: conteudo.eyebrow, titulo: conteudo.titulo }}
@@ -141,9 +166,11 @@ export function Filiacoes({ conteudo }: { conteudo: ConteudoQuemSomos["filiacoes
                   <Heading as="h3" level="card">
                     {filiacao.nome}
                   </Heading>
-                  <Text size="sm" tone="muted" className="mt-2">
-                    {filiacao.descricao}
-                  </Text>
+                  {filiacao.paragrafos.map((paragrafo, i) => (
+                    <Text key={i} size="sm" tone="muted" className="mt-2">
+                      {paragrafo}
+                    </Text>
+                  ))}
                 </div>
               </div>
             </li>

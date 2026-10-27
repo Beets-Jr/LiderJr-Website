@@ -5,120 +5,95 @@ import type { Servico } from "@/types/servico";
  * ============================================================================
  * SERVIÇO: GESTÃO DE ESTOQUES
  * ============================================================================
- * ⚠️ CONTEÚDO PROVISÓRIO — escrito para dar corpo à página e mostrar o layout
- * funcionando. Precisa de revisão da Líder Jr. antes de publicar.
- * Ver PENDENCIAS.md. O `depoimento` também é FORJADO: pessoa e fala inventadas,
- * a pedido, só para a seção existir enquanto não há uma citação real.
+ * Topo, "Como funciona", metodologia e benefícios: texto da Líder Jr.
+ * ⚠️ Ainda provisório: o `cta`. Ver PENDENCIAS.md.
  * ============================================================================
  */
 export const gestaoDeEstoques: Servico = {
   slug: "gestao-de-estoques",
   grupoId: "otimizacao-de-processos",
   titulo: "Gestão de Estoques",
-  chamada: "Estoque enxuto, operação mais ágil!",
+  chamada: "Mais controle para comprar melhor e reduzir excessos e faltas!",
   descricao:
-    "Otimizamos a gestão de estoques com modelos de lote econômico, curva ABC e sistemas de reabastecimento inteligente.",
-  tags: ["ABC", "EOQ", "Kanban"],
+    "Analisamos o comportamento do estoque e estruturamos métodos de controle para reduzir excessos, faltas e perdas, apoiando decisões mais seguras de compra e reposição.",
+  tags: ["Estoque", "Controle", "Reposição"],
   icone: "estrela",
   // No protótipo esta imagem eram figurinhas do Mario. Ver PENDENCIAS.md.
-  imagem: imagens.dashboardIndicadores,
+  imagem: imagens.corredorDeEstoque,
 
   detalhe: {
     metadados: {
       titulo: "Gestão de Estoques",
       descricao:
-        "Curva ABC, lote econômico e política de reposição para liberar capital parado sem correr o risco de faltar item na hora da venda.",
+        "Analisamos seu estoque e estruturamos métodos de controle para reduzir excessos, faltas e perdas e apoiar decisões mais seguras de compra e reposição.",
     },
 
-    imagemDeFundo: comoFundo(imagens.engenheiraLinhaMontagem),
+    descricaoDoTopo:
+      "Analisamos seu estoque e estruturamos métodos de controle para reduzir excessos, faltas e perdas e apoiar decisões mais seguras de compra e reposição.",
+
+    imagemDeFundo: comoFundo(imagens.corredorDeEstoque),
 
     sobre: {
       eyebrow: "Como funciona",
-      titulo: "O equilíbrio entre faltar e sobrar",
+      titulo: "Tenha mais controle sobre seu estoque",
       paragrafos: [
-        "Excesso de produtos parados, faltas recorrentes, perdas ou a falta de um critério claro para decidir quando e quanto comprar — os sintomas variam, mas a raiz costuma ser a mesma: ninguém está olhando os dados de perto o suficiente.",
-        "Analisamos os dados e o comportamento de cada item em estoque para organizar esse controle. Classificamos os itens por relevância com a curva ABC, calculamos o lote econômico de compra e definimos ponto de pedido e estoque de segurança por faixa, dando mais segurança às decisões de compra e reposição.",
+        "Analisamos como os produtos se comportam no estoque, considerando consumo, giro e criticidade para identificar os principais problemas da operação.",
+        "A partir disso, estruturamos métodos e parâmetros de controle que ajudam sua empresa a tomar decisões mais seguras de compra e reposição.",
       ],
-      imagem: imagens.analiseDeFluxoEmPapel,
+      imagem: imagens.corredorDeEstoque,
     },
 
     metodologia: {
       eyebrow: "Metodologia",
-      titulo: "As etapas da gestão",
+      titulo: "As etapas da nossa gestão de estoques",
       etapas: [
         {
           numero: "01",
           titulo: "Diagnóstico",
           descricao:
-            "Levantamento da situação atual da gestão de estoques: o que falta, o que sobra e por quê.",
+            "Entendemos como o estoque é controlado atualmente e quais dificuldades a empresa enfrenta.",
         },
         {
           numero: "02",
-          titulo: "Organização dos Dados",
+          titulo: "Análise dos dados",
           descricao:
-            "Levantamento e organização dos dados existentes sobre movimentação e níveis de estoque.",
+            "Organizamos os dados disponíveis e avaliamos consumo, giro e criticidade dos produtos.",
         },
         {
           numero: "03",
-          titulo: "Análise",
+          titulo: "Definição dos parâmetros",
           descricao:
-            "Estudo do comportamento dos produtos — consumo, giro e criticidade — item por item.",
+            "Estruturamos critérios e métodos de controle adequados à realidade da empresa.",
         },
         {
           numero: "04",
-          titulo: "Oportunidades",
+          titulo: "Acompanhamento",
           descricao:
-            "Identificação dos problemas atuais e das oportunidades concretas de melhoria.",
-        },
-        {
-          numero: "05",
-          titulo: "Parâmetros",
-          descricao:
-            "Definição dos métodos e parâmetros de controle — curva ABC, lote econômico, ponto de pedido.",
-        },
-        {
-          numero: "06",
-          titulo: "Ferramentas",
-          descricao:
-            "Estruturação das ferramentas de acompanhamento que a equipe vai usar no dia a dia.",
+            "Desenvolvemos ferramentas para facilitar o monitoramento e apoiar as decisões de estoque.",
         },
       ],
     },
 
     resultados: {
-      titulo: "Por que revisar seu estoque?",
-      descricao:
-        "O estoque costuma ser a maior conta esquecida da empresa: aparece no balanço como ativo e some do caixa como dinheiro.",
+      titulo: "Por que melhorar a gestão de estoques?",
       itens: [
         {
-          icone: "quedaGrafico",
-          titulo: "Capital Liberado",
+          icone: "caixa",
+          titulo: "Redução de excessos",
           descricao:
-            "Itens de giro baixo deixam de consumir caixa e espaço que a operação precisa para o que realmente vende.",
+            "Evite recursos parados em produtos que permanecem por muito tempo no estoque.",
         },
         {
           icone: "escudo",
-          titulo: "Menos Ruptura",
-          descricao:
-            "Ponto de pedido e estoque de segurança definidos reduzem a falta justamente do item que sustenta a venda.",
+          titulo: "Menos faltas",
+          descricao: "Tenha critérios mais claros para planejar compras e reposições.",
         },
         {
-          icone: "relogio",
-          titulo: "Compra Previsível",
-          descricao:
-            "A reposição passa a seguir uma regra, e não a urgência de quem percebeu a falta primeiro.",
+          icone: "barras",
+          titulo: "Decisões mais seguras",
+          descricao: "Use dados do estoque para definir quando e quanto comprar.",
         },
       ],
-    },
-
-    // ⚠️ DEPOIMENTO FORJADO — pessoa e fala inventadas, a pedido, só para a
-    // seção aparecer enquanto não há depoimento real. TROCAR ANTES DE PUBLICAR.
-    depoimento: {
-      texto:
-        "Comprávamos por pressentimento e vivíamos entre o excesso e a falta. Com a curva ABC e o ponto de pedido definidos, sobrou espaço no almoxarifado e, principalmente, sobrou caixa.",
-      autor: "Marcelo Tanaka",
-      cargo: "Gerente de Suprimentos, Distribuidora",
-      iniciais: "MT",
     },
 
     cta: {

@@ -16,7 +16,7 @@ export async function generateImageMetadata({ params }: { params: { slug: string
   return [
     {
       id: "capa",
-      alt: item?.detalhe?.metadados.titulo ?? paginaDeCases.metadados.titulo,
+      alt: item?.detalhe.metadados.titulo ?? paginaDeCases.metadados.titulo,
       size: TAMANHO,
       contentType: "image/png",
     },
@@ -30,7 +30,7 @@ export default async function Imagem({
 }) {
   const { slug } = await params;
   const item = await getCasePorSlug(slug);
-  if (!item?.detalhe) notFound();
+  if (!item) notFound();
 
   return desenharImagemDeCompartilhamento({
     rotulo: `${paginaDeCases.metadados.titulo} · ${item.categoria}`,

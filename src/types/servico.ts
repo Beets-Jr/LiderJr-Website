@@ -55,7 +55,13 @@ export interface ResumoDeServico {
   titulo: string;
   /** Frase de efeito curta, exibida em laranja abaixo do título. */
   chamada: string;
+  /** Texto dos cards de /servicos (e do topo da página, sem `descricaoDoTopo`). */
   descricao: string;
+  /**
+   * Texto do card na Home ("Nossas áreas de atuação"). Opcional: sem ele, o
+   * card da Home usa a `descricao`.
+   */
+  descricaoNaHome?: string;
   /** Metodologias e siglas. Ex.: ["Lean", "BPMN", "VSM"]. */
   tags: string[];
   icone: NomeDeIcone;
@@ -65,7 +71,17 @@ export interface ResumoDeServico {
 /** O conteúdo da página própria do serviço. */
 export interface DetalheDeServico {
   metadados: Metadados;
-  /** Imagem de fundo do topo da página. Título e descrição vêm do resumo. */
+  /**
+   * Texto do topo da página. Opcional: sem ele, o topo usa a `descricao` do
+   * resumo — a mesma dos cards de /servicos.
+   */
+  descricaoDoTopo?: string;
+  /**
+   * Tags do bloco "Como funciona". Opcional: sem elas, valem as `tags` do
+   * resumo — as mesmas do card.
+   */
+  tagsDaPagina?: string[];
+  /** Imagem de fundo do topo da página. O título vem do resumo. */
   imagemDeFundo: Imagem;
 
   /** Bloco "Como funciona": texto à esquerda, imagem à direita. */

@@ -5,124 +5,98 @@ import type { Servico } from "@/types/servico";
  * ============================================================================
  * SERVIÇO: PLANO DE NEGÓCIOS
  * ============================================================================
- * ⚠️ CONTEÚDO PROVISÓRIO — serviço novo, criado só para a página existir.
- * Sem depoimento (opcional): melhor a seção ausente do que mais uma citação
- * inventada. Aguardando o texto definitivo do cliente. Ver PENDENCIAS.md.
+ * Topo, "Como funciona", metodologia e benefícios: texto da Líder Jr.
+ * ⚠️ Ainda provisório: o `cta`. Ver PENDENCIAS.md.
  * ============================================================================
  */
 export const planoDeNegocios: Servico = {
   slug: "plano-de-negocios",
   grupoId: "empreendedorismo",
   titulo: "Plano de Negócios",
-  chamada: "Coloque a ideia no papel antes de investir!",
+  chamada: "Transforme uma ideia em um negócio estruturado!",
   descricao:
-    "Estruturamos um plano de negócios completo — mercado, operação e financeiro — para quem vai abrir ou reposicionar uma empresa.",
-  tags: ["Canvas", "Viabilidade", "Financeiro"],
+    "Estruturamos e analisamos seu negócio considerando mercado, público, concorrência, operação, marketing e finanças para apoiar decisões e avaliar sua viabilidade.",
+  descricaoNaHome:
+    "Transformamos uma ideia ou negócio existente em um plano estruturado, com análises de mercado, operação, marketing e viabilidade financeira.",
+  tags: ["Estratégia", "Mercado", "Viabilidade"],
   icone: "documento",
-  imagem: imagens.equipeReuniaoMesa,
+  imagem: imagens.consultoresComNotebookECalculadora,
 
   detalhe: {
     metadados: {
       titulo: "Plano de Negócios",
       descricao:
-        "Plano de negócios estruturado, com análise de mercado, modelo de operação e projeção financeira, para dar consistência a uma ideia antes do investimento.",
+        "Estruturamos os principais pilares do seu negócio, analisando mercado, operação, marketing e finanças para apoiar decisões e avaliar sua viabilidade.",
     },
 
-    imagemDeFundo: comoFundo(imagens.equipeReuniaoMesa),
+    descricaoDoTopo:
+      "Estruturamos os principais pilares do seu negócio, analisando mercado, operação, marketing e finanças para apoiar decisões e avaliar sua viabilidade.",
+
+    tagsDaPagina: ["Viabilidade", "Estratégia", "Negócio"],
+
+    imagemDeFundo: comoFundo(imagens.consultoresComNotebookECalculadora),
 
     sobre: {
       eyebrow: "Como funciona",
-      titulo: "Da ideia ao plano que sustenta uma decisão",
+      titulo: "Estruture seu negócio antes de tomar grandes decisões",
       paragrafos: [
-        "Toda ideia de negócio parece boa por dentro da cabeça de quem a teve. O plano de negócios é o que testa essa ideia no papel, antes de comprometer tempo e dinheiro de verdade — seja antes de abrir, seja já em operação.",
-        "Estruturamos o modelo de negócio e analisamos mercado, público-alvo, concorrentes e fornecedores. Definimos a operação, as estratégias de marketing e as projeções financeiras, para que a decisão de investir — ou não — seja tomada com informação, não só com entusiasmo.",
+        "Analisamos os principais pilares do negócio para transformar informações e ideias em um planejamento estruturado.",
+        "O projeto contempla mercado, público, concorrência, operação, marketing e finanças, ajudando a avaliar a viabilidade e orientar as próximas decisões da empresa.",
       ],
-      imagem: imagens.apresentacaoParaEquipe,
+      imagem: imagens.consultoresComNotebookECalculadora,
     },
 
     metodologia: {
       eyebrow: "Metodologia",
-      titulo: "As etapas do plano",
+      titulo: "As etapas do nosso plano de negócios",
       etapas: [
         {
           numero: "01",
-          titulo: "Modelo de Negócio",
+          titulo: "Modelo e mercado",
           descricao:
-            "Estruturação do modelo de negócio em Business Model Canvas: proposta de valor, público e receita.",
+            "Entendemos a proposta do negócio e analisamos mercado, público, concorrentes e fornecedores.",
         },
         {
           numero: "02",
-          titulo: "Mercado",
+          titulo: "Estruturação da operação",
           descricao:
-            "Pesquisa e análise de mercado para dimensionar o cenário em que o negócio vai operar.",
+            "Definimos os principais aspectos necessários para o funcionamento do negócio.",
         },
         {
           numero: "03",
-          titulo: "Público e Concorrência",
+          titulo: "Marketing e finanças",
           descricao:
-            "Definição do público-alvo, com análise de concorrentes e fornecedores.",
+            "Estruturamos as estratégias de marketing e as projeções financeiras.",
         },
         {
           numero: "04",
-          titulo: "Plano Operacional",
+          titulo: "Consolidação estratégica",
           descricao:
-            "Estruturação da operação necessária para entregar o produto ou serviço no dia a dia.",
-        },
-        {
-          numero: "05",
-          titulo: "Plano de Marketing",
-          descricao:
-            "Estruturação das estratégias de atração e relacionamento com os clientes.",
-        },
-        {
-          numero: "06",
-          titulo: "Plano Financeiro",
-          descricao:
-            "Projeção de investimento inicial, receita, custos e ponto de equilíbrio.",
-        },
-        {
-          numero: "07",
-          titulo: "Análise Estratégica",
-          descricao:
-            "Análise SWOT para mapear forças, fraquezas, oportunidades e ameaças do negócio.",
-        },
-        {
-          numero: "08",
-          titulo: "Metas e Indicadores",
-          descricao:
-            "Definição de metas e KPIs para acompanhar a empresa depois que o plano sai do papel.",
-        },
-        {
-          numero: "09",
-          titulo: "Consolidação",
-          descricao:
-            "Reunião das informações em um plano único e apresentação dos resultados do projeto.",
+            "Integramos as análises, avaliamos a viabilidade e definimos metas e indicadores.",
         },
       ],
     },
 
     resultados: {
       titulo: "Por que fazer um plano de negócios?",
-      descricao:
-        "Serve para quem ainda não abriu e para quem já opera, mas precisa organizar melhor suas informações e decisões.",
       itens: [
         {
-          icone: "alvo",
-          titulo: "Decisão Informada",
+          icone: "check",
+          titulo: "Avaliação de viabilidade",
           descricao:
-            "Você decide investir sabendo o tamanho do mercado, o investimento necessário e o ponto de equilíbrio.",
+            "Entenda melhor as condições necessárias para colocar uma ideia em prática ou desenvolver um negócio existente.",
         },
         {
-          icone: "escudo",
-          titulo: "Risco Mapeado",
+          icone: "documento",
+          titulo: "Decisões mais estruturadas",
           descricao:
-            "Pontos fracos do modelo aparecem no papel, antes de aparecerem no caixa.",
+            "Tenha informações sobre mercado, operação, marketing e finanças reunidas em um único planejamento.",
         },
         {
-          icone: "grafico",
-          titulo: "Base para Captação",
+          icone: "bussola",
+          titulo: "Visão completa do negócio",
           descricao:
-            "Um plano estruturado é o que investidores e bancos pedem antes de conversar sobre capital.",
+            "Enxergue como diferentes áreas e decisões se conectam antes de avançar.",
         },
       ],
     },

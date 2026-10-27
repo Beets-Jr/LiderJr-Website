@@ -1,4 +1,6 @@
 import { createReader } from "@keystatic/core/reader";
+import { grupos } from "@/content/servicos/grupos";
+import { montarImagem } from "@/lib/imagem";
 import type { Material } from "@/types/material";
 import keystaticConfig from "../../../keystatic.config";
 
@@ -13,9 +15,8 @@ import keystaticConfig from "../../../keystatic.config";
  * Nada além deste arquivo sabe que o conteúdo vem de YAML — trocar a fonte de
  * dados de novo, um dia, é reescrever só a função abaixo.
  *
- * PARA ADICIONAR UM MATERIAL: use a interface em /keystatic. Para liberar o
- * download, envie o arquivo no campo correspondente; sem ele o botão do card
- * aparece desabilitado, escrito "Em breve".
+ * PARA ADICIONAR UM MATERIAL: use a interface em /keystatic. O arquivo para
+ * download é obrigatório — o CMS não salva um material sem ele.
  * ============================================================================
  */
 
@@ -30,16 +31,26 @@ export async function getTodosMateriais(): Promise<Material[]> {
   // campo de data no schema e ordenar por ele, como o blog faz.
   entradas.sort((a, b) => a.entry.titulo.localeCompare(b.entry.titulo, "pt-BR"));
 
-  return entradas.map(({ slug, entry }) => ({
-    slug,
-    titulo: entry.titulo,
-    resumo: entry.resumo,
-    tipo: entry.tipo,
-    categoria: entry.categoria,
-    // O campo é opcional no CMS; `null` (sem arquivo) vira `undefined`, que é
-    // o que o tipo `Material` usa para dizer "download ainda não liberado".
-    arquivo: entry.arquivo ?? undefined,
-  }));
+  return entradas.map(({ slug, entry }) => {
+    // O CMS grava o id do grupo; o site mostra o nome. Um id desconhecido é um
+    // grupo apagado de grupos.ts — melhor o build falhar do que um card sem
+    // categoria.
+    const grupo = grupos.find((g) => g.id === entry.categoria);
+    if (!grupo) {
+      throw new Error(`Material "${slug}": categoria "${entry.categoria}" não existe.`);
+    }
+
+    return {
+      slug,
+      titulo: entry.titulo,
+      resumo: entry.resumo,
+      tipo: entry.tipo,
+      categoria: grupo.titulo,
+      arquivo: entry.arquivo,
+      // Mesmo esquema de cases e posts: o alt é o título do material.
+      imagem: montarImagem(entry.imagem.arquivo, entry.titulo),
+    };
+  });
 }
 
 export { paginaDeMateriais } from "./pagina";

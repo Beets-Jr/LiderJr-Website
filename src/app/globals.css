@@ -196,3 +196,10 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* O selo flutuante do reCAPTCHA cobriria o canto da tela em todas as páginas
+   visitadas depois do Fale Conosco. O Google permite escondê-lo desde que o
+   aviso em texto apareça junto do formulário (ver contact-form.tsx). */
+.grecaptcha-badge {
+  visibility: hidden;
+}

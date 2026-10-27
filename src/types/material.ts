@@ -1,22 +1,18 @@
+import type { Imagem } from "./comum";
+
 /**
- * Material para download (e-books, planilhas, guias).
+ * Material para download (e-books, planilhas, checklists).
  *
- * O tipo é fechado: só existem os cinco formatos abaixo. Cada um tem ícone e
+ * O tipo é fechado: só existem os três formatos abaixo. Cada um tem ícone e
  * cor próprios definidos no componente — no protótipo isso vinha de um switch
  * que usava quatro famílias de cor fora da paleta da marca.
  */
 /**
- * Os cinco formatos, em lista, porque o schema do CMS precisa iterar sobre eles
+ * Os três formatos, em lista, porque o schema do CMS precisa iterar sobre eles
  * para montar o campo de seleção. O tipo abaixo deriva daqui — acrescentar um
  * formato é mexer em um lugar só.
  */
-export const TIPOS_DE_MATERIAL = [
-  "E-book",
-  "Planilha",
-  "Guia",
-  "Template",
-  "Webinar",
-] as const;
+export const TIPOS_DE_MATERIAL = ["E-book", "Planilha", "Checklist"] as const;
 
 export type TipoDeMaterial = (typeof TIPOS_DE_MATERIAL)[number];
 
@@ -25,12 +21,17 @@ export interface Material {
   titulo: string;
   resumo: string;
   tipo: TipoDeMaterial;
-  /** Usada no filtro da listagem. As opções do filtro saem daqui. */
+  /**
+   * O grupo de serviço a que o material se refere ("Gestão Financeira"). Um
+   * dos dois filtros da listagem — o outro é o `tipo`.
+   */
   categoria: string;
   /**
-   * Caminho do arquivo a partir de public/. Ex.: "/materiais/guia-lean.pdf".
-   * Sem isso, o botão de download aparece desabilitado.
-   * TODO: nenhum arquivo foi entregue ainda — ver PENDENCIAS.md.
+   * Caminho do arquivo a partir de public/, gravado pelo CMS.
+   * Ex.: "/materiais/guia-lean/arquivo.pdf". Obrigatório: todo material tem
+   * o que baixar.
    */
-  arquivo?: string;
+  arquivo: string;
+  /** A foto do topo do card. */
+  imagem: Imagem;
 }

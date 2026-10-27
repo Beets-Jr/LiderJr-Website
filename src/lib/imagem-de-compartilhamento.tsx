@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { PROPORCAO_DO_CUBO, SVG_DO_CUBO } from "@/components/layout/cubo-da-marca";
 import { site } from "@/content/site";
 
 /**
@@ -18,8 +19,7 @@ import { site } from "@/content/site";
  *
  * Usada pela imagem padrão do site (src/app/opengraph-image.tsx) e pelas das
  * páginas de serviço, case e post (opengraph-image.tsx de cada [slug]).
- *
- * TODO: quando o logo oficial chegar, trocar o quadrado com "L" por ele.
+
  * ============================================================================
  */
 
@@ -88,22 +88,13 @@ export function desenharImagemDeCompartilhamento({
       />
 
       <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-        <div
-          style={{
-            width: 64,
-            height: 64,
-            borderRadius: 14,
-            background: COR.marca,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontSize: 34,
-            fontWeight: 700,
-            color: COR.texto,
-          }}
-        >
-          L
-        </div>
+        {/* eslint-disable-next-line @next/next/no-img-element -- a ImageResponse não usa o <Image> do Next */}
+        <img
+          alt=""
+          src={`data:image/svg+xml;utf8,${encodeURIComponent(SVG_DO_CUBO)}`}
+          width={Math.round(72 * PROPORCAO_DO_CUBO)}
+          height={72}
+        />
         <div style={{ fontSize: 40, fontWeight: 700, color: COR.texto }}>
           {site.nome}
         </div>

@@ -43,7 +43,7 @@ export function PostCard({
     <Card
       as="article"
       padding="none"
-      interactive={Boolean(href)}
+      interactive
       className="group relative flex flex-col overflow-hidden"
     >
       <div className="relative h-52 shrink-0 overflow-hidden">
@@ -95,7 +95,7 @@ export function FeaturedPost({
     <Card
       as="article"
       padding="none"
-      interactive={Boolean(href)}
+      interactive
       className="group relative grid grid-cols-1 overflow-hidden lg:grid-cols-2"
     >
       <div className="relative min-h-80 overflow-hidden">
@@ -126,11 +126,7 @@ export function FeaturedPost({
           <Text as="p" size="sm" tone="muted" weight="medium">
             <DataDoPost post={post} />
           </Text>
-          {href ? (
-            <span className="text-brand font-body text-sm font-bold">
-              {rotuloDoLink}
-            </span>
-          ) : null}
+          <span className="text-brand font-body text-sm font-bold">{rotuloDoLink}</span>
         </div>
       </div>
     </Card>

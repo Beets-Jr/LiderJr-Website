@@ -1,13 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-39.6 -6.5 600.2 600.2" width="32" height="32">
   <!--
-    Favicon provisório: o mesmo ícone usado no logo do cabeçalho (um cubo dentro
-    de um quadrado laranja). TODO: substituir pelo símbolo oficial da marca
-    quando ele existir. Ver PENDENCIAS.md.
+    Favicon: o cubo da Líder Jr., centralizado num quadrado. Cópia do desenho
+    de src/components/layout/cubo-da-marca.tsx — ao mexer lá, refaça aqui.
   -->
-  <rect width="32" height="32" rx="7" fill="#ff751f" />
-  <g fill="none" stroke="#ffffff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M16 7.5 24.5 12v8L16 24.5 7.5 20v-8z" />
-    <path d="M7.5 12 16 16.5 24.5 12" />
-    <path d="M16 16.5v8" />
+  <g fill="none" stroke="#cc6538" stroke-linejoin="round">
+    <path stroke-width="22" d="M260.5 3 511 147.6V439.7L260.5 584.2 10 439.7V147.6Z"/>
+    <path stroke-width="22" d="M10 147.6 260.5 292.5 511 147.6M260.5 292.5V584.2"/>
+    <path stroke-width="5" d="M260.5 3V292.5M260.5 292.5 10 439.7M260.5 292.5 511 439.7"/>
   </g>
 </svg>

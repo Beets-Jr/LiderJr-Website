@@ -1,28 +1,15 @@
-import type { ChamadaParaAcao, Imagem, Metadados } from "./comum";
+import type { RenderableTreeNodes } from "@markdoc/markdoc";
+import type { ConviteDoFormulario, Imagem, Metadados } from "./comum";
 
 /**
  * ============================================================================
  * POST DO BLOG
  * ============================================================================
- * O corpo do artigo é uma lista de BLOCOS, na ordem em que devem aparecer.
- * Isso permite montar artigos com estruturas diferentes sem escrever HTML.
- * Ver CONTEUDO.md para exemplos de cada bloco.
+ * O corpo do artigo é escrito no CMS como texto contínuo (Markdoc) e chega aqui
+ * já convertido numa árvore de elementos, que corpo-de-texto.tsx desenha com
+ * os estilos do site. Ver src/cms/corpo-de-texto.tsx.
  * ============================================================================
  */
-
-export type BlocoDePost =
-  /** Um parágrafo de texto. */
-  | { tipo: "paragrafo"; texto: string }
-  /** Um subtítulo dentro do artigo (vira <h2>). */
-  | { tipo: "subtitulo"; texto: string }
-  /** Uma citação em destaque, com barra laranja à esquerda. */
-  | { tipo: "citacao"; texto: string; autor?: string }
-  /** Lista de marcadores simples. */
-  | { tipo: "lista"; itens: string[] }
-  /** Lista numerada em que cada item tem título e explicação. */
-  | { tipo: "listaNumerada"; itens: { titulo: string; descricao: string }[] }
-  /** Uma imagem no meio do texto, com legenda opcional. */
-  | { tipo: "imagem"; imagem: Imagem; legenda?: string };
 
 export interface ResumoDePost {
   slug: string;
@@ -35,19 +22,26 @@ export interface ResumoDePost {
    * escrita à mão em dois lugares e os dois discordavam.
    */
   data: string;
-  /** Usada no filtro da listagem. As opções do filtro saem daqui. */
+  /**
+   * Um dos grupos de serviço ou "Atualidades" (ver
+   * src/content/blog/categorias.ts). Alimenta o filtro da listagem.
+   */
   categoria: string;
   imagem: Imagem;
 }
 
 export interface DetalheDePost {
   metadados: Metadados;
-  corpo: BlocoDePost[];
-  cta: ChamadaParaAcao;
+  /**
+   * O texto do artigo, já transformado pelo Markdoc. Os nomes dos elementos
+   * (Paragrafo, Subtitulo, ImagemComLegenda…) são os componentes de
+   * post-body.tsx.
+   */
+  corpo: RenderableTreeNodes;
+  cta: ConviteDoFormulario;
 }
 
+/** Todo post tem página própria: `detalhe` é obrigatório. */
 export interface Post extends ResumoDePost {
-  detalhe?: DetalheDePost;
+  detalhe: DetalheDePost;
 }
-
-export type PostComPagina = Post & { detalhe: DetalheDePost };

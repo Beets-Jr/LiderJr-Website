@@ -8,13 +8,20 @@
  *
  * @param itens qualquer lista cujos objetos tenham um campo `categoria`
  * @param rotuloTodos o nome da opção que mostra tudo, ex.: "Todos"
+ * @param ordem opcional: a ordem em que as categorias devem aparecer. As que
+ *   não estiverem nela vêm no fim, na ordem dos itens.
  */
 export function montarCategorias<T extends { categoria: string }>(
   itens: readonly T[],
   rotuloTodos: string,
+  ordem: readonly string[] = [],
 ): string[] {
   const unicas = [...new Set(itens.map((item) => item.categoria))];
-  return [rotuloTodos, ...unicas];
+  const posicao = (categoria: string) => {
+    const i = ordem.indexOf(categoria);
+    return i === -1 ? ordem.length : i;
+  };
+  return [rotuloTodos, ...unicas.sort((a, b) => posicao(a) - posicao(b))];
 }
 
 /** Filtra os itens pela categoria escolhida. `rotuloTodos` devolve a lista inteira. */

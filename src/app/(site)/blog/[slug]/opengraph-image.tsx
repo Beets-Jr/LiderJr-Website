@@ -29,7 +29,7 @@ export default async function Imagem({
 }) {
   const { slug } = await params;
   const post = await getPostPorSlug(slug);
-  if (!post?.detalhe) notFound();
+  if (!post) notFound();
 
   return desenharImagemDeCompartilhamento({
     rotulo: `${paginaDoBlog.metadados.titulo} · ${post.categoria}`,

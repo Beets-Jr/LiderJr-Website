@@ -5,106 +5,91 @@ import type { Servico } from "@/types/servico";
  * ============================================================================
  * SERVIÇO: PREVISÃO DE DEMANDA
  * ============================================================================
- * ⚠️ CONTEÚDO PROVISÓRIO — serviço novo, criado só para a página existir.
- * Sem depoimento (opcional): melhor a seção ausente do que mais uma citação
- * inventada. Aguardando o texto definitivo do cliente. Ver PENDENCIAS.md.
+ * Topo, "Como funciona", metodologia e benefícios: texto da Líder Jr.
+ * ⚠️ Ainda provisório: o `cta`. Ver PENDENCIAS.md.
  * ============================================================================
  */
 export const previsaoDeDemanda: Servico = {
   slug: "previsao-de-demanda",
   grupoId: "empreendedorismo",
   titulo: "Previsão de Demanda",
-  chamada: "Planeje antes que a demanda te surpreenda!",
+  chamada: "Planeje o futuro com base nos seus dados!",
   descricao:
-    "Modelos estatísticos de previsão para antecipar vendas, orientar compras e dimensionar produção com mais segurança.",
-  tags: ["Séries Temporais", "Forecast", "Sazonalidade"],
+    "Analisamos dados históricos e padrões de comportamento para estimar vendas ou consumo futuros, apoiando decisões de estoque, compras, produção e capacidade.",
+  tags: ["Dados", "Previsão", "Planejamento"],
   icone: "grafico",
-  imagem: imagens.dashboardIndicadores,
+  imagem: imagens.relatorioComGraficos,
 
   detalhe: {
     metadados: {
       titulo: "Previsão de Demanda",
       descricao:
-        "Modelagem estatística da demanda histórica para prever vendas futuras, reduzindo excesso e falta de estoque.",
+        "Analisamos dados históricos e padrões de comportamento para estimar demandas futuras e apoiar decisões de produção, estoque, compras e capacidade.",
     },
 
-    imagemDeFundo: comoFundo(imagens.dashboardIndicadores),
+    descricaoDoTopo:
+      "Analisamos dados históricos e padrões de comportamento para estimar demandas futuras e apoiar decisões de produção, estoque, compras e capacidade.",
+
+    imagemDeFundo: comoFundo(imagens.relatorioComGraficos),
 
     sobre: {
       eyebrow: "Como funciona",
-      titulo: "Decida compra e produção olhando para frente",
+      titulo: "Antecipe sua demanda com base em dados",
       paragrafos: [
-        "Comprar e produzir olhando só para o mês passado é reagir, não planejar — e normalmente sobra estoque do item errado e falta o que vende.",
-        "Estimamos o volume futuro de vendas ou consumo com base em dados históricos e em padrões de comportamento identificados na série, com margem de erro conhecida. A estimativa apoia decisões de planejamento de produção, gestão de estoques, compras e dimensionamento de capacidade.",
+        "Analisamos o histórico da empresa para identificar padrões no comportamento da demanda e estimar volumes futuros de vendas ou consumo.",
+        "Essas informações ajudam a reduzir incertezas e apoiar decisões de produção, estoque, compras e capacidade.",
       ],
-      imagem: imagens.analiseDeFluxoEmPapel,
+      imagem: imagens.relatorioComGraficos,
     },
 
     metodologia: {
       eyebrow: "Metodologia",
-      titulo: "As etapas da previsão",
+      titulo: "As etapas da nossa previsão de demanda",
       etapas: [
         {
           numero: "01",
-          titulo: "Histórico",
-          descricao:
-            "Levantamento e organização do histórico de vendas ou consumo da empresa.",
+          titulo: "Organização dos dados",
+          descricao: "Levantamos e estruturamos o histórico disponível.",
         },
         {
           numero: "02",
-          titulo: "Comportamento",
+          titulo: "Análise da demanda",
           descricao:
-            "Análise de como a demanda se comportou ao longo do tempo, período a período.",
+            "Identificamos padrões e fatores relevantes no comportamento dos dados.",
         },
         {
           numero: "03",
-          titulo: "Padrões",
+          titulo: "Modelagem",
           descricao:
-            "Identificação de tendência, sazonalidade e outros fatores relevantes na série.",
+            "Aplicamos métodos de previsão adequados às características da demanda.",
         },
         {
           numero: "04",
-          titulo: "Modelagem",
+          titulo: "Recomendações",
           descricao:
-            "Aplicação do método de previsão mais adequado aos dados disponíveis.",
-        },
-        {
-          numero: "05",
-          titulo: "Validação",
-          descricao:
-            "Análise dos resultados obtidos e ajuste do modelo até a margem de erro ficar aceitável.",
-        },
-        {
-          numero: "06",
-          titulo: "Previsão Final",
-          descricao:
-            "Definição da previsão final e recomendações de como a empresa deve utilizá-la.",
+            "Consolidamos a previsão e orientamos sua aplicação nas decisões da empresa.",
         },
       ],
     },
 
     resultados: {
-      titulo: "Por que prever a demanda?",
-      descricao:
-        "Errar a previsão custa dos dois lados: capital parado em estoque excedente ou venda perdida por falta.",
+      titulo: "Por que prever sua demanda?",
       itens: [
         {
-          icone: "quedaGrafico",
-          titulo: "Estoque Equilibrado",
-          descricao:
-            "Compra e produção alinhadas à demanda esperada, sem o excesso que imobiliza caixa.",
+          icone: "calendario",
+          titulo: "Mais planejamento",
+          descricao: "Antecipe necessidades futuras da operação.",
         },
         {
-          icone: "escudo",
-          titulo: "Menos Ruptura",
-          descricao:
-            "Picos de demanda sazonais deixam de pegar a operação desprevenida.",
+          icone: "barras",
+          titulo: "Menos incerteza",
+          descricao: "Utilize dados históricos para apoiar decisões.",
         },
         {
-          icone: "grafico",
-          titulo: "Planejamento Antecipado",
+          icone: "caixa",
+          titulo: "Melhor alocação de recursos",
           descricao:
-            "Produção, compras e caixa passam a ser planejados com semanas ou meses de antecedência.",
+            "Planeje estoque, produção, compras e capacidade com mais informação.",
         },
       ],
     },

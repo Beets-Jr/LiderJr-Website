@@ -3,12 +3,12 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { DadosEstruturados } from "@/components/layout/dados-estruturados";
 import { BackLink } from "@/components/sections/back-link";
-import { CTAPanel } from "@/components/sections/cta";
+import { CTAComFormulario } from "@/components/sections/cta";
 import { PageHero } from "@/components/sections/page-hero";
 import { PostBody } from "@/components/sections/post-body";
 import { RelatedCards } from "@/components/sections/related-cards";
 import { Text } from "@/components/ui";
-import { getPostPorSlug, getPostsComPagina, getTodosPosts } from "@/content/blog";
+import { getPostPorSlug, getTodosPosts } from "@/content/blog";
 import { paginaDoBlog } from "@/content/blog/pagina";
 import { dadosDaTrilha, dadosDoPost } from "@/lib/dados-estruturados";
 import { formatarData } from "@/lib/datas";
@@ -27,13 +27,13 @@ import { montarMetadata } from "@/lib/metadados";
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
-  return (await getPostsComPagina()).map((post) => ({ slug: post.slug }));
+  return (await getTodosPosts()).map((post) => ({ slug: post.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const post = await getPostPorSlug(slug);
-  if (!post?.detalhe) return {};
+  if (!post) return {};
 
   return montarMetadata(post.detalhe.metadados, `/blog/${post.slug}`, {
     tipo: "article",
@@ -46,7 +46,7 @@ export default async function PaginaDePost({ params }: Props) {
   const { slug } = await params;
   const post = await getPostPorSlug(slug);
 
-  if (!post?.detalhe) notFound();
+  if (!post) notFound();
 
   const { detalhe } = post;
   const { navegacaoDeDetalhe } = paginaDoBlog;
@@ -55,7 +55,7 @@ export default async function PaginaDePost({ params }: Props) {
     .filter((outro) => outro.slug !== post.slug)
     .slice(0, 3)
     .map((outro) => ({
-      href: getHrefDoPost(outro) ?? "/blog",
+      href: getHrefDoPost(outro),
       etiqueta: outro.categoria,
       titulo: outro.titulo,
       descricao: outro.resumo,
@@ -97,10 +97,16 @@ export default async function PaginaDePost({ params }: Props) {
       <BackLink link={navegacaoDeDetalhe.voltar} />
 
       <article>
-        <PostBody blocos={detalhe.corpo} resumo={post.resumo} />
+        <PostBody corpo={detalhe.corpo} resumo={post.resumo} />
       </article>
 
-      <CTAPanel chamada={detalhe.cta} />
+      <CTAComFormulario
+        convite={detalhe.cta}
+        origem={{
+          formulario: `Post do blog "${post.titulo}"`,
+          pagina: `/blog/${post.slug}`,
+        }}
+      />
 
       <RelatedCards
         titulo={navegacaoDeDetalhe.relacionados.titulo}

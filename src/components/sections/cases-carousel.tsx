@@ -228,7 +228,8 @@ export function CasesCarousel({
   );
 }
 
-function BotaoDoCarrossel({
+/** A seta redonda dos carrosséis. Também usada pelo de parceiros (Quem Somos). */
+export function BotaoDoCarrossel({
   rotulo,
   onClick,
   disabled,
@@ -289,16 +290,7 @@ function CaseSlide({
         destaque && "border-brand shadow-lg",
       )}
     >
-      <p className="font-heading text-brand text-4xl font-bold">{item.resultado}</p>
-      <Text size="sm" tone="muted" className="mt-1">
-        {item.metrica}
-      </Text>
-
-      {/* O traço só existe no card do meio: é ele que separa o número do texto
-          quando o card ganha altura. */}
-      {destaque ? <hr className="bg-border mt-6 h-px w-12 border-0" /> : null}
-
-      <Heading as="h3" level="card" className="mt-6">
+      <Heading as="h3" level="card">
         <LinkEsticado href={href} tabIndex={alcancavel ? undefined : -1}>
           {item.empresa}
         </LinkEsticado>
@@ -309,7 +301,7 @@ function CaseSlide({
       </Text>
 
       <ul className="mt-6 flex flex-wrap gap-1.5">
-        {item.tags.map((tag) => (
+        {[item.servico.titulo, item.segmento].map((tag) => (
           <li key={tag}>
             <Badge>{tag}</Badge>
           </li>
@@ -317,23 +309,15 @@ function CaseSlide({
       </ul>
 
       {/* Só o card em destaque mostra a chamada. Nos laterais ela competiria
-          com o centro; o link do título continua valendo nos três. Sem página
-          própria, o texto vira aviso — mesma regra da listagem de /cases. */}
+          com o centro; o link do título continua valendo nos três. */}
       {destaque ? (
-        <p
-          className={cn(
-            "font-body mt-6 flex items-center gap-2 text-sm font-semibold transition-colors",
-            href ? "text-brand group-hover:text-brand-hover" : "text-fg-muted",
-          )}
-        >
-          {href ? textos.rotuloComPagina : textos.rotuloSemPagina}
-          {href ? (
-            <ArrowRight
-              size={16}
-              aria-hidden="true"
-              className="transition-transform group-hover:translate-x-1"
-            />
-          ) : null}
+        <p className="font-body text-brand group-hover:text-brand-hover mt-6 flex items-center gap-2 text-sm font-semibold transition-colors">
+          {textos.rotuloComPagina}
+          <ArrowRight
+            size={16}
+            aria-hidden="true"
+            className="transition-transform group-hover:translate-x-1"
+          />
         </p>
       ) : null}
     </Card>

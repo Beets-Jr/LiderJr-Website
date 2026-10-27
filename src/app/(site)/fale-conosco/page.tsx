@@ -7,9 +7,14 @@ import { faleConosco } from "@/content/fale-conosco";
 import { site } from "@/content/site";
 import { montarMetadata } from "@/lib/metadados";
 
+// O título já leva o nome da empresa: sem `tituloCompleto` a aba mostraria
+// "Fale com a Líder Jr. | Líder Jr.".
 export const metadata: Metadata = montarMetadata(
   faleConosco.metadados,
   "/fale-conosco",
+  {
+    tituloCompleto: true,
+  },
 );
 
 export default function PaginaFaleConosco() {

@@ -5,9 +5,8 @@ import type { Servico } from "@/types/servico";
  * ============================================================================
  * SERVIÇO: GESTÃO DE FLUXO DE CAIXA
  * ============================================================================
- * ⚠️ CONTEÚDO PROVISÓRIO — serviço novo, criado só para a página existir.
- * Sem depoimento (opcional): melhor a seção ausente do que mais uma citação
- * inventada. Aguardando o texto definitivo do cliente. Ver PENDENCIAS.md.
+ * Topo, "Como funciona", metodologia e benefícios: texto da Líder Jr.
+ * ⚠️ Ainda provisório: o `cta`. Ver PENDENCIAS.md.
  * ============================================================================
  */
 export const gestaoDeFluxoDeCaixa: Servico = {
@@ -15,97 +14,82 @@ export const gestaoDeFluxoDeCaixa: Servico = {
   grupoId: "gestao-financeira",
   // O \n força a quebra no card de /servicos; nos outros lugares vira espaço.
   titulo: "Gestão de Fluxo\nde Caixa",
-  chamada: "Nunca mais seja surpreendido pelo caixa!",
+  chamada: "Tenha mais controle sobre o presente e o futuro do seu caixa!",
   descricao:
-    "Organizamos as entradas e saídas da empresa em um fluxo de caixa vivo, para antecipar apertos e planejar sobras.",
-  tags: ["Fluxo de Caixa", "Liquidez", "Planejamento"],
+    "Estruturamos e analisamos as entradas e saídas financeiras para dar mais visibilidade ao caixa e antecipar períodos de falta ou disponibilidade de recursos.",
+  tags: ["Caixa", "Controle", "Previsibilidade"],
   icone: "bussola",
-  imagem: imagens.analiseDeFluxoEmPapel,
+  imagem: imagens.consultorAnalisandoPlanilha,
 
   detalhe: {
     metadados: {
       titulo: "Gestão de Fluxo de Caixa",
       descricao:
-        "Estruturação do fluxo de caixa, com entradas e saídas organizadas por data, para antecipar apertos e planejar a saúde financeira da empresa.",
+        "Estruturamos e analisamos as entradas e saídas financeiras para dar mais controle sobre o caixa e antecipar necessidades futuras de recursos.",
     },
 
-    imagemDeFundo: comoFundo(imagens.analiseDeFluxoEmPapel),
+    descricaoDoTopo:
+      "Estruturamos e analisamos as entradas e saídas financeiras para dar mais controle sobre o caixa e antecipar necessidades futuras de recursos.",
+
+    imagemDeFundo: comoFundo(imagens.consultorAnalisandoPlanilha),
 
     sobre: {
       eyebrow: "Como funciona",
-      titulo: "Saiba hoje o caixa de daqui a 30 dias",
+      titulo: "Tenha mais previsibilidade sobre o seu caixa",
       paragrafos: [
-        "É comum um negócio ter dificuldade em prever se vai ter recursos suficientes para honrar seus compromissos nos próximos meses — a boa notícia é que a maioria dos apertos financeiros não pega a empresa de surpresa de verdade, só ninguém tinha o fluxo organizado para enxergar com antecedência.",
-        "Estruturamos as entradas e saídas em um fluxo de caixa por data, com projeção para as próximas semanas, dando mais controle sobre a situação atual do caixa e antecipando períodos de aperto ou de folga financeira.",
+        "Organizamos as entradas e saídas financeiras da empresa para tornar mais claro o comportamento do caixa ao longo do tempo.",
+        "Com a projeção das movimentações futuras, sua empresa consegue antecipar possíveis períodos de falta ou disponibilidade de recursos.",
       ],
-      imagem: imagens.painelDeGestao,
+      imagem: imagens.consultorAnalisandoPlanilha,
     },
 
     metodologia: {
       eyebrow: "Metodologia",
-      titulo: "As etapas do trabalho",
+      titulo: "As etapas da nossa gestão de fluxo de caixa",
       etapas: [
         {
           numero: "01",
           titulo: "Levantamento",
-          descricao:
-            "Levantamento de todas as movimentações financeiras — entradas e saídas — da empresa.",
+          descricao: "Mapeamos as movimentações financeiras da empresa.",
         },
         {
           numero: "02",
-          titulo: "Organização",
-          descricao:
-            "Organização das entradas e saídas, separando o que é recorrente do que é pontual.",
+          titulo: "Estruturação",
+          descricao: "Organizamos entradas e saídas e construímos o fluxo de caixa.",
         },
         {
           numero: "03",
-          titulo: "Estruturação",
-          descricao:
-            "Estruturação do fluxo de caixa por data, pronto para consulta e acompanhamento.",
+          titulo: "Análise",
+          descricao: "Avaliamos o comportamento financeiro ao longo do tempo.",
         },
         {
           numero: "04",
-          titulo: "Análise",
-          descricao:
-            "Análise do comportamento do caixa ao longo do tempo, identificando os padrões da empresa.",
-        },
-        {
-          numero: "05",
           titulo: "Projeção",
           descricao:
-            "Projeção das movimentações futuras, com cenários de atraso e antecipação de recebimentos.",
-        },
-        {
-          numero: "06",
-          titulo: "Oportunidades",
-          descricao:
-            "Identificação de necessidades e oportunidades de melhoria na gestão do caixa.",
+            "Estimamos movimentações futuras e identificamos necessidades e oportunidades.",
         },
       ],
     },
 
     resultados: {
-      titulo: "Por que organizar o fluxo de caixa?",
-      descricao:
-        "Empresa lucrativa também quebra por falta de caixa no momento errado — o fluxo existe para isso nunca ser surpresa.",
+      titulo: "Por que gerenciar seu fluxo de caixa?",
       itens: [
         {
-          icone: "escudo",
-          titulo: "Aperto Antecipado",
+          icone: "carteira",
+          titulo: "Maior controle",
           descricao:
-            "Faltas de caixa aparecem no radar com semanas de antecedência, não no dia do pagamento.",
+            "Entenda como as entradas e saídas se comportam ao longo do tempo.",
         },
         {
-          icone: "grafico",
-          titulo: "Decisão Financeira Mais Segura",
-          descricao:
-            "Pagar, receber, investir ou renegociar passa a ser decisão com o saldo projetado na mão.",
+          icone: "calendario",
+          titulo: "Mais previsibilidade",
+          descricao: "Antecipe possíveis períodos de aperto financeiro.",
         },
         {
-          icone: "check",
-          titulo: "Rotina Sustentável",
+          icone: "cifrao",
+          titulo: "Planejamento financeiro",
           descricao:
-            "O fluxo passa a ser atualizado toda semana, sem depender de um levantamento do zero.",
+            "Tenha informações para organizar compromissos e decisões futuras.",
         },
       ],
     },

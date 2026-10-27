@@ -5,112 +5,94 @@ import type { Servico } from "@/types/servico";
  * ============================================================================
  * SERVIÇO: CRONOANÁLISE
  * ============================================================================
- * ⚠️ CONTEÚDO PROVISÓRIO — serviço novo, criado só para a página existir.
- * Sem depoimento (opcional): melhor a seção ausente do que mais uma citação
- * inventada. Aguardando o texto definitivo do cliente. Ver PENDENCIAS.md.
+ * Topo, "Como funciona", metodologia e benefícios: texto da Líder Jr.
+ * ⚠️ Ainda provisório: o `cta`. Ver PENDENCIAS.md.
  * ============================================================================
  */
 export const cronoanalise: Servico = {
   slug: "cronoanalise",
   grupoId: "otimizacao-de-processos",
   titulo: "Cronoanálise",
-  chamada: "Meça o tempo certo de cada tarefa!",
+  chamada: "Entenda onde o tempo da sua operação está sendo utilizado!",
   descricao:
-    "Cronometragem e análise dos tempos de execução para dimensionar equipes, prazos e capacidade produtiva com precisão.",
-  tags: ["Tempos e Métodos", "MTM", "Capacidade"],
+    "Medimos e analisamos o tempo das atividades para identificar desperdícios, definir tempos de referência e encontrar oportunidades de aumento de produtividade e melhor uso da equipe e dos recursos.",
+  descricaoNaHome:
+    "Analisamos o tempo das atividades para identificar desperdícios, aumentar a produtividade e apoiar um melhor dimensionamento de equipes e recursos.",
+  tags: ["Produtividade", "Tempo", "Eficiência"],
   icone: "relogio",
-  imagem: imagens.analiseDeFluxoEmPapel,
+  imagem: imagens.cronometroNaMao,
 
   detalhe: {
     metadados: {
       titulo: "Cronoanálise",
       descricao:
-        "Cronometragem das etapas do processo para calcular tempo padrão, dimensionar equipe e planejar a capacidade produtiva com base em dados reais.",
+        "Medimos e analisamos o tempo das atividades para identificar desperdícios, apoiar o aumento da produtividade e melhorar o uso de equipes e recursos.",
     },
 
-    imagemDeFundo: comoFundo(imagens.analiseDeFluxoEmPapel),
+    descricaoDoTopo:
+      "Medimos e analisamos o tempo das atividades para identificar desperdícios, apoiar o aumento da produtividade e melhorar o uso de equipes e recursos.",
+
+    imagemDeFundo: comoFundo(imagens.cronometroNaMao),
 
     sobre: {
       eyebrow: "Como funciona",
-      titulo: "O tempo real da sua operação, cronometrado",
+      titulo: "Entenda onde o tempo da sua operação está sendo utilizado",
       paragrafos: [
-        "A cronoanálise é indicada para quem precisa entender quanto tempo suas atividades realmente consomem — seja para identificar onde há desperdício de tempo, seja para estabelecer uma referência confiável de quanto tempo uma tarefa deveria levar.",
-        "Cronometramos as etapas do processo, aplicamos as tolerâncias adequadas e calculamos o tempo padrão de cada atividade — base para quem busca aumentar a produtividade da operação ou dimensionar melhor equipe e recursos.",
+        "Medimos e analisamos o tempo gasto nas atividades da operação para compreender seu desempenho e identificar oportunidades de melhoria.",
+        "Com dados representativos, é possível estabelecer referências mais confiáveis, reduzir desperdícios de tempo e apoiar o melhor dimensionamento de equipes e recursos.",
       ],
-      imagem: imagens.workshopPostIts,
+      imagem: imagens.cronometroNaMao,
     },
 
     metodologia: {
       eyebrow: "Metodologia",
-      titulo: "As etapas da cronoanálise",
+      titulo: "As etapas da nossa cronoanálise",
       etapas: [
         {
           numero: "01",
-          titulo: "Estudo do Processo",
+          titulo: "Estruturação do processo",
           descricao:
-            "Entendimento de como o processo é realizado hoje e definição do que será analisado.",
+            "Entendemos a operação e definimos quais atividades serão analisadas.",
         },
         {
           numero: "02",
-          titulo: "Definição",
+          titulo: "Planejamento das medições",
           descricao:
-            "Estruturação dos microprocessos que compõem o processo, definindo o que entra na cronoanálise.",
+            "Estruturamos o plano de coleta necessário para obter dados representativos.",
         },
         {
           numero: "03",
-          titulo: "Plano Amostral",
+          titulo: "Medição e análise",
           descricao:
-            "Definição de quantas medições são necessárias para que os dados coletados sejam confiáveis.",
+            "Coletamos os tempos e realizamos análises técnicas e estatísticas sobre o desempenho das atividades.",
         },
         {
           numero: "04",
-          titulo: "Cronometragem",
+          titulo: "Oportunidades de melhoria",
           descricao:
-            "Coleta dos tempos em campo, considerando as condições reais em que cada atividade acontece.",
-        },
-        {
-          numero: "05",
-          titulo: "Análise dos Dados",
-          descricao:
-            "Tratamento estatístico dos tempos coletados para entender o comportamento de cada microprocesso.",
-        },
-        {
-          numero: "06",
-          titulo: "Oportunidades",
-          descricao:
-            "Identificação dos principais pontos de melhoria e desenvolvimento de propostas específicas.",
-        },
-        {
-          numero: "07",
-          titulo: "Consolidação",
-          descricao:
-            "Organização dos resultados e apresentação das melhorias propostas para o processo.",
+            "Identificamos pontos de otimização e consolidamos recomendações para o processo.",
         },
       ],
     },
 
     resultados: {
-      titulo: "Por que cronometrar seus processos?",
-      descricao:
-        "Tempo não medido é tempo administrado no escuro — e no escuro é fácil dimensionar errado equipe, prazo e custo.",
+      titulo: "Por que realizar uma cronoanálise?",
       itens: [
         {
-          icone: "quedaGrafico",
-          titulo: "Ociosidade Reduzida",
+          icone: "tendencia",
+          titulo: "Aumento de produtividade",
           descricao:
-            "Tempos reais mostram onde a equipe está sub ou sobrecarregada, antes de contratar ou remanejar.",
+            "Identifique onde o tempo está sendo utilizado de maneira pouco eficiente.",
         },
         {
-          icone: "grafico",
-          titulo: "Metas Realistas",
-          descricao:
-            "Prazos e metas passam a partir do tempo medido, não do que parecia razoável.",
+          icone: "relogio",
+          titulo: "Tempos mais confiáveis",
+          descricao: "Crie referências baseadas em medições reais da operação.",
         },
         {
-          icone: "check",
-          titulo: "Custo de Mão de Obra Preciso",
-          descricao:
-            "O tempo padrão de cada tarefa vira insumo direto para o custo real da operação.",
+          icone: "pessoas",
+          titulo: "Melhor dimensionamento",
+          descricao: "Tenha dados para apoiar decisões sobre equipes e recursos.",
         },
       ],
     },

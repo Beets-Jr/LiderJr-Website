@@ -51,7 +51,7 @@ export interface ConteudoDaHome {
   servicos: CabecalhoDeSecao;
 
   sobre: CabecalhoDeSecao & {
-    paragrafo: string;
+    paragrafos: string[];
     checklist: ListaDeChecagem;
     link: LinkDeNavegacao;
     imagem: Imagem;
@@ -68,14 +68,12 @@ export interface ConteudoDaHome {
 
   cases: CabecalhoDeSecao & {
     /** Rótulos do carrossel. `anterior`, `proximo` e `regiao` são para leitores
-     *  de tela; os dois últimos aparecem no card em destaque, conforme o case
-     *  tenha ou não página própria. */
+     *  de tela; `rotuloComPagina` é o link do card em destaque. */
     carrossel: {
       anterior: string;
       proximo: string;
       regiao: string;
       rotuloComPagina: string;
-      rotuloSemPagina: string;
     };
   };
 
@@ -94,7 +92,7 @@ export interface ConteudoDaHome {
 
 export interface Filiacao {
   nome: string;
-  descricao: string;
+  paragrafos: string[];
   logo: Imagem;
 }
 
@@ -103,7 +101,9 @@ export interface PilarDeCultura {
   codigo: string;
   icone: NomeDeIcone;
   titulo: string;
-  descricao: string;
+  /** Um parágrafo (Missão, Visão) ou uma lista (Valores) — use um ou outro. */
+  descricao?: string;
+  itens?: string[];
 }
 
 export interface ConteudoQuemSomos {
@@ -122,6 +122,15 @@ export interface ConteudoQuemSomos {
   filiacoes: CabecalhoDeSecao & {
     itens: Filiacao[];
   };
+
+  parceiros: CabecalhoDeSecao & {
+    /** Descrição para leitores de tela do carrossel. */
+    rotulo: string;
+    /** Rótulos das setas, para leitores de tela. */
+    anterior: string;
+    proximo: string;
+    empresas: Cliente[];
+  };
 }
 
 /* -------------------------------------------------------------------------- */
@@ -135,6 +144,17 @@ export interface TextosDeFiltro {
   /** Descrição do grupo de botões para leitores de tela. */
   rotuloAcessivel: string;
   /** Mensagem quando nenhum item bate com o filtro. */
+  vazio: { titulo: string; descricao: string };
+}
+
+/** Rótulos do campo de busca de uma listagem. */
+export interface TextosDeBusca {
+  /** Nome do campo para leitores de tela. */
+  rotulo: string;
+  placeholder: string;
+  /** Anúncio para leitores de tela: "{n} artigos encontrados". */
+  resultados: { um: string; varios: string };
+  /** Mensagem quando nenhum item bate com a busca. */
   vazio: { titulo: string; descricao: string };
 }
 
@@ -158,10 +178,8 @@ export interface ConteudoDeCases {
   metadados: Metadados;
   hero: HeroDePagina;
   filtro: TextosDeFiltro;
-  /** Texto do link do card quando o case tem página. */
+  /** Texto do link do card. */
   rotuloComPagina: string;
-  /** Texto quando o case ainda não tem página. */
-  rotuloSemPagina: string;
   /** Rótulos usados nas páginas de case individuais. */
   navegacaoDeDetalhe: TextosDeNavegacaoDeDetalhe;
   /**
@@ -169,24 +187,25 @@ export interface ConteudoDeCases {
    * escrito por case, no CMS; os botões são navegação do site. O secundário
    * aponta para o serviço que o case indicar — daí só o rótulo morar aqui.
    */
-  botoesDoCta: { primario: LinkDeNavegacao; rotuloDoServico: string };
-  /** Cabeçalho do painel de números, igual em todo case. */
-  impacto: { eyebrow: string; titulo: string };
 }
 
 export interface ConteudoDeMateriais {
   metadados: Metadados;
   hero: HeroDePagina;
-  filtro: TextosDeFiltro;
+  /** Dois filtros que se combinam: tipo (E-book, Planilha…) e categoria. */
+  filtro: Omit<TextosDeFiltro, "rotuloAcessivel"> & {
+    tipo: { rotulo: string; rotuloAcessivel: string };
+    categoria: { rotulo: string; rotuloAcessivel: string };
+  };
   rotuloDoBotao: string;
-  /** Texto do botão quando ainda não há arquivo para baixar. */
-  rotuloIndisponivel: string;
 }
 
 export interface ConteudoDoBlog {
   metadados: Metadados;
   hero: HeroDePagina;
   filtro: TextosDeFiltro;
+  /** O campo de busca por título, na barra de filtros. */
+  busca: TextosDeBusca;
   rotuloDoLink: string;
   /** Rótulo do "Artigo •" acima do título, na página do post. */
   rotuloDoArtigo: string;
@@ -197,7 +216,6 @@ export interface ConteudoDoBlog {
    * escritos por post, no CMS; os botões são navegação do site e valem para
    * todos — por isso moram aqui, e não em cada publicação.
    */
-  botoesDoCta: { primario: LinkDeNavegacao; secundario: LinkDeNavegacao };
 }
 
 /* -------------------------------------------------------------------------- */
@@ -222,7 +240,10 @@ export interface ConteudoFaleConosco {
   metadados: Metadados;
   hero: HeroDePagina;
 
-  informacoes: CabecalhoDeSecao;
+  informacoes: CabecalhoDeSecao & {
+    /** Texto abaixo do telefone e do e-mail, apontando para o formulário. */
+    orientacao?: string;
+  };
 
   formulario: {
     titulo: string;
@@ -233,8 +254,8 @@ export interface ConteudoFaleConosco {
     sucesso: string;
     /** Mensagem quando o e-mail digitado é inválido. */
     emailInvalido: string;
-    /** Aviso de que ainda não há integração. Remover quando houver backend. */
-    aviso: string;
+    /** Mensagem quando o envio falha (servidor ou ActiveCampaign fora do ar). */
+    erroNoEnvio: string;
   };
 }
 

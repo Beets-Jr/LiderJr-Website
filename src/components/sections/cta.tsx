@@ -9,8 +9,10 @@ import {
   Section,
   Text,
 } from "@/components/ui";
+import { faleConosco } from "@/content/fale-conosco";
 import { cn } from "@/lib/cn";
-import type { ChamadaParaAcao, Depoimento } from "@/types/comum";
+import type { ChamadaParaAcao, ConviteDoFormulario, Depoimento } from "@/types/comum";
+import { FormularioDeContato, type OrigemDoFormulario } from "./contact-form";
 
 /* -------------------------------------------------------------------------- */
 /* Peças compartilhadas                                                        */
@@ -43,8 +45,8 @@ function Botoes({
 }
 
 /**
- * O texto da chamada, sem a caixa. Reaproveitado pelo CTA da Home, pelo CTA
- * das páginas de serviço e pelo painel escuro das páginas de detalhe.
+ * O texto da chamada, sem a caixa. Reaproveitado pelo CTA da Home e pelo CTA
+ * das páginas de serviço.
  */
 export function TextoDaChamada({
   chamada,
@@ -109,9 +111,11 @@ export function CTATestimonialColumns({ depoimento, chamada }: CTATestimonialPro
               <Text size="sm" weight="semibold" tone="onDark">
                 {depoimento.autor}
               </Text>
-              <Text size="xs" tone="onDarkFaint">
-                {depoimento.cargo}
-              </Text>
+              {depoimento.cargo ? (
+                <Text size="xs" tone="onDarkFaint">
+                  {depoimento.cargo}
+                </Text>
+              ) : null}
             </div>
           </figcaption>
         </Card>
@@ -123,15 +127,39 @@ export function CTATestimonialColumns({ depoimento, chamada }: CTATestimonialPro
 }
 
 /* -------------------------------------------------------------------------- */
-/* Painel escuro dentro de seção clara — páginas de case e de post             */
+/* Cartão com formulário — fim das páginas de case e de post                  */
 /* -------------------------------------------------------------------------- */
 
-export function CTAPanel({ chamada }: { chamada: ChamadaParaAcao }) {
+/**
+ * O convite (título e texto, escritos no CMS por case ou post) e, embaixo, o
+ * formulário do Fale Conosco em formato horizontal. Os campos e mensagens são
+ * os mesmos de src/content/fale-conosco.ts; o que muda é a origem: aqui vai a
+ * própria página, não a anterior.
+ */
+export function CTAComFormulario({
+  convite,
+  origem,
+}: {
+  convite: ConviteDoFormulario;
+  origem: OrigemDoFormulario;
+}) {
   return (
     <Section spacing="tight">
       <Container>
-        <Card tone="invertido" padding="xl">
-          <TextoDaChamada chamada={chamada} centralizado />
+        <Card tone="raised" padding="xl">
+          <Heading as="h2" level="section">
+            {convite.titulo}
+          </Heading>
+          <Text size="lg" tone="muted" className="mt-6 max-w-2xl">
+            {convite.descricao}
+          </Text>
+
+          <FormularioDeContato
+            conteudo={faleConosco.formulario}
+            formato="horizontal"
+            origem={origem}
+            className="mt-10"
+          />
         </Card>
       </Container>
     </Section>

@@ -53,7 +53,7 @@ export function ServiceCardCompacto({
       </Heading>
 
       <Text size="base" tone="muted" className="mt-3">
-        {servico.descricao}
+        {servico.descricaoNaHome ?? servico.descricao}
       </Text>
 
       <ul className="mt-6 flex flex-wrap gap-1.5">

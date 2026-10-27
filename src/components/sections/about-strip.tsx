@@ -35,9 +35,11 @@ export function AboutStrip({ conteudo }: { conteudo: ConteudoDaHome["sobre"] }) 
             {conteudo.titulo}
           </Heading>
 
-          <Text className="mt-6" tone="muted">
-            {conteudo.paragrafo}
-          </Text>
+          {conteudo.paragrafos.map((paragrafo, indice) => (
+            <Text key={indice} className={indice === 0 ? "mt-6" : "mt-4"} tone="muted">
+              {paragrafo}
+            </Text>
+          ))}
 
           <ul className="mt-8 flex flex-col gap-3">
             {conteudo.checklist.itens.map((item) => (

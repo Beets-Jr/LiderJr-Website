@@ -64,12 +64,15 @@ export default async function PaginaDeServico({ params }: Props) {
         conteudo={{
           eyebrow: paginaDeServicos.hero.eyebrow,
           titulo: servico.titulo,
-          descricao: servico.descricao,
+          descricao: detalhe.descricaoDoTopo ?? servico.descricao,
           imagemDeFundo: detalhe.imagemDeFundo,
         }}
       />
 
-      <SobreOServico conteudo={detalhe.sobre} tags={servico.tags} />
+      <SobreOServico
+        conteudo={detalhe.sobre}
+        tags={detalhe.tagsDaPagina ?? servico.tags}
+      />
       <MetodologiaDoServico conteudo={detalhe.metodologia} />
       <ResultadosDoServico conteudo={detalhe.resultados} />
 

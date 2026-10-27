@@ -4,7 +4,7 @@ import type { ConteudoDeCases } from "@/types/paginas";
 /**
  * Textos da PÁGINA DE LISTAGEM /cases.
  * Os cases em si vivem em src/content/cases/ (um arquivo por case).
- * As opções do filtro saem sozinhas do campo `categoria` de cada case.
+ * As opções do filtro saem sozinhas do grupo do serviço de cada case.
  */
 export const paginaDeCases: ConteudoDeCases = {
   metadados: {
@@ -14,11 +14,11 @@ export const paginaDeCases: ConteudoDeCases = {
   },
 
   hero: {
-    eyebrow: "Resultados Comprovados",
+    eyebrow: "Resultados na prática",
     titulo: "Nossos Cases",
     descricao:
-      "Conheça os projetos desenvolvidos pela Líder Jr. e o impacto real que a Engenharia de Produção gerou na produtividade e no faturamento dos nossos clientes.",
-    imagemDeFundo: comoFundo(imagens.dashboardIndicadores),
+      "Conheça projetos desenvolvidos pela Líder Jr. e os resultados alcançados a partir de soluções aplicadas para atender às necessidades de nossos clientes.",
+    imagemDeFundo: comoFundo(imagens.apertoDeMaosComCliente),
   },
 
   filtro: {
@@ -30,18 +30,7 @@ export const paginaDeCases: ConteudoDeCases = {
     },
   },
 
-  rotuloComPagina: "Ver resultados completos",
-  rotuloSemPagina: "Case em breve",
-
-  impacto: {
-    eyebrow: "Impacto do Projeto",
-    titulo: "Resultados em números",
-  },
-
-  botoesDoCta: {
-    primario: { label: "Fale Conosco", href: "/fale-conosco" },
-    rotuloDoServico: "Conhecer o serviço",
-  },
+  rotuloComPagina: "Ver case completo",
 
   // Textos que aparecem nas páginas individuais de case.
   navegacaoDeDetalhe: {

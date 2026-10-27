@@ -2,9 +2,11 @@
 
 import { useMemo, useState } from "react";
 import { Container, Section } from "@/components/ui";
+import { CATEGORIAS_DO_BLOG } from "@/content/blog/categorias";
+import { grupos } from "@/content/servicos/grupos";
 import { filtrarPorCategoria, montarCategorias } from "@/lib/categorias";
 import type { Case } from "@/types/case";
-import type { Material } from "@/types/material";
+import { TIPOS_DE_MATERIAL, type Material } from "@/types/material";
 import type {
   ConteudoDeCases,
   ConteudoDeMateriais,
@@ -12,7 +14,7 @@ import type {
 } from "@/types/paginas";
 import type { Post } from "@/types/post";
 import { CaseList } from "./case-list";
-import { CategoryFilter, EstadoVazio } from "./category-filter";
+import { BarraDeFiltros, CategoryFilter, EstadoVazio } from "./category-filter";
 import { MaterialCard } from "./material-card";
 import { FeaturedPost, PostCard } from "./post-card";
 
@@ -28,6 +30,7 @@ import { FeaturedPost, PostCard } from "./post-card";
 function useFiltro<T extends { categoria: string }>(
   itens: T[],
   rotuloTodos: string,
+  ordem?: readonly string[],
 ): {
   categorias: string[];
   ativa: string;
@@ -37,8 +40,8 @@ function useFiltro<T extends { categoria: string }>(
   const [ativa, setAtiva] = useState(rotuloTodos);
 
   const categorias = useMemo(
-    () => montarCategorias(itens, rotuloTodos),
-    [itens, rotuloTodos],
+    () => montarCategorias(itens, rotuloTodos, ordem),
+    [itens, rotuloTodos, ordem],
   );
 
   const filtrados = useMemo(
@@ -51,6 +54,9 @@ function useFiltro<T extends { categoria: string }>(
 
 /* -------------------------------------------------------------------------- */
 
+const ORDEM_DOS_GRUPOS = grupos.map((g) => g.titulo);
+const ORDEM_DO_BLOG = CATEGORIAS_DO_BLOG.map((c) => c.titulo);
+
 export function ListagemDeCases({
   cases,
   conteudo,
@@ -58,9 +64,12 @@ export function ListagemDeCases({
   cases: Case[];
   conteudo: ConteudoDeCases;
 }) {
+  // As categorias dos cases são os grupos de serviço: aparecem na mesma
+  // ordem do menu e de /servicos.
   const { categorias, ativa, selecionar, filtrados } = useFiltro(
     cases,
     conteudo.filtro.rotuloTodos,
+    ORDEM_DOS_GRUPOS,
   );
 
   return (
@@ -75,11 +84,7 @@ export function ListagemDeCases({
       <Section>
         <Container>
           {filtrados.length > 0 ? (
-            <CaseList
-              cases={filtrados}
-              rotuloComPagina={conteudo.rotuloComPagina}
-              rotuloSemPagina={conteudo.rotuloSemPagina}
-            />
+            <CaseList cases={filtrados} rotuloComPagina={conteudo.rotuloComPagina} />
           ) : (
             <EstadoVazio {...conteudo.filtro.vazio} />
           )}
@@ -98,18 +103,51 @@ export function ListagemDeMateriais({
   materiais: Material[];
   conteudo: ConteudoDeMateriais;
 }) {
-  const { categorias, ativa, selecionar, filtrados } = useFiltro(
-    materiais,
-    conteudo.filtro.rotuloTodos,
+  const { rotuloTodos } = conteudo.filtro;
+  const [tipoAtivo, setTipoAtivo] = useState(rotuloTodos);
+  const [categoriaAtiva, setCategoriaAtiva] = useState(rotuloTodos);
+
+  // Só aparecem opções que têm algum material, na ordem fixa de cada lista —
+  // a dos formatos e a dos grupos de serviço.
+  const tipos = useMemo(
+    () => [
+      rotuloTodos,
+      ...TIPOS_DE_MATERIAL.filter((t) => materiais.some((m) => m.tipo === t)),
+    ],
+    [materiais, rotuloTodos],
+  );
+  const categorias = useMemo(
+    () => montarCategorias(materiais, rotuloTodos, ORDEM_DOS_GRUPOS),
+    [materiais, rotuloTodos],
+  );
+
+  // Os dois filtros se somam: "Planilha" + "Gestão Financeira" mostra só as
+  // planilhas de gestão financeira.
+  const filtrados = useMemo(
+    () =>
+      filtrarPorCategoria(materiais, categoriaAtiva, rotuloTodos).filter(
+        (m) => tipoAtivo === rotuloTodos || m.tipo === tipoAtivo,
+      ),
+    [materiais, tipoAtivo, categoriaAtiva, rotuloTodos],
   );
 
   return (
     <>
-      <CategoryFilter
-        categorias={categorias}
-        ativa={ativa}
-        onSelecionar={selecionar}
-        rotuloAcessivel={conteudo.filtro.rotuloAcessivel}
+      <BarraDeFiltros
+        fileiras={[
+          {
+            ...conteudo.filtro.tipo,
+            opcoes: tipos,
+            ativa: tipoAtivo,
+            onSelecionar: setTipoAtivo,
+          },
+          {
+            ...conteudo.filtro.categoria,
+            opcoes: categorias,
+            ativa: categoriaAtiva,
+            onSelecionar: setCategoriaAtiva,
+          },
+        ]}
       />
 
       <Section>
@@ -121,7 +159,6 @@ export function ListagemDeMateriais({
                   <MaterialCard
                     material={material}
                     rotuloDoBotao={conteudo.rotuloDoBotao}
-                    rotuloIndisponivel={conteudo.rotuloIndisponivel}
                   />
                 </li>
               ))}
@@ -144,29 +181,59 @@ export function ListagemDoBlog({
   posts: Post[];
   conteudo: ConteudoDoBlog;
 }) {
-  const { categorias, ativa, selecionar, filtrados } = useFiltro(
-    posts,
-    conteudo.filtro.rotuloTodos,
+  const {
+    categorias,
+    ativa,
+    selecionar,
+    filtrados: daCategoria,
+  } = useFiltro(posts, conteudo.filtro.rotuloTodos, ORDEM_DO_BLOG);
+  const [busca, setBusca] = useState("");
+
+  // A busca se soma à categoria e olha só o título.
+  const termo = normalizar(busca.trim());
+  const filtrados = useMemo(
+    () =>
+      termo
+        ? daCategoria.filter((p) => normalizar(p.titulo).includes(termo))
+        : daCategoria,
+    [daCategoria, termo],
   );
 
   // O post em destaque só aparece quando nenhum filtro está aplicado.
-  const mostrarDestaque = ativa === conteudo.filtro.rotuloTodos;
+  const mostrarDestaque = ativa === conteudo.filtro.rotuloTodos && !termo;
   const [destaque, ...restantes] = filtrados;
   const naGrade = mostrarDestaque ? restantes : filtrados;
 
   return (
     <>
-      <CategoryFilter
-        categorias={categorias}
-        ativa={ativa}
-        onSelecionar={selecionar}
-        rotuloAcessivel={conteudo.filtro.rotuloAcessivel}
+      <BarraDeFiltros
+        fileiras={[
+          {
+            opcoes: categorias,
+            ativa,
+            onSelecionar: selecionar,
+            rotuloAcessivel: conteudo.filtro.rotuloAcessivel,
+          },
+        ]}
+        busca={{
+          valor: busca,
+          onMudar: setBusca,
+          rotulo: conteudo.busca.rotulo,
+          placeholder: conteudo.busca.placeholder,
+        }}
       />
 
       <Section>
         <Container>
+          {/* Quem usa leitor de tela não vê a grade mudar enquanto digita. */}
+          <p role="status" className="sr-only">
+            {termo
+              ? `${filtrados.length} ${filtrados.length === 1 ? conteudo.busca.resultados.um : conteudo.busca.resultados.varios}`
+              : ""}
+          </p>
+
           {filtrados.length === 0 ? (
-            <EstadoVazio {...conteudo.filtro.vazio} />
+            <EstadoVazio {...(termo ? conteudo.busca.vazio : conteudo.filtro.vazio)} />
           ) : (
             <>
               {mostrarDestaque && destaque ? (
@@ -188,4 +255,12 @@ export function ListagemDoBlog({
       </Section>
     </>
   );
+}
+
+/** Minúsculas e sem acentos: "Gestão" acha "gestao" e vice-versa. */
+function normalizar(texto: string): string {
+  return texto
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .toLowerCase();
 }

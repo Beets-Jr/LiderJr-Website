@@ -23,13 +23,12 @@ export const metadata: Metadata = montarMetadata(home.metadados, "/", {
 });
 
 export default async function PaginaInicial() {
-  // Curadoria manual: um serviço de grupos diferentes, escolhidos pelo
-  // cliente para representar "Nossas áreas de atuação" — não é mais
-  // automático. Ver PENDENCIAS.md 2.3.
+  // Curadoria manual: serviços escolhidos pelo cliente para representar
+  // "Nossas áreas de atuação" — não é mais automático. Ver PENDENCIAS.md 2.3.
   const slugsEmDestaque = [
     "mapeamento-de-processos",
     "plano-de-negocios",
-    "pesquisa-de-mercado",
+    "cronoanalise",
   ] as const;
   const servicos = slugsEmDestaque
     .map((slug) => getServicoPorSlug(slug))
@@ -57,7 +56,7 @@ export default async function PaginaInicial() {
       <Section>
         <Container>
           <SectionHeader conteudo={home.servicos} />
-          <ul className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
             {servicos.map((servico) => (
               <li key={servico.slug} className="flex">
                 <ServiceCardCompacto
@@ -76,7 +75,7 @@ export default async function PaginaInicial() {
 
       <Section>
         <Container>
-          <SectionHeader conteudo={home.cases} />
+          <SectionHeader conteudo={home.cases} largo />
           <div className="mt-14">
             <CasesCarousel cases={cases} textos={home.cases.carrossel} />
           </div>

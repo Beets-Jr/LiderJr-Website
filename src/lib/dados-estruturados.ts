@@ -1,7 +1,7 @@
 import { site } from "@/content/site";
-import type { CaseComPagina } from "@/types/case";
+import type { Case } from "@/types/case";
 import type { LinkDeNavegacao } from "@/types/comum";
-import type { PostComPagina } from "@/types/post";
+import type { Post } from "@/types/post";
 import type { ServicoComPagina } from "@/types/servico";
 
 /**
@@ -16,9 +16,7 @@ import type { ServicoComPagina } from "@/types/servico";
  * Tudo sai do conteúdo que o site já tem — nada é escrito à mão aqui.
  *
  * Validar em https://search.google.com/test/rich-results depois de publicar.
- *
- * TODO: acrescentar `logo` à organização quando existir o logo oficial em PNG
- * (mínimo 112×112px). O favicon atual é provisório. Ver PENDENCIAS.md.
+
  * ============================================================================
  */
 
@@ -49,6 +47,9 @@ export function dadosDaOrganizacao(): NoDeDados {
     name: site.nomeCompleto,
     alternateName: site.nome,
     url: site.url,
+    // O cubo da marca em PNG quadrado (512×512) — o Google pede no mínimo
+    // 112×112 e não aceita SVG aqui. Ver components/layout/cubo-da-marca.tsx.
+    logo: absoluta("/imagens/marca/logo.png"),
     description: site.descricao,
     email: site.contato.email.texto,
     telephone: site.contato.telefone.href.replace(/^tel:/, ""),
@@ -86,7 +87,7 @@ export function dadosDaTrilha(...links: LinkDeNavegacao[]): NoDeDados {
   };
 }
 
-export function dadosDoPost(post: PostComPagina): NoDeDados {
+export function dadosDoPost(post: Post): NoDeDados {
   const url = absoluta(`/blog/${post.slug}`);
   return {
     "@type": "BlogPosting",
@@ -117,7 +118,7 @@ export function dadosDoServico(servico: ServicoComPagina): NoDeDados {
   };
 }
 
-export function dadosDoCase(item: CaseComPagina): NoDeDados {
+export function dadosDoCase(item: Case): NoDeDados {
   const url = absoluta(`/cases/${item.slug}`);
   return {
     "@type": "Article",

@@ -5,105 +5,91 @@ import type { Servico } from "@/types/servico";
  * ============================================================================
  * SERVIÇO: DRE
  * ============================================================================
- * ⚠️ CONTEÚDO PROVISÓRIO — serviço novo, criado só para a página existir.
- * Sem depoimento (opcional): melhor a seção ausente do que mais uma citação
- * inventada. Aguardando o texto definitivo do cliente. Ver PENDENCIAS.md.
+ * Topo, "Como funciona", metodologia e benefícios: texto da Líder Jr.
+ * ⚠️ Ainda provisório: o `cta`. Ver PENDENCIAS.md.
  * ============================================================================
  */
 export const dre: Servico = {
   slug: "dre",
   grupoId: "gestao-financeira",
   titulo: "DRE",
-  chamada: "Enxergue o lucro real do seu negócio!",
+  chamada: "Entenda onde sua empresa ganha e perde dinheiro!",
   descricao:
-    "Estruturamos a Demonstração do Resultado do Exercício para mostrar com clareza receita, custos, despesas e lucro.",
-  tags: ["DRE", "Resultado", "Indicadores"],
+    "Organizamos receitas, custos e despesas para mostrar de forma clara como o resultado do negócio é formado e apoiar uma análise mais precisa da rentabilidade.",
+  tags: ["Resultado", "Rentabilidade", "Finanças"],
   icone: "colunas",
-  imagem: imagens.painelDeGestao,
+  imagem: imagens.consultorComPlanilhaNoNotebook,
 
   detalhe: {
     metadados: {
       titulo: "DRE",
       descricao:
-        "Estruturação da Demonstração do Resultado do Exercício, organizando receitas, custos e despesas para mostrar com clareza se a empresa dá lucro.",
+        "Organizamos receitas, custos e despesas para mostrar como o resultado da empresa é formado e apoiar uma análise mais clara da rentabilidade do negócio.",
     },
 
-    imagemDeFundo: comoFundo(imagens.painelDeGestao),
+    descricaoDoTopo:
+      "Organizamos receitas, custos e despesas para mostrar como o resultado da empresa é formado e apoiar uma análise mais clara da rentabilidade do negócio.",
+
+    imagemDeFundo: comoFundo(imagens.consultorComPlanilhaNoNotebook),
 
     sobre: {
       eyebrow: "Como funciona",
-      titulo: "Saiba se a empresa dá lucro, com números",
+      titulo: "Entenda como o resultado da sua empresa é formado",
       paragrafos: [
-        "Caixa positivo no fim do mês não significa lucro — pode ser dinheiro de cliente que ainda vai virar despesa. A DRE ajuda a empresa a entender como seu resultado é formado, organizando com clareza as receitas, os custos e as despesas do período.",
-        "É um trabalho útil para quem não tem visibilidade clara sobre onde está ganhando ou perdendo dinheiro. Organizamos as contas da empresa na estrutura da DRE, da receita bruta ao lucro líquido, criando uma rotina simples para manter o relatório atualizado mês a mês e analisar a rentabilidade com mais precisão.",
+        "Organizamos receitas, custos e despesas para construir uma visão estruturada do desempenho financeiro da empresa.",
+        "Com a DRE, torna-se mais fácil identificar os principais fatores que impactam o resultado e analisar a rentabilidade do negócio.",
       ],
-      imagem: imagens.dashboardIndicadores,
+      imagem: imagens.consultorComPlanilhaNoNotebook,
     },
 
     metodologia: {
       eyebrow: "Metodologia",
-      titulo: "As etapas do trabalho",
+      titulo: "As etapas da nossa DRE",
       etapas: [
         {
           numero: "01",
           titulo: "Levantamento",
-          descricao:
-            "Levantamento dos dados financeiros da empresa no período analisado.",
+          descricao: "Coletamos os dados financeiros necessários para a análise.",
         },
         {
           numero: "02",
           titulo: "Organização",
-          descricao: "Organização das receitas, custos e despesas em uma única base.",
+          descricao: "Classificamos receitas, custos e despesas.",
         },
         {
           numero: "03",
-          titulo: "Estruturação",
-          descricao:
-            "Estruturação da DRE, do faturamento bruto ao lucro líquido do período.",
+          titulo: "Estruturação da DRE",
+          descricao: "Consolidamos as informações e estruturamos o demonstrativo.",
         },
         {
           numero: "04",
           titulo: "Análise",
           descricao:
-            "Análise dos resultados obtidos e dos principais indicadores de margem.",
-        },
-        {
-          numero: "05",
-          titulo: "Impactos",
-          descricao:
-            "Identificação dos principais impactos sobre o resultado, para saber onde agir primeiro.",
-        },
-        {
-          numero: "06",
-          titulo: "Recomendações",
-          descricao:
-            "Apresentação das recomendações e do modelo para manter a DRE atualizada mês a mês.",
+            "Avaliamos o resultado e identificamos os principais impactos e oportunidades.",
         },
       ],
     },
 
     resultados: {
-      titulo: "Por que estruturar a DRE?",
-      descricao:
-        "Sem DRE, decisão de preço, corte de custo e investimento são tomadas sem saber, de fato, quanto a empresa lucra.",
+      titulo: "Por que estruturar sua DRE?",
       itens: [
         {
-          icone: "grafico",
-          titulo: "Lucro Real Visível",
+          icone: "calculadora",
+          titulo: "Entenda a formação do resultado",
           descricao:
-            "Fica claro se a empresa lucra, quanto lucra e em qual parte da operação o resultado se forma.",
+            "Veja com clareza como receitas, custos e despesas se combinam para formar o resultado da empresa.",
         },
         {
-          icone: "escudo",
-          titulo: "Decisão Mais Segura",
+          icone: "lupa",
+          titulo: "Identifique os principais impactos",
           descricao:
-            "Cortar custo, mexer em preço ou investir passa a ser decisão baseada no resultado apurado.",
+            "Descubra quais itens mais influenciam o desempenho financeiro do negócio.",
         },
         {
-          icone: "check",
-          titulo: "Rotina Simples",
+          icone: "lampada",
+          titulo: "Tenha uma base para agir",
           descricao:
-            "A DRE passa a ser atualizada todo mês, sem depender de um levantamento do zero.",
+            "Use uma visão estruturada dos resultados para apoiar decisões e direcionar melhorias.",
         },
       ],
     },

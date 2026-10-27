@@ -1,10 +1,5 @@
-import type {
-  ChamadaParaAcao,
-  Depoimento,
-  Imagem,
-  Metadados,
-  NomeDeIcone,
-} from "./comum";
+import type { RenderableTreeNodes } from "@markdoc/markdoc";
+import type { ConviteDoFormulario, Imagem, Metadados } from "./comum";
 
 /**
  * ============================================================================
@@ -17,22 +12,17 @@ export interface ResumoDeCase {
   slug: string;
   /** Quem é o cliente. Ex.: "Indústria metalúrgica". */
   empresa: string;
-  /** O número de destaque. Ex.: "-35%". */
-  resultado: string;
-  /** O que o número mede. Ex.: "Tempo de produção". */
-  metrica: string;
   descricao: string;
-  tags: string[];
-  /** Usada no filtro da listagem. As opções do filtro saem daqui. */
+  /**
+   * O grupo do serviço feito no projeto ("Otimização de Processos"). É a
+   * etiqueta em destaque e alimenta o filtro da listagem.
+   */
   categoria: string;
+  /** O serviço feito no projeto. */
+  servico: { titulo: string; href?: string };
+  /** O ramo da empresa. Ex.: "Indústria". */
+  segmento: string;
   imagem: Imagem;
-}
-
-/** Um número de impacto exibido na barra lateral do case. */
-export interface NumeroDeImpacto {
-  icone: NomeDeIcone;
-  valor: string;
-  rotulo: string;
 }
 
 export interface DetalheDeCase {
@@ -40,24 +30,16 @@ export interface DetalheDeCase {
   imagemDeFundo: Imagem;
 
   /**
-   * As seções em prosa do case, na ordem em que aparecem.
-   * No exemplo migrado: "O Desafio", "A Solução", "Os Resultados".
+   * O texto do case, escrito livremente no editor do CMS e já transformado
+   * pelo Markdoc (ver src/lib/corpo-de-texto.ts). O formato recomendado é
+   * "O Desafio", "A Solução" e "Os Resultados" como subtítulos.
    */
-  secoes: { titulo: string; paragrafos: string[] }[];
+  corpo: RenderableTreeNodes;
 
-  depoimento?: Depoimento;
-
-  impacto?: {
-    eyebrow: string;
-    titulo: string;
-    numeros: NumeroDeImpacto[];
-  };
-
-  cta: ChamadaParaAcao;
+  cta: ConviteDoFormulario;
 }
 
+/** Todo case tem página própria: `detalhe` é obrigatório. */
 export interface Case extends ResumoDeCase {
-  detalhe?: DetalheDeCase;
+  detalhe: DetalheDeCase;
 }
-
-export type CaseComPagina = Case & { detalhe: DetalheDeCase };

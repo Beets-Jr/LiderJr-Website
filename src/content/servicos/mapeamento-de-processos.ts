@@ -16,31 +16,36 @@ export const mapeamentoDeProcessos: Servico = {
   slug: "mapeamento-de-processos",
   grupoId: "otimizacao-de-processos",
   titulo: "Mapeamento de Processos",
-  chamada: "Transforme eficiência em vantagem competitiva!",
+  chamada: "Processos mais claros, organizados e eficientes!",
   descricao:
-    "Identificamos gargalos e ineficiências na sua operação, propondo melhorias sustentadas em metodologias como BPMN e fluxogramas.",
-  tags: ["Lean", "BPMN", "VSM"],
+    "Entendemos como as atividades da sua empresa acontecem, identificamos gargalos, retrabalhos e desperdícios e propomos melhorias para tornar os processos mais organizados e padronizados.",
+  descricaoNaHome:
+    "Entendemos como sua operação funciona, identificamos gargalos, retrabalhos e desperdícios e estruturamos processos mais claros, padronizados e eficientes.",
+  tags: ["Processos", "Padronização", "Eficiência"],
   icone: "tendencia",
-  imagem: imagens.engenheiraLinhaMontagem,
+  imagem: imagens.consultoresDesenhandoProcesso,
 
   detalhe: {
     metadados: {
       titulo: "Mapeamento de Processos",
       descricao:
-        "Levantamos, documentamos e analisamos os processos da sua empresa com BPMN, fluxogramas e VSM para identificar gargalos, retrabalho e pontos de melhoria.",
+        "Entendemos como seus processos acontecem, identificamos gargalos, retrabalhos e desperdícios e propomos melhorias para torná-los mais claros, organizados e eficientes.",
     },
 
-    imagemDeFundo: comoFundo(imagens.engenheiraLinhaMontagem),
+    descricaoDoTopo:
+      "Entendemos como seus processos acontecem, identificamos gargalos, retrabalhos e desperdícios e propomos melhorias para torná-los mais claros, organizados e eficientes.",
+
+    imagemDeFundo: comoFundo(imagens.consultoresDesenhandoProcesso),
 
     sobre: {
       eyebrow: "Como funciona",
-      titulo: "Enxergue sua operação com clareza",
+      titulo: "Enxergue seus processos com clareza",
       paragrafos: [
-        "Levantamos, documentamos e analisamos os processos da sua empresa para identificar gargalos, retrabalho, atividades que não agregam valor e pontos em que a responsabilidade não está bem definida — antes de propor qualquer mudança.",
-        "Usamos metodologias consolidadas como BPMN, fluxogramas e Value Stream Mapping (VSM) para transformar processos informais em fluxos claros e mensuráveis. O trabalho também serve para empresas que precisam documentar e padronizar seus processos como preparação para certificações e normas, como a ISO 9001.",
+        "Entendemos como as atividades da sua empresa realmente acontecem, identificando gargalos, retrabalhos, desperdícios e pontos de melhoria.",
+        "A partir desse diagnóstico, estruturamos processos mais claros, organizados e padronizados, facilitando a execução das atividades e a definição de responsabilidades.",
       ],
       // No protótipo esta imagem eram figurinhas do Mario. Ver PENDENCIAS.md.
-      imagem: imagens.workshopPostIts,
+      imagem: imagens.consultoresDesenhandoProcesso,
     },
 
     metodologia: {
@@ -49,39 +54,27 @@ export const mapeamentoDeProcessos: Servico = {
       etapas: [
         {
           numero: "01",
-          titulo: "Entendimento",
+          titulo: "Levantamento",
           descricao:
-            "Compreensão do processo e do contexto da empresa antes de sair mapeando qualquer coisa.",
+            "Entendemos o processo atual, suas atividades, responsáveis e particularidades.",
         },
         {
           numero: "02",
-          titulo: "Levantamento",
+          titulo: "Mapeamento atual",
           descricao:
-            "Identificação das atividades e dos responsáveis por cada uma delas, entrevista a entrevista.",
+            "Estruturamos visualmente como o processo acontece hoje, tornando seu fluxo mais claro.",
         },
         {
           numero: "03",
-          titulo: "Mapeamento",
+          titulo: "Diagnóstico",
           descricao:
-            "Construção do fluxo atual em notação BPMN — o processo como ele realmente acontece hoje.",
+            "Identificamos gargalos, desperdícios, retrabalhos e oportunidades de melhoria.",
         },
         {
           numero: "04",
-          titulo: "Diagnóstico",
-          descricao:
-            "Identificação de gargalos, desperdícios e oportunidades de melhoria ao longo do fluxo.",
-        },
-        {
-          numero: "05",
           titulo: "Redesenho",
           descricao:
-            "Proposta de um processo otimizado — o fluxo como ele deveria ser.",
-        },
-        {
-          numero: "06",
-          titulo: "Entrega",
-          descricao:
-            "Documentação do processo e apresentação das melhorias propostas para a equipe.",
+            "Propomos um processo otimizado e documentamos as melhorias recomendadas.",
         },
       ],
     },
@@ -89,35 +82,27 @@ export const mapeamentoDeProcessos: Servico = {
     resultados: {
       titulo: "Por que mapear seus processos?",
       descricao:
-        "O mapeamento não é apenas um desenho. É uma ferramenta estratégica que gera impactos diretos nos resultados da sua empresa.",
+        "Ter clareza sobre como o trabalho acontece é o primeiro passo para melhorar a operação.",
       itens: [
         {
-          icone: "quedaGrafico",
-          titulo: "Redução de Desperdícios",
+          icone: "raio",
+          titulo: "Mais eficiência",
           descricao:
-            "Eliminamos passos desnecessários, reduzindo o tempo de ciclo da operação e cortando custos invisíveis que afetam sua margem.",
+            "Identifique atividades desnecessárias, gargalos e retrabalhos que prejudicam o desempenho.",
         },
         {
-          icone: "escudo",
-          titulo: "Responsabilidades Claras",
+          icone: "listaDeChecagem",
+          titulo: "Mais padronização",
           descricao:
-            "Cada atividade passa a ter um responsável definido, diminuindo a dependência de funcionários específicos.",
+            "Estruture processos e responsabilidades para tornar a execução mais consistente.",
         },
         {
-          icone: "award",
-          titulo: "Pronta para Certificação",
+          icone: "olho",
+          titulo: "Mais clareza operacional",
           descricao:
-            "Processos documentados e padronizados facilitam a preparação da empresa para certificações como a ISO 9001.",
+            "Visualize como as atividades se conectam e onde estão as principais oportunidades de melhoria.",
         },
       ],
-    },
-
-    depoimento: {
-      texto:
-        "O mapeamento mostrou gargalos que a gente nem enxergava mais de tão acostumados com a rotina. Em poucas semanas reduzimos o tempo de produção reorganizando o fluxo de ponta a ponta.",
-      autor: "Roberto Martins",
-      cargo: "Gerente de Produção, Indústria Metalúrgica",
-      iniciais: "RM",
     },
 
     cta: {

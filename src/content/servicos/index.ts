@@ -27,9 +27,9 @@ import { previsaoDeDemanda } from "./previsao-de-demanda";
  *   3. acrescente na lista `servicos`, com o `grupoId` do grupo certo
  * A página nasce sozinha. Ver CONTEUDO.md.
  *
- * Os onze serviços têm página. O texto de dez delas é PROVISÓRIO e está
- * marcado no topo de cada arquivo — precisa da revisão da Líder Jr. antes de
- * publicar. Ver PENDENCIAS.md.
+ * Os onze serviços têm página, com texto da Líder Jr. Ainda provisória: a
+ * chamada final (CTA) de cada uma — marcada no topo de cada arquivo.
+ * Ver PENDENCIAS.md.
  *
  * Os grupos (Otimização de Processos, Empreendedorismo, Gestão Financeira,
  * Captação de Clientes) vêm de ./grupos.ts e não têm página própria — servem

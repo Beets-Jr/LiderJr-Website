@@ -35,7 +35,8 @@ export interface CabecalhoDeSecao {
 export interface Depoimento {
   texto: string;
   autor: string;
-  cargo: string;
+  /** Opcional: quando o depoimento é assinado só pela empresa, fica de fora. */
+  cargo?: string;
   /** Duas letras exibidas no círculo. Ex.: "MA" para Marcos Andrade. */
   iniciais: string;
 }
@@ -49,6 +50,15 @@ export interface ChamadaParaAcao {
   botaoSecundario?: LinkDeNavegacao;
   /** Frase pequena abaixo dos botões. */
   observacao?: string;
+}
+
+/**
+ * Título e texto acima do formulário de contato no fim de um case ou post.
+ * Escritos no CMS, um por publicação.
+ */
+export interface ConviteDoFormulario {
+  titulo: string;
+  descricao: string;
 }
 
 /** Um passo de uma linha do tempo de processo. */

@@ -1,4 +1,4 @@
-import { imagens } from "@/content/imagens";
+import { imagens, logosDeClientes } from "@/content/imagens";
 import type { ConteudoDaHome } from "@/types/paginas";
 
 /**
@@ -22,16 +22,16 @@ export const home: ConteudoDaHome = {
     tituloDestaque: "Líder Jr.",
     titulo: "Consultoria Empresarial",
     descricao: "A solução que você precisa, com a qualidade que só um Líder tem!",
-    botaoPrimario: { label: "Solicitar orçamento", href: "/fale-conosco" },
+    botaoPrimario: { label: "Agendar diagnóstico gratuito", href: "/fale-conosco" },
     botaoSecundario: { label: "Conheça nossos serviços", href: "/servicos" },
-    imagem: imagens.engenheiraLinhaMontagem,
+    imagem: imagens.equipeComBandeiraEmEvento,
   },
 
   estatisticas: [
-    { valor: "+100", rotulo: "Projetos entregues" },
-    { valor: "17", rotulo: "Anos de atuação" },
-    { valor: "97%", rotulo: "Satisfação dos clientes" },
-    { valor: "+50", rotulo: "Clientes atendidos" },
+    { valor: "+130", rotulo: "Projetos entregues" },
+    { valor: "17", rotulo: "Anos de experiência" },
+    { valor: "97", rotulo: "Net Promoter Score" },
+    { valor: "2º", rotulo: "Melhor Eng. de Produção do Brasil" },
   ],
 
   servicos: {
@@ -43,46 +43,47 @@ export const home: ConteudoDaHome = {
   sobre: {
     eyebrow: "Sobre nós",
     titulo: "Conhecimento acadêmico aplicado aos desafios da sua empresa",
-    paragrafo:
-      "A Líder Jr. conecta conhecimento acadêmico, inovação e supervisão especializada para desenvolver projetos que geram resultados reais para empresas de diferentes segmentos.",
+    paragrafos: [
+      "Fundada em 2008 por estudantes de Engenharia de Produção da UFSCar Sorocaba, a Líder Jr. nasceu para aproximar o conhecimento acadêmico dos desafios reais enfrentados pelas empresas.",
+      "Desde então, desenvolvemos projetos de consultoria em diferentes áreas da Engenharia de Produção, unindo aprendizado, metodologias de gestão e acompanhamento especializado para gerar valor aos nossos clientes.",
+    ],
     checklist: {
       itens: [
         "Projetos personalizados para cada negócio",
-        "Equipe supervisionada por especialistas",
-        "Soluções acessíveis com alto impacto",
+        "Equipe acompanhada por especialistas",
+        "Metodologias consolidadas e soluções aplicáveis",
       ],
     },
     link: { label: "Conheça a Líder Jr.", href: "/quem-somos" },
-    imagem: imagens.equipeReuniaoMesa,
-    selo: { valor: "+100", rotulo: "Projetos entregues" },
+    imagem: imagens.equipeReunidaAoArLivre,
+    selo: { valor: "+130", rotulo: "Projetos entregues" },
   },
 
   clientes: {
     eyebrow: "Confiança",
     titulo: "Nossos Clientes",
     rotulo: "Empresas que já trabalharam com a Líder Jr.",
-    // TODO: nomes fictícios herdados do protótipo. Substituir pelos clientes
-    // reais (ou remover a seção) quando a lista for definida. Ver PENDENCIAS.md.
-    //
-    // PARA COLOCAR O LOGO: declare a imagem em src/content/imagens.ts (arquivo
-    // em public/imagens/clientes/, PNG ou SVG) e acrescente `logo:` ao item —
-    // ex.: { nome: "TechSul", logo: logosDeClientes.techSul }. Quem tiver logo
-    // mostra a imagem; quem não tiver continua mostrando o nome escrito.
+    // Logos em public/imagens/clientes/, declarados em src/content/imagens.ts.
+    // Cliente sem logo: deixe só `nome` — aparece o nome escrito no lugar.
     linhaSuperior: [
-      { nome: "Empresa Alpha" },
-      { nome: "Grupo Nova" },
-      { nome: "TechSul" },
-      { nome: "Metalúrgica Vitória" },
-      { nome: "AgroPrime" },
-      { nome: "Comércio Estrela" },
+      { nome: "Gerdau", logo: logosDeClientes.gerdau },
+      { nome: "Allnova", logo: logosDeClientes.allnova },
+      { nome: "Grupo Curae Saluti", logo: logosDeClientes.grupoCuraeSaluti },
+      { nome: "Leal Dutra", logo: logosDeClientes.lealDutra },
+      { nome: "Interativa", logo: logosDeClientes.interativa },
+      { nome: "Leak Inspection", logo: logosDeClientes.leakInspection },
+      { nome: "Neri", logo: logosDeClientes.neri },
+      { nome: "Röti Gastronomia", logo: logosDeClientes.rotiGastronomia },
     ],
     linhaInferior: [
-      { nome: "Indústria Confiança" },
-      { nome: "GrupoMax" },
-      { nome: "Vertex Solutions" },
-      { nome: "Prime Foods" },
-      { nome: "Construtora Horizonte" },
-      { nome: "LogTech" },
+      { nome: "Laticrete", logo: logosDeClientes.laticrete },
+      { nome: "Casa do Motoqueiro", logo: logosDeClientes.casaDoMotoqueiro },
+      { nome: "Falcon Tecnologia", logo: logosDeClientes.falconTecnologia },
+      { nome: "Flash", logo: logosDeClientes.flash },
+      { nome: "Galbilec", logo: logosDeClientes.galbilec },
+      { nome: "Insight Consultoria", logo: logosDeClientes.insightConsultoria },
+      { nome: "Dalata", logo: logosDeClientes.dalata },
+      { nome: "TWE Automação Industrial", logo: logosDeClientes.tweAutomacao },
     ],
   },
 
@@ -90,16 +91,13 @@ export const home: ConteudoDaHome = {
     eyebrow: "Cases em destaque",
     titulo: "Resultados que geram confiança",
     descricao:
-      "Conheça alguns projetos desenvolvidos pela Líder Jr. e o impacto que nossas soluções proporcionaram para diferentes empresas.",
+      "Conheça projetos desenvolvidos pela Líder Jr. e os resultados alcançados por nossos clientes.",
     link: { label: "Ver todos", href: "/cases" },
     carrossel: {
       anterior: "Case anterior",
       proximo: "Próximo case",
       regiao: "Carrossel de cases em destaque",
       rotuloComPagina: "Ver case",
-      // Os cases sem página própria (ver PENDENCIAS.md) mostram este aviso no
-      // lugar do link, como já acontece na listagem de /cases.
-      rotuloSemPagina: "Case em breve",
     },
   },
 
@@ -112,18 +110,17 @@ export const home: ConteudoDaHome = {
   ctaFinal: {
     depoimento: {
       texto:
-        "A Líder Jr. reorganizou nosso processo produtivo em poucas semanas. O nível de profissionalismo superou nossa expectativa para uma consultoria júnior.",
-      autor: "Marcos Andrade",
-      cargo: "Diretor de Operações, Indústria Metalúrgica",
-      iniciais: "MA",
+        "Trabalho realizado com muito empenho e profissionalismo! Projeto fundamental para decisões em nosso mercado de trabalho",
+      autor: "Laticrete",
+      iniciais: "LA",
     },
     chamada: {
       eyebrow: "O próximo case pode ser o seu",
-      titulo: "Para ter um resultado parecido, basta entrar em contato.",
+      titulo: "O próximo resultado pode ser o da sua empresa.",
       descricao:
-        "Assim como fizemos por essa empresa, nossa equipe pode entender os desafios do seu negócio e propor uma solução personalizada — sem custo no diagnóstico inicial.",
-      botaoPrimario: { label: "Quero um resultado assim", href: "/fale-conosco" },
-      botaoSecundario: { label: "Ver outros cases", href: "/cases" },
+        "Conte para nossa equipe quais desafios sua empresa enfrenta. A partir de um diagnóstico inicial, podemos entender seu cenário e identificar como a Líder Jr. pode ajudar.",
+      botaoPrimario: { label: "Fale com nossa equipe", href: "/fale-conosco" },
+      botaoSecundario: { label: "Conheça outros cases", href: "/cases" },
     },
   },
 };

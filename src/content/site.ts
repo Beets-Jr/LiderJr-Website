@@ -86,7 +86,7 @@ export const site: ConteudoDoSite = {
           { label: "Cases", href: "/cases" },
           { label: "Materiais", href: "/materiais" },
           { label: "Blog", href: "/blog" },
-          { label: "Fale Conosco", href: "/fale-conosco" },
+          { label: "Fale com a Líder Jr.", href: "/fale-conosco" },
         ],
       },
     ],

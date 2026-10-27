@@ -16,8 +16,8 @@ export const paginaDeServicos: ConteudoDeServicos = {
     eyebrow: "O que oferecemos",
     titulo: "Nossos Serviços",
     descricao:
-      "Soluções completas em Engenharia de Produção para empresas que querem crescer com inteligência e eficiência.",
-    imagemDeFundo: comoFundo(imagens.workshopPostIts),
+      "Soluções em Engenharia de Produção desenvolvidas para organizar processos, apoiar decisões e melhorar os resultados da sua empresa.",
+    imagemDeFundo: comoFundo(imagens.consultoresComNotebookECalculadora),
   },
 
   rotuloDoCard: "Conhecer a solução",
@@ -27,35 +27,35 @@ export const paginaDeServicos: ConteudoDeServicos = {
     eyebrow: "Do primeiro contato à entrega",
     titulo: "Nosso processo",
     descricao:
-      "Quatro etapas, sem atalhos. Cada projeto passa pelo mesmo rigor — da escuta inicial até o relatório final nas suas mãos.",
+      "Desenvolvemos cada projeto de forma personalizada, seguindo quatro etapas estruturadas — do entendimento da necessidade à entrega da solução.",
     etapas: [
       {
         numero: "01",
         icone: "lupa",
         titulo: "Diagnóstico",
         descricao:
-          "Ouvimos o time, mapeamos o cenário atual e identificamos as causas reais do problema — não só os sintomas.",
+          "Entendemos o contexto da empresa, seus desafios e necessidades para identificar as principais oportunidades e definir o direcionamento do projeto.",
       },
       {
         numero: "02",
         icone: "documento",
         titulo: "Proposta",
         descricao:
-          "Traduzimos o diagnóstico em um plano claro: escopo, cronograma, entregáveis e investimento, sem letra miúda.",
+          "Estruturamos uma solução personalizada, com escopo, etapas, entregáveis, prazo e investimento alinhados às necessidades identificadas.",
       },
       {
         numero: "03",
         icone: "pessoas",
         titulo: "Execução",
         descricao:
-          "Equipe dedicada em campo, com acompanhamento semanal e supervisão acadêmica em cada etapa crítica.",
+          "Desenvolvemos o projeto aplicando as metodologias e ferramentas adequadas a cada serviço, com acompanhamento contínuo ao longo das etapas.",
       },
       {
         numero: "04",
         icone: "check",
         titulo: "Entrega",
         descricao:
-          "Resultado documentado e validado, com plano de continuidade para depois que o projeto termina.",
+          "Consolidamos as análises e resultados do projeto, apresentamos as recomendações e entregamos os materiais desenvolvidos para apoiar a aplicação das melhorias.",
       },
     ],
   },

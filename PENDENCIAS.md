@@ -7,47 +7,39 @@ estão os pontos de integração futura.
 
 ## 1. Bloqueios de conteúdo — precisam do cliente
 
-### 1.1 Filiações (Quem Somos) — o mais urgente
+### 1.1 Filiações (Quem Somos) — resolvido
 
-No protótipo, os quatro textos desta seção **descreviam outra empresa júnior, a
-Beets Jr.**, e os logos eram carregados do site dela
-(`beetsjr.com.br/assets/…`). Um dos textos dizia literalmente _"A **Beets Jr.**
-se filiou ao NuCa em julho de 2020"_.
-
-Os textos foram substituídos por marcadores `[TEXTO PENDENTE — …]` e os logos por
-placeholders com a palavra "LOGO PENDENTE".
-
-**A Líder Jr. precisa fornecer:** os quatro textos corretos e os quatro logos
-(ou a autorização de uso deles).
+Os quatro textos foram fornecidos pela Líder Jr. Os logos foram extraídos dos
+SVGs da página Quem Somos da Beets Jr. (`beetsjr.com.br/assets/…`), a pedido do
+cliente, e agora ficam no próprio projeto. Se houver versões oficiais melhores,
+basta trocar os arquivos.
 📄 `src/content/quem-somos.ts` · `public/imagens/filiacoes/`
 
 ### 1.2 Imagens
 
-Todas as sete imagens são de banco, herdadas do protótipo. Precisam virar fotos
-reais da Líder Jr.
+As fotos das páginas fixas (home, quem somos, serviços, cases, materiais, blog e
+fale conosco) agora são fotos reais da Líder Jr., extraídas do PDF "Fotos para o
+site". Cada serviço usa a mesma foto no card, no topo e em "Como funciona".
 📄 `src/content/imagens.ts` · `public/imagens/`
 
-Dois pontos merecem atenção:
+Pontos que merecem atenção:
 
-- **`apresentacao-para-equipe.jpg` tem marca de terceiro visível** — há um telão
-  escrito "Proof ALL HANDS 4/24/2019" e um painel de parede com outra marca. É
-  usada em Quem Somos, Fale Conosco e no case da rede de clínicas.
+- **Quatro fotos vieram em resolução baixa** no PDF: Cronoanálise (327×581),
+  Previsão de Demanda (422×750), Planejamento Estratégico (500×750) e Análise de
+  Custos (500×334). Em telas grandes elas ficam borradas — vale pedir os
+  arquivos originais.
 - **Duas imagens se repetem no blog.** Os posts de KPIs e de Gestão de Estoques
   usam a mesma foto de dashboard, consequência da substituição descrita em 3.1.
 
-### 1.3 Logo e favicon
+### 1.3 Logo e favicon — resolvido
 
-Não existe arquivo de logo. O protótipo usava um ícone genérico (`Box`, do
-lucide) dentro de um quadrado laranja, e é isso que está no ar. O favicon
-(`src/app/icon.svg`) e a imagem de compartilhamento
-(`src/app/opengraph-image.tsx`) seguem a mesma solução provisória.
-
-**Falta:** o símbolo oficial em SVG, e uma versão em PNG de pelo menos
-112×112px. O PNG entra como `logo` nos dados estruturados da organização — é o
-logo que o Google pode exibir no painel da empresa nos resultados de busca — e
-o símbolo substitui o "L" das imagens de compartilhamento.
-📄 `src/components/layout/logo.tsx` · `src/app/icon.svg` ·
-`src/lib/dados-estruturados.ts` · `src/lib/imagem-de-compartilhamento.tsx`
+O cubo da Líder Jr. foi redesenhado em vetor a partir do PNG oficial do site
+antigo (mesma geometria, espessuras e cor, #CC6538) e está no cabeçalho, no
+rodapé, no favicon, nas imagens de compartilhamento e no `logo` dos dados
+estruturados (PNG 512×512). O nome ao lado do cubo é texto na fonte do site;
+se a marca tiver o logotipo completo em vetor, ele pode substituir a composição.
+📄 `src/components/layout/cubo-da-marca.tsx` · `src/components/layout/logo.tsx`
+· `src/app/icon.svg` · `public/imagens/marca/logo.png`
 
 ### 1.4 Redes sociais — resolvido
 
@@ -57,62 +49,42 @@ da Líder Jr.
 
 ### 1.5 Arquivos dos materiais
 
-Os seis materiais existem, mas **nenhum arquivo foi entregue**. Os botões
-aparecem desabilitados, escritos "Em breve".
+O arquivo para download agora é obrigatório em todo material. Como nenhum
+arquivo real foi entregue, os seis materiais têm uma **imagem de teste** (PNG
+com o título e o aviso "Arquivo de teste") — o botão funciona e baixa essa
+imagem.
 
-No protótipo o botão parecia ativo e não fazia nada — preferimos ser honestos
-com o visitante.
+A "Imagem do card", também obrigatória, usa por enquanto fotos genéricas do
+banco de imagens do site.
 
-**Para liberar:** abra o material em `/keystatic` e envie o arquivo no campo
-"Arquivo para download". Ele vai para `public/materiais/` sozinho.
-📄 `content/materiais/*.yaml`
+**Antes de publicar:** abra cada material em `/keystatic` e troque o arquivo
+no campo "Arquivo para download" pelo PDF ou planilha real, e a imagem do card
+por uma que represente o material.
+📄 `content/materiais/*.yaml` · `public/materiais/`
 
-### 1.6 Texto de dez páginas de serviço
+### 1.6 Páginas de serviço — CTA e depoimentos
 
-Só a página de **Mapeamento de Processos** tem texto validado. As outras dez
-foram escritas para o site ficar completo e descrevem cada serviço de forma
-genérica, no formato do modelo — **precisam da revisão da Líder Jr. antes de
-publicar**, porque afirmam o que a empresa entrega:
+Topo, "Como funciona", metodologia e benefícios das onze páginas já têm o texto
+da Líder Jr. Continua provisória, em todas, a **chamada final** (`cta`): o
+título, o texto e principalmente o `checklist` "O que você recebe", que descreve
+entregáveis concretos e ainda cita ferramentas do texto antigo (BPMN, curva
+ABC, OKR…).
 
-- **Pesquisa de Mercado, Planejamento Estratégico, Gestão de Estoques, Análise
-  de Custos** já existiam (as duas últimas com nome e URL novos desde a
-  reorganização em grupos, ver 2.3) e têm texto provisório herdado.
-- **Cronoanálise, Plano de Negócios, Previsão de Demanda, DRE, Gestão de Fluxo
-  de Caixa, Plano de Marketing** são seis páginas novas, criadas na
-  reorganização em grupos só para o site sair completo — o texto é ainda mais
-  provisório que o das demais e nenhuma delas tem depoimento (ver abaixo).
-
-Cada arquivo abre com um aviso de conteúdo provisório. Revise em especial a
-`metodologia` (as quatro etapas) e o `checklist` do CTA ("O que você recebe"),
-que descrevem entregáveis concretos.
-
-**Cinco depoimentos são forjados** — pessoa, empresa e fala inventadas, a
-pedido, para a seção existir enquanto não há citação real: Pesquisa de
-Mercado, Planejamento Estratégico, Gestão de Estoques, Análise de Custos, e o
-de Mapeamento de Processos, herdado do protótipo. Cada um está marcado com
-`⚠️ DEPOIMENTO FORJADO` na linha acima do campo. As seis páginas novas não têm
-depoimento — o campo é opcional e foi deixado de fora em vez de inventar mais
-seis citações falsas.
-
-> **Publicar depoimento inventado como se fosse de cliente é propaganda
-> enganosa.** Antes de o site ir ao ar: substituir por depoimentos reais, com
-> autorização de quem falou, ou apagar o campo `depoimento` — ele é opcional e a
-> página continua íntegra sem ele.
+Os depoimentos (cinco deles inventados) foram removidos de todas as páginas de
+serviço. O campo `depoimento` continua opcional: se a Líder Jr. tiver uma
+citação real, com autorização de quem falou, basta preenchê-lo e a seção volta
+a aparecer.
 
 📄 `src/content/servicos/*.ts`
 
-### 1.7 Clientes da faixa da Home — nomes e logos
+### 1.7 Clientes da faixa da Home — resolvido
 
-Os 12 nomes que passam na faixa da Home são fictícios, herdados do protótipo
-("Empresa Alpha", "TechSul", "GrupoMax"…). Substituir pelos clientes reais — ou
-remover a seção.
-
-A faixa já aceita **logo em imagem** (PNG ou SVG) no lugar do nome escrito.
-Cada item é `{ nome, logo? }`: com `logo`, aparece a imagem; sem, o nome. Para
-ligar um logo, declare o arquivo em `src/content/imagens.ts` (guardado em
-`public/imagens/clientes/`) e acrescente o campo ao item. O `nome` continua
-obrigatório mesmo com logo — é ele que vira o `alt` de fallback e o que sobra
-se a imagem falhar.
+Os 16 logos vieram da seção "Alguns de nossos clientes" do site antigo
+(liderjr.com), com margens recortadas e fundo branco tornado transparente
+(menos na Leal Dutra, cujo fundo amarelo é parte da marca). Se a Líder Jr. tiver
+versões melhores (SVG ou PNG maior), basta trocar o arquivo em
+`public/imagens/clientes/` e atualizar `largura`/`altura` em `imagens.ts`.
+Cliente sem logo: deixe só `nome` no item, e aparece o nome escrito.
 📄 `src/content/home.ts` · `src/content/imagens.ts`
 
 ### 1.8 Domínio de produção — confirmado
@@ -182,8 +154,9 @@ coluna "Serviços" virou duas colunas lado a lado (6 links cada, incluindo
 sem subtítulo de grupo, é só uma divisão visual da mesma lista.
 
 Na Home, a seção "Nossas áreas de atuação" **é curada, não automática**: o
-cliente escolheu Mapeamento de Processos, Plano de Negócios e Pesquisa de
-Mercado — um de três grupos diferentes, nessa ordem. Para trocar, edite
+cliente escolheu Mapeamento de Processos, Plano de Negócios e Cronoanálise,
+nessa ordem (Pesquisa de Mercado saiu da Home a pedido do cliente; a página do
+serviço continua no ar). Para trocar, edite
 `slugsEmDestaque` em `src/app/(site)/page.tsx`.
 
 📄 `src/content/servicos/grupos.ts` · `src/content/servicos/index.ts` ·
@@ -270,34 +243,65 @@ O card do blog dizia "15 Jun 2026 · 6 min"; a página do post dizia "17 Jul, 20
 
 ## 4. Pontos de integração futura
 
-### 4.1 Formulário de contato — o único que existe
+### 4.1 Formulário de contato — ActiveCampaign
 
-O formulário valida no navegador e **não envia para lugar nenhum**. Todo o envio
-está isolado em um arquivo:
+O formulário envia para **/api/contato**, que valida de novo e repassa para o
+ActiveCampaign. A chave de API fica só no servidor.
 
-📄 **`src/lib/formulario-de-contato.ts`**
+📄 `src/app/api/contato/route.ts` · `src/lib/active-campaign.ts`
 
-```ts
-// TODO: integração — trocar por um POST real.
-console.info("[formulário de contato] dados que seriam enviados:", dados);
-```
+A cada envio: o contato é criado ou atualizado pelo e-mail (não duplica), e a
+mensagem vira uma **nota** no contato — com todos os campos, o formulário de
+onde veio e a página de origem.
 
-A assinatura da função e o tipo do resultado já estão prontos para uma chamada
-real. O componente `ContactForm` não precisa mudar.
+O mesmo formulário aparece em dois lugares: no **Fale Conosco** (a página de
+origem é a anterior, ver `src/lib/origem-do-visitante.ts`) e, em formato
+horizontal, no **fim de cada case e de cada post** (a página de origem é o
+próprio case ou post). Os campos são os de `src/content/fale-conosco.ts` nos
+dois. Se configurados, o contato entra
+numa lista e recebe uma tag, que é o que dispara automações.
 
-Além dos campos visíveis, o envio leva `paginaDeOrigem`: a página do site em que
-a pessoa estava antes do formulário (ex.: `/servicos/dre`), ou, se ela entrou
-direto no Fale Conosco, `externo: <site>` / `acesso direto`. Ver
-`src/lib/origem-do-visitante.ts`. A integração deve repassar esse campo.
+**Falta para ir ao ar:** configurar as variáveis no `.env.local` e na Vercel.
 
-Ao integrar, **remova também o aviso** exibido abaixo do botão — está em
-`src/content/fale-conosco.ts`, campo `formulario.aviso`.
+| Variável                 | Onde achar no ActiveCampaign                             |
+| ------------------------ | -------------------------------------------------------- |
+| `ACTIVECAMPAIGN_URL`     | Settings → Developer → URL (`https://conta.api-us1.com`) |
+| `ACTIVECAMPAIGN_API_KEY` | Settings → Developer → Key                               |
+| `ACTIVECAMPAIGN_LIST_ID` | Opcional. Número no endereço da lista                    |
+| `ACTIVECAMPAIGN_TAG_ID`  | Opcional. Número no endereço da tag                      |
+
+Sem as duas primeiras, o formulário mostra a mensagem de erro (campo
+`formulario.erroNoEnvio` em `src/content/fale-conosco.ts`) e o motivo aparece
+no log do servidor. Lista ou tag com ID errado não bloqueiam o envio: o contato
+é salvo e o problema só vai para o log.
+
+**Contra robôs**, duas barreiras em `/api/contato`:
+
+- **campo-armadilha** (`website`), invisível para pessoas. Preenchido, a rota
+  responde "sucesso" e não envia nada — sem dar pista ao robô;
+- **reCAPTCHA v3**, invisível (ninguém clica em nada). Envios com nota abaixo
+  de 0,5 são recusados com a mensagem de erro normal. Ajuste `NOTA_MINIMA` em
+  `src/lib/recaptcha-servidor.ts` se pessoas reais forem barradas — as notas
+  aparecem no painel do reCAPTCHA. Se o Google estiver fora do ar, o envio
+  passa (a armadilha continua valendo).
+
+| Variável                         | Onde achar                                                             |
+| -------------------------------- | ---------------------------------------------------------------------- |
+| `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` | google.com/recaptcha/admin → criar site do tipo **v3** → chave do site |
+| `RECAPTCHA_SECRET_KEY`           | Mesma tela → chave secreta                                             |
+
+Cadastre no reCAPTCHA o domínio de produção e `localhost`. Sem a chave secreta
+a verificação fica desligada (log de aviso) — só para desenvolvimento. A chave
+do site entra no build: depois de configurá-la na Vercel, faça um novo deploy.
+
+Testado contra um ActiveCampaign simulado (contato, nota, lista, tag, erros de
+validação e ausência de credenciais). **Ainda não testado contra a conta real.**
 
 ### 4.2 CMS — implantado
 
 Blog, Cases e Materiais são editados em **/keystatic**, uma interface gráfica
 que escreve arquivos YAML em `content/`. Publicar vira commit; o commit dispara
-o deploy; o site continua 100% estático.
+o deploy; as páginas continuam estáticas.
 
 **Falta para ir ao ar:** criar o GitHub App (o próprio Keystatic guia pela tela
 de configuração), levar as variáveis do `.env.local` para a Vercel e apontar
@@ -316,7 +320,8 @@ e testado editando e salvando um post e um case pelo /keystatic.)
 
 ### 4.3 Fora de escopo por decisão
 
-Não há backend, banco de dados nem analytics. Serviços e os textos das páginas
+Não há banco de dados nem analytics; o único trecho de servidor é o envio do
+formulário (4.1). Serviços e os textos das páginas
 seguem em arquivo TypeScript — são páginas de produto e cópia institucional,
 não publicações.
 
@@ -338,13 +343,12 @@ só dá para fazer com o site no ar:
 **Compartilhamento.** Toda página tem prévia em 1200×630: a Home e as
 listagens usam a imagem padrão; cada serviço, case e post com página própria
 ganha um cartão com o próprio título, gerado sozinho — inclusive as
-publicações futuras, sem ninguém produzir imagem. Publicação sem página própria
-não tem link, então não tem o que compartilhar.
+publicações futuras, sem ninguém produzir imagem.
 📄 `src/lib/imagem-de-compartilhamento.tsx`
 
-Hoje só 1 dos 6 posts e 1 dos 6 cases têm página própria. Para o Google, o
-que não tem página não existe — cada post publicado com página é uma porta de
-entrada a mais pela busca.
+Todo post e todo case tem página própria (obrigatório no CMS). Cinco posts e
+cinco cases estão com **texto de teste**, marcado no primeiro parágrafo —
+trocar pelo texto real antes de publicar.
 
 ---
 

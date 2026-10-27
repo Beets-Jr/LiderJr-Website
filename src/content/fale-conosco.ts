@@ -3,26 +3,28 @@ import type { ConteudoFaleConosco } from "@/types/paginas";
 
 export const faleConosco: ConteudoFaleConosco = {
   metadados: {
-    titulo: "Fale Conosco",
+    titulo: "Fale com a Líder Jr.",
     descricao:
       "Conte para a Líder Jr. o desafio da sua empresa. Nossa equipe retorna com uma proposta de consultoria em Engenharia de Produção sob medida.",
   },
 
   hero: {
     eyebrow: "Entre em contato",
-    titulo: "Fale Conosco",
+    titulo: "Fale com a Líder Jr.",
     descricao:
-      "Conte-nos sobre o seu desafio. Nossa equipe entrará em contato para entender sua necessidade e apresentar a melhor solução.",
-    imagemDeFundo: comoFundo(imagens.apresentacaoParaEquipe),
+      "Conte-nos sobre sua necessidade e agende um diagnóstico gratuito com a nossa equipe.",
+    imagemDeFundo: comoFundo(imagens.equipeComBandeiraEmEvento),
   },
 
   informacoes: {
     eyebrow: "Contato",
     titulo: "Vamos conversar",
+    orientacao:
+      "Preencha as informações a seguir e nossa equipe entrará em contato para entender sua necessidade, tirar suas dúvidas e iniciar seu diagnóstico gratuito.",
   },
 
   formulario: {
-    titulo: "Solicite um orçamento",
+    titulo: "Agende seu diagnóstico gratuito",
 
     /**
      * PARA MUDAR O FORMULÁRIO: acrescente, remova ou reordene os campos abaixo.
@@ -33,23 +35,16 @@ export const faleConosco: ConteudoFaleConosco = {
       {
         nome: "nome",
         label: "Nome",
-        placeholder: "Seu nome completo",
+        placeholder: "Qual é o seu nome?",
         tipo: "texto",
         obrigatorio: true,
         mensagemDeErro: "Informe seu nome.",
-      },
-      {
-        nome: "empresa",
-        label: "Empresa",
-        placeholder: "Nome da sua empresa",
-        tipo: "texto",
-        obrigatorio: false,
-        mensagemDeErro: "",
+        larguraTotal: true,
       },
       {
         nome: "email",
         label: "E-mail",
-        placeholder: "voce@empresa.com.br",
+        placeholder: "seunome@email.com",
         tipo: "email",
         obrigatorio: true,
         mensagemDeErro: "Informe seu e-mail.",
@@ -64,8 +59,8 @@ export const faleConosco: ConteudoFaleConosco = {
       },
       {
         nome: "mensagem",
-        label: "Mensagem",
-        placeholder: "Conte um pouco sobre seu projeto...",
+        label: "Como podemos te ajudar?",
+        placeholder: "Conte brevemente sobre sua necessidade, projeto ou desafio!",
         tipo: "textarea",
         obrigatorio: true,
         mensagemDeErro: "Escreva sua mensagem.",
@@ -73,14 +68,12 @@ export const faleConosco: ConteudoFaleConosco = {
       },
     ],
 
-    rotuloDoBotao: "Enviar mensagem",
+    rotuloDoBotao: "Fale com um especialista",
     rotuloEnviando: "Enviando...",
     sucesso: "Mensagem registrada! Em breve nossa equipe entra em contato.",
     emailInvalido: "Confira o e-mail digitado.",
 
-    // TODO: integração — remover este aviso quando o formulário passar a enviar
-    // de verdade. Ver src/lib/formulario-de-contato.ts e PENDENCIAS.md.
-    aviso:
-      "Este formulário ainda não está conectado a um servidor: os dados não são enviados. Use o telefone ou o e-mail ao lado para falar com a gente.",
+    erroNoEnvio:
+      "Não conseguimos enviar sua mensagem agora. Tente de novo em instantes ou fale com a gente pelo telefone ou e-mail ao lado.",
   },
 };

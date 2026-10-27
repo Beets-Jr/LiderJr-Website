@@ -5,127 +5,98 @@ import type { Servico } from "@/types/servico";
  * ============================================================================
  * SERVIÇO: PESQUISA DE MERCADO
  * ============================================================================
- * ⚠️ CONTEÚDO PROVISÓRIO — escrito para dar corpo à página e mostrar o layout
- * funcionando. Precisa de revisão da Líder Jr. antes de publicar.
- * Ver PENDENCIAS.md. O `depoimento` também é FORJADO: pessoa e fala inventadas,
- * a pedido, só para a seção existir enquanto não há uma citação real.
+ * Topo, "Como funciona", metodologia e benefícios: texto da Líder Jr.
+ * ⚠️ Ainda provisório: o `cta`. Ver PENDENCIAS.md.
  * ============================================================================
  */
 export const pesquisaDeMercado: Servico = {
   slug: "pesquisa-de-mercado",
   grupoId: "captacao-de-clientes",
   titulo: "Pesquisa de\nMercado",
-  chamada: "Decisões certeiras com dados reais do seu setor!",
+  chamada: "Conheça seu público antes de tomar decisões!",
   descricao:
-    "Realizamos pesquisas quantitativas e qualitativas para embasar decisões estratégicas com dados reais do seu segmento.",
-  tags: ["Dados", "Análise", "Estratégia"],
+    "Investigamos necessidades, preferências, comportamentos e percepções do seu público para reduzir incertezas e gerar informações que apoiem decisões de marketing e de negócio.",
+  descricaoNaHome:
+    "Entendemos seu mercado e seu público por meio de dados, identificando comportamentos, necessidades e oportunidades para apoiar decisões mais seguras.",
+  tags: ["Dados", "Público", "Estratégia"],
   icone: "pessoas",
-  imagem: imagens.painelDeGestao,
+  imagem: imagens.dashboardNoNotebook,
 
   detalhe: {
     metadados: {
       titulo: "Pesquisa de Mercado",
       descricao:
-        "Pesquisas quantitativas e qualitativas para entender clientes, concorrência e potencial de demanda antes de investir em um novo produto ou praça.",
+        "Investigamos necessidades, preferências e comportamentos do público para gerar informações que reduzam incertezas e apoiem decisões de marketing e de negócio.",
     },
 
-    imagemDeFundo: comoFundo(imagens.painelDeGestao),
+    descricaoDoTopo:
+      "Investigamos necessidades, preferências e comportamentos do público para gerar informações que reduzam incertezas e apoiem decisões de marketing e de negócio.",
+
+    tagsDaPagina: ["Mercado", "Dados", "Público"],
+
+    imagemDeFundo: comoFundo(imagens.dashboardNoNotebook),
 
     sobre: {
       eyebrow: "Como funciona",
-      titulo: "Decida com dados, não com achismo",
+      titulo: "Conheça seu mercado antes de tomar decisões",
       paragrafos: [
-        "A pesquisa de mercado ajuda a empresa a conhecer melhor o público em que está inserida — suas necessidades, preferências, comportamentos e percepções sobre produtos ou serviços. Esse conhecimento reduz incertezas na tomada de decisão e serve de base para estratégias de marketing e de negócio.",
-        "Um exemplo de aplicação já realizado pela Líder foi uma pesquisa de público-alvo para uma empresa do setor de massas de pizza: definimos a região de interesse, estruturamos o instrumento de pesquisa, coletamos as respostas e fizemos uma análise detalhada para entender características e hábitos do público consumidor.",
+        "Estruturamos pesquisas para entender melhor o público e o contexto em que sua empresa está inserida.",
+        "A partir da coleta e análise de dados, identificamos comportamentos, necessidades, preferências e oportunidades que podem apoiar decisões de marketing e de negócio.",
       ],
-      imagem: imagens.equipeReuniaoMesa,
+      imagem: imagens.dashboardNoNotebook,
     },
 
     metodologia: {
       eyebrow: "Metodologia",
-      titulo: "As etapas da pesquisa",
+      titulo: "As etapas da nossa pesquisa de mercado",
       etapas: [
         {
           numero: "01",
-          titulo: "Objetivo",
-          descricao:
-            "Definição do objetivo da pesquisa: a decisão que os dados precisam sustentar.",
+          titulo: "Definição da pesquisa",
+          descricao: "Estabelecemos objetivo, público e região de estudo.",
         },
         {
           numero: "02",
-          titulo: "Público e Região",
-          descricao: "Definição do público a ser ouvido e da região de estudo.",
+          titulo: "Estruturação e coleta",
+          descricao:
+            "Desenvolvemos a metodologia e o questionário e realizamos a coleta das respostas.",
         },
         {
           numero: "03",
-          titulo: "Instrumento",
-          descricao: "Estruturação do questionário e da metodologia da pesquisa.",
+          titulo: "Tratamento e análise",
+          descricao:
+            "Organizamos os dados e identificamos padrões e informações relevantes.",
         },
         {
           numero: "04",
-          titulo: "Coleta",
-          descricao: "Coleta das respostas junto ao público e à região definidos.",
-        },
-        {
-          numero: "05",
-          titulo: "Tratamento",
-          descricao: "Organização e tratamento dos dados coletados em campo.",
-        },
-        {
-          numero: "06",
-          titulo: "Análise",
+          titulo: "Insights e recomendações",
           descricao:
-            "Análise dos resultados para entender o comportamento do público pesquisado.",
-        },
-        {
-          numero: "07",
-          titulo: "Insights",
-          descricao:
-            "Identificação de insights e oportunidades a partir do que a pesquisa revelou.",
-        },
-        {
-          numero: "08",
-          titulo: "Conclusões",
-          descricao:
-            "Apresentação das conclusões e recomendações práticas para a decisão da empresa.",
+            "Consolidamos os resultados e apresentamos conclusões e oportunidades identificadas.",
         },
       ],
     },
 
     resultados: {
-      titulo: "Por que pesquisar antes de decidir?",
-      descricao:
-        "Pesquisa é o investimento que evita o investimento errado — custa uma fração do que custa lançar um produto que o mercado não queria.",
+      titulo: "Por que realizar uma pesquisa de mercado?",
       itens: [
         {
-          icone: "alvo",
-          titulo: "Risco Reduzido",
-          descricao:
-            "Você testa a hipótese com o mercado antes de comprometer capital em estoque, estrutura ou campanha.",
-        },
-        {
           icone: "pessoas",
-          titulo: "Cliente Compreendido",
+          titulo: "Conhecimento do público",
           descricao:
-            "Descobrimos o que pesa na decisão de compra do seu público — que raramente é o que a empresa imagina.",
+            "Entenda necessidades, preferências e comportamentos dos consumidores.",
         },
         {
-          icone: "bussola",
-          titulo: "Direção Clara",
+          icone: "barras",
+          titulo: "Menos incerteza",
+          descricao: "Utilize dados reais como apoio para decisões.",
+        },
+        {
+          icone: "lampada",
+          titulo: "Identificação de oportunidades",
           descricao:
-            "O relatório termina em recomendações objetivas, ligadas à decisão que motivou a pesquisa.",
+            "Encontre insights que podem direcionar estratégias de marketing e negócio.",
         },
       ],
-    },
-
-    // ⚠️ DEPOIMENTO FORJADO — pessoa e fala inventadas, a pedido, só para a
-    // seção aparecer enquanto não há depoimento real. TROCAR ANTES DE PUBLICAR.
-    depoimento: {
-      texto:
-        "Íamos abrir a segunda loja em outro bairro por intuição. A pesquisa mostrou que o público que compra de nós estava do outro lado da cidade. Mudamos o endereço antes de assinar o contrato.",
-      autor: "Diego Ramalho",
-      cargo: "Sócio-proprietário, Varejo de Materiais de Construção",
-      iniciais: "DR",
     },
 
     cta: {

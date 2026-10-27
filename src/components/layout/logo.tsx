@@ -1,14 +1,11 @@
-import { Box } from "lucide-react";
 import { cn } from "@/lib/cn";
+import { CuboDaMarca, VIEWBOX_DO_LOGO } from "./cubo-da-marca";
 import { LinkDaMesmaPagina } from "./link-da-mesma-pagina";
 
 /**
- * Logo da Líder Jr.
- *
- * TODO: o protótipo não tinha arquivo de logo — usava o ícone `Box` do lucide
- * dentro de um quadrado laranja. Quando a marca entregar o SVG oficial, troque
- * o conteúdo deste componente. Nada mais no site precisa mudar.
- * Ver PENDENCIAS.md.
+ * Logo da Líder Jr.: o cubo da marca, um traço vertical e o nome — a mesma
+ * composição do logo do site antigo. O cubo vem de cubo-da-marca.tsx; o nome é
+ * texto, para continuar nítido e acompanhar a cor de cada fundo.
  */
 const tonesDoNome = {
   onDark: "text-on-dark",
@@ -31,12 +28,17 @@ export function Logo({
        — mesma regra dos links do rodapé. Ver LinkDaMesmaPagina. */
     <LinkDaMesmaPagina
       href="/"
-      className={cn("group inline-flex items-center gap-2 rounded-sm", className)}
+      className={cn(
+        "group inline-flex items-center gap-3 rounded-sm",
+        tonesDoNome[tone],
+        className,
+      )}
       aria-label={`${nome} — página inicial`}
     >
-      <span className="bg-brand text-brand-fg flex h-9 w-9 items-center justify-center rounded-sm">
-        <Box size={22} strokeWidth={1.6} aria-hidden="true" />
-      </span>
+      {/* Tamanho fixo, casado com VIEWBOX_DO_LOGO: é o que deixa as arestas
+          nítidas. Mudou o tamanho, refaça o enquadramento. */}
+      <CuboDaMarca viewBox={VIEWBOX_DO_LOGO} className="h-9 w-[33px] shrink-0" />
+      <span aria-hidden="true" className="h-7 w-px bg-current opacity-25" />
       <span className={cn("font-heading text-xl font-bold", tonesDoNome[tone])}>
         {nome}
       </span>

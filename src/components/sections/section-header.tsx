@@ -15,6 +15,8 @@ export interface SectionHeaderProps {
   alinhamento?: "esquerda" | "centro";
   /** Tag do título. Ajuste para manter a hierarquia da página correta. */
   as?: "h2" | "h3";
+  /** Libera o bloco de texto até 4xl, para uma descrição caber em uma linha. */
+  largo?: boolean;
   className?: string;
 }
 
@@ -23,6 +25,7 @@ export function SectionHeader({
   tone = "light",
   alinhamento = "esquerda",
   as = "h2",
+  largo = false,
   className,
 }: SectionHeaderProps) {
   const centro = alinhamento === "centro";
@@ -36,7 +39,7 @@ export function SectionHeader({
         className,
       )}
     >
-      <div className={cn("max-w-2xl", centro && "text-center")}>
+      <div className={cn(largo ? "max-w-4xl" : "max-w-2xl", centro && "text-center")}>
         {/* O eyebrow é laranja também sobre o escuro — é assim no hero das
             páginas internas e no painel de impacto do case. Sobre o preto o
             laranja dá 7,82:1, bem acima do mínimo do WCAG AA. */}

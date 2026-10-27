@@ -17,8 +17,8 @@ export const paginaDoBlog: ConteudoDoBlog = {
     eyebrow: "Conhecimento",
     titulo: "Blog Líder Jr.",
     descricao:
-      "Conteúdo prático e acessível sobre Engenharia de Produção, gestão empresarial e inovação para empreendedores e estudantes.",
-    imagemDeFundo: comoFundo(imagens.painelDeGestao),
+      "Conteúdos práticos sobre gestão, processos e negócios para apoiar decisões e melhorias na sua empresa.",
+    imagemDeFundo: comoFundo(imagens.notebookComPostDoBlog),
   },
 
   filtro: {
@@ -30,15 +30,21 @@ export const paginaDoBlog: ConteudoDoBlog = {
     },
   },
 
+  // Busca só pelo título, ignorando maiúsculas e acentos.
+  busca: {
+    rotulo: "Buscar artigos pelo título",
+    placeholder: "Buscar pelo título…",
+    resultados: { um: "artigo encontrado", varios: "artigos encontrados" },
+    vazio: {
+      titulo: "Nenhum artigo encontrado",
+      descricao: "Nenhum título corresponde à sua busca. Tente outra palavra.",
+    },
+  },
+
   rotuloDoLink: "Ler artigo",
   rotuloDoArtigo: "Artigo",
 
   // Textos que aparecem nas páginas individuais de post.
-  botoesDoCta: {
-    primario: { label: "Fale Conosco", href: "/fale-conosco" },
-    secundario: { label: "Ver outros artigos", href: "/blog" },
-  },
-
   navegacaoDeDetalhe: {
     voltar: { label: "Voltar para o Blog", href: "/blog" },
     relacionados: {

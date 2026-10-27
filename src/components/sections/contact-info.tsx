@@ -16,7 +16,9 @@ export function ContactInfo({
 
   return (
     <div>
-      <SectionHeader conteudo={conteudo} />
+      <SectionHeader
+        conteudo={{ eyebrow: conteudo.eyebrow, titulo: conteudo.titulo }}
+      />
 
       <ul className="mt-8 flex flex-col gap-6">
         {itens.map((item) => {
@@ -45,6 +47,12 @@ export function ContactInfo({
           );
         })}
       </ul>
+
+      {conteudo.orientacao ? (
+        <Text tone="muted" className="mt-8">
+          {conteudo.orientacao}
+        </Text>
+      ) : null}
     </div>
   );
 }

@@ -114,7 +114,7 @@ acento, sem espaço e com hífen: `equipe-2026.jpg`.
 **Passo 2 — abra `src/content/imagens.ts`** e ajuste a imagem que quer trocar:
 
 ```ts
-equipeReuniaoMesa: {
+equipeEmEscritorio: {
   src: "/imagens/equipe-2026.jpg",
   alt: "Equipe da Líder Jr. reunida na sala de projetos",
   largura: 1920,
@@ -154,13 +154,23 @@ imagem sem descrição (`alt`): o formulário acusa antes de salvar. E se um
 arquivo chegar quebrado no repositório, o build falha em vez de publicar uma
 página torta.
 
-**Post e case sem texto pronto.** Existe a chave "tem página própria". Desmarcada,
-o item aparece como card na listagem e não vira link — que é como cinco dos seis
-posts e cinco dos seis cases estão hoje. Marque quando o texto estiver pronto.
+**Todo post e todo case tem página própria.** O texto (o corpo do artigo, ou a
+história do case) é obrigatório: o CMS não salva um item incompleto. O título e a
+descrição que aparecem no Google são o título e o resumo (ou a descrição) do
+próprio item — não há campo separado para isso.
 
-**O corpo do artigo é montado em blocos** — parágrafo, subtítulo, citação, lista,
-lista numerada e imagem. Escolha o tipo, escreva, arraste para reordenar.
-Ninguém digita HTML, e é por isso que todo artigo sai com a mesma cara.
+**O texto de posts e cases é um editor contínuo**, como um documento:
+escreva direto e use a barra de ferramentas para subtítulo, **negrito**,
+_itálico_, link, citação e listas. Pelo botão de inserir há dois blocos
+próprios do site: **Imagem com legenda** e **Lista numerada com títulos** (cada
+item com um título em destaque e uma descrição). Ninguém digita HTML nem
+Markdown — o arquivo é gravado em `content/blog/*.mdoc` ou
+`content/cases/*.mdoc` e o site desenha cada parte com os estilos dele, por isso
+todo texto sai com a mesma cara.
+
+**Formato recomendado para cases** (o editor não obriga): três subtítulos —
+"O Desafio", "A Solução" e "Os Resultados" —, cada um com um ou dois
+parágrafos. Os seis cases de hoje seguem esse formato.
 
 > **Endereço (slug):** é o nome do arquivo e a URL. Mudar o slug de algo já
 > publicado quebra os links antigos e a posição no Google. Na dúvida, não mude.
@@ -253,22 +263,32 @@ vira link e o item entra no mapa do site — dentro da seção do grupo escolhid
 Pelo CMS, em `/keystatic` → **Materiais** → criar. O arquivo do PDF ou da
 planilha entra no próprio formulário, no campo "Arquivo para download".
 
-Sem arquivo, o material aparece na listagem com o botão desabilitado, escrito
-"Em breve" — que é como os seis materiais de hoje estão.
+O arquivo e a "Imagem do card" (a foto do topo do card, como nos cases e
+posts) são obrigatórios: o CMS não salva um material sem eles. Os seis
+materiais de hoje têm arquivos de teste e fotos do banco de imagens do site no
+lugar (ver PENDENCIAS.md).
 
 ---
 
 ## Trocar as categorias dos filtros
 
-**Não existe lista de categorias para manter.** Os botões de filtro em Cases,
-Materiais e Blog são montados a partir do campo `categoria` de cada item.
+**Blog:** a categoria de cada post é de lista fechada — um dos 4 grupos de
+serviço ou "Atualidades" (ver `src/content/blog/categorias.ts`). O filtro só
+mostra as categorias que têm algum post.
 
-Para criar uma categoria nova, basta escrevê-la em algum item. Para eliminar
-uma, tire-a do último item que a usa. Uma categoria sem nenhum item nunca
-aparece — assim ninguém clica num filtro que só mostra tela vazia.
+**Materiais têm dois filtros, ambos de lista fechada:** o tipo (E-book,
+Planilha ou Checklist) e a categoria, que é um dos 4 grupos de serviço. Os dois
+se combinam, e só aparecem as opções que têm algum material.
 
-Atenção: `"Logística"` e `"Logistica"` são categorias **diferentes**. Copie e
-cole para não errar o acento.
+**Cases:** a categoria é o grupo do serviço escolhido no campo
+"Serviço" (Otimização de Processos, Empreendedorismo, Gestão Financeira ou
+Captação de Clientes) e aparece na ordem do menu. Abaixo do título, o case
+mostra o serviço e o segmento da empresa. O segmento é texto livre: para dois
+cases do mesmo ramo, escreva igual ("Varejo" e "varejo" aparecem diferentes).
+
+As listas fechadas não se editam pelo CMS. Os grupos ficam em
+`src/content/servicos/grupos.ts` e valem para cases, materiais e blog de uma
+vez. Os tipos de material ficam em `src/types/material.ts`.
 
 ---
 

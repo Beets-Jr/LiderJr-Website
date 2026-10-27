@@ -1,100 +1,61 @@
 import { createReader } from "@keystatic/core/reader";
+import { montarCorpoDeTexto } from "@/lib/corpo-de-texto";
 import { montarImagem } from "@/lib/imagem";
-import type { BlocoDePost, Post, PostComPagina } from "@/types/post";
+import type { Post } from "@/types/post";
 import keystaticConfig from "../../../keystatic.config";
-import { paginaDoBlog } from "./pagina";
+import { CATEGORIAS_DO_BLOG } from "./categorias";
 
 /**
  * ============================================================================
  * REGISTRY DO BLOG
  * ============================================================================
- * Os posts vêm dos arquivos em `content/blog/*.yaml`, escritos pelo CMS em
+ * Os posts vêm dos arquivos em `content/blog/*.mdoc`, escritos pelo CMS em
  * /keystatic. Este arquivo é o ADAPTER: lê as entradas e converte cada uma para
  * o tipo `Post` — que é o que a Home, a listagem e a página do post consomem.
  *
- * Nada além deste arquivo sabe que o conteúdo vem de YAML.
- *
- * Um post só vira página quando o campo "tem página própria" está marcado no
- * CMS. Sem ele, o post aparece como card na listagem e não leva a lugar nenhum
- * — que é o estado de cinco dos seis posts de hoje.
+ * Cada arquivo traz os campos do card no topo e o texto do artigo embaixo.
+ * Nada além deste arquivo sabe disso.
  * ============================================================================
  */
 
 const leitor = createReader(process.cwd(), keystaticConfig);
 
-/** Uma entrada do CMS, já lida. O tipo sai do próprio schema. */
-type EntradaDePost = Awaited<ReturnType<typeof leitor.collections.posts.all>>[number];
-
-/**
- * Converte os blocos do CMS para `BlocoDePost`. O formato do CMS separa o tipo
- * (`discriminant`) do conteúdo (`value`); o do site guarda os dois juntos em
- * `tipo`. É só essa a diferença.
- */
-function montarCorpo(
-  corpo: NonNullable<EntradaDePost["entry"]["artigo"]["value"]>["corpo"],
-): BlocoDePost[] {
-  return corpo.map((bloco): BlocoDePost => {
-    switch (bloco.discriminant) {
-      case "subtitulo":
-        return { tipo: "subtitulo", texto: bloco.value };
-      case "citacao":
-        return {
-          tipo: "citacao",
-          texto: bloco.value.texto,
-          autor: bloco.value.autor || undefined,
-        };
-      case "lista":
-        return { tipo: "lista", itens: [...bloco.value] };
-      case "listaNumerada":
-        return { tipo: "listaNumerada", itens: bloco.value.map((i) => ({ ...i })) };
-      case "imagem":
-        return {
-          tipo: "imagem",
-          imagem: montarImagem(bloco.value.imagem.arquivo, bloco.value.imagem.alt),
-          legenda: bloco.value.legenda || undefined,
-        };
-      default:
-        return { tipo: "paragrafo", texto: bloco.value };
-    }
-  });
-}
+/** Uma entrada do CMS, já lida — com o corpo do artigo carregado. */
+type EntradaDePost = Awaited<
+  ReturnType<typeof leitor.collections.posts.all<[{ resolveLinkedFiles: true }]>>
+>[number];
 
 function montarPost({ slug, entry }: EntradaDePost): Post {
-  const resumo: Post = {
+  // O CMS grava o id; o site mostra o nome. Um id desconhecido é uma categoria
+  // apagada de categorias.ts — melhor o build falhar do que um card sem ela.
+  const categoria = CATEGORIAS_DO_BLOG.find((c) => c.id === entry.categoria);
+  if (!categoria) {
+    throw new Error(`Post "${slug}": categoria "${entry.categoria}" não existe.`);
+  }
+
+  return {
     slug,
     titulo: entry.titulo,
     resumo: entry.resumo,
     data: entry.data,
-    categoria: entry.categoria,
-    imagem: montarImagem(entry.imagem.arquivo, entry.imagem.alt),
-  };
-
-  const artigo = entry.artigo.discriminant ? entry.artigo.value : null;
-  if (!artigo) return resumo;
-
-  return {
-    ...resumo,
+    categoria: categoria.titulo,
+    imagem: montarImagem(entry.imagem.arquivo, entry.titulo),
     detalhe: {
-      // Sem título/descrição de SEO próprios, o post reaproveita os do card —
-      // um campo a menos para preencher, sem página nenhuma ficar sem metadado.
-      metadados: {
-        titulo: artigo.tituloSeo || entry.titulo,
-        descricao: artigo.descricaoSeo || entry.resumo,
-      },
-      corpo: montarCorpo(artigo.corpo),
-      cta: {
-        titulo: artigo.cta.titulo,
-        descricao: artigo.cta.descricao,
-        botaoPrimario: paginaDoBlog.botoesDoCta.primario,
-        botaoSecundario: paginaDoBlog.botoesDoCta.secundario,
-      },
+      // Título e descrição para o Google são os do próprio post — não há
+      // campo separado para isso no CMS.
+      metadados: { titulo: entry.titulo, descricao: entry.resumo },
+      corpo: montarCorpoDeTexto(entry.corpo.node, {
+        origem: `Post "${slug}"`,
+        altPadrao: entry.titulo,
+      }),
+      cta: { titulo: entry.cta.titulo, descricao: entry.cta.descricao },
     },
   };
 }
 
 /** Todos os posts, do mais recente para o mais antigo. */
 export async function getTodosPosts(): Promise<Post[]> {
-  const entradas = await leitor.collections.posts.all();
+  const entradas = await leitor.collections.posts.all({ resolveLinkedFiles: true });
   return entradas.map(montarPost).sort((a, b) => b.data.localeCompare(a.data));
 }
 
@@ -111,12 +72,9 @@ export async function getUltimosPosts(quantidade: number): Promise<Post[]> {
   return todos.slice(0, quantidade);
 }
 
-export async function getPostsComPagina(): Promise<PostComPagina[]> {
-  const todos = await getTodosPosts();
-  return todos.filter((p): p is PostComPagina => p.detalhe !== undefined);
-}
-
 export async function getPostPorSlug(slug: string): Promise<Post | undefined> {
-  const entrada = await leitor.collections.posts.read(slug);
+  const entrada = await leitor.collections.posts.read(slug, {
+    resolveLinkedFiles: true,
+  });
   return entrada ? montarPost({ slug, entry: entrada }) : undefined;
 }

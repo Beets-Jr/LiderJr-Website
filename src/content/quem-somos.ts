@@ -1,4 +1,9 @@
-import { comoFundo, imagens, logosDeFiliacao } from "@/content/imagens";
+import {
+  comoFundo,
+  imagens,
+  logosDeFiliacao,
+  logosDeParceiros,
+} from "@/content/imagens";
 import type { ConteudoQuemSomos } from "@/types/paginas";
 
 export const quemSomos: ConteudoQuemSomos = {
@@ -12,18 +17,18 @@ export const quemSomos: ConteudoQuemSomos = {
     eyebrow: "Nossa empresa",
     titulo: "Quem Somos",
     descricao:
-      "Somos a Líder Jr., empresa júnior do curso de Engenharia de Produção, formada por estudantes apaixonados por soluções que fazem diferença.",
-    imagemDeFundo: comoFundo(imagens.equipeReuniaoMesa),
+      "Somos a empresa júnior de Engenharia de Produção da UFSCar Sorocaba, formada por estudantes que transformam conhecimento acadêmico em soluções para desafios reais de empresas.",
+    imagemDeFundo: comoFundo(imagens.equipeComBandeiraEmSala),
   },
 
   historia: {
     eyebrow: "Nossa história",
     titulo: "Nascemos para conectar academia e mercado",
     paragrafos: [
-      "Fundada por um grupo de alunos motivados do curso de Engenharia de Produção, a Líder Jr. surgiu como resposta a uma necessidade clara: pequenas e médias empresas precisavam de consultoria de qualidade a preços acessíveis.",
-      "Ao longo dos anos, crescemos, obtivemos certificação pela Brasil Júnior e construímos um portfólio diversificado de projetos em setores como indústria, varejo, serviços e agronegócio.",
+      "A Líder Jr. é uma organização sem fins lucrativos, constituída e gerida por alunos do curso de Engenharia de Produção da Universidade Federal de São Carlos – campus Sorocaba. Nesse sentido, nossa estrutura permite que entreguemos projetos de alta qualidade com foco total no desenvolvimento acadêmico e profissional de nossos membros.",
+      "Além disso, desde 2008, a Líder Jr. oferece consultorias para micro, médias e grandes empresas com um custo muito inferior ao praticado no mercado. Dessa forma, promovemos soluções de qualidade sob a orientação de professores doutores na área de Engenharia de Produção, garantindo resultados sólidos para nossos clientes.",
     ],
-    imagem: imagens.apresentacaoParaEquipe,
+    imagem: imagens.equipeEmEscritorio,
   },
 
   cultura: {
@@ -34,61 +39,87 @@ export const quemSomos: ConteudoQuemSomos = {
         codigo: "M / 01",
         icone: "alvo",
         titulo: "Missão",
-        descricao:
-          "Oferecer soluções inovadoras em Engenharia de Produção, desenvolvendo competências nos nossos membros e gerando valor real para clientes.",
+        descricao: "Transformar vidas desenvolvendo profissionais.",
       },
       {
         codigo: "V / 02",
         icone: "bussola",
         titulo: "Visão",
-        descricao:
-          "Ser referência nacional em consultoria júnior, reconhecida pela excelência técnica, impacto nos negócios e formação de líderes.",
+        descricao: "Ser uma EJ referência com a qualidade que só um líder tem.",
       },
       {
         codigo: "P / 03",
         icone: "colunas",
         titulo: "Valores",
-        descricao:
-          "Inovação, comprometimento, ética e aprendizado contínuo são os pilares que guiam cada projeto e cada decisão da Líder Jr.",
+        itens: [
+          "Espírito líder",
+          "Excelência em Resultados",
+          "Profissionalismo",
+          "Cliente³",
+          "Inconformismo",
+          "Viver o MEJ",
+        ],
       },
     ],
   },
 
-  /**
-   * ATENÇÃO — CONTEÚDO PENDENTE.
-   * No protótipo, os textos desta seção descreviam OUTRA empresa júnior (a
-   * Beets Jr.) e os logos eram carregados do site dela. Os textos foram
-   * substituídos por marcadores e os logos por placeholders.
-   * A Líder Jr. precisa fornecer os textos e logos corretos. Ver PENDENCIAS.md.
-   */
   filiacoes: {
     eyebrow: "Parcerias",
     titulo: "Filiações",
     itens: [
       {
         nome: "UFSCar",
-        descricao:
-          "[TEXTO PENDENTE — descrever a relação da Líder Jr. com a universidade: orientação acadêmica, professores envolvidos, desde quando.]",
+        paragrafos: [
+          "A Universidade Federal de São Carlos (UFSCar) é uma instituição pública e federal brasileira. Tendo a sua fundação em 1968, em São Carlos (SP), a Universidade é referência no Brasil e, principalmente, no Estado de São Paulo quando os assuntos são qualidade de ensino, inovação, pesquisa e avaliação do mercado.",
+          "A Líder Jr. Consultoria Empresarial tem a sua sede em Sorocaba e é a Empresa Júnior do curso de Engenharia de Produção da UFSCar. Nossa proximidade com a universidade conecta os projetos ao conhecimento acadêmico e possibilita o acompanhamento de professores e especialistas da área.",
+        ],
         logo: logosDeFiliacao.ufscar,
       },
       {
         nome: "Núcleo Campinas",
-        descricao:
-          "[TEXTO PENDENTE — descrever a filiação da Líder Jr. ao NuCa: desde quando e o que representa.]",
+        paragrafos: [
+          "O Núcleo Campinas conecta empresas juniores da região, promovendo troca de experiências, desenvolvimento e fortalecimento do Movimento Empresa Júnior.",
+        ],
         logo: logosDeFiliacao.nuca,
       },
       {
         nome: "FEJESP",
-        descricao:
-          "[TEXTO PENDENTE — descrever a relação da Líder Jr. com a Federação de Empresas Juniores do Estado de São Paulo.]",
+        paragrafos: [
+          "A FEJESP conecta e desenvolve empresas juniores do estado de São Paulo, fortalecendo o ecossistema paulista do Movimento Empresa Júnior.",
+        ],
         logo: logosDeFiliacao.fejesp,
       },
       {
         nome: "Brasil Júnior",
-        descricao:
-          "[TEXTO PENDENTE — descrever a certificação e a participação da Líder Jr. no Movimento Empresa Júnior brasileiro.]",
+        paragrafos: [
+          "A Brasil Júnior representa o Movimento Empresa Júnior nacionalmente, conectando empresas juniores de todo o país e impulsionando o desenvolvimento de jovens empreendedores.",
+        ],
         logo: logosDeFiliacao.brasilJunior,
       },
+    ],
+  },
+
+  parceiros: {
+    eyebrow: "Parceiros",
+    titulo: "Conexões que fortalecem a Líder Jr.",
+    rotulo: "Carrossel de empresas parceiras da Líder Jr.",
+    anterior: "Parceiro anterior",
+    proximo: "Próximo parceiro",
+    // Parceiros sem logo (hiGen, btc, Empower, Liona) aparecem com o nome
+    // escrito. Para pôr o logo, declare em logosDeParceiros (imagens.ts) e
+    // acrescente `logo:` ao item.
+    empresas: [
+      { nome: "Visagio", logo: logosDeParceiros.visagio },
+      { nome: "hiGen" },
+      { nome: "Bain & Company", logo: logosDeParceiros.bain },
+      { nome: "XP Inc.", logo: logosDeParceiros.xpInc },
+      { nome: "EloGroup", logo: logosDeParceiros.elogroup },
+      { nome: "Ambev", logo: logosDeParceiros.ambev },
+      { nome: "btc" },
+      { nome: "Empower" },
+      { nome: "AGV Gestão", logo: logosDeParceiros.agvGestao },
+      { nome: "Liona" },
+      { nome: "PEERS", logo: logosDeParceiros.peers },
     ],
   },
 };

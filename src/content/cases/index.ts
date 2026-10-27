@@ -1,14 +1,17 @@
 import { createReader } from "@keystatic/core/reader";
+import { getServicoPorSlug } from "@/content/servicos";
+import { grupos } from "@/content/servicos/grupos";
+import { montarCorpoDeTexto } from "@/lib/corpo-de-texto";
+import { getHrefDoServico } from "@/lib/hrefs";
 import { montarImagem } from "@/lib/imagem";
-import type { Case, CaseComPagina } from "@/types/case";
+import type { Case } from "@/types/case";
 import keystaticConfig from "../../../keystatic.config";
-import { paginaDeCases } from "./pagina";
 
 /**
  * ============================================================================
  * REGISTRY DE CASES
  * ============================================================================
- * Os cases vêm dos arquivos em `content/cases/*.yaml`, escritos pelo CMS em
+ * Os cases vêm dos arquivos em `content/cases/*.mdoc`, escritos pelo CMS em
  * /keystatic. Este arquivo é o ADAPTER: lê as entradas e converte cada uma para
  * o tipo `Case` — que é o que a Home, a listagem e a página do case consomem.
  *
@@ -19,66 +22,49 @@ import { paginaDeCases } from "./pagina";
 
 const leitor = createReader(process.cwd(), keystaticConfig);
 
-type EntradaDeCase = Awaited<ReturnType<typeof leitor.collections.cases.all>>[number];
+type EntradaDeCase = Awaited<
+  ReturnType<typeof leitor.collections.cases.all<[{ resolveLinkedFiles: true }]>>
+>[number];
 
 function montarCase({ slug, entry }: EntradaDeCase): Case {
-  const resumo: Case = {
-    slug,
-    empresa: entry.empresa,
-    resultado: entry.resultado,
-    metrica: entry.metrica,
-    descricao: entry.descricao,
-    tags: [...entry.tags],
-    categoria: entry.categoria,
-    imagem: montarImagem(entry.imagem.arquivo, entry.imagem.alt),
-  };
-
-  const historia = entry.historia.discriminant ? entry.historia.value : null;
-  if (!historia) return resumo;
-
-  const depoimento = historia.depoimento.discriminant
-    ? historia.depoimento.value
-    : null;
+  // O CMS só oferece serviços que existem; um slug desconhecido aqui é um
+  // serviço apagado do registry. Melhor o build falhar do que um case sem grupo.
+  const servico = getServicoPorSlug(entry.servico);
+  const grupo = grupos.find((g) => g.id === servico?.grupoId);
+  if (!servico || !grupo) {
+    throw new Error(`Case "${slug}": serviço "${entry.servico}" não existe.`);
+  }
+  const hrefDoServico = getHrefDoServico(servico);
 
   return {
-    ...resumo,
+    slug,
+    empresa: entry.empresa,
+    descricao: entry.descricao,
+    categoria: grupo.titulo,
+    servico: {
+      titulo: servico.titulo.replace(/\s*\n\s*/g, " "),
+      href: hrefDoServico,
+    },
+    segmento: entry.segmento.trim(),
+    imagem: montarImagem(entry.imagem.arquivo, entry.empresa),
     detalhe: {
-      metadados: {
-        titulo: historia.tituloSeo || entry.empresa,
-        descricao: historia.descricaoSeo || entry.descricao,
-      },
+      // Título e descrição para o Google são os do próprio case — não há
+      // campo separado para isso no CMS.
+      metadados: { titulo: entry.empresa, descricao: entry.descricao },
       // A mesma imagem do card, com o alt zerado: no topo da página ela é fundo
       // decorativo atrás do título, e o texto por cima já informa o conteúdo.
       imagemDeFundo: montarImagem(entry.imagem.arquivo, ""),
-      secoes: historia.secoes.map((s) => ({
-        titulo: s.titulo,
-        paragrafos: [...s.paragrafos],
-      })),
-      depoimento: depoimento ? { ...depoimento } : undefined,
-      // Sem números cadastrados, o painel de impacto simplesmente não aparece.
-      impacto:
-        historia.numerosDeImpacto.length > 0
-          ? {
-              eyebrow: paginaDeCases.impacto.eyebrow,
-              titulo: paginaDeCases.impacto.titulo,
-              numeros: historia.numerosDeImpacto.map((n) => ({ ...n })),
-            }
-          : undefined,
-      cta: {
-        titulo: historia.cta.titulo,
-        descricao: historia.cta.descricao,
-        botaoPrimario: paginaDeCases.botoesDoCta.primario,
-        botaoSecundario: {
-          label: paginaDeCases.botoesDoCta.rotuloDoServico,
-          href: historia.cta.servicoRelacionado || "/servicos",
-        },
-      },
+      corpo: montarCorpoDeTexto(entry.corpo.node, {
+        origem: `Case "${slug}"`,
+        altPadrao: entry.empresa,
+      }),
+      cta: { titulo: entry.cta.titulo, descricao: entry.cta.descricao },
     },
   };
 }
 
 export async function getTodosCases(): Promise<Case[]> {
-  const entradas = await leitor.collections.cases.all();
+  const entradas = await leitor.collections.cases.all({ resolveLinkedFiles: true });
   return entradas.map(montarCase);
 }
 
@@ -110,12 +96,9 @@ export async function getCasesEmDestaque(): Promise<Case[]> {
   });
 }
 
-export async function getCasesComPagina(): Promise<CaseComPagina[]> {
-  const todos = await getTodosCases();
-  return todos.filter((c): c is CaseComPagina => c.detalhe !== undefined);
-}
-
 export async function getCasePorSlug(slug: string): Promise<Case | undefined> {
-  const entrada = await leitor.collections.cases.read(slug);
+  const entrada = await leitor.collections.cases.read(slug, {
+    resolveLinkedFiles: true,
+  });
   return entrada ? montarCase({ slug, entry: entrada }) : undefined;
 }

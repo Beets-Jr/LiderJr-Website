@@ -45,7 +45,20 @@ export type NomeDeIcone =
   | "relogio"
   | "tag"
   | "telefone"
-  | "tendencia";
+  | "tendencia"
+  | "barras"
+  | "calculadora"
+  | "caixa"
+  | "carteira"
+  | "cifrao"
+  | "fluxo"
+  | "listaDeChecagem"
+  | "megafone"
+  | "olho"
+  | "pizza"
+  | "raio"
+  | "rota"
+  | "velocimetro";
 
 /** Uma imagem. O `alt` é obrigatório no tipo — não dá para esquecer. */
 export interface Imagem {
