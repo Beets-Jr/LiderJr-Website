@@ -62,13 +62,14 @@ const OPCOES_DE_SERVICO = servicos.map((servico) => ({
  * na máquina. `github` faz cada publicação virar um commit no repositório,
  * autenticada pela conta de quem publicou, e é o modo que vai para o ar.
  *
- * PARA LIGAR O MODO GITHUB (quando o repositório estiver no GitHub):
- *   1. crie um GitHub App pelo próprio Keystatic: rode o site, abra
- *      /keystatic e siga o passo a passo da tela de configuração;
- *   2. ele grava as variáveis no .env.local — leve as mesmas para a Vercel:
+ * PARA LIGAR O MODO GITHUB: o passo a passo está na seção 3 do .env.local.
+ * Em resumo:
+ *   1. com KEYSTATIC_GITHUB_CLIENT_ID preenchido com qualquer texto, rode o
+ *      site, abra /keystatic e siga a tela de configuração, que cria o App;
+ *   2. ele grava as variáveis num arquivo `.env` — passe os valores para o
+ *      .env.local (que tem prioridade sobre o `.env`) e para a Vercel:
  *      KEYSTATIC_GITHUB_CLIENT_ID, KEYSTATIC_GITHUB_CLIENT_SECRET,
- *      KEYSTATIC_SECRET e NEXT_PUBLIC_KEYSTATIC_GITHUB_APP_SLUG;
- *   3. troque `repo` abaixo pelo dono/nome reais.
+ *      KEYSTATIC_SECRET e NEXT_PUBLIC_KEYSTATIC_GITHUB_APP_SLUG.
  * Quem tiver acesso ao repositório publica; quem sair da equipe perde o acesso
  * junto com o resto. Não há senha para o site guardar.
  */
