@@ -54,8 +54,8 @@ export const faleConosco: ConteudoFaleConosco = {
         label: "Telefone",
         placeholder: "(00) 00000-0000",
         tipo: "telefone",
-        obrigatorio: false,
-        mensagemDeErro: "",
+        obrigatorio: true,
+        mensagemDeErro: "Informe seu telefone.",
       },
       {
         nome: "mensagem",
@@ -72,6 +72,7 @@ export const faleConosco: ConteudoFaleConosco = {
     rotuloEnviando: "Enviando...",
     sucesso: "Mensagem registrada! Em breve nossa equipe entra em contato.",
     emailInvalido: "Confira o e-mail digitado.",
+    telefoneInvalido: "Confira o telefone digitado, com DDD.",
 
     erroNoEnvio:
       "Não conseguimos enviar sua mensagem agora. Tente de novo em instantes ou fale com a gente pelo telefone ou e-mail ao lado.",

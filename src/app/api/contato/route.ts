@@ -1,15 +1,19 @@
 import { faleConosco } from "@/content/fale-conosco";
-import { enviarParaActiveCampaign } from "@/lib/active-campaign";
-import { CAMPO_ARMADILHA, pareceEmailValido } from "@/lib/formulario-de-contato";
+import { enviarParaDashHub } from "@/lib/dash-hub";
+import {
+  CAMPO_ARMADILHA,
+  pareceEmailValido,
+  pareceTelefoneValido,
+} from "@/lib/formulario-de-contato";
 import { CAMPO_DO_RECAPTCHA } from "@/lib/recaptcha";
 import { verificarRecaptcha } from "@/lib/recaptcha-servidor";
 
 /**
- * Recebe o formulário do Fale Conosco e repassa para o ActiveCampaign.
+ * Recebe o formulário do Fale Conosco e repassa para a Dash Hub.
  *
  * A validação usa a MESMA lista de campos que desenha o formulário
  * (src/content/fale-conosco.ts): acrescentar um campo lá já faz ele ser
- * validado aqui e aparecer na nota do contato, sem mexer neste arquivo.
+ * validado aqui e chegar à Dash Hub, sem mexer neste arquivo.
  *
  * Duas barreiras contra robôs, nesta ordem:
  *   1. campo-armadilha — invisível para pessoas; preenchido, é robô;
@@ -51,6 +55,10 @@ export async function POST(requisicao: Request) {
 
   const email = ler(campos.find((c) => c.tipo === "email")?.nome ?? "email");
   if (!pareceEmailValido(email)) return erro(faleConosco.formulario.emailInvalido, 400);
+  const telefone = campos.find((c) => c.tipo === "telefone");
+  if (telefone && ler(telefone.nome) && !pareceTelefoneValido(ler(telefone.nome))) {
+    return erro(faleConosco.formulario.telefoneInvalido, 400);
+  }
 
   // Na Vercel, o primeiro IP do x-forwarded-for é o do visitante.
   const ip = requisicao.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
@@ -64,19 +72,15 @@ export async function POST(requisicao: Request) {
   // pessoa preencheu. Nesses, a página de origem é a do próprio case ou post.
   const formulario = ler("formulario").slice(0, 200) || "Fale Conosco";
   const paginaDeOrigem = ler("paginaDeOrigem").slice(0, 500);
-  const nota = [
-    `Mensagem enviada pelo formulário do site (${formulario})`,
-    "",
-    ...campos.map((c) => `${c.label}: ${ler(c.nome) || "—"}`),
-    `Página de origem: ${paginaDeOrigem || "—"}`,
-  ].join("\n");
+  const preenchidos = campos
+    .filter((c) => ler(c.nome))
+    .map((c) => [c.label, ler(c.nome)] as const);
 
   try {
-    await enviarParaActiveCampaign({
-      email,
-      nome: ler("nome"),
-      telefone: ler(campos.find((c) => c.tipo === "telefone")?.nome ?? "telefone"),
-      nota,
+    await enviarParaDashHub({
+      ...Object.fromEntries(preenchidos),
+      Formulário: formulario,
+      ...(paginaDeOrigem && { "Página de origem": paginaDeOrigem }),
     });
   } catch (motivo) {
     console.error("[formulário de contato] falha ao enviar:", motivo);

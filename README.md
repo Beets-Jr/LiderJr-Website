@@ -157,8 +157,8 @@ animações são CSS.
 
 As páginas são **estáticas**. Não há banco de dados. O único trecho que roda no
 servidor é [`/api/contato`](src/app/api/contato/route.ts), que leva o
-formulário de contato para o ActiveCampaign — precisa das variáveis
-`ACTIVECAMPAIGN_*` (ver PENDENCIAS.md, seção 4.1).
+formulário de contato para a Dash Hub — precisa da variável `DASHHUB_FONTE`
+(ver PENDENCIAS.md, seção 4.1).
 
 A lista completa de pendências está em **[PENDENCIAS.md](PENDENCIAS.md)**.
 

@@ -73,7 +73,7 @@ const OPCOES_DE_SERVICO = servicos.map((servico) => ({
  * junto com o resto. Não há senha para o site guardar.
  */
 const armazenamento = process.env.KEYSTATIC_GITHUB_CLIENT_ID
-  ? ({ kind: "github", repo: "liderjr/site" } as const)
+  ? ({ kind: "github", repo: "Beets-Jr/LiderJr-Website" } as const)
   : ({ kind: "local" } as const);
 
 export default config({
@@ -107,7 +107,7 @@ export default config({
             itemLabel: (item) => item.value ?? "Escolha um case",
             description:
               "Três é o número que o carrossel foi desenhado para mostrar. Arraste para ordenar — o primeiro da lista abre no centro.",
-            validation: { length: { min: 1, max: 3 } },
+            validation: { length: { min: 0, max: 3 } },
           },
         ),
       },
@@ -181,7 +181,7 @@ export default config({
           {
             label: "Convite no fim do artigo",
             description:
-              "Aparece acima do formulário de contato que fecha o artigo. O envio chega no ActiveCampaign marcado com este post.",
+              "Aparece acima do formulário de contato que fecha o artigo. O envio chega na Dash Hub marcado com este post.",
           },
         ),
       },
@@ -259,7 +259,7 @@ export default config({
           {
             label: "Convite no fim da página",
             description:
-              "Aparece acima do formulário de contato que fecha o case. O envio chega no ActiveCampaign marcado com este case.",
+              "Aparece acima do formulário de contato que fecha o case. O envio chega na Dash Hub marcado com este case.",
           },
         ),
       },

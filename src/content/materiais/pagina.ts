@@ -29,6 +29,11 @@ export const paginaDeMateriais: ConteudoDeMateriais = {
       descricao:
         "Ainda não liberamos materiais para esta combinação de filtros. Fique de olho!",
     },
+    semItens: {
+      titulo: "Em breve, nossos materiais",
+      descricao:
+        "Estamos preparando e-books, planilhas e checklists gratuitos. Fique de olho!",
+    },
   },
 
   rotuloDoBotao: "Baixar Material",

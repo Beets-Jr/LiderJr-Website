@@ -28,6 +28,10 @@ export const paginaDoBlog: ConteudoDoBlog = {
       titulo: "Nenhum artigo nesta categoria",
       descricao: "Nenhum artigo encontrado nesta categoria no momento.",
     },
+    semItens: {
+      titulo: "Em breve, nossos primeiros artigos",
+      descricao: "Estamos preparando conteúdos sobre gestão, processos e negócios.",
+    },
   },
 
   // Busca só pelo título, ignorando maiúsculas e acentos.

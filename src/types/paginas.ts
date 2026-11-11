@@ -145,6 +145,8 @@ export interface TextosDeFiltro {
   rotuloAcessivel: string;
   /** Mensagem quando nenhum item bate com o filtro. */
   vazio: { titulo: string; descricao: string };
+  /** Mensagem quando ainda não há nenhum item publicado. Substitui os filtros. */
+  semItens: { titulo: string; descricao: string };
 }
 
 /** Rótulos do campo de busca de uma listagem. */
@@ -254,7 +256,9 @@ export interface ConteudoFaleConosco {
     sucesso: string;
     /** Mensagem quando o e-mail digitado é inválido. */
     emailInvalido: string;
-    /** Mensagem quando o envio falha (servidor ou ActiveCampaign fora do ar). */
+    /** Mensagem quando o telefone está incompleto. */
+    telefoneInvalido: string;
+    /** Mensagem quando o envio falha (servidor ou Dash Hub fora do ar). */
     erroNoEnvio: string;
   };
 }

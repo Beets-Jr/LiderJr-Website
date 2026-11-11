@@ -28,6 +28,11 @@ export const paginaDeCases: ConteudoDeCases = {
       titulo: "Nenhum case nesta categoria",
       descricao: "Nenhum projeto encontrado nesta categoria no momento.",
     },
+    semItens: {
+      titulo: "Em breve, nossos cases",
+      descricao:
+        "Estamos preparando os relatos dos projetos desenvolvidos pela Líder Jr.",
+    },
   },
 
   rotuloComPagina: "Ver case completo",

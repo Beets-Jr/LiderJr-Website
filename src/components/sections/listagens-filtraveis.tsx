@@ -52,6 +52,17 @@ function useFiltro<T extends { categoria: string }>(
   return { categorias, ativa, selecionar: setAtiva, filtrados };
 }
 
+/** Sem nada publicado, não há o que filtrar: só a mensagem, sem a barra. */
+function ListagemVazia(props: { titulo: string; descricao: string }) {
+  return (
+    <Section>
+      <Container>
+        <EstadoVazio {...props} />
+      </Container>
+    </Section>
+  );
+}
+
 /* -------------------------------------------------------------------------- */
 
 const ORDEM_DOS_GRUPOS = grupos.map((g) => g.titulo);
@@ -71,6 +82,8 @@ export function ListagemDeCases({
     conteudo.filtro.rotuloTodos,
     ORDEM_DOS_GRUPOS,
   );
+
+  if (cases.length === 0) return <ListagemVazia {...conteudo.filtro.semItens} />;
 
   return (
     <>
@@ -130,6 +143,8 @@ export function ListagemDeMateriais({
       ),
     [materiais, tipoAtivo, categoriaAtiva, rotuloTodos],
   );
+
+  if (materiais.length === 0) return <ListagemVazia {...conteudo.filtro.semItens} />;
 
   return (
     <>
@@ -203,6 +218,8 @@ export function ListagemDoBlog({
   const mostrarDestaque = ativa === conteudo.filtro.rotuloTodos && !termo;
   const [destaque, ...restantes] = filtrados;
   const naGrade = mostrarDestaque ? restantes : filtrados;
+
+  if (posts.length === 0) return <ListagemVazia {...conteudo.filtro.semItens} />;
 
   return (
     <>

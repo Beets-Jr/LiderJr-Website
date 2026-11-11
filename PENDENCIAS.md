@@ -28,8 +28,6 @@ Pontos que merecem atenção:
   Previsão de Demanda (422×750), Planejamento Estratégico (500×750) e Análise de
   Custos (500×334). Em telas grandes elas ficam borradas — vale pedir os
   arquivos originais.
-- **Duas imagens se repetem no blog.** Os posts de KPIs e de Gestão de Estoques
-  usam a mesma foto de dashboard, consequência da substituição descrita em 3.1.
 
 ### 1.3 Logo e favicon — resolvido
 
@@ -47,20 +45,24 @@ Os três links (LinkedIn, Instagram, Facebook) já apontam para os perfis reais
 da Líder Jr.
 📄 `src/content/site.ts`
 
-### 1.5 Arquivos dos materiais
+### 1.5 Publicações — o site estreia vazio
 
-O arquivo para download agora é obrigatório em todo material. Como nenhum
-arquivo real foi entregue, os seis materiais têm uma **imagem de teste** (PNG
-com o título e o aviso "Arquivo de teste") — o botão funciona e baixa essa
-imagem.
+Os posts, cases e materiais de exemplo foram apagados, com as imagens e os
+arquivos de teste deles. O site vai ao ar sem nenhuma publicação, e a Líder Jr.
+publica as reais pelo `/keystatic`.
 
-A "Imagem do card", também obrigatória, usa por enquanto fotos genéricas do
-banco de imagens do site.
+Enquanto uma coleção estiver vazia:
 
-**Antes de publicar:** abra cada material em `/keystatic` e troque o arquivo
-no campo "Arquivo para download" pelo PDF ou planilha real, e a imagem do card
-por uma que represente o material.
-📄 `content/materiais/*.yaml` · `public/materiais/`
+- **Blog, Cases e Materiais** mostram um aviso de "em breve" no lugar da barra
+  de filtros (textos em `filtro.semItens`, no `pagina.ts` de cada um);
+- **na Home**, as seções "Últimas do blog" e de cases somem, e o botão
+  "Conheça outros cases" da chamada final também;
+- **o menu e o rodapé continuam** com os links para as três páginas.
+
+O carrossel de cases da Home só volta quando alguém escolher os cases em
+`/keystatic` → **Home — cases em destaque**. Publicar um case não basta.
+📄 `content/` · `src/app/(site)/page.tsx` ·
+`src/components/sections/listagens-filtraveis.tsx`
 
 ### 1.6 Páginas de serviço — CTA e depoimentos
 
@@ -179,7 +181,7 @@ Mapeamento de Processos.
 
 Foi descartada. No painel do serviço entrou a foto do workshop de post-its (que
 é literalmente mapeamento de processos); nos outros dois pontos, imagens
-pertinentes. Isso causa a repetição descrita em 1.2.
+pertinentes.
 
 ### 3.2 Cinco CTAs iguais no fim da Home
 
@@ -243,37 +245,41 @@ O card do blog dizia "15 Jun 2026 · 6 min"; a página do post dizia "17 Jul, 20
 
 ## 4. Pontos de integração futura
 
-### 4.1 Formulário de contato — ActiveCampaign
+### 4.1 Formulário de contato — Dash Hub
 
-O formulário envia para **/api/contato**, que valida de novo e repassa para o
-ActiveCampaign. A chave de API fica só no servidor.
+O formulário envia para **/api/contato**, que valida de novo e, do servidor,
+repassa para a Dash Hub, o CRM da Líder Jr. (O ActiveCampaign saiu.)
 
-📄 `src/app/api/contato/route.ts` · `src/lib/active-campaign.ts`
+📄 `src/app/api/contato/route.ts` · `src/lib/dash-hub.ts`
 
-A cada envio: o contato é criado ou atualizado pelo e-mail (não duplica), e a
-mensagem vira uma **nota** no contato — com todos os campos, o formulário de
-onde veio e a página de origem.
+A cada envio vai um lead com os campos preenchidos, identificados pelo rótulo
+que a pessoa lê ("Nome", "E-mail", "Telefone", "Como podemos te ajudar?"), mais
+"Formulário" (de onde veio) e "Página de origem".
+
+**Por que não a linha de script da Dash Hub.** A Dash Hub sugere colar
+`<script src="https://dashhub.com.br/captura.js" data-fonte="…">` no site. Ela
+copia qualquer formulário direto do navegador, e neste site isso daria errado:
+copia antes da validação (quem esquece um campo vira um lead incompleto, e
+outro ao corrigir), passa por cima do reCAPTCHA e da armadilha, e, se um
+bloqueador de anúncios barrar o script, o lead some sem ninguém saber. O envio
+pelo servidor usa o mesmo endereço de captura da Dash Hub, sem esses problemas.
+**Não cole o script no site** — os leads chegariam duplicados.
 
 O mesmo formulário aparece em dois lugares: no **Fale Conosco** (a página de
 origem é a anterior, ver `src/lib/origem-do-visitante.ts`) e, em formato
 horizontal, no **fim de cada case e de cada post** (a página de origem é o
 próprio case ou post). Os campos são os de `src/content/fale-conosco.ts` nos
-dois. Se configurados, o contato entra
-numa lista e recebe uma tag, que é o que dispara automações.
+dois.
 
-**Falta para ir ao ar:** configurar as variáveis no `.env.local` e na Vercel.
+**Falta para ir ao ar:** configurar a variável no `.env.local` e na Vercel.
 
-| Variável                 | Onde achar no ActiveCampaign                             |
-| ------------------------ | -------------------------------------------------------- |
-| `ACTIVECAMPAIGN_URL`     | Settings → Developer → URL (`https://conta.api-us1.com`) |
-| `ACTIVECAMPAIGN_API_KEY` | Settings → Developer → Key                               |
-| `ACTIVECAMPAIGN_LIST_ID` | Opcional. Número no endereço da lista                    |
-| `ACTIVECAMPAIGN_TAG_ID`  | Opcional. Número no endereço da tag                      |
+| Variável        | Onde achar                                                                                              |
+| --------------- | ------------------------------------------------------------------------------------------------------- |
+| `DASHHUB_FONTE` | Dash Hub → CRM → Captação: o valor de `data-fonte` na linha de script (o da fonte "Novo Site Líder Jr") |
 
-Sem as duas primeiras, o formulário mostra a mensagem de erro (campo
-`formulario.erroNoEnvio` em `src/content/fale-conosco.ts`) e o motivo aparece
-no log do servidor. Lista ou tag com ID errado não bloqueiam o envio: o contato
-é salvo e o problema só vai para o log.
+Sem ela, ou com a Dash Hub fora do ar, o formulário mostra a mensagem de erro
+(campo `formulario.erroNoEnvio` em `src/content/fale-conosco.ts`) e o motivo
+aparece no log do servidor.
 
 **Contra robôs**, duas barreiras em `/api/contato`:
 
@@ -294,8 +300,10 @@ Cadastre no reCAPTCHA o domínio de produção e `localhost`. Sem a chave secret
 a verificação fica desligada (log de aviso) — só para desenvolvimento. A chave
 do site entra no build: depois de configurá-la na Vercel, faça um novo deploy.
 
-Testado contra um ActiveCampaign simulado (contato, nota, lista, tag, erros de
-validação e ausência de credenciais). **Ainda não testado contra a conta real.**
+Testado contra uma Dash Hub simulada (envio, recusa, fora do ar e variável
+ausente) e, em 10/11/2026, contra a conta real, pelo formulário de um case: os
+campos chegaram corretamente no CRM. Com o site no ar, vale um último envio de
+teste pelo Fale Conosco.
 
 ### 4.2 CMS — implantado
 
@@ -346,9 +354,8 @@ ganha um cartão com o próprio título, gerado sozinho — inclusive as
 publicações futuras, sem ninguém produzir imagem.
 📄 `src/lib/imagem-de-compartilhamento.tsx`
 
-Todo post e todo case tem página própria (obrigatório no CMS). Cinco posts e
-cinco cases estão com **texto de teste**, marcado no primeiro parágrafo —
-trocar pelo texto real antes de publicar.
+Todo post e todo case tem página própria (obrigatório no CMS). O passo 2 só dá
+para fazer depois do primeiro post publicado.
 
 ---
 

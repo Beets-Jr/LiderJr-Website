@@ -3,9 +3,9 @@
  * ENVIO DO FORMULÁRIO DE CONTATO
  * ============================================================================
  * O navegador manda os dados para /api/contato (src/app/api/contato/route.ts),
- * que valida de novo e repassa para o ActiveCampaign (src/lib/active-campaign.ts).
- * O navegador nunca fala direto com o ActiveCampaign: a chave de API ficaria
- * exposta para qualquer visitante.
+ * que valida de novo e repassa para a Dash Hub (src/lib/dash-hub.ts).
+ * O navegador nunca fala direto com a Dash Hub: assim o CRM só recebe o envio
+ * que passou pela validação e pelas barreiras contra robôs.
  * ============================================================================
  */
 
@@ -52,6 +52,15 @@ export async function enviarFormularioDeContato(
 /** Validação de e-mail usada no navegador e revalidada em /api/contato. */
 export function pareceEmailValido(valor: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(valor.trim());
+}
+
+/**
+ * Telefone completo: ao menos 10 dígitos — DDD + número fixo. Um número de
+ * outro país, com o código dele, também passa disso. Validado no navegador e
+ * revalidado em /api/contato.
+ */
+export function pareceTelefoneValido(valor: string): boolean {
+  return valor.replace(/\D/g, "").length >= 10;
 }
 
 /**

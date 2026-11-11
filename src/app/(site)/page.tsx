@@ -40,6 +40,10 @@ export default async function PaginaInicial() {
   // deles fica no centro.
   const cases = await getCasesEmDestaque();
   const posts = await getUltimosPosts(3);
+  // Sem cases ou posts publicados, a seção some em vez de mostrar só o título.
+  // Pelo mesmo motivo, o botão "Conheça outros cases" só aparece se houver cases.
+  const { botaoSecundario: _semCases, ...chamadaSemBotao } = home.ctaFinal.chamada;
+  const chamada = cases.length > 0 ? home.ctaFinal.chamada : chamadaSemBotao;
 
   return (
     <>
@@ -73,32 +77,33 @@ export default async function PaginaInicial() {
 
       <ClientsMarquee conteudo={home.clientes} />
 
-      <Section>
-        <Container>
-          <SectionHeader conteudo={home.cases} largo />
-          <div className="mt-14">
-            <CasesCarousel cases={cases} textos={home.cases.carrossel} />
-          </div>
-        </Container>
-      </Section>
+      {cases.length > 0 ? (
+        <Section>
+          <Container>
+            <SectionHeader conteudo={home.cases} largo />
+            <div className="mt-14">
+              <CasesCarousel cases={cases} textos={home.cases.carrossel} />
+            </div>
+          </Container>
+        </Section>
+      ) : null}
 
-      <Section tone="muted">
-        <Container>
-          <SectionHeader conteudo={home.blog} />
-          <ul className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
-            {posts.map((post) => (
-              <li key={post.slug} className="flex">
-                <PostCard post={post} />
-              </li>
-            ))}
-          </ul>
-        </Container>
-      </Section>
+      {posts.length > 0 ? (
+        <Section tone="muted">
+          <Container>
+            <SectionHeader conteudo={home.blog} />
+            <ul className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
+              {posts.map((post) => (
+                <li key={post.slug} className="flex">
+                  <PostCard post={post} />
+                </li>
+              ))}
+            </ul>
+          </Container>
+        </Section>
+      ) : null}
 
-      <CTATestimonialColumns
-        depoimento={home.ctaFinal.depoimento}
-        chamada={home.ctaFinal.chamada}
-      />
+      <CTATestimonialColumns depoimento={home.ctaFinal.depoimento} chamada={chamada} />
     </>
   );
 }

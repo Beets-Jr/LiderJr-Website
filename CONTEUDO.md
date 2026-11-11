@@ -196,6 +196,9 @@ muda a Home. Para trocar, abra `/keystatic` → **Home — cases em destaque**,
 escolha os três e arraste para ordenar: o primeiro da lista abre no centro do
 carrossel.
 
+> **Sem nenhum case escolhido** (o caso do site recém-lançado), a seção de
+> cases não aparece na Home. O mesmo vale para "Últimas do blog" sem posts.
+
 > **Se você apagar um case que está em destaque**, o site avisa na hora de
 > publicar, dizendo o nome dele — em vez de a Home ir ao ar com um card a menos.
 > É só voltar nessa tela e escolher outro.
@@ -264,9 +267,7 @@ Pelo CMS, em `/keystatic` → **Materiais** → criar. O arquivo do PDF ou da
 planilha entra no próprio formulário, no campo "Arquivo para download".
 
 O arquivo e a "Imagem do card" (a foto do topo do card, como nos cases e
-posts) são obrigatórios: o CMS não salva um material sem eles. Os seis
-materiais de hoje têm arquivos de teste e fotos do banco de imagens do site no
-lugar (ver PENDENCIAS.md).
+posts) são obrigatórios: o CMS não salva um material sem eles.
 
 ---
 

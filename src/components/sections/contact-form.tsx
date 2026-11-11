@@ -9,6 +9,7 @@ import {
   enviarFormularioDeContato,
   formatarTelefone,
   pareceEmailValido,
+  pareceTelefoneValido,
   type DadosDoFormularioDeContato,
 } from "@/lib/formulario-de-contato";
 import { getOrigemDoVisitante } from "@/lib/origem-do-visitante";
@@ -29,7 +30,7 @@ const TIPO_HTML = {
 } as const;
 
 /**
- * Onde o formulário está, para a nota do ActiveCampaign. Sem ela, é o do Fale
+ * Onde o formulário está, para o lead na Dash Hub. Sem ela, é o do Fale
  * Conosco, e a página de origem é a anterior (ver lib/origem-do-visitante.ts).
  */
 export interface OrigemDoFormulario {
@@ -62,7 +63,7 @@ export function ContactForm({
  * O formulário em si, sem cartão nem título.
  *
  * Valida no navegador e envia por lib/formulario-de-contato.ts, que passa por
- * /api/contato até o ActiveCampaign. Contra robôs: um campo-armadilha
+ * /api/contato até a Dash Hub. Contra robôs: um campo-armadilha
  * escondido e o reCAPTCHA v3, invisível (ver lib/recaptcha.ts).
  *
  * `horizontal` é o do fim dos cases e posts: campos curtos lado a lado e a
@@ -101,6 +102,9 @@ export function FormularioDeContato({
       }
       if (campo.tipo === "email" && valor !== "" && !pareceEmailValido(valor)) {
         encontrados[campo.nome] = conteudo.emailInvalido;
+      }
+      if (campo.tipo === "telefone" && valor !== "" && !pareceTelefoneValido(valor)) {
+        encontrados[campo.nome] = conteudo.telefoneInvalido;
       }
     }
 
